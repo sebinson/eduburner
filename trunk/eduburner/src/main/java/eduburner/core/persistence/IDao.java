@@ -21,12 +21,6 @@ public interface IDao {
 	public List getInstancesByDetachedCriteria(DetachedCriteria criteria,
 			int startIndex, int maxResults);
 
-	/**
-	 * Does a query by example
-	 * 
-	 * @param example
-	 * @return
-	 */
 	@SuppressWarnings("unchecked")
 	public List getInstancesByExample(Object example);
 
@@ -34,21 +28,13 @@ public interface IDao {
 			Class<T> entityClass, String queryName, String[] paramNames,
 			Object[] values) throws DataAccessException;
 
-	public <T> void create(T instance);
-
+	
 	public <T> void save(T instance);
 
 	public <T> void update(T instance);
 
 	public <T> void saveOrUpdate(T instance);
 
-	/**
-	 * copy the state of the given object onto the persistence object
-	 * 
-	 * @param <T>
-	 * @param instance
-	 * @return
-	 */
 	public <T> T merge(T instance);
 
 	public void remove(Object instance);
@@ -56,11 +42,6 @@ public interface IDao {
 	@SuppressWarnings("unchecked")
 	public void removeAll(Collection entities);
 
-	/**
-	 * 
-	 * @param model
-	 *            to attach to the current persistence session
-	 */
 	public void reattach(Object model);
 
 	/**

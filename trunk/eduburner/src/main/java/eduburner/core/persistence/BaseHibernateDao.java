@@ -17,31 +17,23 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.metadata.ClassMetadata;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import eduburner.utils.CommonUtils;
+import eduburner.util.ClassUtils;
 
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
-	private Logger logger = LoggerFactory.getLogger(BaseHibernateDao.class);
-
+	
 	@SuppressWarnings("unchecked")
 	public List getAllInstances(Class type) {
 		return getHibernateTemplate().find(
-				"from " + CommonUtils.checkForCGLIB(type).getName());
-		// return getHibernateTemplate().loadAll(
-		// CommonUtils.checkForCGLIB(type));
+				"from " + ClassUtils.checkForCGLIB(type).getName());
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("type is: " + type.getName());
-		}
-		return (T) getHibernateTemplate().get(CommonUtils.checkForCGLIB(type),
+		return (T) getHibernateTemplate().get(ClassUtils.checkForCGLIB(type),
 				id);
 	}
 
@@ -99,18 +91,9 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		return results;
 	}
 
-	public <T> void create(T instance) {
-		try {
-			getHibernateTemplate().save(instance);
-		} catch (DataAccessException dex) {
-			throw new PersistenceException(dex);
-		}
-		getHibernateTemplate().flush();
-	}
-
 	public <T> void save(T instance) {
 		try {
-			getHibernateTemplate().saveOrUpdate(instance);
+			getHibernateTemplate().save(instance);
 		} catch (DataAccessException dex) {
 			throw new PersistenceException(dex);
 		}
