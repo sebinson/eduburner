@@ -68,7 +68,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public List getInstancesByExample(final Object example) {
 		return (List) getHibernateTemplate().executeWithNativeSession(
 				new HibernateCallback() {
-
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
 						// create Criteria instance
