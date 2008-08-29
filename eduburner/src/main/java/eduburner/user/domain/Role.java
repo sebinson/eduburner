@@ -2,7 +2,9 @@ package eduburner.user.domain;
 
 import org.springframework.security.GrantedAuthority;
 
-public class Role implements GrantedAuthority {
+import eduburner.core.EntityObject;
+
+public class Role extends EntityObject implements GrantedAuthority {
 
 	private static final long serialVersionUID = -908605749081541265L;
 	
@@ -16,6 +18,11 @@ public class Role implements GrantedAuthority {
 	@Override
 	public int compareTo(Object o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 
 }

@@ -20,9 +20,11 @@ import org.hibernate.metadata.ClassMetadata;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
 
 import eduburner.util.ClassUtils;
 
+@Component("dao")
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	
 	@SuppressWarnings("unchecked")
