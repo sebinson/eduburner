@@ -240,6 +240,11 @@
 			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.8.1.GA</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
 			<version>${lucene.version}</version>
