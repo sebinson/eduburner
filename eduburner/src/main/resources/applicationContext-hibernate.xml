@@ -15,7 +15,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value></value>
+				<value>eduburner.user.domain.User</value>
+				<value>eduburner.user.domain.Role</value>
 			</list>
 		</property>
 		<property name="configurationClass">
@@ -41,4 +42,8 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+    <bean id="dao"
+		class="eduburner.core.persistence.BaseHibernateDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

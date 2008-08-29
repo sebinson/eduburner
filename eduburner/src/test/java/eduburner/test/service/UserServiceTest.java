@@ -16,7 +16,6 @@ import eduburner.user.domain.User;
 import eduburner.user.service.IRoleManager;
 import eduburner.user.service.IUserManager;
 
-
 public class UserServiceTest extends BaseServiceTestSupport {
 	private Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
 
@@ -27,7 +26,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	@Autowired
 	@Qualifier("roleManager")
 	private IRoleManager roleManager;
-	
+
 	@Autowired
 	@Qualifier("passwordEncoder")
 	private PasswordEncoder passwordEncoder;
@@ -51,7 +50,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		}
 	}
 
-	// @Test
+	@Test
 	public void testTreatingAUserCausesADatabaseRowToBeInserted() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering test method...");
@@ -84,8 +83,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	}
 
 	// just show how to change test order
-	// @Test(dependsOnMethods = {
-	// "testTreatingAUserCausesADatabaseRowToBeInserted" }, alwaysRun = true)
+	@Test(dependsOnMethods = { "testTreatingAUserCausesADatabaseRowToBeInserted" }, alwaysRun = true)
 	public void testGetUser() {
 		User user = userManager.getUserById(1);
 		if (logger.isDebugEnabled()) {
@@ -98,7 +96,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		Assert.assertEquals(1, user.getAuthorities().length);
 	}
 
-	// @Test
+	@Test
 	public void testGetRole() {
 		int before = getCount("SELECT COUNT(*) FROM role;");
 		Role role = new Role();
@@ -124,7 +122,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(passwordEncoder.encodePassword(password, null));
-		Role role = roleManager.getRoleByName("user");
+		Role role = roleManager.getRoleByName(Role.DEFAULT_ROLE_NAME);
 		user.addRole(role);
 		userManager.updateUser(user);
 		return user;
