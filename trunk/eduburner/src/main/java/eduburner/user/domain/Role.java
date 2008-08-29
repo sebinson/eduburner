@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.springframework.security.GrantedAuthority;
 
@@ -16,6 +17,8 @@ import eduburner.core.EntityObject;
 @Entity
 public class Role extends EntityObject implements GrantedAuthority {
 	private static final long serialVersionUID = -908605749081541265L;
+
+	public static final String DEFAULT_ROLE_NAME = "role_user";
 
 	private String name;
 	
@@ -38,6 +41,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 	}
 
 	@Override
+	@Transient
 	public String getAuthority() {
 		return this.name;
 	}

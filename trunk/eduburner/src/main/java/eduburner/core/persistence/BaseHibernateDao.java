@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 
 import eduburner.util.ClassUtils;
 
-@Component("dao")
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	
 	@SuppressWarnings("unchecked")
