@@ -20,22 +20,17 @@ import org.hibernate.metadata.ClassMetadata;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Component;
-
-import eduburner.util.ClassUtils;
 
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
-	
+
 	@SuppressWarnings("unchecked")
 	public List getAllInstances(Class type) {
-		return getHibernateTemplate().find(
-				"from " + ClassUtils.checkForCGLIB(type).getName());
+		return getHibernateTemplate().find("from " + type.getName());
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
-		return (T) getHibernateTemplate().get(ClassUtils.checkForCGLIB(type),
-				id);
+		return (T) getHibernateTemplate().get(type.getName(), id);
 	}
 
 	@SuppressWarnings("unchecked")
