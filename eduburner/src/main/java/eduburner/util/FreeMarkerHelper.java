@@ -13,9 +13,9 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class FreeMarkerUtil {
+public class FreeMarkerHelper {
 	private static final Logger logger = LoggerFactory
-			.getLogger(FreeMarkerUtil.class);
+			.getLogger(FreeMarkerHelper.class);
 
 	@SuppressWarnings("unchecked")
 	public static String renderContent(String freemarkerText, Map contextMap) {

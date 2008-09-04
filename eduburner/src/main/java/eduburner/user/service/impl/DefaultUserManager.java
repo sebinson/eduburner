@@ -60,22 +60,10 @@ public class DefaultUserManager extends BaseManager implements
 		updateUser(foundUser);
 	}
 
-	@SuppressWarnings("unchecked")
 	public User getUserByUsername(String username) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 		criteria.add(Restrictions.eq("username", username));
-
-		List users = dao.getInstancesByDetachedCriteria(criteria);
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("user number: " + users.size());
-		}
-
-		if (users.size() == 0) {
-			throw new UsernameNotFoundException("User not found");
-		}
-
-		User user = (User) users.get(0);
+		User user = (User)dao.getUniqueInstanceByDetachedCriteria(criteria);
 		return user;
 	}
 
