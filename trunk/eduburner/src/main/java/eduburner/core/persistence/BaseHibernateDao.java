@@ -32,6 +32,18 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
 		return (T) getHibernateTemplate().get(type.getName(), id);
 	}
+	
+	@Override
+	public Object getUniqueInstanceByDetachedCriteria(final DetachedCriteria criteria) {
+		return (Object) getHibernateTemplate().executeWithNativeSession(
+				new HibernateCallback() {
+					@Override
+					public Object doInHibernate(Session session)
+							throws HibernateException, SQLException {
+						return criteria.getExecutableCriteria(session).uniqueResult();
+					}
+				});
+	}
 
 	@SuppressWarnings("unchecked")
 	public List getInstancesByDetachedCriteria(final DetachedCriteria criteria) {
@@ -58,6 +70,25 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 						return criteria1.list();
 					}
 				});
+	}
+	
+	@Override
+	public Object getUniqueInstanceByExample(final Object example) {
+		return (Object)getHibernateTemplate().executeWithNativeSession(
+				new HibernateCallback(){
+					@Override
+					public Object doInHibernate(Session session)
+							throws HibernateException, SQLException {
+						// create Criteria instance
+						Criteria searchCriteria = session
+								.createCriteria(example.getClass());
+						// loop over the example object's PropertyDescriptors
+						searchCriteria
+								.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+						return searchCriteria.uniqueResult();
+					}
+				}
+		);
 	}
 
 	@SuppressWarnings("unchecked")

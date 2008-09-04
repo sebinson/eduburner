@@ -16,10 +16,14 @@ public interface IDao {
 
 	@SuppressWarnings("unchecked")
 	public List getInstancesByDetachedCriteria(DetachedCriteria criteria);
+	
+	public Object getUniqueInstanceByDetachedCriteria(DetachedCriteria criteria);
 
 	@SuppressWarnings("unchecked")
 	public List getInstancesByDetachedCriteria(DetachedCriteria criteria,
 			int startIndex, int maxResults);
+	
+	public Object getUniqueInstanceByExample(Object example);
 
 	@SuppressWarnings("unchecked")
 	public List getInstancesByExample(Object example);
