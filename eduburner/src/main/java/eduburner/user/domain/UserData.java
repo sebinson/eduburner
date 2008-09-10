@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import eduburner.core.EntityObject;
+import eduburner.feed.domain.Feed;
 
 /**
  * @author rockmaple
@@ -23,6 +24,8 @@ public class UserData extends EntityObject {
 	private String email;
 
 	private long userId;
+	
+	private Feed feed;
 
 	// 加上个人头像
 	private byte[] profilePicture;
@@ -77,6 +80,14 @@ public class UserData extends EntityObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Feed getFeed() {
+		return feed;
+	}
+
+	public void setFeed(Feed feed) {
+		this.feed = feed;
 	}
 
 	@Override
