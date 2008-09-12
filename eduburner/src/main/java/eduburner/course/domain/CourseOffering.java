@@ -16,11 +16,11 @@ import eduburner.user.domain.UserData;
  * 
  * 日历借助google calendar
  * 每个人的学习笔记借助google notebook
- * 文章分享借助rss
+ * 文章分享借助google reader
  * 
  * 课程需要一个论坛
  * 
- * 每位同学是否需要有博客？
+ * 每位同学需要有一个空间，列出其所在的课程，学生可以写微博客
  * 是否需要建立好友关系？
  * 
  * @author zhangyf@gmail.com
