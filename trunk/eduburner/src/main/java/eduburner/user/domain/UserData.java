@@ -1,5 +1,8 @@
 package eduburner.user.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -7,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import eduburner.core.EntityObject;
+import eduburner.course.domain.CourseOffering;
 import eduburner.feed.domain.Feed;
 
 /**
@@ -26,6 +30,9 @@ public class UserData extends EntityObject {
 	private long userId;
 	
 	private Feed feed;
+	
+	//参与的课程,多对多
+	private List<CourseOffering> courses = new ArrayList<CourseOffering>();
 
 	// 加上个人头像
 	private byte[] profilePicture;
