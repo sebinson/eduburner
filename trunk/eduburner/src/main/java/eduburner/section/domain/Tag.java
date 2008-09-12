@@ -1,8 +1,8 @@
 package eduburner.section.domain;
 
-public class PostThread extends Post{
+import eduburner.core.EntityObject;
 
-	private static final long serialVersionUID = 2191061322611394526L;
+public class Tag extends EntityObject {
 
 	@Override
 	public String toString() {
