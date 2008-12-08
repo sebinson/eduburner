@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import eduburner.core.EntityObject;
+import eduburner.enumerations.CourseStatus;
 import eduburner.user.domain.UserData;
 
 /**
@@ -25,6 +29,9 @@ import eduburner.user.domain.UserData;
  * 
  * @author zhangyf@gmail.com
  */
+
+@Entity
+@Table(name = "course_offering")
 public class CourseOffering extends EntityObject {
 
 	private static final long serialVersionUID = -1025308879798159789L;
@@ -34,11 +41,12 @@ public class CourseOffering extends EntityObject {
 	private String description;
 
 	// This might be open, closed, planned, or discontinued, for example
-	private String status;
+	private CourseStatus status;
 
 	private Date startDate;
 
 	private Date endDate;
+	
 
 	//成员
 	private List<UserData> members = new ArrayList<UserData>();
@@ -48,4 +56,5 @@ public class CourseOffering extends EntityObject {
 		return new ToStringBuilder(this).append("title", title).toString();
 	}
 
+	
 }
