@@ -350,11 +350,6 @@
 			<version>2.0.3.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.compass-project</groupId>
-			<artifactId>compass</artifactId>
-			<version>${compass.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
@@ -411,11 +406,6 @@
 			<artifactId>ehcache</artifactId>
 			<version>1.5.0</version>
 		</dependency>
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
@@ -464,7 +454,7 @@
 		<copyright.year>2008</copyright.year>
 		<dao.framework>hibernate</dao.framework>
 		<!-- Framework dependency versions -->
-		<hibernate.version>3.3.0.SP1</hibernate.version>
+		<hibernate.version>3.3.1.GA</hibernate.version>
 		<hibernate-common-annotaions.version>
 			3.3.0.ga
 		</hibernate-common-annotaions.version>
@@ -472,15 +462,12 @@
 			3.4.0.GA
 		</hibernate-annotations.version>
 		<hibernate-validator.version>
-			3.1.0.CR2
+			3.1.0.GA
 		</hibernate-validator.version>
 		<hibernate-search.version>3.0.0.GA</hibernate-search.version>
-		<lucene.version>2.3.1</lucene.version>
+		<lucene.version>2.4.0</lucene.version>
 		<spring.version>2.5.6</spring.version>
 		<spring.security.version>2.0.4</spring.security.version>
-
-		<compass.version>2.0.2</compass.version>
-		<quartz.version>1.6.0</quartz.version>
 
 		<!-- Testing dependency versions -->
 		<testng.version>5.7</testng.version>
