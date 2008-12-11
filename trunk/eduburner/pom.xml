@@ -333,23 +333,6 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>org.springframework.binding</artifactId>
-			<version>2.0.3.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>org.springframework.js</artifactId>
-			<version>2.0.3.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>org.springframework.webflow</artifactId>
-			<version>2.0.3.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
