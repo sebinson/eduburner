@@ -5,6 +5,6 @@ package eduburner.crawler;
  * @author zhangyf@gmail.com
  *
  */
-public class FeedCrawlResult {
+public class FetchResult {
 
 }
