@@ -1,4 +1,4 @@
-package eduburner.fetcher;
+package eduburner.feed.fetcher;
 
 /**
  * @author Nick Lothian
