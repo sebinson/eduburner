@@ -10,8 +10,6 @@ public class Entry extends EntityObject {
 	private static final long serialVersionUID = -1106338683739123478L;
 	
 	private List<Content> contents = new ArrayList<Content>();
-
-	
 	
 	@Override
 	public String toString() {
