@@ -16,7 +16,7 @@ public interface IFeedFetcher {
 	 * Some servers ban user agents with "Java" in the name.</p> 
 	 * 
 	 */
-	public static String DEFAULT_USER_AGENT = "Rome Client (http://tinyurl.com/64t5n)";
+	public static String DEFAULT_USER_AGENT = "Rome Client";
 
 	/**
 	 * @return the User-Agent currently being sent to servers
