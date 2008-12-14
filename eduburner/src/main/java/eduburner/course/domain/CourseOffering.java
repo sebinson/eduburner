@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -49,6 +52,8 @@ public class CourseOffering extends EntityObject {
 
 	// 成员
 	private List<UserData> members = new ArrayList<UserData>();
+	
+	private List<CourseResource> courseResources = new ArrayList<CourseResource>();
 
 	@Override
 	public String toString() {
@@ -103,4 +108,12 @@ public class CourseOffering extends EntityObject {
 		this.members = members;
 	}
 
+	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	public List<CourseResource> getCourseResources() {
+		return courseResources;
+	}
+
+	public void setCourseResources(List<CourseResource> courseResources) {
+		this.courseResources = courseResources;
+	}
 }

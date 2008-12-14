@@ -1,6 +1,9 @@
 package eduburner.course.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import eduburner.core.EntityObject;
@@ -20,6 +23,8 @@ public class CourseResource extends EntityObject {
 
 	private CourseOffering course;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_course_id")
 	public CourseOffering getCourse() {
 		return course;
 	}
@@ -40,5 +45,4 @@ public class CourseResource extends EntityObject {
 	public String toString() {
 		return name;
 	}
-
 }
