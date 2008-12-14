@@ -14,7 +14,6 @@ import eduburner.feed.fetcher.FetcherException;
 import eduburner.feed.fetcher.IFeedFetcher;
 import eduburner.feed.fetcher.IFetcherListener;
 
-
 public abstract class AbstractFeedFetcher implements IFeedFetcher {
 	private final Set<IFetcherListener> fetcherEventListeners;
 	private String userAgent;
