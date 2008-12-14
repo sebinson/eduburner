@@ -1,7 +1,10 @@
-package eduburner.course.domain;
+package eduburner.components;
 
 import eduburner.core.EntityObject;
 
+/**
+ * @author zhangyf@gmail.com
+ */
 public class Post extends EntityObject {
 
 	private static final long serialVersionUID = 697717739347893427L;
