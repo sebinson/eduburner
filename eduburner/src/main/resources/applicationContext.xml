@@ -11,7 +11,17 @@
 
 	<context:annotation-config/>
 	
+	<!-- 
 	<context:component-scan base-package="eduburner.*.service" />
+	-->
+	 
+	<context:component-scan base-package="eduburner">
+    	<context:include-filter type="regex" expression="eduburner\.user\.service\..*"/>
+    	<context:include-filter type="regex" expression="eduburner\.course\.service\..*"/>
+    	<!--  
+        <context:exclude-filter type="aspectj" expression="eduburner.feed.fetcher..*"/>
+        -->
+    </context:component-scan>
 
 	<!-- AnnotationBeanConfigurerAspect -->
 	<context:spring-configured/>
