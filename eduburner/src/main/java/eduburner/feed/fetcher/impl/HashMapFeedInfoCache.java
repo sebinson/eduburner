@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import eduburner.feed.fetcher.IFeedFetcherCache;
+import eduburner.feed.fetcher.SyndFeedInfo;
 
 
 /**

@@ -17,7 +17,7 @@ import eduburner.feed.domain.Feed;
  * @author rockmaple
  */
 @Entity
-@Table(name = "userdata")
+@Table(name = "user_data")
 public class UserData extends EntityObject {
 	private static final long serialVersionUID = -8000191009583356867L;
 

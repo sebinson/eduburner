@@ -22,10 +22,36 @@ public class UserLog extends EntityObject {
 	private long userId;
 	private String action;
 	private Date actionDate;
-
+	
 	@Override
 	public String toString() {
 		return userId + " action: " + action;
+	}
+
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public Date getActionDate() {
+		return actionDate;
+	}
+
+
+	public void setActionDate(Date actionDate) {
+		this.actionDate = actionDate;
 	}
 
 }
