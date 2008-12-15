@@ -31,6 +31,7 @@ import com.sun.syndication.io.FeedException;
 import eduburner.feed.fetcher.FetcherEvent;
 import eduburner.feed.fetcher.FetcherException;
 import eduburner.feed.fetcher.IFeedFetcherCache;
+import eduburner.feed.fetcher.SyndFeedInfo;
 
 /**
  * @author Nick Lothian

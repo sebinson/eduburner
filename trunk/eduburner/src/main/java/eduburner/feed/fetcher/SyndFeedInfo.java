@@ -1,4 +1,4 @@
-package eduburner.feed.fetcher.impl;
+package eduburner.feed.fetcher;
 
 import java.io.Serializable;
 import java.net.URL;

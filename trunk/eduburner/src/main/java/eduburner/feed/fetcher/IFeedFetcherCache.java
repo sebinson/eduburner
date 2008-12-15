@@ -2,7 +2,6 @@ package eduburner.feed.fetcher;
 
 import java.net.URL;
 
-import eduburner.feed.fetcher.impl.SyndFeedInfo;
 
 /**
  * <p>An interface to allow caching of feed details. Implementing this allows the
