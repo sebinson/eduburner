@@ -1,11 +1,12 @@
 package eduburner.feed.fetcher.impl;
 
-import eduburner.feed.fetcher.FeedEntry;
+import eduburner.feed.domain.Feed;
+import eduburner.feed.fetcher.IFeedCrawler;
 
-public class FeedCrawler {
+public class FeedCrawler implements IFeedCrawler{
 	
-
-	public synchronized void crawle(FeedEntry feedEntry){
+	@Override
+	public synchronized void crawle(Feed feed){
 		
 	}
 	

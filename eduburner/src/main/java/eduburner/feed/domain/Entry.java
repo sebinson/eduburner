@@ -29,7 +29,6 @@ public class Entry extends EntityObject {
     private List<Comment> comments;
     private List<Like> likes;
     private List<Media> media;
-    
 	
 	@Override
 	public String toString() {
