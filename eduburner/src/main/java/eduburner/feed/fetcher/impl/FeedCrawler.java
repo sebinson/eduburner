@@ -9,18 +9,17 @@ public class FeedCrawler implements IFeedCrawler{
 	public synchronized void crawle(Feed feed){
 		
 	}
-	
-	/**
-	 * 负责抓取的线程
-	 */
-	private class FetchThread implements Runnable{
-		private volatile boolean stop = false;
-		@Override
-		public void run() {
-			while(!Thread.interrupted() && !stop){
-				
-			}
-		}
+
+	@Override
+	public boolean start() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean stop() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
