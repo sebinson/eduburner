@@ -1,49 +1,44 @@
 package eduburner.feed.fetcher.impl;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
 
 import eduburner.feed.fetcher.FetcherEvent;
 import eduburner.feed.fetcher.FetcherException;
 import eduburner.feed.fetcher.IFeedFetcher;
 import eduburner.feed.fetcher.IFetcherListener;
 
-public abstract class AbstractFeedFetcher implements IFeedFetcher {
-	private final Set<IFetcherListener> fetcherEventListeners;
+public class FeedFetcher implements IFeedFetcher {
+	
 	private String userAgent;
-	private boolean usingDeltaEncoding;	
-    
-	public AbstractFeedFetcher() {
+	private boolean usingDeltaEncoding;
+	
+	@Autowired
+	@Qualifier("fetcherProperties")
+	private Properties fetcherProperties;
+	
+	private final Set<IFetcherListener> fetcherEventListeners;
+	
+	public FeedFetcher() {
 		fetcherEventListeners = new CopyOnWriteArraySet<IFetcherListener>();
-		
-		Properties props = new Properties(System.getProperties());
-		String resourceName = "fetcher.properties";
-		
-		try {
-			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(resourceName);
-			if (inputStream == null) {
-			    inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
-			}			
-			if (inputStream != null) {
-				props.load(inputStream);
-				System.getProperties().putAll(props);
-				inputStream.close();
-			} else {
-				System.err.println("Could not find " + resourceName + " on classpath");
-			}
-		} catch (IOException e) {
-			// do nothing - we don't want to fail just because we could not find the version
-			System.err.println("Error reading " + resourceName + " from classpath: " + e.getMessage());
-		}		
-		
-		
-		setUserAgent(DEFAULT_USER_AGENT + " Ver: " + System.getProperty("rome.fetcher.version", "UNKNOWN"));
+		setUserAgent(DEFAULT_USER_AGENT + " Ver: " + fetcherProperties.getProperty("rome.fetcher.version", "UNKNOWN"));
+	}
+	
+	@Override
+	public SyndFeed retrieveFeed(URL feedUrl) throws IllegalArgumentException,
+			IOException, FeedException, FetcherException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

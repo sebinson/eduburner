@@ -36,7 +36,8 @@ import eduburner.feed.fetcher.SyndFeedInfo;
 /**
  * @author Nick Lothian
  */
-public class HttpClientFeedFetcher extends AbstractFeedFetcher {
+
+public class HttpClientFeedFetcher extends FeedFetcher {
 
 	private IFeedFetcherCache feedInfoCache;
 
