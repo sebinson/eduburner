@@ -21,20 +21,27 @@
 
 	<!-- AnnotationBeanConfigurerAspect -->
 	<context:spring-configured/>
-	<bean id="cacheManager"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation">
 			<value>classpath:ehcache.xml</value>
 		</property>
 	</bean>
 
-	<bean id="cache"
-		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+	<bean id="cache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
 		<property name="cacheManager">
 			<ref local="cacheManager" />
 		</property>
 		<property name="cacheName">
 			<value>eduburner.cache</value>
+		</property>
+	</bean>
+	
+	<bean id="fetcherCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="cacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>eduburner.fetcher.cache</value>
 		</property>
 	</bean>
 	
@@ -54,6 +61,10 @@
 				<prop key="password">zhangyf</prop>
 			</props>
 		</property>
+	</bean>
+	
+	<bean id="fetcherProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:fetcher.properties"/>
 	</bean>
 	
 	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
