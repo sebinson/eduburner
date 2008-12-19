@@ -4,12 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-      <!-- HTTP 1.1 -->
-      <meta http-equiv="Cache-Control" content="no-store"/>
-      <!-- HTTP 1.0 -->
-      <meta http-equiv="Pragma" content="no-cache"/>
-      <!-- Prevents caching at the Proxy Server -->
-      <meta http-equiv="Expires" content="0"/>
+
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	  
 	  <link type="text/css" rel="stylesheet" href="${base}/styles/reset-min.css" />
@@ -38,20 +33,30 @@
   </head>
   <body>
       <div class="yui-d1">
-         <div id="header">
+      	 <#-- begin of site header -->
+         <div id="hd" class="site-hd">
+         	<@ui.header />
          </div>
+         <#-- end of site header -->
          
-      	 <div class="yui-t2">
+      	 <div id="bd" class="yui-t2">
       	     <div class="yui-b">
+      	        <#-- nav bar -->
+      	     	<@ui.navbar />
       	     </div>
       	     <div class="yui-main">
       	         <div id="main" class="yui-b">
+      	            <#-- main content -->
+      	         	<#nested />
       	         </div>
       	     </div>
       	 </div>
       	 
-      	 <div id="footer">
+      	 <#-- begin of site footer -->
+      	 <div id="ft" class="site-ft">
+      	    <@ui.footer />
       	 </div>
+      	 <#-- end of site footer -->
       </div>
   </body>
 </html>
