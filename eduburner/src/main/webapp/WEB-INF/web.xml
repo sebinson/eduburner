@@ -87,7 +87,12 @@
 	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/list/*</url-pattern>
+		<url-pattern>/courses/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
