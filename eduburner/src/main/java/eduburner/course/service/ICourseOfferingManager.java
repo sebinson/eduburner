@@ -4,6 +4,6 @@ import eduburner.course.domain.CourseOffering;
 
 public interface ICourseOfferingManager {
 	
-	public void addCourse(CourseOffering course);
+	public void createCourse(CourseOffering course);
 
 }

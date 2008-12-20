@@ -10,7 +10,7 @@ import eduburner.course.service.ICourseOfferingManager;
 public class DefaultCourseOfferingManager extends BaseManager implements ICourseOfferingManager {
 
 	@Override
-	public void addCourse(CourseOffering course) {
+	public void createCourse(CourseOffering course) {
 		
 	}
 
