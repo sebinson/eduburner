@@ -3,6 +3,7 @@ package eduburner.feed.domain;
 import java.util.Date;
 import java.util.List;
 
+import eduburner.components.Entry;
 import eduburner.core.EntityObject;
 
 public class Feed extends EntityObject {
