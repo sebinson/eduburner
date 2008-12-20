@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 
 import eduburner.core.service.BaseManager;
 import eduburner.course.domain.CourseOffering;
-import eduburner.course.service.ICourseOfferingManager;
+import eduburner.course.service.ICourseManager;
 
 @Service("courseManager")
-public class DefaultCourseOfferingManager extends BaseManager implements ICourseOfferingManager {
+public class CourseManager extends BaseManager implements ICourseManager {
 
 	@Override
 	public void createCourse(CourseOffering course) {

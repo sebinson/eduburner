@@ -21,9 +21,9 @@ import eduburner.user.domain.User;
 import eduburner.user.service.IUserManager;
 
 @Service("userManager")
-public class DefaultUserManager extends BaseManager implements
+public class UserManager extends BaseManager implements
 		UserDetailsService, IUserManager {
-	private Logger logger = LoggerFactory.getLogger(DefaultUserManager.class);
+	private Logger logger = LoggerFactory.getLogger(UserManager.class);
 
 	@Autowired
 	@Qualifier("passwordEncoder")

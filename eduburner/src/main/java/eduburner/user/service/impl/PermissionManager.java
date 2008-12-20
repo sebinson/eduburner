@@ -13,7 +13,7 @@ import eduburner.user.service.IPermissionManager;
 
 @Service("permissionManager")
 @SuppressWarnings("unchecked")
-public class DefaultPermissionManager extends BaseManager implements
+public class PermissionManager extends BaseManager implements
 		IPermissionManager {
 
 	public List getPermittedEntities(User user, PermissionBase permission, List list) {
