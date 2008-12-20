@@ -1,4 +1,4 @@
-package eduburner.feed.fetcher.impl;
+package eduburner.feed.crawler.impl;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,10 +28,10 @@ import org.apache.http.params.HttpProtocolParams;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 
-import eduburner.feed.fetcher.FetcherEvent;
-import eduburner.feed.fetcher.FetcherException;
-import eduburner.feed.fetcher.IFeedFetcherCache;
-import eduburner.feed.fetcher.SyndFeedInfo;
+import eduburner.feed.crawler.FetcherEvent;
+import eduburner.feed.crawler.FetcherException;
+import eduburner.feed.crawler.IFeedFetcherCache;
+import eduburner.feed.crawler.SyndFeedInfo;
 
 /**
  * @author Nick Lothian

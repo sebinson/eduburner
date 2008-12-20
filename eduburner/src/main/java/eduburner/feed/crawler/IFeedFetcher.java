@@ -1,4 +1,4 @@
-package eduburner.feed.fetcher;
+package eduburner.feed.crawler;
 
 import java.io.IOException;
 import java.net.URL;

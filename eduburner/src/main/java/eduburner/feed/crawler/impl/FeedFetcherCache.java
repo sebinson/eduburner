@@ -1,4 +1,4 @@
-package eduburner.feed.fetcher.impl;
+package eduburner.feed.crawler.impl;
 
 import java.net.URL;
 
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import eduburner.feed.fetcher.IFeedFetcherCache;
-import eduburner.feed.fetcher.SyndFeedInfo;
+import eduburner.feed.crawler.IFeedFetcherCache;
+import eduburner.feed.crawler.SyndFeedInfo;
 
 @Component("feedFetcherCache")
 public class FeedFetcherCache implements IFeedFetcherCache {
