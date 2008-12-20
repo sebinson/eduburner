@@ -11,7 +11,7 @@ import eduburner.user.domain.Role;
 import eduburner.user.service.IRoleManager;
 
 @Service("roleManager")
-public class DefaultRoleManager extends BaseManager implements IRoleManager {
+public class RoleManager extends BaseManager implements IRoleManager {
 
 	public Role getRoleById(String id) {
 		return dao.getInstanceById(Role.class, id);
