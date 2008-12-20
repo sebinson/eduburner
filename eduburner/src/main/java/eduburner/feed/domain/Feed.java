@@ -3,8 +3,8 @@ package eduburner.feed.domain;
 import java.util.Date;
 import java.util.List;
 
-import eduburner.components.Entry;
 import eduburner.core.EntityObject;
+import eduburner.entry.domain.Entry;
 
 public class Feed extends EntityObject {
 	private static final long serialVersionUID = 367824212338403517L;
