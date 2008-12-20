@@ -1,4 +1,4 @@
-package eduburner.components;
+package eduburner.entry.domain;
 
 import eduburner.core.EntityObject;
 
