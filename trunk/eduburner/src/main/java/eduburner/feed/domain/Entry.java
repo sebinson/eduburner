@@ -7,157 +7,146 @@ import java.util.List;
 import eduburner.core.EntityObject;
 import eduburner.user.domain.UserData;
 
-public class Entry extends EntityObject{
-    private static final long serialVersionUID = -1018771380257973544L;
+public class Entry extends EntityObject {
+	private static final long serialVersionUID = -1018771380257973544L;
 	private String entryId;
-    private String title;
-    private String link;
-    private Date published;
-    private Date updated;
-    private boolean anonymous;
-    private boolean hidden;
-    private UserData user;
-    private Service service;
-    private List<Comment> comments;
-    private List<Like> likes;
-    private List<Media> media;
-    private Via via;
+	private String title;
+	private String link;
+	private Date published;
+	private Date updated;
+	private boolean anonymous;
+	private boolean hidden;
+	private UserData user;
+	private Service service;
+	private List<Comment> comments;
+	private List<Like> likes;
+	private List<Media> media;
+	private Via via;
 
+	public Entry() {
+		comments = new ArrayList<Comment>();
+		likes = new ArrayList<Like>();
+		media = new ArrayList<Media>();
+	}
 
+	public String getEntryId() {
+		return entryId;
+	}
 
-    public Entry() {
-        comments = new ArrayList<Comment>();
-        likes = new ArrayList<Like>();
-        media = new ArrayList<Media>();
-    }
+	public String getTitle() {
+		return title;
+	}
 
+	public String getLink() {
+		return link;
+	}
 
-    public String getEntryId() {
-        return entryId;
-    }
+	public Date getPublished() {
+		return published;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public Date getUpdated() {
+		return updated;
+	}
 
-    public String getLink() {
-        return link;
-    }
+	public void setAnonymous(boolean anonymous) {
+		this.anonymous = anonymous;
+	}
 
-    public Date getPublished() {
-        return published;
-    }
+	public boolean isAnonymous() {
+		return anonymous;
+	}
 
-    public Date getUpdated() {
-        return updated;
-    }
+	public boolean isHidden() {
+		return hidden;
+	}
 
-    public void setAnonymous(boolean anonymous) {
-    	this.anonymous = anonymous;
-    }
-    
-    public boolean isAnonymous() {
-    	return anonymous;
-    }
-    
-    public boolean isHidden() {
-        return hidden;
-    }
+	public Service getService() {
+		return service;
+	}
 
-    public Service getService() {
-        return service;
-    }
+	public List<Comment> getComments() {
+		if (comments == null) {
+			comments = new ArrayList<Comment>();
+		}
+		return comments;
+	}
 
-    public List<Comment> getComments() {
-    	if (comments == null) {
-    		comments = new ArrayList<Comment>();
-    	}
-        return comments;
-    }
+	public List<Like> getLikes() {
+		if (likes == null) {
+			likes = new ArrayList<Like>();
+		}
+		return likes;
+	}
 
-    public List<Like> getLikes() {
-    	if (likes == null) {
-    		likes = new ArrayList<Like>();
-    	}
-        return likes;
-    }
+	public List<Media> getMedia() {
+		if (media == null) {
+			media = new ArrayList<Media>();
+		}
+		return media;
+	}
 
-    public List<Media> getMedia() {
-    	if (media == null) {
-    		media = new ArrayList<Media>();
-    	}
-        return media;
-    }
+	public Via getVia() {
+		return via;
+	}
 
-    public Via getVia() {
-        return via;
-    }
+	public void setEntryId(String id) {
+		this.entryId = id;
+	}
 
-    public void setEntryId(String id) {
-        this.entryId = id;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setLink(String link) {
+		this.link = link;
+	}
 
-    public void setLink(String link) {
-        this.link = link;
-    }
+	public void setPublished(Date published) {
+		this.published = published;
+	}
 
-    public void setPublished(Date published) {
-        this.published = published;
-    }
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
+	public void setService(Service service) {
+		this.service = service;
+	}
 
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
-    public void setService(Service service) {
-        this.service = service;
-    }
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
+	}
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+	public void setMedia(List<Media> media) {
+		this.media = media;
+	}
 
-    public void setLikes(List<Like> likes) {
-        this.likes = likes;
-    }
-
-    public void setMedia(List<Media> media) {
-        this.media = media;
-    }
-
-    public void setVia(Via via) {
-        this.via = via;
-    }
+	public void setVia(Via via) {
+		this.via = via;
+	}
 
 	public UserData getUser() {
 		return user;
 	}
 
-
 	public void setUser(UserData user) {
 		this.user = user;
 	}
-	
+
 	public String toString() {
-        return "Entry{" +
-                "id='" + entryId + '\'' +
-                ", title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", published=" + published +
-                ", updated=" + updated +
-                ", hidden=" + hidden +
-                ", user=" + user +
-                ", service=" + service +
-                '}';
-    }
+		return "Entry{" + "id='" + entryId + '\'' + ", title='" + title + '\''
+				+ ", link='" + link + '\'' + ", published=" + published
+				+ ", updated=" + updated + ", hidden=" + hidden + ", user="
+				+ user + ", service=" + service + '}';
+	}
 
 }
