@@ -1,4 +1,4 @@
-package eduburner.feed.domain;
+package eduburner.components;
 
 import java.util.Date;
 
