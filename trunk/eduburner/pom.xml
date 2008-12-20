@@ -387,7 +387,7 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>1.5.0</version>
+			<version>1.6.0-beta1</version>
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>
@@ -399,6 +399,17 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.0-beta1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>0.8</version>
+		</dependency>
+		
+		<dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>1.2.3</version>
+        </dependency> 
 	</dependencies>
 	<profiles>
 		<profile>
@@ -497,7 +508,7 @@
 		</jdbc.driverClassName>
 		<jdbc.url><![CDATA[jdbc:mysql://localhost/eduburner?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
 		<jdbc.username>root</jdbc.username>
-		<jdbc.password>zhangyf</jdbc.password>
+		<jdbc.password>rootpass</jdbc.password>
 	</properties>
 	
 	<repositories>
@@ -519,6 +530,16 @@
 			<name>jboss</name>
 			<url>http://repository.jboss.org/maven2/</url>
 		</repository>
+		<repository>
+           <id>gson</id>
+           <url>http://google-gson.googlecode.com/svn/mavenrepo</url>
+           <snapshots>
+              <enabled>true</enabled>
+           </snapshots>
+           <releases>
+              <enabled>true</enabled>
+           </releases>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
