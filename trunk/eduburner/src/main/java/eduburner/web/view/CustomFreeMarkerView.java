@@ -20,9 +20,6 @@ import eduburner.util.SecurityHelper;
  */
 public class CustomFreeMarkerView extends FreeMarkerView {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(CustomFreeMarkerView.class);
-
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void exposeHelpers(Map model, HttpServletRequest request)
