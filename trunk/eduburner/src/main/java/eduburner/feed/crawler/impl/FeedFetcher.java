@@ -1,4 +1,4 @@
-package eduburner.feed.fetcher.impl;
+package eduburner.feed.crawler.impl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 
-import eduburner.feed.fetcher.FetcherEvent;
-import eduburner.feed.fetcher.FetcherException;
-import eduburner.feed.fetcher.IFeedFetcher;
-import eduburner.feed.fetcher.IFetcherListener;
+import eduburner.feed.crawler.FetcherEvent;
+import eduburner.feed.crawler.FetcherException;
+import eduburner.feed.crawler.IFeedFetcher;
+import eduburner.feed.crawler.IFetcherListener;
 
 public class FeedFetcher implements IFeedFetcher {
 	
