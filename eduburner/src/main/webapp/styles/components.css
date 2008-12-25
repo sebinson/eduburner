@@ -1,0 +1,59 @@
+/***************** button **********************/
+.yui-button {
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.yui-button .first-child {
+	display: block; 
+	*display: inline-block;
+}
+
+.yui-button button,.yui-button a {
+	display: block; 
+	*display: inline-block;
+	border: none;
+	margin: 0;
+}
+
+.yui-button button {
+	background-color: transparent; 
+	*overflow: visible;
+	cursor: pointer;
+}
+
+.yui-button a {
+	text-decoration: none;
+}
+
+#bd .yui-button {
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #808080;
+	background: url(../images/sprite.png) repeat-x 0 0;
+	margin: auto .25em;
+}
+
+#bd .yui-button .first-child {
+	border-width: 0 1px;
+	border-style: solid;
+	border-color: #808080;
+	margin: 0 -1px; 
+	*position: relative; 
+	*left: -1px;
+}
+
+#bd .yui-button button,.yui-skin-sam .yui-button a {
+	padding: 0 10px;
+	font-size: 93%;
+	line-height: 2; 
+	line-height: 1.7;
+	*min-height: 2em;
+	*min-height: auto;
+	color: #000;
+}
+
+#bd .yui-button a { 
+	*line-height: 2;
+}

@@ -1,0 +1,30 @@
+html, body {
+    
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+	clear: both;
+}
+
+/*********** site layout ******************/
+
+#hd {
+}
+
+#bd {
+}
+
+#ft {
+}
+
+/*********** end of site layout ***********/
+

@@ -34,7 +34,7 @@
   <body>
       <div class="yui-d1">
       	 <#-- begin of site header -->
-         <div id="hd" class="site-hd">
+         <div id="hd">
          	<@ui.header />
          </div>
          <#-- end of site header -->
@@ -53,7 +53,7 @@
       	 </div>
       	 
       	 <#-- begin of site footer -->
-      	 <div id="ft" class="site-ft">
+      	 <div id="ft">
       	    <@ui.footer />
       	 </div>
       	 <#-- end of site footer -->
