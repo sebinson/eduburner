@@ -1,6 +1,6 @@
 <#macro header>
     <div id="logo">
-    	<a href="/"><i>EduTech Spur</i></a>
+    	<a href="/"><i>EduBurner</i></a>
     </div>
     <div class="linkbar">
         <#if securityHelper.principal?has_content>
