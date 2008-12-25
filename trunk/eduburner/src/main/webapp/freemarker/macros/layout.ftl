@@ -1,4 +1,4 @@
-<#macro masterPage title="" css=[] js=[] initType="">
+<#macro masterPage title="" css=[] js=[]>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,20 +15,8 @@
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import ${base}/${cssFile};</style>
       </#list>
-
-      <script type="text/javascript" src="${base}/scripts/jquery-1.2.6.js"></script>
-      
-      <#list js as jsFile>   		
-		  <script type="text/javascript" src="${base}/${jsFile}"></script>
-      </#list>
+     
       <title>${title} | EduBurner</title>
-      
-      <!-- 在此切换初始化代码 -->
-      <script type="text/javascript">
-      	$(document).ready(function(){
-      		
-      	});
-      </script>
       
   </head>
   <body>
@@ -58,6 +46,15 @@
       	 </div>
       	 <#-- end of site footer -->
       </div>
+      <script type="text/javascript" src="${base}/scripts/jquery-1.2.6.js"></script>
+      <#list js as jsFile>   		
+		  <script type="text/javascript" src="${base}/${jsFile}"></script>
+      </#list>
+      <script type="text/javascript">
+      	$(document).ready(function(){
+      		
+      	});
+      </script>
   </body>
 </html>
 
