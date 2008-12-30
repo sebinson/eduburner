@@ -12,6 +12,9 @@
       <link type="text/css" rel="stylesheet" href="${base}/styles/grids-min.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/base-min.css" />
       
+      <link type="text/css" rel="stylesheet" href="${base}/styles/main.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/styles/tools.css" />
+      
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import ${base}/${cssFile};</style>
       </#list>
