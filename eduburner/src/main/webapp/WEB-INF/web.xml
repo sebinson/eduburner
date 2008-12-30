@@ -77,7 +77,7 @@
     
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/account/*</url-pattern>
+		<url-pattern>/accounts/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

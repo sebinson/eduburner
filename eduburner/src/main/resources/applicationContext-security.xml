@@ -21,8 +21,8 @@
         <intercept-url pattern="/view/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
         <intercept-url pattern="/**" access="ROLE_USER"/>
 		
-        <form-login login-page="/view/login" login-processing-url="/j_spring_security_check" default-target-url="/view/index" authentication-failure-url="/view/login?error=true"/>
-        <logout logout-url="/logout" logout-success-url="/view/login"/>
+        <form-login login-page="/view/login" login-processing-url="/j_spring_security_check" default-target-url="/app/index" authentication-failure-url="/accounts/login?error=true"/>
+        <logout logout-url="/logout" logout-success-url="/accounts/login"/>
         <remember-me key="EduBurnerRocks" user-service-ref="userManager"/>
     </http>
 
