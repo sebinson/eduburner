@@ -21,6 +21,8 @@ import org.hibernate.validator.NotNull;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
+import com.google.gson.annotations.Expose;
+
 import eduburner.core.EntityObject;
 
 @Entity
