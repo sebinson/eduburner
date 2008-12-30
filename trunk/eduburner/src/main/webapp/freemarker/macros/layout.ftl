@@ -23,7 +23,7 @@
       
   </head>
   <body>
-      <div class="yui-d1">
+      <div class="yui-d2">
       	 <#-- begin of site header -->
          <div id="hd">
          	<@ui.header />

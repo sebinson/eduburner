@@ -1,14 +1,14 @@
-html, body {
-    
+html,body {
+	
 }
 
 .link {
-    text-decoration: underline;
-    cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .clear {
@@ -16,27 +16,66 @@ html, body {
 }
 
 .spacing {
-	margin-bottom:8px;
+	margin-bottom: 8px;
 }
 
 /*********** site layout ******************/
-
 #hd {
+	height: 35px;
+	background: #3B5998;
+	margin-bottom: 10px;
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-webkit-border-radius-bottomleft:5px;
+	-webkit-border-radius-bottomright:5px;
 }
 
 #bd {
 }
 
 #ft {
-}
-
-#main {
+	background-color: #e2eecd;
+	padding: 8px;
+	text-align:center;
+	border-style: solid;
+	border-width: 0px;
+	border-top-width: 2px;
+	border-color: #d2e6bd;
 }
 
 /*********** end of site layout ***********/
 
-/*********** nav block ********************/
+#logo {
+	float: left;
+    cursor: pointer;
+    height: 32px;
+    width: 158px;
+    font-size: 170%;
+    font-weight: bolder;
+    margin: 5px 0 0 10px;
+}
 
+#logo>a{
+	text-decoration: none;
+	color:#fff;
+}
+
+.linkbar {
+    float: right;
+    padding: .5em 1em;
+}
+
+.linkbar a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#main {
+	
+}
+
+
+/*********** nav block ********************/
 .sidebar-block {
 	padding: 4px 0 8px 0;
 	width: 94%;
@@ -102,5 +141,4 @@ html, body {
 .sidebar-block-content ul.sidebar-tag-cloud li {
 	
 }
-
 /***************** end of nav block *********************/
