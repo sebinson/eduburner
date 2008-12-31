@@ -2,11 +2,11 @@
     <div id="logo">
     	<a href="/"><i>EduBurner</i></a>
     </div>
-    <div class="linkbar">
+    <div id="linkbar">
         <#if securityHelper.principal?has_content>
-             <a href="${base}/account/profile">${securityHelper.principal?default("")} </a>
-             <a href="#">设置</a>
-             <a href="${base}/logout">退出</a>
+             <a href="${base}/account/profile">${securityHelper.principal?default("")}</a>
+             | <a href="#">设置</a>
+             | <a href="${base}/logout">退出</a>
         <#else>
             <a id="signup-link" href="#">注册</a>
         </#if>

@@ -1,10 +1,24 @@
-html,body {
-	
+html, body {
+    background-color: #606060;
+}
+
+a, a:visited, .link {
+    color: #666666
 }
 
 .link {
-	text-decoration: underline;
-	cursor: pointer;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:focus {
+    -moz-outline: 0;
+}
+
+a:focus, .unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .hidden {
@@ -20,20 +34,18 @@ html,body {
 }
 
 /*********** site layout ******************/
-#hd {
-	height: 35px;
-	background: #3B5998;
+
+#site-doc{
+	background-color: #ffffff;
+	border-top: solid 3px #e2eecd;
+}
+
+#site-hd{
+	border-bottom: 1px dotted #E2EECD;
 	margin-bottom: 10px;
-	-moz-border-radius-bottomleft:5px;
-	-moz-border-radius-bottomright:5px;
-	-webkit-border-radius-bottomleft:5px;
-	-webkit-border-radius-bottomright:5px;
 }
 
-#bd {
-}
-
-#ft {
+#site-ft{
 	background-color: #e2eecd;
 	padding: 8px;
 	text-align:center;
@@ -52,26 +64,17 @@ html,body {
     width: 158px;
     font-size: 170%;
     font-weight: bolder;
+    color:#555555;
     margin: 5px 0 0 10px;
 }
 
 #logo>a{
 	text-decoration: none;
-	color:#fff;
 }
 
-.linkbar {
+#linkbar {
     float: right;
-    padding: .5em 1em;
-}
-
-.linkbar a{
-	color: #fff;
-	text-decoration: none;
-}
-
-#main {
-	
+    padding: 3px 6px;
 }
 
 
@@ -79,6 +82,7 @@ html,body {
 .sidebar-block {
 	padding: 4px 0 8px 0;
 	width: 94%;
+	margin-left: 6%;
 	overflow: hidden;
 	background-color: #E2EECD;
 	-moz-border-radius: 5px;
@@ -113,7 +117,7 @@ html,body {
 
 .sidebar-block-content ul.sidebar-block-list li {
 	margin: 0 0 5px 5px;
-	padding: 0 5px 0 18px;
+	padding: 0 5px 0 14px;
 	list-style-type: none;
 	display: block;
 	float: left;
