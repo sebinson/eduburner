@@ -10,7 +10,7 @@
 	  <link type="text/css" rel="stylesheet" href="${base}/styles/reset-min.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/fonts-min.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/grids-min.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/styles/base-min.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/styles/base-context-min.css" />
       
       <link type="text/css" rel="stylesheet" href="${base}/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/tools.css" />
@@ -23,14 +23,14 @@
       
   </head>
   <body>
-      <div class="yui-d2">
+      <div id="site-doc" class="yui-d2">
       	 <#-- begin of site header -->
-         <div id="hd">
+         <div id="site-hd">
          	<@ui.header />
          </div>
          <#-- end of site header -->
          
-      	 <div id="bd" class="yui-t2">
+      	 <div id="site-bd" class="yui-t2">
       	     <div class="yui-b">
       	        <#-- nav bar -->
       	     	<@ui.navbar />
@@ -44,7 +44,7 @@
       	 </div>
       	 
       	 <#-- begin of site footer -->
-      	 <div id="ft">
+      	 <div id="site-ft">
       	    <@ui.footer />
       	 </div>
       	 <#-- end of site footer -->
