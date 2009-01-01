@@ -17,12 +17,12 @@
         <intercept-url pattern="/scripts/**" filters="none"/>
         <intercept-url pattern="/styles/**" filters="none"/>
         <intercept-url pattern="/images/**" filters="none"/>
-        <intercept-url pattern="/view/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>   
-        <intercept-url pattern="/view/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
-        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <intercept-url pattern="/accounts/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>   
+        <intercept-url pattern="/accounts/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		
-        <form-login login-page="/view/login" login-processing-url="/j_spring_security_check" default-target-url="/app/index" authentication-failure-url="/accounts/login?error=true"/>
-        <logout logout-url="/logout" logout-success-url="/accounts/login"/>
+        <form-login login-page="/accounts/login" login-processing-url="/j_spring_security_check" default-target-url="/app/index" authentication-failure-url="/accounts/login?error=true"/>
+        <logout logout-url="/accounts/logout" logout-success-url="/accounts/login"/>
         <remember-me key="EduBurnerRocks" user-service-ref="userManager"/>
     </http>
 

@@ -27,7 +27,7 @@
 	text-decoration: none;
 }
 
-#bd .yui-button {
+#site-bd .yui-button {
 	border-width: 1px 0;
 	border-style: solid;
 	border-color: #808080;
@@ -35,7 +35,7 @@
 	margin: auto .25em;
 }
 
-#bd .yui-button .first-child {
+#site-bd .yui-button .first-child {
 	border-width: 0 1px;
 	border-style: solid;
 	border-color: #808080;
@@ -44,7 +44,7 @@
 	*left: -1px;
 }
 
-#bd .yui-button button,.yui-skin-sam .yui-button a {
+#site-bd .yui-button button,.yui-skin-sam .yui-button a {
 	padding: 0 10px;
 	font-size: 93%;
 	line-height: 2; 
@@ -54,7 +54,7 @@
 	color: #000;
 }
 
-#bd .yui-button a { 
+#site-bd .yui-button a { 
 	*line-height: 2;
 }
 
