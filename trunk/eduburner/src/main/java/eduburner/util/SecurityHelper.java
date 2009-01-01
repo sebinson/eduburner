@@ -18,8 +18,12 @@ public class SecurityHelper {
 		}
 		
 		//logger.debug("principal is: " + ((UserDetails) auth.getPrincipal()).getUsername());
-
-		return auth.getName();
+		
+		if(auth.isAuthenticated()){
+			return auth.getName();
+		}else{
+			return null;
+		}
 	}
 	
 	public String[] getPermissions(){
