@@ -1,6 +1,7 @@
 package eduburner.crawler.impl;
 
 import eduburner.crawler.ICrawlController;
+import eduburner.crawler.IFrontier;
 
 public class CrawlController implements ICrawlController {
 
@@ -74,6 +75,24 @@ public class CrawlController implements ICrawlController {
 	public void requestCrawlStop() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void acquireContinuePermission() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IFrontier getFrontier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void releaseContinuePermission() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
