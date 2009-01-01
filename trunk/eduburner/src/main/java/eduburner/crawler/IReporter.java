@@ -42,39 +42,10 @@ public interface IReporter {
     public String[] getReports();
     
     /**
-     * Make a report of the given name to the passed-in Writer,
-     * If null, give the default report. 
-     * 
-     * @param writer to receive report
-     */
-    public void reportTo(String name, PrintWriter writer);
-    
-    /**
-     * Make a default report to the passed-in Writer. Should
-     * be equivalent to reportTo(null, writer)
-     * 
-     * @param writer to receive report
-     */
-    public void reportTo(PrintWriter writer) throws IOException;
-    
-    /**
-     * Make a single-line summary report to the passed-in writer
-     * 
-     * @param writer to receive report
-     */
-    public void singleLineReportTo(PrintWriter writer) throws IOException;
-    
-    /**
      * Return a short single-line summary report as a String.
      * 
      * @return String single-line summary report
      */
     public String singleLineReport();
     
-    /**
-     * Return a  legend for the single-line summary report as a String.
-     * 
-     * @return String single-line summary legend
-     */
-    public String singleLineLegend();
 }

@@ -1,5 +1,6 @@
 package eduburner.crawler;
 
+
 /**
  * Interface for controlling a crawl job. The implementation is
  * {@link CrawlControllerImpl}, which is an open MBean.
@@ -11,7 +12,7 @@ public interface ICrawlController {
 	/**
 	 * Operator requested crawl begin
 	 */
-	void requestCrawlStart();
+	public void requestCrawlStart();
 
 	/**
 	 * Request a checkpoint. Sets a checkpointing thread running.
@@ -20,34 +21,40 @@ public interface ICrawlController {
 	 *             Thrown if crawl is not in paused state (Crawl must be first
 	 *             paused before checkpointing).
 	 */
-	void requestCrawlCheckpoint() throws IllegalStateException;
+	public void requestCrawlCheckpoint() throws IllegalStateException;
 
 	/**
 	 * Operator requested for crawl to stop.
 	 */
-	void requestCrawlStop();
+	public void requestCrawlStop();
 
 	/**
 	 * Stop the crawl temporarly.
 	 */
-	void requestCrawlPause();
+	public void requestCrawlPause();
+	
+	public IFrontier getFrontier();
+	
+	public void releaseContinuePermission();
 
 	/**
 	 * Resume crawl from paused state
 	 */
-	void requestCrawlResume();
+	public void requestCrawlResume();
 
-	String getCrawlStatusString();
+	public String getCrawlStatusString();
 
-	String getToeThreadReport();
+	public String getToeThreadReport();
 
-	String getToeThreadReportShort();
+	public String getToeThreadReportShort();
 
-	String getFrontierReport();
+	public String getFrontierReport();
 
-	String getFrontierReportShort();
+	public String getFrontierReportShort();
 
-	String getProcessorsReport();
+	public String getProcessorsReport();
+	
+	public void acquireContinuePermission();
 
-	void killThread(int threadNumber, boolean replace);
+	public void killThread(int threadNumber, boolean replace);
 }
