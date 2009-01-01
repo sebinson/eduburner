@@ -4,8 +4,6 @@ import static eduburner.crawler.FetchStatusCodes.*;
 
 public class CrawlUri {
 	
-	
-	
 	public static String fetchStatusCodesToString(int code){
         switch(code){
             // DNS
