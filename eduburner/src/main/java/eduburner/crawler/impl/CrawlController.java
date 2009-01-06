@@ -1,9 +1,15 @@
 package eduburner.crawler.impl;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 import eduburner.crawler.ICrawlController;
 import eduburner.crawler.IFrontier;
 
 public class CrawlController implements ICrawlController {
+	
+	private ThreadPoolExecutor toePool;
+	
+	
 
 	@Override
 	public String getCrawlStatusString() {

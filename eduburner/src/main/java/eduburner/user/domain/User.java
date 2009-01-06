@@ -21,6 +21,7 @@ import org.hibernate.validator.NotNull;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
+import com.google.common.collect.Sets;
 import com.google.gson.annotations.Expose;
 
 import eduburner.core.EntityObject;
@@ -44,7 +45,7 @@ public class User extends EntityObject implements UserDetails {
 
 	private Integer version;
 
-	private Set<Role> roles = new HashSet<Role>(0);
+	private Set<Role> roles = Sets.newHashSet();
 
 	private boolean enabled = true;
 
