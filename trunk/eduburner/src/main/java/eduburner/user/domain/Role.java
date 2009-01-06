@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.security.GrantedAuthority;
 
+import com.google.common.collect.Sets;
+
 import eduburner.core.EntityObject;
 
 @Entity
@@ -26,7 +28,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 	
 	private String description;
 
-	protected Set<User> users = new HashSet<User>();
+	protected Set<User> users = Sets.newHashSet();
 
 	@Column(name = "name", nullable = false, unique = true)
 	public String getName() {
