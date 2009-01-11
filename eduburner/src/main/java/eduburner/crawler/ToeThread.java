@@ -2,8 +2,6 @@ package eduburner.crawler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class ToeThread implements Runnable, IReporter {
 
@@ -19,8 +17,6 @@ public class ToeThread implements Runnable, IReporter {
 	private static final String STEP_ABOUT_TO_RETURN_URI = "ABOUT_TO_RETURN_URI";
 	private static final String STEP_FINISHING_PROCESS = "FINISHING_PROCESS";
 
-	@Autowired
-	@Qualifier("crawlController")
 	private ICrawlController crawlController;
 	
 	// activity monitoring, debugging, and problem detection

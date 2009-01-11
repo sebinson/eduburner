@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.common.collect.Lists;
+
 import eduburner.core.EntityObject;
 import eduburner.enumerations.CourseStatus;
 import eduburner.user.domain.UserData;
@@ -51,9 +53,9 @@ public class CourseOffering extends EntityObject {
 	private Date endDate;
 
 	// 成员
-	private List<UserData> members = new ArrayList<UserData>();
+	private List<UserData> members = Lists.newArrayList();
 	
-	private List<CourseResource> courseResources = new ArrayList<CourseResource>();
+	private List<CourseResource> courseResources = Lists.newArrayList();
 
 	@Override
 	public String toString() {
