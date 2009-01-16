@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Lists;
+
 public class HtmlUtil {
 
 	public static String stripTags(String html) {
@@ -28,7 +30,7 @@ public class HtmlUtil {
 	}
 
 	public static String stripOuterHtmlTags(String html) {
-		List<String[]> tags = new ArrayList<String[]>();
+		List<String[]> tags = Lists.newArrayList();
 		tags.add(new String[] { "html", "true", "0" });
 		tags.add(new String[] { "head", "false", "0" });
 		tags.add(new String[] { "body", "true", "0" });
