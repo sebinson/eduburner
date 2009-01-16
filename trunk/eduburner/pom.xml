@@ -388,17 +388,12 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>1.6.0-beta1</version>
-		</dependency>
-		<dependency>
-			<groupId>rome</groupId>
-			<artifactId>rome</artifactId>
-			<version>0.9</version>
+			<version>1.6.0-beta2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.0-beta1</version>
+			<version>4.0-beta2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.collections</groupId>
@@ -409,7 +404,7 @@
 		<dependency>
           <groupId>com.google.code.gson</groupId>
           <artifactId>gson</artifactId>
-          <version>1.2.3</version>
+          <version>1.3</version>
         </dependency>
         
         <dependency>
@@ -417,6 +412,13 @@
           <artifactId>je</artifactId>
           <version>3.2.43</version>
         </dependency>
+        
+        <dependency>
+          <groupId>org.apache.abdera</groupId>
+          <artifactId>abdera-core</artifactId>
+          <version>1.0-SNAPSHOT</version>
+        </dependency>
+        
 	</dependencies>
 	<profiles>
 		<profile>
@@ -546,6 +548,10 @@
            <releases>
               <enabled>true</enabled>
            </releases>
+        </repository>
+        <repository>
+        	<id>apache-snapshot</id>
+			<url>http://people.apache.org/repo/m2-snapshot-repository/</url>
         </repository>
 	</repositories>
 
