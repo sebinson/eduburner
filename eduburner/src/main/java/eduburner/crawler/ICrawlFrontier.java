@@ -1,11 +1,13 @@
 package eduburner.crawler;
 
-import java.io.IOException;
+import java.util.List;
 
 import eduburner.crawler.model.CrawlUri;
 
 
 public interface ICrawlFrontier {
+	
+	public void loadUris(List<CrawlUri> uris);
 	/**
      * Get the next URI that should be processed. If no URI becomes availible
      * during the time specified null will be returned.
@@ -91,55 +93,6 @@ public interface ICrawlFrontier {
      * @return Number of URIs that failed to process.
      */
     public long failedFetchCount();
-    
-    /**
-     * Load URIs from a file, for scheduling and/or considered-included 
-     * status (if from a recovery log). 
-     *
-     * <p> The 'params' Map describes the source file to use and options
-     * in effect regarding its format and handling. Significant keys 
-     * are:
-     * 
-     * <p>"path": full path to source file. If the path ends '.gz', it 
-     * will be considered to be GZIP compressed.
-     * <p>"format": one of "onePer", "crawlLog", or "recoveryLog"
-     * <p>"forceRevisit": if non-null, URIs will be force-scheduled even
-     * if already considered included
-     * <p>"scopeSchedules": if non-null, any URI imported be checked
-     * against the frontier's configured scope before scheduling 
-     * 
-     * <p>If the "format" is "recoveryLog", 7 more keys are significant:
-     * 
-     * <p>"includeSuccesses": if non-null, success lines ("Fs") in the log
-     * will be considered-included. (Usually, this is the aim of
-     * a recovery-log import.)
-     * <p>"includeFailures": if non-null, failure lines ("Ff") in the log
-     * will be considered-included. (Sometimes, this is desired.)
-     * <p>"includeScheduleds": If non-null, scheduled lines ("F+") in the 
-     * log will be considered-included. (Atypical, but an option for 
-     * completeness.)
-     * <p>"scopeIncludes": if non-null, any of the above will be checked
-     * against the frontier's configured scope before consideration
-     *
-     * <p>"scheduleSuccesses": if non-null, success lines ("Fs") in the log
-     * will be schedule-attempted. (Atypical, as all successes
-     * are preceded by "F+" lines.)
-     * <p>"scheduleFailures": if non-null, failure lines ("Ff") in the log
-     * will be schedule-attempted. (Atypical, as all failures
-     * are preceded by "F+" lines.)
-     * <p>"scheduleScheduleds": if non-null, scheduled lines ("F+") in the 
-     * log will be considered-included. (Usually, this is the aim of a
-     * recovery-log import.)
-     * 
-     * TODO: add parameter for auto-unpause-at-good-time
-     * 
-     * @param params Map describing source file and options as above
-     * @throws IOException If problems occur reading file.
-     * @throws JSONException 
-     */
-    public void importUris(
-            String params)
-			throws IOException;
     
     /**
      * Enumeration of possible target states. 

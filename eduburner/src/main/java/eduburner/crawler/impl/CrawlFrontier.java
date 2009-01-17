@@ -1,7 +1,7 @@
 package eduburner.crawler.impl;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import eduburner.crawler.ICrawlController;
@@ -20,6 +20,10 @@ public class CrawlFrontier implements ICrawlFrontier, Serializable{
     protected ReentrantReadWriteLock outboundLock = 
         new ReentrantReadWriteLock(true);
 
+    public void loadUris(List<CrawlUri> uris){
+    	
+    }
+    
 	@Override
 	public long failedFetchCount() {
 		// TODO Auto-generated method stub
@@ -28,12 +32,6 @@ public class CrawlFrontier implements ICrawlFrontier, Serializable{
 
 	@Override
 	public void finished(CrawlUri uri) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void importUris(String params) throws IOException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -67,6 +65,5 @@ public class CrawlFrontier implements ICrawlFrontier, Serializable{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-    
     
 }
