@@ -33,7 +33,7 @@ public interface ICrawlController {
 	 */
 	public void requestCrawlPause();
 	
-	public IFrontier getFrontier();
+	public ICrawlFrontier getFrontier();
 	
 	public void releaseContinuePermission();
 

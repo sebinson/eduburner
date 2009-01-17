@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.model;
 
 import static eduburner.crawler.FetchStatusCodes.*;
 

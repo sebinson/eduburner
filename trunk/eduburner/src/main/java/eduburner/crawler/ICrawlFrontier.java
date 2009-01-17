@@ -6,6 +6,8 @@ package eduburner.crawler;
 
 import java.io.IOException;
 
+import eduburner.crawler.model.CrawlUri;
+
 /**
  * An interface for URI Frontiers.
  *
@@ -78,7 +80,7 @@ import java.io.IOException;
  * @see org.archive.crawler.framework.FrontierHostStatistics
  * @see org.archive.crawler.settings.ModuleType
  */
-public interface IFrontier {
+public interface ICrawlFrontier {
 	/**
      * Get the next URI that should be processed. If no URI becomes availible
      * during the time specified null will be returned.
