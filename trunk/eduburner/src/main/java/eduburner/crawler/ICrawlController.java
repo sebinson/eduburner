@@ -1,8 +1,12 @@
 package eduburner.crawler;
 
-
+/**
+ * As the "global context" for a crawl, subcomponents will usually reach each other through the CrawlController.
+ *
+ */
 public interface ICrawlController {
 
+	public void initTasks();
 	/**
 	 * Operator requested crawl begin
 	 */
