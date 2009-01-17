@@ -3,6 +3,8 @@ package eduburner.crawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import eduburner.crawler.model.CrawlUri;
+
 public class ToeThread implements Runnable, IReporter {
 
 	private static final Logger logger = LoggerFactory

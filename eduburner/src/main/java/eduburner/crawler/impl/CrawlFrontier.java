@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import eduburner.crawler.CrawlUri;
 import eduburner.crawler.ICrawlController;
-import eduburner.crawler.IFrontier;
+import eduburner.crawler.ICrawlFrontier;
+import eduburner.crawler.model.CrawlUri;
 
-public class Frontier implements IFrontier, Serializable{
+public class CrawlFrontier implements ICrawlFrontier, Serializable{
 
 	private static final long serialVersionUID = 5723257498212526250L;
 	private ICrawlController crawlController;

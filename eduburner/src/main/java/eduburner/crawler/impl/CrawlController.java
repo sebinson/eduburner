@@ -3,13 +3,11 @@ package eduburner.crawler.impl;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import eduburner.crawler.ICrawlController;
-import eduburner.crawler.IFrontier;
+import eduburner.crawler.ICrawlFrontier;
 
 public class CrawlController implements ICrawlController {
 	
 	private ThreadPoolExecutor toePool;
-	
-	
 
 	@Override
 	public String getCrawlStatusString() {
@@ -90,7 +88,7 @@ public class CrawlController implements ICrawlController {
 	}
 
 	@Override
-	public IFrontier getFrontier() {
+	public ICrawlFrontier getFrontier() {
 		// TODO Auto-generated method stub
 		return null;
 	}
