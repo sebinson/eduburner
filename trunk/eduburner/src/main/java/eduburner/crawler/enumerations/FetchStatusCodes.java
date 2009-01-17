@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.enumerations;
 
 /**
  * Constant flag codes to be used, in lieu of per-protocol

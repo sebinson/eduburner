@@ -1,13 +1,21 @@
 package eduburner.crawler.impl;
 
-import java.util.concurrent.ThreadPoolExecutor;
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Component;
 
 import eduburner.crawler.ICrawlController;
-import eduburner.crawler.ICrawlFrontier;
+import eduburner.crawler.IFeedFetcher;
 
+@Component("crawlController")
 public class CrawlController implements ICrawlController {
 	
-	private ThreadPoolExecutor toePool;
+	private IFeedFetcher frontier;
+	
+	@PostConstruct
+	public void initTasks(){
+		
+	}
 
 	@Override
 	public String getCrawlStatusString() {
@@ -88,7 +96,7 @@ public class CrawlController implements ICrawlController {
 	}
 
 	@Override
-	public ICrawlFrontier getFrontier() {
+	public IFeedFetcher getFrontier() {
 		// TODO Auto-generated method stub
 		return null;
 	}
