@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import eduburner.crawler.model.CrawlUri;
 
-public class ToeThread implements Runnable, IReporter {
+public class ToeThread implements Runnable{
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(ToeThread.class);
@@ -114,18 +114,6 @@ public class ToeThread implements Runnable, IReporter {
         step=s;
         atStepSince = System.currentTimeMillis();
     }
-
-	@Override
-	public String[] getReports() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String singleLineReport() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public boolean isShouldRetire() {
 		return shouldRetire;
