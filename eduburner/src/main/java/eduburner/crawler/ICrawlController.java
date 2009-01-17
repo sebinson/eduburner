@@ -1,12 +1,6 @@
 package eduburner.crawler;
 
 
-/**
- * Interface for controlling a crawl job. The implementation is
- * {@link CrawlControllerImpl}, which is an open MBean.
- * 
- * @author pjack
- */
 public interface ICrawlController {
 
 	/**
@@ -33,7 +27,7 @@ public interface ICrawlController {
 	 */
 	public void requestCrawlPause();
 	
-	public IFeedFetcher getFrontier();
+	public ICrawlFrontier getFrontier();
 	
 	public void releaseContinuePermission();
 
@@ -41,18 +35,6 @@ public interface ICrawlController {
 	 * Resume crawl from paused state
 	 */
 	public void requestCrawlResume();
-
-	public String getCrawlStatusString();
-
-	public String getToeThreadReport();
-
-	public String getToeThreadReportShort();
-
-	public String getFrontierReport();
-
-	public String getFrontierReportShort();
-
-	public String getProcessorsReport();
 	
 	public void acquireContinuePermission();
 

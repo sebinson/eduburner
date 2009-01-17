@@ -1,86 +1,11 @@
-/* Frontier
- *
- * codes taken from heritrix
- */
 package eduburner.crawler;
 
 import java.io.IOException;
 
 import eduburner.crawler.model.CrawlUri;
 
-/**
- * An interface for URI Frontiers.
- *
- * <p>A URI Frontier is a pluggable module in Heritrix that maintains the
- * internal state of the crawl. This includes (but is not limited to):
- * <ul>
- *     <li>What URIs have been discovered
- *     <li>What URIs are being processed (fetched)
- *     <li>What URIs have been processed
- *     <li>In what order unprocessed URIs will be processed
- * </ul>
- *
- * <p>The Frontier is also responsible for enforcing any politeness restrictions
- * that may have been applied to the crawl. Such as limiting simultaneous
- * connection to the same host, server or IP number to 1 (or any other fixed
- * amount), delays between connections etc.
- *
- * <p>A URIFrontier is created by the
- * {@link org.archive.crawler.framework.CrawlControllerImpl CrawlController} which
- * is in turn responsible for providing access to it. Most significant among
- * those modules interested in the Frontier are the
- * {@link org.archive.crawler.framework.ToeThread ToeThreads} who perform the
- * actual work of processing a URI.
- *
- * <p>The methods defined in this interface are those required to get URIs for
- * processing, report the results of processing back (ToeThreads) and to get
- * access to various statistical data along the way. The statistical data is
- * of interest to {@link org.archive.crawler.framework.StatisticsTracker
- * Statistics Tracking} modules. A couple of additional methods are provided
- * to be able to inspect and manipulate the Frontier at runtime.
- *
- * <p>The statistical data exposed by this interface is:
- * <ul>
- *     <li> {@link #discoveredUriCount() Discovered URIs}
- *     <li> {@link #queuedUriCount() Queued URIs}
- *     <li> {@link #finishedUriCount() Finished URIs}
- *     <li> {@link #succeededFetchCount() Successfully processed URIs}
- *     <li> {@link #failedFetchCount() Failed to process URIs}
- *     <li> {@link #disregardedUriCount() Disregarded URIs}
- *     <li> {@link #totalBytesWritten() Total bytes written}
- * </ul>
- *
- * <p>In addition the frontier may optionally implement an interface that
- * exposes information about hosts.
- *
- * <p>Furthermore any implementation of the URI Frontier should trigger
- * {@link org.archive.crawler.event.CrawlURIDispositionListener
- * CrawlURIDispostionEvents} by invoking the proper methods on the
- * {@link org.archive.crawler.framework.CrawlControllerImpl CrawlController}.
- * Doing this allows a custom built
- * {@link org.archive.crawler.framework.StatisticsTracker
- * Statistics Tracking} module to gather any other additional data it might be
- * interested in by examining the completed URIs.
- *
- * <p>All URI Frontiers inherit from
- * {@link org.archive.crawler.settings.ModuleType ModuleType}
- * and therefore creating settings follows the usual pattern of pluggable modules
- * in Heritrix.
- *
- * @author Gordon Mohr
- * @author Kristinn Sigurdsson
- *
- * @see org.archive.crawler.framework.CrawlControllerImpl
- * @see org.archive.crawler.framework.CrawlControllerImpl#fireCrawledURIDisregardEvent(CrawlURI)
- * @see org.archive.crawler.framework.CrawlControllerImpl#fireCrawledURIFailureEvent(CrawlURI)
- * @see org.archive.crawler.framework.CrawlControllerImpl#fireCrawledURINeedRetryEvent(CrawlURI)
- * @see org.archive.crawler.framework.CrawlControllerImpl#fireCrawledURISuccessfulEvent(CrawlURI)
- * @see org.archive.crawler.framework.StatisticsTracker
- * @see org.archive.crawler.framework.ToeThread
- * @see org.archive.crawler.framework.FrontierHostStatistics
- * @see org.archive.crawler.settings.ModuleType
- */
-public interface IFeedFetcher {
+
+public interface ICrawlFrontier {
 	/**
      * Get the next URI that should be processed. If no URI becomes availible
      * during the time specified null will be returned.
@@ -131,26 +56,6 @@ public interface IFeedFetcher {
      */
     public void finished(CrawlUri uri);
 
-    /**
-     * Number of <i>discovered</i> URIs.
-     *
-     * <p>That is any URI that has been confirmed be within 'scope'
-     * (i.e. the Frontier decides that it should be processed). This
-     * includes those that have been processed, are being processed
-     * and have finished processing. Does not include URIs that have
-     * been 'forgotten' (deemed out of scope when trying to fetch,
-     * most likely due to operator changing scope definition).
-     *
-     * <p><b>Note:</b> This only counts discovered URIs. Since the same
-     * URI can (at least in most frontiers) be fetched multiple times, this
-     * number may be somewhat lower then the combined <i>queued</i>,
-     * <i>in process</i> and <i>finished</i> items combined due to duplicate
-     * URIs being queued and processed. This variance is likely to be especially
-     * high in Frontiers implementing 'revist' strategies.
-     *
-     * @return Number of discovered URIs.
-     */
-    public long discoveredUriCount();
 
     /**
      * Number of URIs <i>queued</i> up and waiting for processing.
