@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import eduburner.crawler.ICrawlController;
-import eduburner.crawler.IFeedFetcher;
+import eduburner.crawler.ICrawlFrontier;
 import eduburner.crawler.model.CrawlUri;
 
-public class FeedFetcher implements IFeedFetcher, Serializable{
+public class CrawlFrontier implements ICrawlFrontier, Serializable{
 
 	private static final long serialVersionUID = 5723257498212526250L;
 	private ICrawlController crawlController;
@@ -19,12 +19,6 @@ public class FeedFetcher implements IFeedFetcher, Serializable{
      * frontier can acquire write permission to hold threads */
     protected ReentrantReadWriteLock outboundLock = 
         new ReentrantReadWriteLock(true);
-
-	@Override
-	public long discoveredUriCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public long failedFetchCount() {
