@@ -1,5 +1,7 @@
 package eduburner.crawler;
 
+import eduburner.crawler.enumerations.ProcessStatus;
+
 public class ProcessResult {
     
     final public static ProcessResult PROCEED = 

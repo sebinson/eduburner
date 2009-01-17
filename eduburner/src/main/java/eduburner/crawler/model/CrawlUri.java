@@ -1,6 +1,6 @@
 package eduburner.crawler.model;
 
-import static eduburner.crawler.FetchStatusCodes.*;
+import static eduburner.crawler.enumerations.FetchStatusCodes.*;
 
 public class CrawlUri {
 	

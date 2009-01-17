@@ -80,7 +80,7 @@ import eduburner.crawler.model.CrawlUri;
  * @see org.archive.crawler.framework.FrontierHostStatistics
  * @see org.archive.crawler.settings.ModuleType
  */
-public interface ICrawlFrontier {
+public interface IFeedFetcher {
 	/**
      * Get the next URI that should be processed. If no URI becomes availible
      * during the time specified null will be returned.
