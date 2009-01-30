@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * demo for use abdera
+ * demo to use abdera
  * @author zhangyf@gmail.com
  *
  */
@@ -28,6 +28,7 @@ public class FeedParser {
 		  
 		Document<Feed> doc = parser.parse(url.openStream());
 		Feed feed = doc.getRoot();
+		
 		System.out.println(feed.getTitle());
 		for (Entry entry : feed.getEntries()) {
 		  System.out.println("\t" + entry.getTitle());
