@@ -203,7 +203,6 @@
 			</testResource>
 		</testResources>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
