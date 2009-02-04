@@ -23,7 +23,7 @@
       
   </head>
   <body>
-      <div id="site-doc" class="yui-d2">
+      <div id="site-doc" class="yui-d0">
       	 <#-- begin of site header -->
          <div id="site-hd">
          	<@ui.header />
@@ -49,7 +49,7 @@
       	 </div>
       	 <#-- end of site footer -->
       </div>
-      <script type="text/javascript" src="${base}/scripts/jquery-1.2.6.js"></script>
+      <script type="text/javascript" src="${base}/scripts/jquery-1.3.1.min.js"></script>
       <#list js as jsFile>   		
 		  <script type="text/javascript" src="${base}/${jsFile}"></script>
       </#list>
