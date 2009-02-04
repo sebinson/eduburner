@@ -36,15 +36,6 @@
 		</property>
 	</bean>
 	
-	<bean id="fetcherCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager">
-			<ref local="cacheManager" />
-		</property>
-		<property name="cacheName">
-			<value>eduburner.fetcher.cache</value>
-		</property>
-	</bean>
-	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl"
@@ -68,6 +59,8 @@
 	</bean>
 	
 	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
+	
+	<bean id="abdera" class="org.apache.abdera.Abdera" />
 	
 	<import resource="classpath:applicationContext-hibernate.xml" />
 	<import resource="classpath:applicationContext-security.xml" />
