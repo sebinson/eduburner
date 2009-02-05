@@ -8,7 +8,6 @@
 /**
  * @author zhangyf
  */
-
 var History = (function ($) {
     var iframe, hiddenField;
     var ready = false;
