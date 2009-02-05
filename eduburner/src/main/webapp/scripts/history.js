@@ -100,8 +100,8 @@ var History = (function ($) {
     }
 
     return {
-		HistoryLoadEvent: new Reader.CustomEvent("onLoad"),
-		StateChangeEvent: new Reader.CustomEvent("histStateChange"),
+		HistoryLoadEvent: null, //new CustomEvent("onLoad"),
+		StateChangeEvent: null, //new CustomEvent("histStateChange"),
         
         fieldId: 'hist-field',
         iframeId: 'hist-iframe',
