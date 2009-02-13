@@ -13,6 +13,7 @@
       
       <link type="text/css" rel="stylesheet" href="${base}/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/tools.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/styles/ui/ui.theme.css" />
       
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import ${base}/${cssFile};</style>
@@ -22,7 +23,7 @@
       
   </head>
   <body>
-      <div id="site-doc" class="yui-d0">
+      <div id="site-doc" class="yui-d3">
       	 <#-- begin of site header -->
          <div id="site-hd">
          	<@ui.header />

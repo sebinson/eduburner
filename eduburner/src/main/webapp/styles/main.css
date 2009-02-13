@@ -1,14 +1,21 @@
 html, body {
-    background: url(../images/bg.png) repeat-x scroll 0 0;
+    background-color: #606060;
 }
 
 a, a:visited, .link {
-    
+    color: #666666
 }
 
 .link {
     text-decoration: underline;
     cursor: pointer;
+}
+
+a:focus {
+    -moz-outline: 0;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .hidden {
@@ -26,31 +33,23 @@ a, a:visited, .link {
 /*********** site layout ******************/
 
 #site-doc{
-	margin: auto 100px;
+	background-color: #ffffff;
+	border-top: solid 3px #e2eecd;
 }
 
 #site-hd{
+	border-bottom: 1px dotted #E2EECD;
 	margin-bottom: 10px;
 }
 
-#site-bd{
-	background: #FFFFFF;
-}
-
-#site-nav{
-	background: #F7F7F7;
-	min-height: 500px;
-}
-
-#main{
-	border-left: 1px solid #EEEEE;
-	padding: 20px 24px;
-}
-
 #site-ft{
-	padding-top:5px;
+	background-color: #e2eecd;
+	padding: 8px;
 	text-align:center;
-	color: #CCCCCC;
+	border-style: solid;
+	border-width: 0px;
+	border-top-width: 2px;
+	border-color: #d2e6bd;
 }
 
 /*********** end of site layout ***********/
@@ -62,35 +61,28 @@ a, a:visited, .link {
     width: 158px;
     font-size: 170%;
     font-weight: bolder;
-    color:#CCCCCC;
+    color:#555555;
     margin: 5px 0 0 10px;
 }
 
 #logo>a{
 	text-decoration: none;
-	color: #CCCCCC
 }
 
 #linkbar {
     float: right;
     padding: 3px 6px;
-    color: #CCCCCC
-}
-
-#linkbar>a{
-	color: #CCCCCC
 }
 
 
-/*********** nav block ***********************/
+/*********** nav block ********************/
 .sidebar-block {
 	padding: 4px 0 8px 0;
 	width: 94%;
 	margin-left: 6%;
 	overflow: hidden;
-	background-color: #E2EECD;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	background-color: #E7E7DE;
+	border: 1px solid #BBBBBB;
 }
 
 .sidebar-block-inner {
@@ -149,4 +141,4 @@ a, a:visited, .link {
 .sidebar-block-content ul.sidebar-tag-cloud li {
 	
 }
-/*********** end of nav block ****************/
+/***************** end of nav block *********************/
