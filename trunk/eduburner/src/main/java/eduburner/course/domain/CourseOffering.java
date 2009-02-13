@@ -1,6 +1,5 @@
 package eduburner.course.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,11 +56,6 @@ public class CourseOffering extends EntityObject {
 	
 	private List<CourseResource> courseResources = Lists.newArrayList();
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("title", title).toString();
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -102,6 +96,7 @@ public class CourseOffering extends EntityObject {
 		this.endDate = endDate;
 	}
 
+	
 	public List<UserData> getMembers() {
 		return members;
 	}
@@ -117,5 +112,10 @@ public class CourseOffering extends EntityObject {
 
 	public void setCourseResources(List<CourseResource> courseResources) {
 		this.courseResources = courseResources;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("title", title).toString();
 	}
 }

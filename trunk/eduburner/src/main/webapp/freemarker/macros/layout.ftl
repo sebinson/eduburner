@@ -7,10 +7,9 @@
 
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	  
-	  <link type="text/css" rel="stylesheet" href="${base}/styles/reset-min.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/styles/fonts-min.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/styles/grids-min.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/styles/base-context-min.css" />
+	  <link type="text/css" rel="stylesheet" href="${base}/styles/yui/reset-min.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/styles/yui/fonts-min.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/styles/yui/grids-min.css" />
       
       <link type="text/css" rel="stylesheet" href="${base}/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="${base}/styles/tools.css" />
@@ -31,7 +30,7 @@
          <#-- end of site header -->
          
       	 <div id="site-bd" class="yui-t2">
-      	     <div class="yui-b">
+      	     <div id="site-nav" class="yui-b">
       	        <#-- nav bar -->
       	     	<@ui.navbar />
       	     </div>

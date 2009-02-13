@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import eduburner.core.EntityObject;
 import eduburner.user.domain.UserData;
 
+@Entity
 public class Entry extends EntityObject {
 	private static final long serialVersionUID = -1018771380257973544L;
 	private String entryId;
