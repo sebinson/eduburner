@@ -15,7 +15,7 @@
 </#macro>
 
 <#macro footer>
-    <p>&copy; EduBurner | <a href="#" target="_blank">Privacy</a></p>
+    <p>&copy; EduBurner</p>
 </#macro>
 
 <#-- 导航菜单 -->
