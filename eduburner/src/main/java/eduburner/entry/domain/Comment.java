@@ -5,6 +5,7 @@ import java.util.Date;
 import eduburner.core.EntityObject;
 import eduburner.user.domain.UserData;
 
+
 public class Comment extends EntityObject {
 	private static final long serialVersionUID = 6416275923661542381L;
 	private Date date;

@@ -14,4 +14,10 @@ public class CourseManager extends BaseManager implements ICourseManager {
 		
 	}
 
+	@Override
+	public CourseOffering getCourse(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

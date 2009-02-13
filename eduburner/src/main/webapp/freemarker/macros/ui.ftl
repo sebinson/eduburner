@@ -20,7 +20,7 @@
 
 <#-- 导航菜单 -->
 <#macro navbar>
-	<div class="sidebar-block spacing">
+	<div class="ui-widget-content ui-corner-all sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">我的课程</h4>
 	    <div class="sidebar-block-content">
