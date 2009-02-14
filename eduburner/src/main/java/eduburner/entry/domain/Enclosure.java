@@ -1,7 +1,12 @@
 package eduburner.entry.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import eduburner.core.EntityObject;
 
+@Entity
+@Table(name="enclosure")
 public class Enclosure extends EntityObject {
 	private static final long serialVersionUID = -3164951260165938724L;
 	private String type;

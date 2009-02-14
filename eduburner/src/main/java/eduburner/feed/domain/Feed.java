@@ -3,9 +3,14 @@ package eduburner.feed.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import eduburner.core.EntityObject;
 import eduburner.entry.domain.Entry;
 
+@Entity
+@Table(name="feed")
 public class Feed extends EntityObject {
 	private static final long serialVersionUID = 367824212338403517L;
 	

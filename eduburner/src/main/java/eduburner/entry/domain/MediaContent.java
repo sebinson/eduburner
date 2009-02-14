@@ -1,8 +1,13 @@
 package eduburner.entry.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import eduburner.core.EntityObject;
 import eduburner.util.HtmlUtil;
 
+@Entity
+@Table(name="media_content")
 public class MediaContent extends EntityObject{
     private static final long serialVersionUID = 8339618754895554627L;
 	private String url;

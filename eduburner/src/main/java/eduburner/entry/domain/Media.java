@@ -3,8 +3,13 @@ package eduburner.entry.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import eduburner.core.EntityObject;
 
+@Entity
+@Table(name="media")
 public class Media extends EntityObject {
 	private static final long serialVersionUID = -2692282673433144788L;
 	private String title;

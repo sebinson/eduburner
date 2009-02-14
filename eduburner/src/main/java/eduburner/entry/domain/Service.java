@@ -1,5 +1,8 @@
 package eduburner.entry.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import eduburner.core.EntityObject;
 
 /**
@@ -7,6 +10,9 @@ import eduburner.core.EntityObject;
  * @author zhangyf@gmail.com
  *
  */
+
+@Entity
+@Table(name="service")
 public class Service extends EntityObject {
 
 	private static final long serialVersionUID = -2738135912576421035L;
@@ -14,9 +20,6 @@ public class Service extends EntityObject {
 	private String name;
 	private String iconUrl;
 	private String profileUrl;
-
-	public Service() {
-	}
 
 	public String getName() {
 		return name;

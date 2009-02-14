@@ -1,6 +1,29 @@
 package eduburner.crawler.model;
 
-import static eduburner.crawler.enumerations.FetchStatusCodes.*;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_BLOCKED_BY_CUSTOM_PROCESSOR;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_BLOCKED_BY_USER;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_CONNECT_FAILED;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_CONNECT_LOST;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DEEMED_CHAFF;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DEFERRED;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DELETED_BY_USER;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DNS_SUCCESS;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DOMAIN_PREREQUISITE_FAILURE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_DOMAIN_UNRESOLVABLE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_OTHER_PREREQUISITE_FAILURE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_OUT_OF_SCOPE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_PREREQUISITE_UNSCHEDULABLE_FAILURE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_PROCESSING_THREAD_KILLED;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_ROBOTS_PRECLUDED;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_ROBOTS_PREREQUISITE_FAILURE;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_RUNTIME_EXCEPTION;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_SERIOUS_ERROR;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_TIMEOUT;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_TOO_MANY_EMBED_HOPS;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_TOO_MANY_LINK_HOPS;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_TOO_MANY_RETRIES;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_UNATTEMPTED;
+import static eduburner.crawler.enumerations.FetchStatusCodes.S_UNFETCHABLE_URI;
 
 public class CrawlUri {
 	
