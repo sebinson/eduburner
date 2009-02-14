@@ -1,6 +1,5 @@
 package eduburner.user.domain;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;

@@ -2,21 +2,22 @@ package eduburner.entry.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import eduburner.core.EntityObject;
 import eduburner.user.domain.UserData;
 
+@Entity
+@Table(name="like")
 public class Like extends EntityObject {
 	private static final long serialVersionUID = -6439803377969170768L;
 
 	private UserData user;
 	private Entry entry;
 	private Date date;
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public UserData getUser() {
 		return user;
@@ -40,5 +41,10 @@ public class Like extends EntityObject {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@Override
+	public String toString() {
+		return null;
 	}
 }

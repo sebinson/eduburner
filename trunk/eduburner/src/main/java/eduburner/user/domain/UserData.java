@@ -3,8 +3,12 @@ package eduburner.user.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -96,10 +100,21 @@ public class UserData extends EntityObject {
 	public void setFeed(Feed feed) {
 		this.feed = feed;
 	}
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY, mappedBy = "members")
+	public List<CourseOffering> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<CourseOffering> courses) {
+		this.courses = courses;
+	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("username", username).append(
 				"fullname", fullname).toString();
 	}
+
+	
 }

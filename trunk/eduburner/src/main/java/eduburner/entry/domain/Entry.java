@@ -5,13 +5,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.google.common.collect.Lists;
 
 import eduburner.core.EntityObject;
 import eduburner.user.domain.UserData;
 
 @Entity
+@Table(name = "entry")
 public class Entry extends EntityObject {
 	private static final long serialVersionUID = -1018771380257973544L;
+	
 	private String entryId;
 	private String title;
 	private String link;
@@ -19,18 +24,13 @@ public class Entry extends EntityObject {
 	private Date updated;
 	private boolean anonymous;
 	private boolean hidden;
+	
 	private UserData user;
 	private Service service;
-	private List<Comment> comments;
-	private List<Like> likes;
-	private List<Media> media;
+	private List<Comment> comments = Lists.newArrayList();
+	private List<Like> likes = Lists.newArrayList();
+	private List<Media> media = Lists.newArrayList();
 	private Via via;
-
-	public Entry() {
-		comments = new ArrayList<Comment>();
-		likes = new ArrayList<Like>();
-		media = new ArrayList<Media>();
-	}
 
 	public String getEntryId() {
 		return entryId;
@@ -64,6 +64,7 @@ public class Entry extends EntityObject {
 		return hidden;
 	}
 
+	
 	public Service getService() {
 		return service;
 	}

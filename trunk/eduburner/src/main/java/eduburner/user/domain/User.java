@@ -1,6 +1,5 @@
 package eduburner.user.domain;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,7 +21,6 @@ import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
 import com.google.common.collect.Sets;
-import com.google.gson.annotations.Expose;
 
 import eduburner.core.EntityObject;
 
