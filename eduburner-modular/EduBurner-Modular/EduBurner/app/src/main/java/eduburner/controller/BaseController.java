@@ -53,8 +53,7 @@ public class BaseController {
 				Long.class, null, true));
 		binder.registerCustomEditor(byte[].class,
 				new ByteArrayMultipartFileEditor());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				DATE_FORMAT);
+		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, null, new CustomDateEditor(
 				dateFormat, true));
@@ -63,6 +62,7 @@ public class BaseController {
 
 	/**
 	 * template method
+	 * 
 	 * @param request
 	 * @param binder
 	 */

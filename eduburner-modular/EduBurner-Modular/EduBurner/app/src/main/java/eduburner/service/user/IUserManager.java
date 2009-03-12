@@ -16,5 +16,5 @@ public interface IUserManager {
 	public User getUserByUsername(String username);
 
 	public void removeUser(long userId);
-	
+
 }

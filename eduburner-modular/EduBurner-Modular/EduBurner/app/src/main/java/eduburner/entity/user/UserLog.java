@@ -9,8 +9,9 @@ import eduburner.entity.EntityObject;
 
 /**
  * user log
+ * 
  * @author zhangyf@gmail.com
- *
+ * 
  */
 
 @Entity
@@ -18,16 +19,15 @@ import eduburner.entity.EntityObject;
 public class UserLog extends EntityObject {
 
 	private static final long serialVersionUID = -8282684097913298667L;
-	
+
 	private long userId;
 	private String action;
 	private Date actionDate;
-	
+
 	@Override
 	public String toString() {
 		return userId + " action: " + action;
 	}
-
 
 	public long getUserId() {
 		return userId;
@@ -48,7 +48,6 @@ public class UserLog extends EntityObject {
 	public Date getActionDate() {
 		return actionDate;
 	}
-
 
 	public void setActionDate(Date actionDate) {
 		this.actionDate = actionDate;

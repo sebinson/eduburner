@@ -32,16 +32,18 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
 		return (T) getHibernateTemplate().get(type.getName(), id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public Object getUniqueInstanceByDetachedCriteria(final DetachedCriteria criteria) {
+	public Object getUniqueInstanceByDetachedCriteria(
+			final DetachedCriteria criteria) {
 		return (Object) getHibernateTemplate().executeWithNativeSession(
 				new HibernateCallback() {
 					@Override
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
-						return criteria.getExecutableCriteria(session).uniqueResult();
+						return criteria.getExecutableCriteria(session)
+								.uniqueResult();
 					}
 				});
 	}
@@ -72,12 +74,12 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 					}
 				});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getUniqueInstanceByExample(final Object example) {
-		return (Object)getHibernateTemplate().executeWithNativeSession(
-				new HibernateCallback(){
+		return (Object) getHibernateTemplate().executeWithNativeSession(
+				new HibernateCallback() {
 					@Override
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
@@ -89,8 +91,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 								.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 						return searchCriteria.uniqueResult();
 					}
-				}
-		);
+				});
 	}
 
 	@SuppressWarnings("unchecked")

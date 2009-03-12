@@ -37,8 +37,8 @@ public abstract class PermissionBase extends EntityObject {
 	public PermissionBase() {
 
 	}
-	
-	public PermissionBase(Role role){
+
+	public PermissionBase(Role role) {
 		this.role = role;
 	}
 
@@ -46,8 +46,8 @@ public abstract class PermissionBase extends EntityObject {
 		this.allowMask = allowMask;
 		this.denyMask = denyMask;
 	}
-	
-	public PermissionBase(Role role, long allowMask, long denyMask){
+
+	public PermissionBase(Role role, long allowMask, long denyMask) {
 		this.role = role;
 		this.allowMask = allowMask;
 		this.denyMask = denyMask;

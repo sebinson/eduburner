@@ -4,7 +4,6 @@ import javax.persistence.EntityExistsException;
 
 import eduburner.entity.user.Role;
 
-
 public interface IRoleManager {
 	public Role getRoleById(String id);
 

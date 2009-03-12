@@ -24,7 +24,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public static final String DEFAULT_ROLE_NAME = "role_user";
 
 	private String name;
-	
+
 	private String description;
 
 	protected Set<User> users = Sets.newHashSet();
@@ -33,7 +33,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -56,18 +56,18 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		if(!(o instanceof Role)){
+		if (!(o instanceof Role)) {
 			throw new IllegalArgumentException();
 		}
-		Role role = (Role)o;
-		if(role.getName().equals(this)){
+		Role role = (Role) o;
+		if (role.getName().equals(this)) {
 			return 0;
 		}
 		return 1;

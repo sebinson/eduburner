@@ -1,13 +1,7 @@
 package eduburner.entity.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.apache.abdera.model.Feed;
@@ -26,17 +20,16 @@ public class UserData extends EntityObject {
 	private String username;
 
 	private String fullname;
-	
+
 	private String email;
 
 	private long userId;
-	
+
 	private Feed feed;
 
 	// 加上个人头像
 	private byte[] profilePicture;
 
-	
 	public UserData() {
 	}
 
@@ -102,5 +95,4 @@ public class UserData extends EntityObject {
 				"fullname", fullname).toString();
 	}
 
-	
 }
