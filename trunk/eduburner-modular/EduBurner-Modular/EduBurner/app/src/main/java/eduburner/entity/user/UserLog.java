@@ -21,13 +21,19 @@ public class UserLog extends EntityObject {
 	private static final long serialVersionUID = -8282684097913298667L;
 
 	private long userId;
+	//json格式
+	/**
+	 * 
+ "blog":[
+  {"id":1,"title":""}
+ ],
+ "photo":[
+  {"id":1,"title":""}
+ ]
+}
+	 */
 	private String action;
 	private Date actionDate;
-
-	@Override
-	public String toString() {
-		return userId + " action: " + action;
-	}
 
 	public long getUserId() {
 		return userId;
@@ -52,5 +58,9 @@ public class UserLog extends EntityObject {
 	public void setActionDate(Date actionDate) {
 		this.actionDate = actionDate;
 	}
-
+	
+	@Override
+	public String toString() {
+		return userId + " action: " + action;
+	}
 }
