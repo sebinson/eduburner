@@ -23,7 +23,7 @@ public class CustomFreeMarkerView extends FreeMarkerView {
 	protected void exposeHelpers(Map model, HttpServletRequest request)
 			throws Exception {
 		model.put("base", RequestUtils.getResourceBase(request));
-		model.put("securityHelper", new SecurityHelper());
+		model.put("securityHelper", SecurityHelper.getInstance());
 		model.put("req", request);
 	}
 }

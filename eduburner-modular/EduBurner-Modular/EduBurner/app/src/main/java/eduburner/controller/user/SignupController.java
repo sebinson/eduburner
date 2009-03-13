@@ -1,13 +1,9 @@
 package eduburner.controller.user;
 
-import javax.persistence.EntityExistsException;
-
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.providers.ProviderManager;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import eduburner.controller.BaseController;
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
+import eduburner.persistence.EntityExistsException;
 
 @Controller
 @RequestMapping("/signup")
@@ -61,22 +58,16 @@ public class SignupController extends BaseController {
 			result.reject("该用户已存在");
 			return SIGNUP_PAGE;
 		}
-
+		
 		// log user in automatically
-		Authentication auth = new UsernamePasswordAuthenticationToken(user
-				.getUsername(), user.getConfirmPassword());
-		try {
-
-			/*SecurityContextHolder.getContext().setAuthentication(
-					authenticationManager.doAuthentication(auth));*/
-
-		} catch (NoSuchBeanDefinitionException n) {
-			// ignore, should only happen when testing
-		}
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                user.getUsername(), user.getConfirmPassword(), user.getAuthorities());
+        auth.setDetails(user);
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
 		// status.setComplete();
 		// redirect after post
-		return "redirect:/index";
+		return "redirect:/";
 	}
 
 }

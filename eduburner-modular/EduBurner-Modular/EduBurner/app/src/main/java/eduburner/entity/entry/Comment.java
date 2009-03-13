@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 
-
 public class Comment extends EntityObject {
 	private static final long serialVersionUID = 6416275923661542381L;
 	private Date date;

@@ -35,7 +35,7 @@ public class EditProfileController extends BaseController {
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	public String delete() {
+	public String destroy() {
 		return null;
 	}
 
