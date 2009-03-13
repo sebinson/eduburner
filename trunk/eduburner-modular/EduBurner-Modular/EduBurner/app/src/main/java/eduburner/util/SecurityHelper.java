@@ -9,6 +9,16 @@ public class SecurityHelper {
 
 	private static Logger logger = LoggerFactory
 			.getLogger(SecurityHelper.class);
+	
+	private SecurityHelper(){}
+
+	private static class SingletonHolder {
+		static SecurityHelper instance = new SecurityHelper();
+	}
+
+	public static SecurityHelper getInstance() {
+		return SingletonHolder.instance;
+	}
 
 	public String getPrincipal() {
 		Authentication auth = SecurityContextHolder.getContext()

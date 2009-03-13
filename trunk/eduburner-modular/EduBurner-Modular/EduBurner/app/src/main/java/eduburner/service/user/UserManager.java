@@ -1,7 +1,5 @@
 package eduburner.service.user;
 
-import javax.persistence.EntityExistsException;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -17,6 +15,7 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import eduburner.entity.user.User;
+import eduburner.persistence.EntityExistsException;
 import eduburner.service.BaseManager;
 
 @Service("userManager")
