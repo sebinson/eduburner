@@ -6,8 +6,6 @@ import javax.persistence.Table;
 import eduburner.entity.EntityObject;
 import eduburner.util.HtmlUtil;
 
-@Entity
-@Table(name="media_thumbnail")
 public class MediaThumbnail extends EntityObject {
 	private static final long serialVersionUID = -7214123833351476904L;
 	private String url;

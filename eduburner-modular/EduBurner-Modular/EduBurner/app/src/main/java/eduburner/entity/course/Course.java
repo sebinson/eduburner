@@ -35,8 +35,8 @@ import eduburner.enumerations.CourseStatus;
  */
 
 @Entity
-@Table(name = "course_offering")
-public class CourseOffering extends EntityObject {
+@Table(name = "course")
+public class Course extends EntityObject {
 
 	private static final long serialVersionUID = -1025308879798159789L;
 

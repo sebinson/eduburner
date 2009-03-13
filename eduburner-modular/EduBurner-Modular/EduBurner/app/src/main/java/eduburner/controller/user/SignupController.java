@@ -30,10 +30,6 @@ public class SignupController extends BaseController {
 	@Qualifier("passwordEncoder")
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	@Qualifier("authenticationManager")
-	private ProviderManager authenticationManager;
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 		User user = new User();
@@ -71,8 +67,8 @@ public class SignupController extends BaseController {
 				.getUsername(), user.getConfirmPassword());
 		try {
 
-			SecurityContextHolder.getContext().setAuthentication(
-					authenticationManager.doAuthentication(auth));
+			/*SecurityContextHolder.getContext().setAuthentication(
+					authenticationManager.doAuthentication(auth));*/
 
 		} catch (NoSuchBeanDefinitionException n) {
 			// ignore, should only happen when testing

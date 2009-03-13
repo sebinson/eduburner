@@ -22,15 +22,15 @@ public class CourseResource extends EntityObject {
 
 	private String name;
 
-	private CourseOffering course;
+	private Course course;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_course_id")
-	public CourseOffering getCourse() {
+	public Course getCourse() {
 		return course;
 	}
 
-	public void setCourse(CourseOffering course) {
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 

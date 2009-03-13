@@ -8,8 +8,6 @@ import javax.persistence.Table;
 
 import eduburner.entity.EntityObject;
 
-@Entity
-@Table(name="media")
 public class Media extends EntityObject {
 	
 	private static final long serialVersionUID = -2692282673433144788L;
