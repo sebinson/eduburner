@@ -11,22 +11,18 @@ public interface IDao {
 
 	public <T> T getInstanceById(Class<T> type, Serializable id);
 
-	@SuppressWarnings("unchecked")
-	public List getAllInstances(Class type);
+	public List<?> getAllInstances(Class<?> type);
 
-	@SuppressWarnings("unchecked")
-	public List getInstancesByDetachedCriteria(DetachedCriteria criteria);
+	public List<?> getInstancesByDetachedCriteria(DetachedCriteria criteria);
 
 	public Object getUniqueInstanceByDetachedCriteria(DetachedCriteria criteria);
 
-	@SuppressWarnings("unchecked")
-	public List getInstancesByDetachedCriteria(DetachedCriteria criteria,
+	public List<?> getInstancesByDetachedCriteria(DetachedCriteria criteria,
 			int startIndex, int maxResults);
 
 	public Object getUniqueInstanceByExample(Object example);
 
-	@SuppressWarnings("unchecked")
-	public List getInstancesByExample(Object example);
+	public List<?> getInstancesByExample(Object example);
 
 	public <T> List<T> getInstancesByNamedQueryAndNamedParam(
 			Class<T> entityClass, String queryName, String[] paramNames,
@@ -42,8 +38,7 @@ public interface IDao {
 
 	public void remove(Object instance);
 
-	@SuppressWarnings("unchecked")
-	public void removeAll(Collection entities);
+	public void removeAll(Collection<?> entities);
 
 	public void reattach(Object model);
 
@@ -52,8 +47,7 @@ public interface IDao {
 	 * @return a List containing all the classes this persistence service knows
 	 *         about
 	 */
-	@SuppressWarnings("unchecked")
-	public List getAllTypes();
+	public List<?> getAllTypes();
 
 	public <T> List<T> findByValueBean(String queryString, T valueBean);
 }

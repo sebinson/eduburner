@@ -21,19 +21,34 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+/**
+ * @author zhangyf@gmail.com
+ */
+@SuppressWarnings("unchecked")
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 
-	@SuppressWarnings("unchecked")
-	public List getAllInstances(Class type) {
+	@Override
+	public List<?> getAllInstances(Class<?> type) {
 		return getHibernateTemplate().find("from " + type.getName());
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
 		return (T) getHibernateTemplate().get(type.getName(), id);
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> getInstancesByDetachedCriteria(
+			final DetachedCriteria criteria) {
+		return (List<?>) getHibernateTemplate().executeWithNativeSession(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session)
+							throws HibernateException, SQLException {
+						return criteria.getExecutableCriteria(session).list();
+					}
+				});
+	}
+
 	@Override
 	public Object getUniqueInstanceByDetachedCriteria(
 			final DetachedCriteria criteria) {
@@ -48,21 +63,10 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 				});
 	}
 
-	@SuppressWarnings("unchecked")
-	public List getInstancesByDetachedCriteria(final DetachedCriteria criteria) {
-		return (List) getHibernateTemplate().executeWithNativeSession(
-				new HibernateCallback() {
-					public Object doInHibernate(Session session)
-							throws HibernateException, SQLException {
-						return criteria.getExecutableCriteria(session).list();
-					}
-				});
-	}
-
-	@SuppressWarnings("unchecked")
-	public List getInstancesByDetachedCriteria(final DetachedCriteria criteria,
-			final int firstResult, final int maxResults) {
-		return (List) getHibernateTemplate().executeWithNativeSession(
+	public List<?> getInstancesByDetachedCriteria(
+			final DetachedCriteria criteria, final int firstResult,
+			final int maxResults) {
+		return (List<?>) getHibernateTemplate().executeWithNativeSession(
 				new HibernateCallback() {
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
@@ -75,7 +79,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 				});
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getUniqueInstanceByExample(final Object example) {
 		return (Object) getHibernateTemplate().executeWithNativeSession(
@@ -94,8 +97,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 				});
 	}
 
-	@SuppressWarnings("unchecked")
-	public List getInstancesByExample(final Object example) {
+	public List<?> getInstancesByExample(final Object example) {
 		return (List) getHibernateTemplate().executeWithNativeSession(
 				new HibernateCallback() {
 					public Object doInHibernate(Session session)
@@ -111,7 +113,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 				});
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> List<T> getInstancesByNamedQueryAndNamedParam(
 			Class<T> entityClass, String queryName, String[] paramNames,
 			Object[] values) throws DataAccessException {
@@ -157,7 +158,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		getSession().lock(model, LockMode.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Class> getAllTypes() {
 		ArrayList<Class> allTypes = new ArrayList<Class>();
 		for (Iterator iter = getSessionFactory().getAllClassMetadata().values()
@@ -168,12 +168,10 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		return allTypes;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void removeAll(Collection entities) {
 		getHibernateTemplate().deleteAll(entities);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> List<T> findByValueBean(String queryString, T valueBean) {
 		return getHibernateTemplate().findByValueBean(queryString, valueBean);

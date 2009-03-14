@@ -16,7 +16,7 @@ import eduburner.util.SecurityHelper;
  * @author rockmaple
  * 
  */
-public class CustomFreeMarkerView extends FreeMarkerView {
+public class EduBurnerFreeMarkerView extends FreeMarkerView {
 
 	@SuppressWarnings("unchecked")
 	@Override

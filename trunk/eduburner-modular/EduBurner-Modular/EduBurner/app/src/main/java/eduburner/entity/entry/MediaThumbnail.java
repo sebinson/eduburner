@@ -1,8 +1,5 @@
 package eduburner.entity.entry;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import eduburner.entity.EntityObject;
 import eduburner.util.HtmlUtil;
 

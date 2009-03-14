@@ -23,6 +23,8 @@ public class CourseResource extends EntityObject {
 	private String name;
 
 	private Course course;
+	
+	private long fileSize;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_course_id")
