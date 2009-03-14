@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 
-public class HtmlUtil {
+public class HtmlUtils {
 
 	public static String stripTags(String html) {
 		StringBuffer detagged = new StringBuffer();

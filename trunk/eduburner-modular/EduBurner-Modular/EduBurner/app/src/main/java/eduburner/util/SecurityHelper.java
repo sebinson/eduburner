@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 
+import eduburner.entity.user.User;
+
 public class SecurityHelper {
 
 	private static Logger logger = LoggerFactory
@@ -27,11 +29,9 @@ public class SecurityHelper {
 		if (null == auth) {
 			return null;
 		}
-
-		// logger.debug("principal is: " + ((UserDetails)
-		// auth.getPrincipal()).getUsername());
-
-		if (auth.isAuthenticated()) {
+		
+		// don't support spring security's default "roleAnonymous" authentication
+		if (auth.getPrincipal() instanceof User && auth.isAuthenticated()) {
 			return auth.getName();
 		} else {
 			return null;
