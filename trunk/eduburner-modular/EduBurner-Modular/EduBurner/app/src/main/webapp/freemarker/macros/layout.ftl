@@ -7,10 +7,10 @@
 
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	  
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/yui/reset-fonts-grids.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/main.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/tools.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/fragments.css" />
+      <link type="text/css" rel="stylesheet" href="/static/styles/yui/reset-fonts-grids.css" />
+      <link type="text/css" rel="stylesheet" href="/static/styles/main.css" />
+      <link type="text/css" rel="stylesheet" href="/static/styles/tools.css" />
+      <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
       
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import ${base}/static/${cssFile};</style>
