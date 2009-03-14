@@ -23,22 +23,22 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 	
 	@Test
 	public void testCreateCourse(){
+		
 		Course course = new Course();
 		course.setDescription("desc");
 		courseManager.createCourse(course);
 		
 		User user = userManager.getUserByUsername("rockmaple");
-		UserData ud = userManager.getUserData(user.getId());
+		UserData ud = userManager.getUserData(user);
 		course.addMemeber(ud);
 		
 		courseManager.updateCourse(course);
 		
 		int count = getCount("SELECT count(*) FROM course");
-		
 		int udCount = getCount("SELECT count(*) FROM user_data");
 		
 		Assert.assertEquals(1, count);
 		Assert.assertEquals(1, udCount);
+		
 	}
-	
 }

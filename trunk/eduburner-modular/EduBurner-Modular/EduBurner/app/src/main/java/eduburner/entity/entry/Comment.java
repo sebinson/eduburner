@@ -2,14 +2,19 @@ package eduburner.entity.entry;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 
+@Entity
+@Table(name="comment")
 public class Comment extends EntityObject {
+	
 	private static final long serialVersionUID = 6416275923661542381L;
 	private Date date;
 	private String commentId;

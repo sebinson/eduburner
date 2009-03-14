@@ -22,11 +22,12 @@
 <#macro navbar>
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
-	    <h4 class="sidebar-block-header">我的课程</h4>
+	    <h4 class="sidebar-block-header">管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a href="/courses/3">历史</a></li>
+		    <li><a href="/courses/new">创建课程</a></li>
 	      </ul>
+	      <div class="clear"></div>
 	    </div>
 	  </div>
 	</div>

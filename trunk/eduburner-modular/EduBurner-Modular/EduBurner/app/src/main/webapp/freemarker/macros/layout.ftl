@@ -47,15 +47,10 @@
       	 <#-- end of site footer -->
       </div>
       
-      <script type="text/javascript" src="${base}/static/scripts/jquery-1.3.2.min.js"></script>
+      <script type="text/javascript" src="/static/scripts/jquery-1.3.2.min.js"></script>
       <#list js as jsFile>   		
-		  <script type="text/javascript" src="${base}/static/scripts/${jsFile}"></script>
+		  <script type="text/javascript" src="/static/scripts/${jsFile}"></script>
       </#list>
-      <script type="text/javascript">
-      	$(document).ready(function(){
-      		
-      	});
-      </script>
   </body>
 </html>
 
