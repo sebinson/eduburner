@@ -15,12 +15,12 @@
 </#macro>
 
 <#macro footer>
-    <p>&copy; EduBurner</p>
+    &copy; EduBurner
 </#macro>
 
 <#-- 导航菜单 -->
 <#macro navbar>
-	<div class="sidebar-block spacing ui-corner-all">
+	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">我的课程</h4>
 	    <div class="sidebar-block-content">

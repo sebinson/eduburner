@@ -28,6 +28,7 @@ h1{
 	padding: 10px 0px 5px;
 	font-weight: 600;
 	letter-spacing: 0px;
+	color:#003366;
 }
 
 h2{
@@ -36,6 +37,7 @@ h2{
 	padding: 10px 0px 5px;
 	font-weight: 600;
 	letter-spacing: 0px;
+	color:#003366;
 }
 
 h3{
@@ -44,28 +46,37 @@ h3{
 	padding: 10px 0px 5px;
 	font-weight: 600;
 	letter-spacing: 0px;
+	color:#003366;
 }
 
 /*********************************************************************/
 
-.site-doc{
-	background-color: #ffffff;
-	border-top: solid 3px #e2eecd;
+#site-doc{
 }
 
-#hd{
-	border-bottom: 1px dotted #E2EECD;
-	margin-bottom: 10px;
+#site-hd{
+	background-color: #003366;
+	height: 42px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
 }
 
-#ft{
-	background-color: #e2eecd;
-	padding: 8px;
+#site-hd a {
+	color:#BBCDDD;
+}
+
+#site-bd{
+	min-height: 400px;
+	margin-top: 10px;
+}
+
+#site-ft{
+	border-top:2px solid #003366;
+	clear:both;
+	margin:auto;
+	padding:5px 0;
 	text-align:center;
-	border-style: solid;
-	border-width: 0px;
-	border-top-width: 2px;
-	border-color: #d2e6bd;
+	color:#777777;
 }
 
 #logo {
@@ -73,17 +84,17 @@ h3{
     cursor: pointer;
     height: 32px;
     width: 258px;
-    font-size: 170%;
+    font-size: 20px;
     font-weight: bolder;
-    color:#555555;
-    margin: 5px 0 0 10px;
+    margin: 10px 0 0 10px;
 }
 
-#logo>a{
+#logo a{
 	text-decoration: none;
 }
 
 #linkbar {
     float: right;
     padding: .5em 1em;
+	color: #99B3CC;
 }
