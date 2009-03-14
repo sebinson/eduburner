@@ -6,11 +6,6 @@ a, a:visited, .link {
     color: #666666
 }
 
-.link {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 a:focus {
     -moz-outline: 0;
 }
@@ -27,17 +22,7 @@ p {
 	padding:1em 0 0 0;
 }
 
-.hidden {
-    display: none;
-}
 
-.clear {
-	clear: both;
-}
-
-.spacing {
-	margin-bottom:8px;
-}
 
 .input-big {
 	font-size:130%;
