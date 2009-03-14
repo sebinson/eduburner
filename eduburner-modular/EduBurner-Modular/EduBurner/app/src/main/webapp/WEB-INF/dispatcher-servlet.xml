@@ -19,7 +19,7 @@
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="viewClass" value="eduburner.web.view.CustomFreeMarkerView" />
+		<property name="viewClass" value="eduburner.web.view.EduBurnerFreeMarkerView" />
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".ftl" />
