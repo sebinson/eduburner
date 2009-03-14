@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 
-import eduburner.util.RequestUtils;
 import eduburner.util.SecurityHelper;
 
 /**
@@ -18,11 +17,9 @@ import eduburner.util.SecurityHelper;
  */
 public class EduBurnerFreeMarkerView extends FreeMarkerView {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected void exposeHelpers(Map model, HttpServletRequest request)
+	protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request)
 			throws Exception {
-		model.put("base", RequestUtils.getResourceBase(request));
 		model.put("securityHelper", SecurityHelper.getInstance());
 		model.put("req", request);
 	}
