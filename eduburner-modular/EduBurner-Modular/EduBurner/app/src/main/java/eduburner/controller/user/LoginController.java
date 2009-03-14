@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/accounts/login")
 public class LoginController {
 
 	private static final String LOGIN_PAGE = "/login";

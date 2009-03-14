@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CourseController {
 	
 	@RequestMapping(value="/courses")
-	public void index(){
+	public void allCourses(){
+		
+	}
+	
+	@RequestMapping(value="/users/{userId}/courses")
+	public void userCourses(){
 		
 	}
 	

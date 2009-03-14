@@ -2,7 +2,7 @@ package eduburner.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestUtils {
+public class RequestUtil {
 	/**
 	 * Retrieves the current request servlet path. Deals with differences
 	 * between servlet specs (2.2 vs 2.3+)
