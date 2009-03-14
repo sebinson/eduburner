@@ -3,9 +3,6 @@ package eduburner.entity.entry;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import eduburner.entity.EntityObject;
 
 public class Media extends EntityObject {
