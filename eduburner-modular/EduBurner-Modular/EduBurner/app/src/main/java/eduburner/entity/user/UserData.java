@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -17,6 +18,7 @@ import com.google.common.collect.Lists;
 
 import eduburner.entity.EntityObject;
 import eduburner.entity.course.Course;
+import eduburner.entity.entry.Comment;
 
 /**
  * @author rockmaple
@@ -38,6 +40,8 @@ public class UserData extends EntityObject {
 	private byte[] profilePicture;
 	
 	private List<Course> courses = Lists.newArrayList();
+	
+	private List<Comment> comments = Lists.newArrayList();
 
 	public UserData() {
 	}
@@ -100,6 +104,15 @@ public class UserData extends EntityObject {
 		this.courses = courses;
 	}
 
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("username", username).append(
