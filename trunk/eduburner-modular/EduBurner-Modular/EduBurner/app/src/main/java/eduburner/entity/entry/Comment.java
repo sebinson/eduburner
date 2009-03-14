@@ -18,9 +18,11 @@ public class Comment extends EntityObject {
 	private static final long serialVersionUID = 6416275923661542381L;
 	private Date date;
 	private String commentId;
-	private UserData user;
 	private String body;
-
+	
+	private UserData user;
+	private Entry  entry;
+	
 	public String getCommentId() {
 		return commentId;
 	}
@@ -53,6 +55,15 @@ public class Comment extends EntityObject {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	public Entry getEntry() {
+		return entry;
+	}
+
+	public void setEntry(Entry entry) {
+		this.entry = entry;
 	}
 
 	public String toString() {

@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import com.google.common.collect.Lists;
 
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 
+@Entity
+@Table(name="entry")
 public class Entry extends EntityObject {
 	private static final long serialVersionUID = -1018771380257973544L;
 	
@@ -55,6 +62,7 @@ public class Entry extends EntityObject {
 		return hidden;
 	}
 
+	@OneToMany(mappedBy="entry", fetch=FetchType.LAZY)
 	public List<Comment> getComments() {
 		if (comments == null) {
 			comments = new ArrayList<Comment>();
