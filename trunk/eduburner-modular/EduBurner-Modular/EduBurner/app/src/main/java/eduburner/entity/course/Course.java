@@ -112,6 +112,10 @@ public class Course extends EntityObject {
 	public void setCourseResources(List<CourseResource> courseResources) {
 		this.courseResources = courseResources;
 	}
+	
+	public void addMemeber(UserData userData){
+		this.members.add(userData);
+	}
 
 	@Override
 	public String toString() {

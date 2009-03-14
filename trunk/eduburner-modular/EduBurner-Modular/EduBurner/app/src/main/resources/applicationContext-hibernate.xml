@@ -33,6 +33,7 @@
 		<property name="packagesToScan" >
 			<list>
 				<value>eduburner.entity.user</value>
+				<value>eduburner.entity.course</value>
 			</list>
 		</property>
 		<property name="configurationClass">

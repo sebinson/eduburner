@@ -1,12 +1,22 @@
 package eduburner.entity.user;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.common.collect.Lists;
+
 import eduburner.entity.EntityObject;
+import eduburner.entity.course.Course;
 
 /**
  * @author rockmaple
@@ -26,6 +36,8 @@ public class UserData extends EntityObject {
 
 	// 加上个人头像
 	private byte[] profilePicture;
+	
+	private List<Course> courses = Lists.newArrayList();
 
 	public UserData() {
 	}
@@ -78,10 +90,19 @@ public class UserData extends EntityObject {
 		this.email = email;
 	}
 
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinTable(name = "user_course", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("username", username).append(
 				"fullname", fullname).toString();
 	}
-
 }

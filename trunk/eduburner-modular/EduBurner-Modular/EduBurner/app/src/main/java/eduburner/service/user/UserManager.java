@@ -1,5 +1,7 @@
 package eduburner.service.user;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import eduburner.entity.user.User;
+import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
 import eduburner.service.BaseManager;
 
@@ -73,4 +76,37 @@ public class UserManager extends BaseManager implements
 	public void removeUser(long userId) {
 		dao.remove(getUserById(userId));
 	}
+	
+	/**
+	 * get UserData, if of UserData found, create new one
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public UserData getUserData(long userId) {
+		User user = getUserById(userId);
+		DetachedCriteria criteria = DetachedCriteria.forClass(UserData.class);
+		criteria.add(Restrictions.eq("username", user.getUsername()));
+
+		List userDatas = dao.getInstancesByDetachedCriteria(criteria);
+
+		if (userDatas.size() == 0) {
+			return createUserData(userId);
+		}
+
+		return (UserData) userDatas.get(0);
+	}
+
+	@Override
+	public UserData createUserData(long userId) {
+		User user = getUserById(userId);
+		UserData ud = new UserData(user);
+		dao.save(ud);
+		return ud;
+	}
+
+	@Override
+	public void updateUserDate(UserData ud) {
+		dao.update(ud);
+	}
+
 }
