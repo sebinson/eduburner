@@ -7,9 +7,10 @@
 
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	  
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/reset-fonts-grids.css" />
-      <link type="text/css" rel="stylesheet" href="${base}/static/styles/fragments.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/static/styles/yui/reset-fonts-grids.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/static/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="${base}/static/styles/tools.css" />
+      <link type="text/css" rel="stylesheet" href="${base}/static/styles/fragments.css" />
       
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import ${base}/static/${cssFile};</style>
@@ -19,7 +20,7 @@
       
   </head>
   <body>
-      <div id="site-doc" class="yui-d3">
+      <div id="site-doc" class="yui-d0">
       	 <#-- begin of site header -->
          <div id="site-hd">
          	<@ui.header />
@@ -45,8 +46,10 @@
       	 </div>
       	 <#-- end of site footer -->
       </div>
+      
+      <script type="text/javascript" src="${base}/static/scripts/jquery-1.3.2.min.js"></script>
       <#list js as jsFile>   		
-		  <script type="text/javascript" src="${base}/static/${jsFile}"></script>
+		  <script type="text/javascript" src="${base}/static/scripts/${jsFile}"></script>
       </#list>
       <script type="text/javascript">
       	$(document).ready(function(){

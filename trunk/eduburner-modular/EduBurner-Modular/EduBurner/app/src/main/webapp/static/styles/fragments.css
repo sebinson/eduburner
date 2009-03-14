@@ -3,10 +3,10 @@
 	padding: 4px 0 8px 0;
 	width: 94%;
 	overflow: hidden;
-	background-color: #E2EECD;
+	background-color: #D8E4F0;
+	border: 1px solid #CCCCCC;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	border: 1px solid #BBBBBB;
 }
 
 .sidebar-block-inner {
@@ -20,12 +20,12 @@
 	border-bottom: solid 1px #fff;
 	font-weight: bolder;
 	font-size: 110%;
-	color: #333;
 }
 
 .sidebar-block-content {
 	margin-top: 8px;
 	font-size: 100%;
+	color: #003366;
 }
 
 .sidebar-block-footer {
