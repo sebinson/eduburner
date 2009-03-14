@@ -1,7 +1,7 @@
 package eduburner.entity.entry;
 
 import eduburner.entity.EntityObject;
-import eduburner.util.HtmlUtil;
+import eduburner.util.HtmlUtils;
 
 public class MediaThumbnail extends EntityObject {
 	private static final long serialVersionUID = -7214123833351476904L;
@@ -20,7 +20,7 @@ public class MediaThumbnail extends EntityObject {
 	}
 
 	public boolean isImgTag() {
-		return HtmlUtil.isImgTag(this.url);
+		return HtmlUtils.isImgTag(this.url);
 	}
 
 	public String getImgTag() {
@@ -34,7 +34,7 @@ public class MediaThumbnail extends EntityObject {
 	public String getUrl() {
 
 		if (isImgTag()) {
-			return HtmlUtil.getUrlFromImgTag(url);
+			return HtmlUtils.getUrlFromImgTag(url);
 		} else {
 			return url;
 		}

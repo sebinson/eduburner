@@ -18,9 +18,13 @@ public interface IUserManager {
 
 	public void removeUser(long userId);
 
-	public UserData getUserData(long userId);
+	public UserData getUserDataByUserId(long userId);
+	
+	public UserData getUserDataByUsername(String username);
 
-	public UserData createUserData(long userId);
+	public UserData createUserData(User user);
 
 	public void updateUserDate(UserData ud);
+	
+	public UserData getUserData(User user);
 }

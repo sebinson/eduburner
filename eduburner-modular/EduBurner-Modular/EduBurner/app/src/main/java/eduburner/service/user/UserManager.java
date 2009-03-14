@@ -22,8 +22,8 @@ import eduburner.persistence.EntityExistsException;
 import eduburner.service.BaseManager;
 
 @Service("userManager")
-public class UserManager extends BaseManager implements
-		UserDetailsService, IUserManager {
+public class UserManager extends BaseManager implements UserDetailsService,
+		IUserManager {
 	private Logger logger = LoggerFactory.getLogger(UserManager.class);
 
 	@Autowired
@@ -62,7 +62,7 @@ public class UserManager extends BaseManager implements
 	public User getUserByUsername(String username) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 		criteria.add(Restrictions.eq("username", username));
-		User user = (User)dao.getUniqueInstanceByDetachedCriteria(criteria);
+		User user = (User) dao.getUniqueInstanceByDetachedCriteria(criteria);
 		return user;
 	}
 
@@ -76,29 +76,38 @@ public class UserManager extends BaseManager implements
 	public void removeUser(long userId) {
 		dao.remove(getUserById(userId));
 	}
-	
+
 	/**
 	 * get UserData, if of UserData found, create new one
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public UserData getUserData(long userId) {
+	public UserData getUserDataByUserId(long userId) {
 		User user = getUserById(userId);
+		return getUserData(user);
+	}
+
+	@Override
+	public UserData getUserDataByUsername(String username) {
+		User user = getUserByUsername(username);
+		return getUserData(user);
+	}
+
+	@Override
+	public UserData getUserData(User user) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(UserData.class);
 		criteria.add(Restrictions.eq("username", user.getUsername()));
 
-		List userDatas = dao.getInstancesByDetachedCriteria(criteria);
+		List<?> userDatas = dao.getInstancesByDetachedCriteria(criteria);
 
 		if (userDatas.size() == 0) {
-			return createUserData(userId);
+			return createUserData(user);
 		}
 
 		return (UserData) userDatas.get(0);
 	}
 
 	@Override
-	public UserData createUserData(long userId) {
-		User user = getUserById(userId);
+	public UserData createUserData(User user) {
 		UserData ud = new UserData(user);
 		dao.save(ud);
 		return ud;
@@ -108,5 +117,4 @@ public class UserManager extends BaseManager implements
 	public void updateUserDate(UserData ud) {
 		dao.update(ud);
 	}
-
 }

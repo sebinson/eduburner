@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
  * @author zhangyf@gmail.com
  * 
  */
-public class JsonUtil {
+public class JsonUtils {
 
 	public static String toJson(Object obj) {
 

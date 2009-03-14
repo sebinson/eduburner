@@ -1,7 +1,7 @@
 package eduburner.entity.entry;
 
 import eduburner.entity.EntityObject;
-import eduburner.util.HtmlUtil;
+import eduburner.util.HtmlUtils;
 
 
 public class MediaContent extends EntityObject{
@@ -48,7 +48,7 @@ public class MediaContent extends EntityObject{
 
 		if (isImgTag())
 		{
-			return HtmlUtil.getUrlFromImgTag(url);  
+			return HtmlUtils.getUrlFromImgTag(url);  
 		}
 		else
 		{
@@ -59,7 +59,7 @@ public class MediaContent extends EntityObject{
 
 	public boolean isImgTag()
 	{
-		return HtmlUtil.isImgTag(this.url);
+		return HtmlUtils.isImgTag(this.url);
 	}
 	
 	public String getImgTag()

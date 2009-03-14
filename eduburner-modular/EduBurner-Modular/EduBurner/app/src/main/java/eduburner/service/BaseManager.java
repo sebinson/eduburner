@@ -13,4 +13,5 @@ public class BaseManager implements IManager {
 	public void setDao(IDao dao) {
 		this.dao = dao;
 	}
+
 }
