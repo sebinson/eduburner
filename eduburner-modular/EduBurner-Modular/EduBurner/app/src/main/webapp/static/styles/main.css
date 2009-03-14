@@ -49,6 +49,10 @@ h3{
 	color:#003366;
 }
 
+h4{
+	color:#003366;
+}
+
 /*********************************************************************/
 
 #site-doc{
@@ -56,9 +60,10 @@ h3{
 
 #site-hd{
 	background-color: #003366;
-	height: 42px;
-	-moz-border-radius-bottomleft:3px;
-	-moz-border-radius-bottomright:3px;
+	background-image: url(../images/header.gif);
+	background-repeat: repeat-x;
+	color: #BBCDDD;
+	min-height: 42px;
 }
 
 #site-hd a {
@@ -68,6 +73,10 @@ h3{
 #site-bd{
 	min-height: 400px;
 	margin-top: 10px;
+}
+
+#site-nav{
+	margin-left: 5px;
 }
 
 #site-ft{

@@ -14,10 +14,10 @@
     -->
     
     <http auto-config="true" realm="EduBurner">
-        <intercept-url pattern="/static/**" filters="none" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/static/**" filters="none"/>
         <intercept-url pattern="/accounts/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>   
         <intercept-url pattern="/accounts/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
-        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		
         <form-login login-page="/accounts/login" login-processing-url="/j_spring_security_check" default-target-url="/" authentication-failure-url="/accounts/login?error=true"/>
         <logout logout-url="/accounts/logout" logout-success-url="/accounts/login"/>

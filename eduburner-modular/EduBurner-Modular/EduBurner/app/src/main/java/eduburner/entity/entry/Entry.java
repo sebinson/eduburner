@@ -22,7 +22,6 @@ public class Entry extends EntityObject {
 	
 	private UserData user;
 	private List<Comment> comments = Lists.newArrayList();
-	private List<Media> media = Lists.newArrayList();
 
 	public String getEntryId() {
 		return entryId;
@@ -63,13 +62,6 @@ public class Entry extends EntityObject {
 		return comments;
 	}
 
-	public List<Media> getMedia() {
-		if (media == null) {
-			media = new ArrayList<Media>();
-		}
-		return media;
-	}
-
 	public void setEntryId(String id) {
 		this.entryId = id;
 	}
@@ -96,10 +88,6 @@ public class Entry extends EntityObject {
 	
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
-	}
-
-	public void setMedia(List<Media> media) {
-		this.media = media;
 	}
 
 	public UserData getUser() {
