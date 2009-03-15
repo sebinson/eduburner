@@ -45,9 +45,10 @@ public class HtmlUtils {
 		tags
 				.add(new String[] { tag, (new Boolean(inclusive)).toString(),
 						"0" });
-		return stripOuterTags(html, ((List) (tags)), 0);
+		return stripOuterTags(html, ((List<?>) (tags)), 0);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static String stripOuterTags(String html, List tagIncs,
 			int listValue) {
 		String tagInc[] = (String[]) tagIncs.get(listValue);

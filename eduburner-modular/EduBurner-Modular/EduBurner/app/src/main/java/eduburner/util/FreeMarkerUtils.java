@@ -17,8 +17,7 @@ public class FreeMarkerUtils {
 	private static final Logger logger = LoggerFactory
 			.getLogger(FreeMarkerUtils.class);
 
-	@SuppressWarnings("unchecked")
-	public static String renderContent(String freemarkerText, Map contextMap) {
+	public static String renderContent(String freemarkerText, Map<String, Object> contextMap) {
 		String returnString = null;
 		try {
 			StringTemplateLoader stringLoader = new StringTemplateLoader();
