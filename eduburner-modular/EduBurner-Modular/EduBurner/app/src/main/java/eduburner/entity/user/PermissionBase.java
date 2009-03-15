@@ -36,6 +36,8 @@ public abstract class PermissionBase extends EntityObject {
 	protected Role role;
 
 	public PermissionBase() {
+		allowMask = 0L;
+		denyMask = -1L;
 	}
 
 	public PermissionBase(Role role) {
