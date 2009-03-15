@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import eduburner.entity.user.PermissionBase;
+import eduburner.enumerations.PermissionType;
 
 @Entity
 @DiscriminatorValue("eduburner.entity.course.CoursePermission")
@@ -14,6 +15,18 @@ public class CoursePermission extends PermissionBase {
 	private static final long serialVersionUID = -7084640553967090278L;
 
 	private Course course;
+	
+	public boolean canView(){
+		return getBit(PermissionType.VIEW);
+	}
+	
+	public boolean canEdit(){
+		return getBit(PermissionType.EDIT);
+	}
+	
+	public boolean canSetPermissions(){
+		return getBit(PermissionType.SET_PERMISSIONS);
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "fk_course_id")
