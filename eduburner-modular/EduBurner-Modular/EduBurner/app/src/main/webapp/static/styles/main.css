@@ -63,7 +63,7 @@ h4{
 	background-image: url(../images/header.gif);
 	background-repeat: repeat-x;
 	color: #BBCDDD;
-	min-height: 42px;
+	height: 42px;
 }
 
 #site-hd a {
