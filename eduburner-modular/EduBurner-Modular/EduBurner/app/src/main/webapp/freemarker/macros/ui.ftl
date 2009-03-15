@@ -27,16 +27,7 @@
 	      <ul class="sidebar-block-list">
 		    <li><a href="/courses/new">创建课程</a></li>
 	      </ul>
-	      <div class="clear"></div>
 	    </div>
 	  </div>
 	</div>
-</#macro>
-
-<#macro button>
-	<span id="addRow" class="yui-button">
-		<span class="first-child">
-			<button type="button" tabindex="0">按钮</button>
-		</span>
-	</span>
 </#macro>

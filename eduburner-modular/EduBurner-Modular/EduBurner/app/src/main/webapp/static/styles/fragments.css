@@ -33,25 +33,31 @@
 	padding: 4px 0 0 0;
 }
 
+.sidebar-block-content ul.sidebar-block-list{
+	display:block;
+}
+
 .sidebar-block-content ul.sidebar-block-list li {
-	margin: 0 0 5px 5px;
-	padding: 0 5px 0 18px;
 	display: block;
-	float: left;
 	clear: left;
-	background: url('../images/bullet-arrow.gif') no-repeat center left;
 }
 
-.sidebar-block-content ul.sidebar-block-list li.selected {
-	background-color: #d2e6bd;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+.sidebar-block-content ul.sidebar-block-list li a{
+	display:block;
+	padding: 4px 4px 4px 16px;
+	background: url('../images/bullet-arrow.gif') no-repeat 5% 50%;
+	text-decoration:none;
+	color:#003366;
 }
 
-.sidebar-block-content ul.sidebar-block-list li.selected a {
-	color: #000;
-	text-decoration: none;
+.sidebar-block-content ul.sidebar-block-list li a.selected {
+	background-color: #C4D6E9;
 	cursor: default;
+	color: #000;
+}
+
+.sidebar-block-content ul.sidebar-block-list li a:hover {
+	background-color: #C4D6E9;
 }
 
 .sidebar-block-content ul.sidebar-tag-cloud {
