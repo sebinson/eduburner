@@ -32,8 +32,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" >
 			<list>
-				<value>eduburner.entity.user</value>
-				<value>eduburner.entity.course</value>
+				<value>eduburner.entity</value>
 			</list>
 		</property>
 		<property name="configurationClass">
