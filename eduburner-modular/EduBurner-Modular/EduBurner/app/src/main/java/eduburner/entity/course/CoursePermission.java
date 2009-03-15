@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import eduburner.entity.user.PermissionBase;
+import eduburner.entity.user.Role;
 import eduburner.enumerations.PermissionType;
 
 @Entity
@@ -15,6 +16,20 @@ public class CoursePermission extends PermissionBase {
 	private static final long serialVersionUID = -7084640553967090278L;
 
 	private Course course;
+	
+	public CoursePermission(){
+		super();
+	}
+	
+	public CoursePermission(Course course, Role role){
+		super(role);
+		this.course = course;
+	}
+	
+	public CoursePermission(Course course, Role role, PermissionType allowMask, PermissionType denyMask){
+		super(role, allowMask, denyMask);
+		this.course = course;
+	}
 	
 	public boolean canView(){
 		return getBit(PermissionType.VIEW);
