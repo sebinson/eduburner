@@ -15,12 +15,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import eduburner.entity.EntityObject;
 import eduburner.enumerations.AccessControlEntry;
+import eduburner.enumerations.PermissionType;
 
 @Entity
 @Table(name = "permission")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "permission_type", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("default")
+@DiscriminatorColumn(name = "acl_class", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("eduburner.entity.user.PermissionBase")
 public abstract class PermissionBase extends EntityObject {
 
 	private static final long serialVersionUID = 1072287163954242724L;
@@ -35,49 +36,45 @@ public abstract class PermissionBase extends EntityObject {
 	protected Role role;
 
 	public PermissionBase() {
-		
 	}
 
 	public PermissionBase(Role role) {
 		this.role = role;
+		allowMask = 0L;
+		denyMask = -1L;
 	}
 
-	public PermissionBase(long allowMask, long denyMask) {
-		this.allowMask = allowMask;
-		this.denyMask = denyMask;
-	}
-
-	public PermissionBase(Role role, long allowMask, long denyMask) {
+	public PermissionBase(Role role, PermissionType allowMask, PermissionType denyMask) {
 		this.role = role;
-		this.allowMask = allowMask;
-		this.denyMask = denyMask;
+		this.allowMask = allowMask.val();
+		this.denyMask = denyMask.val();
 	}
 
 	// borrowed from community server's PermissionBase.cs
 	@Transient
-	public boolean getBit(long mask) {
+	public boolean getBit(PermissionType mask) {
 		boolean bReturn = false;
 
-		if ((denyMask & mask) == mask)
+		if ((denyMask & mask.val()) == mask.val())
 			bReturn = false;
 
-		if ((allowMask & mask) == mask)
+		if ((allowMask & mask.val()) == mask.val())
 			bReturn = true;
 
 		return bReturn;
 	}
 
-	public void setBit(long mask, long accessControl) {
-
+	public void setBit(PermissionType mask, AccessControlEntry accessControl) {
+		
 		if (accessControl == AccessControlEntry.ALLOW) {
-			allowMask |= (long) mask & (long) -1;
-			denyMask &= ~(long) mask & (long) -1;
+			allowMask |= (long) mask.val() & (long) -1;
+			denyMask &= ~(long) mask.val() & (long) -1;
 		} else if (accessControl == AccessControlEntry.NOTSET) {
-			allowMask &= ~(long) mask & (long) -1;
-			denyMask &= ~(long) mask & (long) -1;
+			allowMask &= ~(long) mask.val() & (long) -1;
+			denyMask &= ~(long) mask.val() & (long) -1;
 		} else {
-			allowMask &= ~(long) mask & (long) -1;
-			denyMask |= (long) mask & (long) -1;
+			allowMask &= ~(long) mask.val() & (long) -1;
+			denyMask |= (long) mask.val() & (long) -1;
 		}
 	}
 
@@ -110,6 +107,16 @@ public abstract class PermissionBase extends EntityObject {
 		this.denyMask = denyMask;
 	}
 
+	@Transient
+	public PermissionType getAllowMaskPermission(){
+		return PermissionType.fromVal(allowMask);
+	}
+	
+	@Transient
+	public PermissionType getDenyMaskPermission(){
+		return PermissionType.fromVal(denyMask);
+	}
+	
 	@ManyToOne
 	@JoinColumn(name = "fk_role_id")
 	public Role getRole() {

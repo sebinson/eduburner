@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,6 +29,8 @@ public class Role extends EntityObject implements GrantedAuthority {
 	private String description;
 
 	protected Set<User> users = Sets.newHashSet();
+	
+	protected Set<PermissionBase> permissions = Sets.newHashSet();
 
 	@Column(name = "name", nullable = false, unique = true)
 	public String getName() {
@@ -60,6 +63,15 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@OneToMany(mappedBy="role", fetch=FetchType.LAZY)
+	public Set<PermissionBase> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<PermissionBase> permissions) {
+		this.permissions = permissions;
+	}
 
 	@Override
 	public int compareTo(Object o) {
@@ -77,4 +89,5 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public String toString() {
 		return this.name;
 	}
+	
 }
