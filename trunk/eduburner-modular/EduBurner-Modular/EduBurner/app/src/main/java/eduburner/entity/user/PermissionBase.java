@@ -126,6 +126,22 @@ public abstract class PermissionBase extends EntityObject {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		boolean isEqual = true;
+        PermissionBase permissionBase = (PermissionBase)obj;
+        if (permissionBase == null && this != null)
+            return isEqual;
+        
+        for(PermissionType permission : PermissionType.values()){
+        	if(permissionBase.getBit(permission) != this.getBit(permission)){
+        		isEqual = false;
+        		break;
+        	}
+        }
+        return isEqual;
+	}
 
 	@Override
 	public String toString() {

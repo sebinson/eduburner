@@ -6,7 +6,8 @@ public enum PermissionType {
 	EDIT,
 	REMOVE,
 	DELETE,
-	SET_PERMISSIONS;
+	SET_PERMISSIONS,
+	ADMIN;
 	
 	public long val(){
 		switch(this){

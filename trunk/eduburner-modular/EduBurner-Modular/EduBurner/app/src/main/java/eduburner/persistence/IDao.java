@@ -8,6 +8,12 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.dao.DataAccessException;
 
 public interface IDao {
+	
+	public List<?> find(String queryString) throws DataAccessException;
+	
+	public List<?> find(String queryString, Object value) throws DataAccessException;
+	
+	public List<?> find(final String queryString, final Object... values) throws DataAccessException;
 
 	public <T> T getInstanceById(Class<T> type, Serializable id);
 

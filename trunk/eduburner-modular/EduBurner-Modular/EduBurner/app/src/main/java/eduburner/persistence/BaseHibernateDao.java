@@ -26,6 +26,23 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  */
 @SuppressWarnings("unchecked")
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
+	
+	@Override
+	public List<?> find(String queryString) throws DataAccessException {
+		return getHibernateTemplate().find(queryString);
+	}
+
+	@Override
+	public List<?> find(String queryString, Object value)
+			throws DataAccessException {
+		return getHibernateTemplate().find(queryString, value);
+	}
+
+	@Override
+	public List<?> find(String queryString, Object... values)
+			throws DataAccessException {
+		return getHibernateTemplate().find(queryString, values);
+	}
 
 	@Override
 	public List<?> getAllInstances(Class<?> type) {
@@ -168,7 +185,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		return allTypes;
 	}
 
-	public void removeAll(Collection entities) {
+	public void removeAll(Collection<?> entities) {
 		getHibernateTemplate().deleteAll(entities);
 	}
 
@@ -176,5 +193,4 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public <T> List<T> findByValueBean(String queryString, T valueBean) {
 		return getHibernateTemplate().findByValueBean(queryString, valueBean);
 	}
-
 }
