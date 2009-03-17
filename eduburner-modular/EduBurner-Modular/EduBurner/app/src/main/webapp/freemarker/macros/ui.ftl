@@ -4,7 +4,7 @@
     </div>
     <div id="linkbar">
         <#if securityHelper.principal?has_content>
-             <a href="/account/profile">${securityHelper.principal?default("")}</a>
+             ${securityHelper.principal?default("")}
              | <a href="/account/settings">设置</a>
              | <a href="/account/logout">退出</a>
         <#else>

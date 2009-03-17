@@ -12,7 +12,7 @@
 		<mapping class="eduburner.entity.course.Course" />
 		<mapping class="eduburner.entity.course.CourseResource" />
 		<mapping class="eduburner.entity.course.CoursePermission" />
-		<mapping class="eduburner.entity.entry.Entry" />
-		<mapping class="eduburner.entity.entry.Comment" />
+		<mapping class="eduburner.entity.Entry" />
+		<mapping class="eduburner.entity.Comment" />
 	</session-factory>
 </hibernate-configuration>
