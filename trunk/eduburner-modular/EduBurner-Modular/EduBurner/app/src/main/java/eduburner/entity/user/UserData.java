@@ -16,9 +16,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.google.common.collect.Lists;
 
+import eduburner.entity.Comment;
 import eduburner.entity.EntityObject;
 import eduburner.entity.course.Course;
-import eduburner.entity.entry.Comment;
 
 /**
  * @author rockmaple

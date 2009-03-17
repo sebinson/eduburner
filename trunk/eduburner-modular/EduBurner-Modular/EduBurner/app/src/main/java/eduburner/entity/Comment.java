@@ -1,4 +1,4 @@
-package eduburner.entity.entry;
+package eduburner.entity;
 
 import java.util.Date;
 
@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 
 @Entity

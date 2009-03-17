@@ -1,4 +1,4 @@
-package eduburner.entity.entry;
+package eduburner.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 import com.google.common.collect.Lists;
 
-import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 
 @Entity
