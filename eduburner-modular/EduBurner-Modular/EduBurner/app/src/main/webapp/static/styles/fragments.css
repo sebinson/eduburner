@@ -4,7 +4,7 @@
 	width: 94%;
 	overflow: hidden;
 	background-color: #D8E4F0;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #C5D7EF;
 }
 
 .sidebar-block-inner {
@@ -183,39 +183,3 @@
 }
 
 /******************************* form style *****************************************/
-.form-area {
-	margin: 2px 0;
-}
-
-.form-title {
-	color: #999999;
-	font-size: 140%;
-	font-weight: bold;
-	margin: 0px;
-	padding: 4px 4px 4px 0px;
-}
-
-}
-.form-desc {
-	padding: 8px 2px 8px 0px;
-}
-
-div.form-field-name {
-	color: #666666;
-	font-weight: bold;
-	font-size: 110%;
-	padding: 8px 2px 2px;
-}
-
-}
-div.form-field-desc {
-	color: #000000;
-	font-size: 90%;
-	font-weight: normal;
-	padding: 2px;
-}
-
-div.form-field {
-	color: #000000;
-	padding: 2px;
-}

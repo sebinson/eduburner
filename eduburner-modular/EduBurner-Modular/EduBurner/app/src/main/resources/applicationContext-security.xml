@@ -15,12 +15,12 @@
     
     <http auto-config="true" realm="EduBurner">
         <intercept-url pattern="/static/**" filters="none"/>
-        <intercept-url pattern="/accounts/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>   
-        <intercept-url pattern="/accounts/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
-        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/account/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>   
+        <intercept-url pattern="/account/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>     
+        <intercept-url pattern="/**" access="ROLE_User"/>
 		
-        <form-login login-page="/accounts/login" login-processing-url="/j_spring_security_check" default-target-url="/" authentication-failure-url="/accounts/login?error=true"/>
-        <logout logout-url="/accounts/logout" logout-success-url="/accounts/login"/>
+        <form-login login-page="/account/login" login-processing-url="/j_spring_security_check" default-target-url="/" authentication-failure-url="/account/login?error=true"/>
+        <logout logout-url="/account/logout" logout-success-url="/account/login"/>
         <remember-me key="EduBurner" user-service-ref="userManager"/>
     </http>
 

@@ -23,6 +23,7 @@ import org.springframework.security.userdetails.UserDetails;
 import com.google.common.collect.Sets;
 
 import eduburner.entity.EntityObject;
+import eduburner.enumerations.RoleType;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
@@ -177,6 +178,27 @@ public class User extends EntityObject implements UserDetails {
 
 	public void addRole(Role role) {
 		this.roles.add(role);
+	}
+
+	@Transient
+	public boolean isAdministrator() {
+		return IsInRoles(new RoleType[] { RoleType.SystemAdmin });
+	}
+
+	@Transient
+	public boolean IsInRoles(RoleType[] roleNames) {
+
+		if (roleNames == null || roleNames.length == 0)
+			return false;
+
+		Set<Role> userRoles = getRoles();
+		for (Role userRole : userRoles) {
+			for (RoleType roleName : roleNames) {
+				if (roleName.toString().equals(userRole.getName()))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public String toString() {
