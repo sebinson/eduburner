@@ -1,4 +1,4 @@
-package eduburner.controller.entry;
+package eduburner.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import eduburner.controller.BaseController;
 
 @Controller
 public class EntryController extends BaseController {
