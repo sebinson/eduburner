@@ -6,6 +6,15 @@
 	clear:both;
 }
 
+.clearer{
+	clear:both;
+	font-size:1px;
+	height:1px;
+	line-height:1px;
+	margin-bottom:-1px;
+	overflow:hidden;
+}
+
 .hidden{
 	display:none;
 }
@@ -13,3 +22,77 @@
 .spacing {
 	margin-bottom:8px;
 }
+
+.field-desc{
+	color:#7F7F7F;
+	font-size:95%;
+	line-height:100%;
+	margin:1px 0 0;
+	padding:0 0 5px;
+}
+
+input.text-field, textarea.text-field {
+	border:1px solid #BBBBBB;
+	padding:3px;
+	width:85%;
+}
+
+/********************** form style ***********************************/
+
+.eb-form {
+	background-color:#F5F8FB;
+	border-bottom:1px solid #BBD0E5;
+	border-collapse:collapse;
+	border-top:1px solid #BBD0E5;
+	clear:left;
+	display:inline;
+	float:left;
+	width:60%;
+}
+
+.eb-form h2{
+	border-top:medium none;
+	margin-bottom:10px;
+	background-color:#EBF1F7;
+}
+
+.eb-form .form-field{
+	padding-left: 14em;
+	clear:left;
+	margin:0 0 0 13px;
+	padding-bottom:1px;
+}
+
+.eb-form .form-field .field-label, .eb-form .form-field .first-column{
+	left:-14em;
+	margin-right:-13em;
+	width:13em;
+	display:inline;
+	float:left;
+	margin-top:0.15em;
+	padding:0 0 5px;
+	position:relative;
+}
+
+.eb-form .form-field .field-value{
+	
+}
+
+.eb-form .form-field .field-desc{
+	color:#7F7F7F;
+	font-size:95%;
+	line-height:100%;
+	margin:1px 0 0;
+	padding:0 0 5px;
+}
+
+.eb-form .form-footer{
+	background-color:#EBF1F7;
+	padding:5px 0;
+}
+
+.eb-form .form-footer .buttons{
+	margin:0 auto;
+	text-align:center;
+}
+
