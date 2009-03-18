@@ -31,42 +31,73 @@
 	padding:0 0 5px;
 }
 
-input.text-field, textarea.text-field {
-	border:1px solid #BBBBBB;
-	padding:3px;
-	width:85%;
+input.text, textarea {
+	border:1px solid #999999;
+	padding:2px;
+}
+
+input.button {
+	border-style: solid;
+	border-color: #D9DFEA rgb(14, 31, 91) rgb(14, 31, 91) rgb(217, 223, 234);
+	border-width: 1px;
+	padding: 1px 5px;
+	overflow: visible;
+	font-family: Tahoma, sans-serif;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	background-repeat: repeat-x;
+	background-position: center top;
+	background-color: #3B5998;
+}
+
+.persistent {
+	color:#333333;
+	font-size:12px;
+	font-weight:normal;
+	line-height:16px;
 }
 
 /********************** form style ***********************************/
 
 .eb-form {
-	background-color:#F5F8FB;
-	border-bottom:1px solid #BBD0E5;
-	border-collapse:collapse;
-	border-top:1px solid #BBD0E5;
-	clear:left;
-	display:inline;
-	float:left;
-	width:60%;
+	border-color: #CCCCCC;
+	border: 1px solid #CFCFCF;
+	width: 600px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.eb-form .form-inner{
+	padding:25px 30px;
+}
+
+.eb-form .title-header{
+	margin:0 0 10px;
+	padding:0 0 10px;
+	border-bottom:1px solid #CCCCCC;
 }
 
 .eb-form h2{
-	border-top:medium none;
-	margin-bottom:10px;
-	background-color:#EBF1F7;
+	font-size: 14px;
+}
+
+.eb-form .form-body{
+	clear:left;
+	margin:auto;
+	padding-top:15px;
+	text-align:left;
 }
 
 .eb-form .form-field{
 	padding-left: 14em;
 	clear:left;
 	margin:0 0 0 13px;
-	padding-bottom:1px;
+	padding-bottom:5px;
 }
 
 .eb-form .form-field .field-label, .eb-form .form-field .first-column{
-	left:-14em;
+	left:-5em;
 	margin-right:-13em;
-	width:13em;
 	display:inline;
 	float:left;
 	margin-top:0.15em;
@@ -84,15 +115,5 @@ input.text-field, textarea.text-field {
 	line-height:100%;
 	margin:1px 0 0;
 	padding:0 0 5px;
-}
-
-.eb-form .form-footer{
-	background-color:#EBF1F7;
-	padding:5px 0;
-}
-
-.eb-form .form-footer .buttons{
-	margin:0 auto;
-	text-align:center;
 }
 

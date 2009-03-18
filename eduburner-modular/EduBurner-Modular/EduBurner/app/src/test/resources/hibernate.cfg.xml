@@ -14,5 +14,6 @@
 		<mapping class="eduburner.entity.course.CoursePermission" />
 		<mapping class="eduburner.entity.Entry" />
 		<mapping class="eduburner.entity.Comment" />
+		<mapping class="eduburner.entity.Service" />
 	</session-factory>
 </hibernate-configuration>

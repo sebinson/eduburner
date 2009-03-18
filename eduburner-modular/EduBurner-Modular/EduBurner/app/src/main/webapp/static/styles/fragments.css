@@ -5,6 +5,8 @@
 	overflow: hidden;
 	background-color: #D8E4F0;
 	border: 1px solid #C5D7EF;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 .sidebar-block-inner {
