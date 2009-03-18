@@ -22,35 +22,16 @@ p {
 	padding:1em 0 0 0;
 }
 
-h1{
-	background-color:#EBF1F7;
-	color:#003366;
-	font-size:150%;
-	line-height:2;
-	padding:0 0 0 10px;
-	font-weight: 600;
+label {
+	color:#666666;
+	cursor:pointer;
+	font-weight:bold;
 }
 
-h2{
-	font-size:125%;
-	background-color:#EBF1F7;
-	color:#003366;
-	line-height:2;
-	padding:0 0 0 10px;
+h1, h2, h3, h4{
+	color:#333333;
 	font-weight: 600;
-}
-
-h3{
-	font-size: 110%;
-	background-color:#EBF1F7;
-	color:#003366;
-	line-height:2;
-	padding:0 0 0 10px;
-	font-weight: 600;
-}
-
-h4{
-	color:#003366;
+	font-size: 14px;
 }
 
 /*********************************************************************/
@@ -59,15 +40,18 @@ h4{
 }
 
 #site-hd{
-	background-color: #003366;
-	background-image: url(../images/header.gif);
+	background-color: #3B5998;
 	background-repeat: repeat-x;
 	color: #BBCDDD;
-	height: 42px;
+	height: 35px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-radius-bottomleft:3px;
+	-webkit-border-radius-bottomright:3px;
 }
 
 #site-hd a {
-	color:#BBCDDD;
+	color:#FFFFFF;
 }
 
 #site-bd{
@@ -80,7 +64,7 @@ h4{
 }
 
 #site-ft{
-	border-top:2px solid #003366;
+	border-top:2px solid #3B5998;
 	clear:both;
 	margin:auto;
 	padding:5px 0;
@@ -95,7 +79,7 @@ h4{
     width: 258px;
     font-size: 20px;
     font-weight: bolder;
-    margin: 10px 0 0 10px;
+    margin: 5px 0 0 10px;
 }
 
 #logo a{
@@ -105,9 +89,7 @@ h4{
 #linkbar {
     float: right;
     padding: .5em 1em;
-	color: #99B3CC;
+	color: #FFFFFF;
+	font-size:12px;
 }
 
-#linkbar a:hover{
-	color: #DDE7EE;
-}

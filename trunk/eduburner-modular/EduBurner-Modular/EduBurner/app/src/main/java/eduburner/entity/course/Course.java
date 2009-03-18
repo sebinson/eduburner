@@ -27,7 +27,7 @@ import eduburner.enumerations.CourseStatus;
  * 
  * 能mashup的就mashup
  * 
- * 日历借助google calendar 每个人的学习笔记借助google notebook 文章分享借助google reader
+ * 日历借助google calendar 每个人的学习笔记借助google notebook? 文章分享借助google reader
  * 
  * 每位同学需要有一个空间，列出其所在的课程，学生可以写微博客 是否需要建立好友关系？
  * 

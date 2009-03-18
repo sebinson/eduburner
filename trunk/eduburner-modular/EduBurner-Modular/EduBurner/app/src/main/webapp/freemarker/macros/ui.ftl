@@ -1,6 +1,6 @@
 <#macro header>
     <div id="logo">
-    	<a href="/"><i>EduBurner</i></a>
+    	<a href="/">EduBurner</a>
     </div>
     <div id="linkbar">
         <#if securityHelper.principal?has_content>
@@ -45,11 +45,24 @@
   </#if>
 </#macro>
 
-<#macro formField label="" name="" value="" type="text" desc="">
+<#macro formTextField label="" name="" value="" type="text" desc="">
 	<div class="form-field">
-		<label class="field-label">${label}</label>
+		<label class="field-label">${label}：</label>
 		<div class="field-value">
-			<input class="text-field" name="${name}" type="${type}" value="${value}"/>
+			<input class="text" name="${name}" type="${type}" value="${value}"/>
+		</div>
+		<div class="field-desc">
+			${desc}
+		</div>
+		<div class="clearer"></div>
+	</div>
+</#macro>
+
+<#macro formTextAreaField label="" name="" value="" type="text" desc="">
+	<div class="form-field">
+		<label class="field-label" for="${name}">${label}：</label>
+		<div class="field-value">
+			<textarea class="text" name="${name}" type="${type}" value="${value}"></textarea>
 		</div>
 		<div class="field-desc">
 			${desc}

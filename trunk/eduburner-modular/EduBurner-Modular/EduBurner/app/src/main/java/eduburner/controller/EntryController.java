@@ -9,19 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class EntryController extends BaseController {
-
-	@RequestMapping(value="/courses/{courseId}/entries", method=RequestMethod.GET)
-	public void courseEntries(@PathVariable("courseId") long courseId, Model model){
-		
-	}
 	
 	@RequestMapping(value="/users/{userId}/entries")
 	public void userEntries(@PathVariable("userId") long userId, Model model){
 		
 	}
 	
-	@RequestMapping(value="/courses/{courseId}/entries", method=RequestMethod.POST)
-	public void createCourseEntry(@PathVariable("courseId") long courseId, Model model){
-		
-	}
 }

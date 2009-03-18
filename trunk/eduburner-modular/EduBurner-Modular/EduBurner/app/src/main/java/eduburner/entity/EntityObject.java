@@ -14,7 +14,7 @@ public abstract class EntityObject implements Serializable {
 	protected Long id;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
