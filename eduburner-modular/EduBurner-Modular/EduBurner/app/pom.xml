@@ -129,7 +129,9 @@
 					</connectors>
 					<contextPath>/</contextPath>
 					<webDefaultXml>webdefault.xml</webDefaultXml>
+					<!--
 					<scanIntervalSeconds>3</scanIntervalSeconds>
+					-->
 					<scanTargets>
 						<scanTarget>
 							src/main/resources/applicationContext.xml

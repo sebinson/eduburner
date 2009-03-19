@@ -15,6 +15,7 @@ import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
@@ -22,6 +23,7 @@ import eduburner.persistence.EntityExistsException;
 import eduburner.service.BaseManager;
 
 @Service("userManager")
+@Transactional
 public class UserManager extends BaseManager implements UserDetailsService,
 		IUserManager {
 	private Logger logger = LoggerFactory.getLogger(UserManager.class);

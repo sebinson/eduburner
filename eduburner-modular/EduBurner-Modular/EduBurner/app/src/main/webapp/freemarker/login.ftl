@@ -12,8 +12,8 @@
     		</div>
     		</#if>
     		<div class="form-body">
-    		<@ui.formTextField label="用户名" name="j_username"/>
-    		<@ui.formTextField label="密码" type="password" name="j_password"/>
+    		<@ui.formField label="用户名" name="j_username"/>
+    		<@ui.formField label="密码"   name="j_password" attrs='type="password"'/>
     		<div class="form-field">
     			<span class="persistent">
     				<input type="checkbox" name="rememberMe"/>
