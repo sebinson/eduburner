@@ -1,5 +1,7 @@
 package eduburner.controller.course;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import eduburner.controller.BaseController;
 
 import eduburner.entity.course.Course;
+import eduburner.service.course.ICourseManager;
 
 @Controller
 public class CourseController extends BaseController{
+	
+	@Autowired
+	@Qualifier("courseManager")
+	private ICourseManager courseManager;
 
 	private static String COURSE_FORM = "/course-form";
 	private static String COURSE_LIST = "/course-list";
@@ -39,7 +46,9 @@ public class CourseController extends BaseController{
 	}
 
 	@RequestMapping(value = "/courses/new")
-	public String editNew() {
+	public String editNew(Model model) {
+		Course course = new Course();
+		model.addAttribute("course", course);
 		return COURSE_FORM;
 	}
 

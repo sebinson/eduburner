@@ -46,35 +46,29 @@
 <#macro adminMenu>
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
-	    <h4 class="sidebar-block-header">管理</h4>
+	    <h4 class="sidebar-block-header">课程管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a href="/users/">用户管理</a></li>
-		    <li><a href="/courses/">课程管理</a></li>
+		    <li><a href="/courses/new">创建课程</a></li>
 	      </ul>
 	    </div>
 	  </div>
 	</div>
 </#macro>
 
-<#macro formTextField label="" name="" value="" type="text" desc="">
+<#macro formField label="" name="" desc="" attrs="" tag="input" >
 	<div class="form-field">
 		<label class="field-label">${label}：</label>
 		<div class="field-value">
-			<input class="text" name="${name}" type="${type}" value="${value}"/>
-		</div>
-		<div class="field-desc">
-			${desc}
-		</div>
-		<div class="clearer"></div>
-	</div>
-</#macro>
-
-<#macro formTextAreaField label="" name="" value="" type="text" desc="">
-	<div class="form-field">
-		<label class="field-label" for="${name}">${label}：</label>
-		<div class="field-value">
-			<textarea class="text" name="${name}" type="${type}" value="${value}"></textarea>
+		    <#if tag == "input">
+		    	<input class="text" name="${name}" ${attrs}/>
+		    <#elseif tag == "textarea">
+		    	<textarea name="${name}" ${attrs}></textarea>
+		    <#elseif tag == "spring-input">
+		    	<@spring.formInput "${name}" "${attrs}" />
+		    <#elseif tag == "spring-textarea">
+		    	<@spring.formTextarea  "${name}" "${attrs}" />
+		    </#if>
 		</div>
 		<div class="field-desc">
 			${desc}
