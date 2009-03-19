@@ -17,7 +17,7 @@ window.History = (function ($) {
 
     function handleStateChange(token) {
         currentToken = token;
-        $().trigger(EventNames.HISTORY_STATE_CHANGED, [token]);
+        $().trigger(EventNames.HISTORY_STATE_CHANGED, [unescape(token)]);
     }
 
     function updateIFrame (token) {
@@ -107,6 +107,7 @@ window.History = (function ($) {
         },
 
         navigate: function (token, preventDup) {
+			token = escape(token);
             if(preventDup !== false){
                 if(this.getToken() == token){
                     return true;
@@ -118,14 +119,6 @@ window.History = (function ($) {
                 top.location.hash = token;
                 return true;
             }
-        },
-
-        back: function(){
-            history.go(-1);
-        },
-
-        forward: function(){
-            history.go(1);
         },
 
         getToken: function() {
