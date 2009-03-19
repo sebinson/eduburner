@@ -13,7 +13,7 @@
       <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
       
       <#list css as cssFile>   		
-      	  <style type="text/css" media="all">@import ${base}/static/${cssFile};</style>
+      	  <style type="text/css" media="all">@import /static/${cssFile};</style>
       </#list>
      
       <title>${title} | EduBurner</title>

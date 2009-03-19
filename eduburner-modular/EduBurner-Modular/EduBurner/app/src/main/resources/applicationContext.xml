@@ -3,23 +3,43 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:p="http://www.springframework.org/schema/p" 
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 	
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<context:annotation-config/>
 	 
 	<context:component-scan base-package="eduburner">
+		<!--
     	<context:include-filter type="regex" expression="eduburner\.service\..*"/>
-    	<!--  
         <context:exclude-filter type="aspectj" expression="eduburner.feed.fetcher..*"/>
         -->
     </context:component-scan>
 	
+	<!--
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* eduburner..*Manager*.*(..))" advice-ref="txAdvice" />
+	</aop:config>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" />
+			<tx:method name="update*" />
+			<tx:method name="remove*" />
+			<tx:method name="create*" />
+			<tx:method name="getUserData" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	-->
 	
 	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
 	
