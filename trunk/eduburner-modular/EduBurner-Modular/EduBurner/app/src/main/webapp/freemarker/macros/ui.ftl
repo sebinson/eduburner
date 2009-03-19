@@ -3,12 +3,12 @@
     	<a href="/">EduBurner</a>
     </div>
     <div id="linkbar">
-        <#if securityHelper.principal?has_content>
-             ${securityHelper.principal?default("")}
-             | <a href="/account/settings">设置</a>
-             | <a href="/account/logout">退出</a>
+        <#if principal?has_content>
+             ${principal.username?default("")}
+             &nbsp;|&nbsp; <a href="/account/settings">设置</a>
+             &nbsp;|&nbsp; <a href="/account/logout">退出</a>
         <#else>
-            <a id="signup-link" href="#">注册</a>
+            <a id="signup-link" href="/account/signup">注册</a>
         </#if>
     </div>
     <div class="clear"></div>
@@ -18,9 +18,18 @@
     &copy; EduBurner
 </#macro>
 
-<#-- 导航菜单 -->
+
 <#macro navbar>
-  <#if securityHelper.principal?has_content>
+  <#if principal?has_content>
+	<@ui.courseList />
+	<#if principal.administrator>
+	<@ui.adminMenu />
+	</#if>
+  </#if>
+</#macro>
+
+<#macro courseList>
+	<#if user?has_content>
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">我的课程</h4>
@@ -31,18 +40,21 @@
 	    </div>
 	  </div>
 	</div>
+	</#if>
+</#macro>
+
+<#macro adminMenu>
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a href="/courses/new">创建课程</a></li>
-		    <li><a href="/courses/">课程列表</a></li>
+		    <li><a href="/users/">用户管理</a></li>
+		    <li><a href="/courses/">课程管理</a></li>
 	      </ul>
 	    </div>
 	  </div>
 	</div>
-  </#if>
 </#macro>
 
 <#macro formTextField label="" name="" value="" type="text" desc="">

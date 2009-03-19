@@ -1,11 +1,16 @@
 <@layout.masterPage title="登录" >
     
     <form id="login-form" method="POST" action="/j_spring_security_check">
-    	<div class="eb-form" style="margin-top: 20px; margin-left: 60px;">
+    	<div class="eb-form" style="margin-top: 20px; margin-left: 60px; margin-bottom: 30px;">
     	  <div class="form-inner">
     		<div class="title-header">
     			<h2>系统登录</h2>
     		</div>
+    		<#if error?has_content>
+    		<div class="error-box">
+    			用户名或密码错误！
+    		</div>
+    		</#if>
     		<div class="form-body">
     		<@ui.formTextField label="用户名" name="j_username"/>
     		<@ui.formTextField label="密码" type="password" name="j_password"/>

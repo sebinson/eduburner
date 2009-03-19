@@ -20,11 +20,13 @@ import org.hibernate.metadata.ClassMetadata;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author zhangyf@gmail.com
  */
 @SuppressWarnings("unchecked")
+@Transactional
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	
 	@Override

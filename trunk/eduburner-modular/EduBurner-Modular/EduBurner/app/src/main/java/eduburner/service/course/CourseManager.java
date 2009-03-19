@@ -1,11 +1,13 @@
 package eduburner.service.course;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import eduburner.entity.course.Course;
 import eduburner.service.BaseManager;
 
 @Component("courseManager")
+@Transactional
 public class CourseManager extends BaseManager implements ICourseManager
 {
 	@Override
