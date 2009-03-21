@@ -16,6 +16,9 @@ a:focus, .unselectable {
     user-select: none;
 }
 
+a { blr:expression(thisthis.onFocus=this.blur()) } /*针对 IE*/  
+a { outline:none; } /*针对firefox等*/  
+
 p {
 	line-height:140%;
 	margin:0pt;
@@ -24,7 +27,6 @@ p {
 
 label {
 	color:#666666;
-	cursor:pointer;
 	font-weight:bold;
 }
 
@@ -34,36 +36,32 @@ h1, h2, h3, h4{
 	font-size: 14px;
 }
 
+textarea {
+    resize: none;  /* Disable browser resizable textarea */
+}
+
 /*********************************************************************/
 
-#site-doc{
-}
-
-#site-hd{
+.eb-header{
 	background-color: #295C7D;
-	background-repeat: repeat-x;
 	color: #BBCDDD;
-	height: 35px;
-	-moz-border-radius-bottomleft:3px;
-	-moz-border-radius-bottomright:3px;
-	-webkit-border-radius-bottomleft:3px;
-	-webkit-border-radius-bottomright:3px;
+	border: 1px solid rgb(41, 92, 125);
 }
 
-#site-hd a {
+.eb-header a {
 	color:#FFFFFF;
 }
 
-#site-bd{
+.eb-body{
 	min-height: 400px;
 	margin-top: 10px;
 }
 
-#site-nav{
+#nav{
 	margin-left: 5px;
 }
 
-#site-ft{
+.eb-footer{
 	border-top:2px solid #3B5998;
 	clear:both;
 	margin:auto;
@@ -74,8 +72,6 @@ h1, h2, h3, h4{
 
 #logo {
 	float: left;
-    cursor: pointer;
-    height: 32px;
     width: 258px;
     font-size: 20px;
     font-weight: bolder;
