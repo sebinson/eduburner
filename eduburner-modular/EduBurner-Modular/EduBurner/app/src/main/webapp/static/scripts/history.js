@@ -17,7 +17,7 @@ window.History = (function ($) {
 
     function handleStateChange(token) {
         currentToken = token;
-        $().trigger(EventNames.HISTORY_STATE_CHANGED, [unescape(token)]);
+        EventList.HISTORY_STATE_CHANGED.fire(token);
     }
 
     function updateIFrame (token) {
@@ -69,7 +69,7 @@ window.History = (function ($) {
 
         ready = true;
 
-        History.HistoryLoadEvent.fire();
+        EventList.HISTORY_LOADED.fire();
     }
 
     function startUp() {
@@ -88,7 +88,7 @@ window.History = (function ($) {
                 }
             }, 50);
             ready = true;
-            $().trigger(EventNames.HISTORY_LOADED, [hash]);
+            EventList.HISTORY_LOADED.fire();
         }
     }
 
