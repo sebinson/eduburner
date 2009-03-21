@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import eduburner.entity.user.User;
+import eduburner.enumerations.Message;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
@@ -78,7 +79,7 @@ public class BaseController {
 		// retrieve user from security context
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		if (auth.isAuthenticated()) {
+		if (auth != null && auth.isAuthenticated()) {
 			if (auth.getPrincipal() instanceof User) {
 				return (User) auth.getPrincipal();
 			} else {
@@ -95,13 +96,15 @@ public class BaseController {
 	private User getUser(String username) {
 		return userManager.getUserByUsername(username);
 	}
-
-	protected void renderText(HttpServletResponse response, String content) {
+	
+	protected void renderMsg(HttpServletResponse response, Message msg){
 		response.setContentType("text/plain;charset=UTF-8");
 		try {
-			response.getWriter().write(content);
+			//String jsonValue = new Gson().toJson(ImmutableMap.of("msg", msg.name()));
+			String jsonValue = "{msg: " + msg.name() + "}";
+			response.getWriter().write(jsonValue);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("failed to render message: " + msg.name(), e);
 		}
 	}
 }

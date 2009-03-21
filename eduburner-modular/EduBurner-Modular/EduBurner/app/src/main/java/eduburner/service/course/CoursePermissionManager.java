@@ -3,6 +3,8 @@ package eduburner.service.course;
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CoursePermission;
 import eduburner.entity.user.Role;
+import eduburner.entity.user.User;
+import eduburner.enumerations.Permission;
 import eduburner.service.BaseManager;
 
 public class CoursePermissionManager extends BaseManager implements ICoursePermisionManager{
@@ -10,8 +12,6 @@ public class CoursePermissionManager extends BaseManager implements ICoursePermi
 	@Override
 	public void createCoursePermission(Role role, Course course,
 			CoursePermission permission) {
-		
-		
 	}
 
 	@Override
@@ -20,6 +20,12 @@ public class CoursePermissionManager extends BaseManager implements ICoursePermi
 		dao.find("FROM CoursePermission WHERE role = ? AND course = ?", role, course);
 		
 		return null;
+	}
+
+	@Override
+	public boolean hasPermission(User user, Course course, Permission permission) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
