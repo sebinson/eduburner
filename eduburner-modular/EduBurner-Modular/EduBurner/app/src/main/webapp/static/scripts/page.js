@@ -60,7 +60,7 @@ window.PageMapping = $H();
 		var onHistoryLoad = function(){
 			var hash = History.getHash();
 			if(hash == null){
-				//go to home page
+				PageMgr.goToPage(PageMapping.keyOf(HomePage));
 			}else{
 				var pageId = Page.getIdByToken(hash);
 				getPageById(pageId).updateUi();

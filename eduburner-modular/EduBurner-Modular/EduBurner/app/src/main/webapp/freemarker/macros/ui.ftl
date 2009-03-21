@@ -51,7 +51,7 @@
 	    <h4 class="sidebar-block-header">课程管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a href="/courses/new">创建课程</a></li>
+		    <li><a id="create-course-link" href="/courses/new">创建课程</a></li>
 		    <li><a href="/courses/new">课程列表</a></li>
 	      </ul>
 	    </div>
@@ -78,31 +78,31 @@
     	${label}：<#if required><span>*</span></#if>
     </label>
     <div class="form-element">
-      	<@spring.formInput "${name}" "style='width:180px' class='form-text form-field' ${attrs}" />
+      	<@spring.formInput "${name}" "class='form-text form-field' ${attrs}" />
     </div>
     <div class="form-clear-left"></div>
   </div>
 </#macro>
 
-<#macro formTextarea label="" name="" desc="" attrs="" >
+<#macro formTextarea label="" name="" desc="" attrs="" required=false>
   <div class="form-item">
     <label class="form-item-label" style="text-align:right;" for="${name}">
     	${label}：<#if required><span>*</span></#if>
     </label>
     <div class="form-element">
-      	<textarea id="${name}" name="${name}" style="width: 240px; height: 100px;" class="form-textarea form-field" ${attrs} ></textarea>
+      	<textarea id="${name}" name="${name}" class="form-textarea form-field" ${attrs} ></textarea>
     </div>
     <div class="form-clear-left"></div>
   </div>
 </#macro>
 
-<#macro springFormTextarea label="" name="" desc="" attrs="" >
+<#macro springFormTextarea label="" name="" desc="" attrs="" required=false>
   <div class="form-item">
     <label class="form-item-label" style="text-align:right;" for="${name}">
     	${label}：<#if required><span>*</span></#if>
     </label>
     <div class="form-element">
-      	<@spring.formTextarea  "${name}" "${attrs}" />
+      	<@spring.formTextarea  "${name}" "class='form-textarea form-field' ${attrs}" />
     </div>
     <div class="form-clear-left"></div>
   </div>

@@ -1,9 +1,15 @@
 (function($){
 	
 	var HomePage = new Class({
-		Extends: Page
+		Extends: Page,
 		
+		buildState:function(){
+			return this.id;
+		},
 		
+		updateUi: function(state){
+			
+		}
 	});
 	
 	var EditCoursePage = new Class({
