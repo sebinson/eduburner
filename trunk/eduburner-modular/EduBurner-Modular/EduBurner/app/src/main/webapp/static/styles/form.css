@@ -9,12 +9,19 @@
 	padding:25px 30px;
 }
 
-.eb-from .persistent {
-	color:#333333;
+.persistent {
+	color: #333333;
 	font-size:12px;
 	font-weight:normal;
 	line-height:16px;
-	padding-top:  2px;
+}
+
+.eb-form .seperator{
+	border-top:1px solid #DDDDDD;
+	clear:both;
+	height:20px;
+	margin-top:20px;
+	overflow:hidden;
 }
 
 .eb-form .form-header{
@@ -25,7 +32,7 @@
 }
 
 .eb-form .form-header h2{
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .form-field {
@@ -71,7 +78,12 @@
     padding-left:0;
     clear:left;
     z-index:2;
+	font-size: 13px;
     position:relative;
+}
+
+.form-item label span{
+	color: #D01E3B;
 }
 
 .form-element {
