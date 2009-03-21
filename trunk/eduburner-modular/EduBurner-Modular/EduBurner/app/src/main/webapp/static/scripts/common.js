@@ -1,6 +1,6 @@
-window.EventNames = {
-	HISTORY_LOADED: 'history-loaded',
-	HISTORY_STATE_CHANGED: 'history-changed'
+window.EventList = {
+	HISTORY_LOADED: new YAHOO.util.CustomEvent('history-loaded'),
+	HISTORY_STATE_CHANGED: new YAHOO.util.CustomEvent('history-changed')
 };
 
 (function($){
@@ -144,6 +144,17 @@ window.EventNames = {
 				}
 			});
 			return vResult;		
+		}
+	};
+	
+	$.waiting = {
+		start: function(){
+			//$("#overlay").show();
+			$("#loading").show();
+		},
+		stop: function(){
+			//$("#overlay").hide();
+			$("#loading").hide();
 		}
 	}
 })(jQuery)

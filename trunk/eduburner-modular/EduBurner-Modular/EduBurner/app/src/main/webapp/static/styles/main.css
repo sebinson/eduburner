@@ -44,7 +44,6 @@ textarea {
 
 .eb-header{
 	background-color: #295C7D;
-	color: #BBCDDD;
 	border: 1px solid rgb(41, 92, 125);
 }
 
@@ -76,6 +75,7 @@ textarea {
     font-size: 20px;
     font-weight: bolder;
     margin: 5px 0 0 10px;
+	color: #FFFFFF;
 }
 
 #logo a{

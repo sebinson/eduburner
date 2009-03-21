@@ -40,8 +40,9 @@
 }
 
 .sidebar-block-content ul.sidebar-block-list li {
-	display: block;
 	clear: left;
+	display: block;
+	height: 1%;
 }
 
 .sidebar-block-content ul.sidebar-block-list li a{
@@ -128,4 +129,33 @@
 .tag1 a:hover,.tag2 a:hover,.tag3 a:hover,.tag4 a:hover,.tag5 a:hover,.tag6 a:hover
 	{
 	text-decoration: underline;
+}
+
+#overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 1000;
+	background-color: #333333;
+	filter: alpha(opacity = 40);
+	moz-opacity: 0.4;
+	opacity: 0.4;
+}
+.ie #overlay {
+	height: expression(document.body.scrollHeight>document.body.offsetHeight?document.body.scrollHeight:document.body.offsetHeight+ 'px');
+}
+
+#loading {
+	position: absolute;
+	left: 45%;
+	top: 40%;
+	padding: 2px;
+	z-index: 20001;
+	height: auto;
+}
+
+#loading .loading-indicator {
+	height: auto;
 }
