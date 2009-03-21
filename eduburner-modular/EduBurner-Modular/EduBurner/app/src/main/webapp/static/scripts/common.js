@@ -11,6 +11,7 @@ window.EventNames = {
             var $bd = $('body');
             var cls = $.browser.msie ? "ie " + ($.browser.version == '6.0' ? 'ie6' : 'ie7') : $.browser.mozilla ? "mozilla" : $.browser.opera ? "opera" : $.browser.safari ? "safari" : "";
             $bd.addClass(cls);
+			$bd.addClass('yui-skin-sam');
         },
         
         findParent: function(el, selector, maxDepth){

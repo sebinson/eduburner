@@ -32,6 +32,10 @@
 	    function onButtonReady() { 
 	        var oKButton = new YAHOO.widget.Button("ok-button"); 
 	    } 
-	    YAHOO.util.Event.onContentReady("ok-button", onButtonReady); 
+	    YAHOO.util.Event.onContentReady("ok-button", onButtonReady);
+	    
+	    YAHOO.util.Event.onDOMReady(function(){
+	          $('#j_username').trigger('focus');
+	    });
 	</script> 
 </@layout.masterPage>

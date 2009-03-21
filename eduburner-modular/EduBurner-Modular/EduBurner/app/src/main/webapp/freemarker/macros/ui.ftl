@@ -8,7 +8,8 @@
              &nbsp;|&nbsp; <a href="/account/settings">设置</a>
              &nbsp;|&nbsp; <a href="/account/logout">退出</a>
         <#else>
-            <a id="signup-link" href="/account/signup">注册</a>
+        	<a id="signup-link" href="/account/login">登录</a>
+            &nbsp;|&nbsp; <a id="signup-link" href="/account/signup">注册</a>
         </#if>
     </div>
     <div class="clear"></div>
@@ -51,28 +52,33 @@
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 		    <li><a href="/courses/new">创建课程</a></li>
+		    <li><a href="/courses/new">课程列表</a></li>
 	      </ul>
 	    </div>
 	  </div>
 	</div>
 </#macro>
 
-<#macro formInput label="" name="" desc="" attrs="" >
+<#macro formInput label="" name="" desc="" attrs="" required=false>
   <div class="form-item">
-    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <label class="form-item-label" style="text-align:right;" for="${name}">
+    	${label}：<#if required><span>*</span></#if>
+    </label>
     <div class="form-element">
-      	<input type="text" name="${name}" style="width:180px" class="form-text form-field" ${attrs}/>
+      	<input id="${name}" name="${name}" style="width:180px" class="form-text form-field" ${attrs}/>
       	<span class="form-invalid-msg hidden"></span>
     </div>
     <div class="form-clear-left"></div>
   </div>
 </#macro>
 
-<#macro springFormInput label="" name="" desc="" attrs="" >
+<#macro springFormInput label="" name="" desc="" attrs="" required=false>
   <div class="form-item">
-    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <label class="form-item-label" style="text-align:right;" for="${name}">
+    	${label}：<#if required><span>*</span></#if>
+    </label>
     <div class="form-element">
-      	<@spring.formInput "${name}" "${attrs}" />
+      	<@spring.formInput "${name}" "style='width:180px' class='form-text form-field' ${attrs}" />
     </div>
     <div class="form-clear-left"></div>
   </div>
@@ -80,9 +86,11 @@
 
 <#macro formTextarea label="" name="" desc="" attrs="" >
   <div class="form-item">
-    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <label class="form-item-label" style="text-align:right;" for="${name}">
+    	${label}：<#if required><span>*</span></#if>
+    </label>
     <div class="form-element">
-      	<textarea name="${name}" style="width: 240px; height: 100px;" class="form-textarea form-field" ${attrs} ></textarea>
+      	<textarea id="${name}" name="${name}" style="width: 240px; height: 100px;" class="form-textarea form-field" ${attrs} ></textarea>
     </div>
     <div class="form-clear-left"></div>
   </div>
@@ -90,7 +98,9 @@
 
 <#macro springFormTextarea label="" name="" desc="" attrs="" >
   <div class="form-item">
-    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <label class="form-item-label" style="text-align:right;" for="${name}">
+    	${label}：<#if required><span>*</span></#if>
+    </label>
     <div class="form-element">
       	<@spring.formTextarea  "${name}" "${attrs}" />
     </div>

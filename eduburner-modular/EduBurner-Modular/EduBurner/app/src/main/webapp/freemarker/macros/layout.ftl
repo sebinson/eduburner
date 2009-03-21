@@ -39,7 +39,7 @@
       <title>${title} | EduBurner</title>
       
   </head>
-  <body class="yui-skin-sam">
+  <body>
       <div id="doc3" class="yui-t2">
       	 <#-- begin of site header -->
          <div id="hd" class="eb-header">
