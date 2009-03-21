@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,6 +30,7 @@ public class Entry extends EntityObject {
 	
 	private UserData user;
 	private List<Comment> comments = Lists.newArrayList();
+	private Service service;
 
 	public String getEntryId() {
 		return entryId;
@@ -60,6 +63,17 @@ public class Entry extends EntityObject {
 	public boolean isHidden() {
 		return hidden;
 	}
+
+	@ManyToOne
+	@JoinColumn(name="fk_service_id")
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
 
 	@OneToMany(mappedBy="entry", fetch=FetchType.LAZY)
 	public List<Comment> getComments() {

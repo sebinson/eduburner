@@ -1,7 +1,13 @@
 package eduburner.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.google.common.collect.Lists;
 
 import eduburner.enumerations.ServiceType;
 
@@ -15,6 +21,8 @@ public class Service extends EntityObject {
 	private String iconUrl;
 	private String profileUrl;
 
+	private List<Entry> entries = Lists.newArrayList();
+	
 	public String getName() {
 		return name;
 	}
@@ -46,9 +54,19 @@ public class Service extends EntityObject {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
+	
+	@OneToMany(mappedBy="service",fetch=FetchType.LAZY)
+	public List<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
+	}
 
 	@Override
 	public String toString() {
 		return "name" + type + "url";
 	}
+
 }

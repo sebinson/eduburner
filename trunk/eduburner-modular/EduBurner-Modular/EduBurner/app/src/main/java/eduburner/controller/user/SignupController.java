@@ -18,10 +18,10 @@ import eduburner.entity.user.User;
 import eduburner.persistence.EntityExistsException;
 
 @Controller
-@RequestMapping("/signup")
+@RequestMapping("/account/signup")
 public class SignupController extends BaseController {
 
-	private static final String SIGNUP_PAGE = "pages/signup";
+	private static final String SIGNUP_PAGE = "signup";
 	@Autowired
 	@Qualifier("passwordEncoder")
 	private PasswordEncoder passwordEncoder;

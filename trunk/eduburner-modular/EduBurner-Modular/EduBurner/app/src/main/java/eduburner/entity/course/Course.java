@@ -15,12 +15,15 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.gson.Gson;
 
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.CourseStatus;
+import eduburner.util.JsonUtils;
 
 /**
  * 课程类，一门课程有多个学生，有讨论区和共享资源
@@ -30,6 +33,8 @@ import eduburner.enumerations.CourseStatus;
  * 日历借助google calendar 每个人的学习笔记借助google notebook? 文章分享借助google reader
  * 
  * 每位同学需要有一个空间，列出其所在的课程，学生可以写微博客 是否需要建立好友关系？
+ * 
+ * 课程的计划，进度，考试，如何管理呢？
  * 
  * @author zhangyf@gmail.com
  */
@@ -132,7 +137,7 @@ public class Course extends EntityObject {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("title", title).toString();
+		return JsonUtils.toJsonMap("title", title, "description", description);
 	}
 	
 }

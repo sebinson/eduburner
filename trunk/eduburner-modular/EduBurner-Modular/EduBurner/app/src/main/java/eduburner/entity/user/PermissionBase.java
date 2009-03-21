@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import eduburner.entity.EntityObject;
 import eduburner.enumerations.AccessControlEntry;
-import eduburner.enumerations.PermissionType;
+import eduburner.enumerations.Permission;
 
 @Entity
 @Table(name = "permission")
@@ -46,7 +46,7 @@ public abstract class PermissionBase extends EntityObject {
 		denyMask = -1L;
 	}
 
-	public PermissionBase(Role role, PermissionType allowMask, PermissionType denyMask) {
+	public PermissionBase(Role role, Permission allowMask, Permission denyMask) {
 		this.role = role;
 		this.allowMask = allowMask.val();
 		this.denyMask = denyMask.val();
@@ -54,7 +54,7 @@ public abstract class PermissionBase extends EntityObject {
 
 	// borrowed from community server's PermissionBase.cs
 	@Transient
-	public boolean getBit(PermissionType mask) {
+	public boolean getBit(Permission mask) {
 		boolean bReturn = false;
 
 		if ((denyMask & mask.val()) == mask.val())
@@ -66,7 +66,7 @@ public abstract class PermissionBase extends EntityObject {
 		return bReturn;
 	}
 
-	public void setBit(PermissionType mask, AccessControlEntry accessControl) {
+	public void setBit(Permission mask, AccessControlEntry accessControl) {
 		
 		if (accessControl == AccessControlEntry.ALLOW) {
 			allowMask |= (long) mask.val() & (long) -1;
@@ -110,13 +110,13 @@ public abstract class PermissionBase extends EntityObject {
 	}
 
 	@Transient
-	public PermissionType getAllowMaskPermission(){
-		return PermissionType.fromVal(allowMask);
+	public Permission getAllowMaskPermission(){
+		return Permission.fromVal(allowMask);
 	}
 	
 	@Transient
-	public PermissionType getDenyMaskPermission(){
-		return PermissionType.fromVal(denyMask);
+	public Permission getDenyMaskPermission(){
+		return Permission.fromVal(denyMask);
 	}
 	
 	@ManyToOne
@@ -136,7 +136,7 @@ public abstract class PermissionBase extends EntityObject {
         if (permissionBase == null && this != null)
             return isEqual;
         
-        for(PermissionType permission : PermissionType.values()){
+        for(Permission permission : Permission.values()){
         	if(permissionBase.getBit(permission) != this.getBit(permission)){
         		isEqual = false;
         		break;
