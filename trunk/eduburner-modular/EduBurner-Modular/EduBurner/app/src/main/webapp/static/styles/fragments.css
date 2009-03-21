@@ -72,14 +72,6 @@
 }
 
 /************************************* tags *****************************/
-.tag-cloud {
-	background-color: #F7F7F7;
-	color: #999999;
-	line-height: 250%;
-	list-style-type: none;
-	margin: 16px 0px;
-	padding: 16px 8px;
-}
 
 .tag1,.tag2,.tag3,.tag3,.tag4,.tag5,.tag6 {
 	display: inline;
@@ -137,51 +129,3 @@
 	{
 	text-decoration: underline;
 }
-
-/******************************************************************************/
-#overlay {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 100%;
-	width: 100%;
-	z-index: 1000;
-	background-color: #333333;
-	filter: alpha(opacity =     40);
-	moz-opacity: 0.4;
-	opacity: 0.4;
-}
-
-/**** ie6 hack ********/
-.ie #overlay {
-	height: expression(document.body.scrollHeight >   document.body.offsetHeight ?   document.body.scrollHeight :   document.body.offsetHeight +   'px');
-}
-
-#loading {
-	position: absolute;
-	left: 45%;
-	top: 40%;
-	padding: 2px;
-	z-index: 20001;
-	height: auto;
-}
-
-#loading .loading-indicator {
-	height: auto;
-}
-
-#top-loading {
-	left: 45%;
-	margin-left: -26px;
-	position: absolute;
-	top: 10px;
-	z-index: 20001;
-	color: #222222;
-	font-weight: bolder;
-	padding: 5px 8px;
-	background-color: #E2EECD;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-/******************************* form style *****************************************/

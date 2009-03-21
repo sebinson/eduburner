@@ -145,17 +145,5 @@ window.EventNames = {
 			return vResult;		
 		}
 	}
-    
-    $.waiting = {
-        start: function(){
-            var t = $(document).scrollTop() + 10;
-            $('#top-loading').css('top', t).show();
-        },
-        
-        stop: function(){
-            $('#top-loading').hide();
-        }
-    };
-    
 })(jQuery)
 

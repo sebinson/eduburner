@@ -23,40 +23,8 @@
 	margin-bottom:8px;
 }
 
-.field-desc{
-	color:#7F7F7F;
-	font-size:95%;
-	line-height:100%;
-	margin:1px 0 0;
-	padding:0 0 5px;
-}
-
-input.text, textarea {
-	border:1px solid #999999;
-	padding:2px;
-	width: 180px;
-}
-
-input.button {
-	border-style: solid;
-	border-color: #D9DFEA rgb(14, 31, 91) rgb(14, 31, 91) rgb(217, 223, 234);
-	border-width: 1px;
-	padding: 1px 5px;
-	overflow: visible;
-	font-family: Tahoma, sans-serif;
-	cursor: pointer;
-	color: rgb(255, 255, 255);
-	background-repeat: repeat-x;
-	background-position: center top;
-	background-color: #3B5998;
-	_font-size: 12px;
-}
-
-.persistent {
-	color:#333333;
-	font-size:12px;
-	font-weight:normal;
-	line-height:16px;
+.buttons{
+	font-size: 13px;
 }
 
 .error-box{
@@ -66,63 +34,34 @@ input.button {
 	padding:10px;
 }
 
-/********************** form style ***********************************/
-
-.eb-form {
-	border-color: #CCCCCC;
-	border: 1px solid #CFCFCF;
-	width: 600px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+#hd .bottom .corner-top, #hd .bottom .corner-left, #hd .bottom .corner-bottom {
+	background-image:url(../images/cr_title.gif);
 }
 
-.eb-form .form-inner{
-	padding:25px 30px;
+.corner-top, .corner-left, .corner-bottom {
+	background-image:url(../images/cr_tabt.gif);
 }
 
-.eb-form .title-header{
-	margin:0 0 10px;
-	padding:0 0 10px;
-	border-bottom:1px solid #CCCCCC;
-}
-
-.eb-form h2{
-	font-size: 14px;
-}
-
-.eb-form .form-body{
-	clear:left;
-	margin:auto;
-	padding-top:15px;
-	text-align:left;
-}
-
-.eb-form .form-field{
-	padding-left: 14em;
-	clear:left;
-	margin:0 0 0 13px;
-	padding-bottom:5px;
-}
-
-.eb-form .form-field .field-label, .eb-form .form-field .first-column{
-	left:-5em;
-	margin-right:-13em;
-	display:inline;
-	float:left;
-	margin-top:0.15em;
-	padding:0 0 5px;
+.corner-top, .corner-left, .corner-bottom {
+	background-repeat:no-repeat;
+	display:block;
+	font-size:0;
+	height:3px;
+	line-height:0;
+	margin:0;
 	position:relative;
 }
 
-.eb-form .form-field .field-value{
-	
+.corner-bottom {
+	background-position:100% -3px;
+	bottom:-1px;
+	clear:both;
+	right:-1px;
+	width:auto;
 }
 
-.eb-form .form-field .field-desc{
-	color:#7F7F7F;
-	font-size:95%;
-	line-height:100%;
-	margin:1px 0 0;
-	padding:0 0 5px;
+.corner-bottom .corner-left {
+	background-position:0 -9px;
+	left:-2px;
+	width:3px;
 }
-
