@@ -15,12 +15,11 @@
       <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
       
       <script type="text/javascript" src="/static/scripts/libs/jquery-1.3.2.min.js"></script>
+      <script type="text/javascript" src="/static/scripts/libs/mootools-1.2.1-core.js"></script>
       <script type="text/javascript" src="/static/yui/yahoo-dom-event/yahoo-dom-event.js"></script> 
-      
       <script type="text/javascript" src="/static/yui/element/element-min.js"></script> 
       <script type="text/javascript" src="/static/yui/button/button-min.js"></script>
-      
-      <script type="text/javascript" src="/static/scripts/common.js"></script> 
+      <script type="text/javascript" src="/static/scripts/common.js"></script>
       
       <#list js as jsFile>   		
 		  <script type="text/javascript" src="/static/scripts/${jsFile}"></script>
@@ -40,6 +39,8 @@
       
   </head>
   <body>
+  	  <iframe id="hist-iframe" class="hidden"></iframe>
+      <input id="hist-field" type="hidden"/>
       <div id="doc3" class="yui-t2">
       	 <#-- begin of site header -->
          <div id="hd" class="eb-header">
@@ -66,7 +67,12 @@
       	 </div>
       	 <#-- end of site footer -->
       </div>
-     
+      <div id="overlay" style="display:none"></div>
+      <div id="loading" style="display:none">
+    	<div class="loading-indicator">
+			<img src="/static/images/indicator_blue.gif" width="32" height="32" style="float:left;vertical-align:top;"/>
+		</div>
+	 </div>
   </body>
 </html>
 
