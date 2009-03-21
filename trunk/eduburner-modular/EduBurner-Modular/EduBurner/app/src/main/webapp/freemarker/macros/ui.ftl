@@ -12,6 +12,7 @@
         </#if>
     </div>
     <div class="clear"></div>
+    <div class="bottom"><span class="corner-bottom"><span class="corner-left"></span></span></div>
 </#macro>
 
 <#macro footer>
@@ -56,23 +57,43 @@
 	</div>
 </#macro>
 
-<#macro formField label="" name="" desc="" attrs="" tag="input" >
-	<div class="form-field">
-		<label class="field-label">${label}：</label>
-		<div class="field-value">
-		    <#if tag == "input">
-		    	<input class="text" name="${name}" ${attrs}/>
-		    <#elseif tag == "textarea">
-		    	<textarea name="${name}" ${attrs}></textarea>
-		    <#elseif tag == "spring-input">
-		    	<@spring.formInput "${name}" "${attrs}" />
-		    <#elseif tag == "spring-textarea">
-		    	<@spring.formTextarea  "${name}" "${attrs}" />
-		    </#if>
-		</div>
-		<div class="field-desc">
-			${desc}
-		</div>
-		<div class="clearer"></div>
-	</div>
+<#macro formInput label="" name="" desc="" attrs="" >
+  <div class="form-item">
+    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <div class="form-element">
+      	<input type="text" name="${name}" style="width:180px" class="form-text form-field" ${attrs}/>
+      	<span class="form-invalid-msg hidden"></span>
+    </div>
+    <div class="form-clear-left"></div>
+  </div>
+</#macro>
+
+<#macro springFormInput label="" name="" desc="" attrs="" >
+  <div class="form-item">
+    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <div class="form-element">
+      	<@spring.formInput "${name}" "${attrs}" />
+    </div>
+    <div class="form-clear-left"></div>
+  </div>
+</#macro>
+
+<#macro formTextarea label="" name="" desc="" attrs="" >
+  <div class="form-item">
+    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <div class="form-element">
+      	<textarea name="${name}" style="width: 240px; height: 100px;" class="form-textarea form-field" ${attrs} ></textarea>
+    </div>
+    <div class="form-clear-left"></div>
+  </div>
+</#macro>
+
+<#macro springFormTextarea label="" name="" desc="" attrs="" >
+  <div class="form-item">
+    <label class="form-item-label" style="text-align:right;" for="${name}">${label}：</label>
+    <div class="form-element">
+      	<@spring.formTextarea  "${name}" "${attrs}" />
+    </div>
+    <div class="form-clear-left"></div>
+  </div>
 </#macro>

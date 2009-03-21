@@ -7,10 +7,30 @@
 
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	  
-      <link type="text/css" rel="stylesheet" href="/static/styles/yui/reset-fonts-grids.css" />
+      <link type="text/css" rel="stylesheet" href="/static/yui/reset-fonts-grids/reset-fonts-grids.css" />
+      <link rel="stylesheet" type="text/css" href="/static/yui/button/assets/skins/sam/button.css">
       <link type="text/css" rel="stylesheet" href="/static/styles/main.css" />
+      <link type="text/css" rel="stylesheet" href="/static/styles/form.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/tools.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
+      
+      <script type="text/javascript" src="/static/scripts/libs/jquery-1.3.2.min.js"></script>
+      <script type="text/javascript" src="/static/yui/yahoo-dom-event/yahoo-dom-event.js"></script> 
+      
+      <script type="text/javascript" src="/static/yui/element/element-min.js"></script> 
+      <script type="text/javascript" src="/static/yui/button/button-min.js"></script>
+      
+      <script type="text/javascript" src="/static/scripts/common.js"></script> 
+      
+      <#list js as jsFile>   		
+		  <script type="text/javascript" src="/static/scripts/${jsFile}"></script>
+      </#list>
+      
+      <script type="text/javascript"> 
+	      YAHOO.util.Event.onDOMReady(function(){
+	          $.utils.setBodyClass();
+	      }); 
+	  </script> 
       
       <#list css as cssFile>   		
       	  <style type="text/css" media="all">@import /static/${cssFile};</style>
@@ -19,20 +39,20 @@
       <title>${title} | EduBurner</title>
       
   </head>
-  <body>
-      <div id="site-doc" class="yui-d0">
+  <body class="yui-skin-sam">
+      <div id="doc3" class="yui-t2">
       	 <#-- begin of site header -->
-         <div id="site-hd">
+         <div id="hd" class="eb-header">
          	<@ui.header />
          </div>
          <#-- end of site header -->
          
-      	 <div id="site-bd" class="yui-t2">
-      	     <div id="site-nav" class="yui-b">
+      	 <div id="bd" class="eb-body">
+      	     <div id="nav" class="yui-b">
       	        <#-- nav bar -->
       	     	<@ui.navbar />
       	     </div>
-      	     <div class="yui-main">
+      	     <div id="yui-main">
       	         <div id="main" class="yui-b">
       	            <#-- main content -->
       	         	<#nested />
@@ -41,16 +61,12 @@
       	 </div>
       	 
       	 <#-- begin of site footer -->
-      	 <div id="site-ft">
+      	 <div id="ft" class="eb-footer">
       	    <@ui.footer />
       	 </div>
       	 <#-- end of site footer -->
       </div>
-      
-      <script type="text/javascript" src="/static/scripts/jquery-1.3.2.min.js"></script>
-      <#list js as jsFile>   		
-		  <script type="text/javascript" src="/static/scripts/${jsFile}"></script>
-      </#list>
+     
   </body>
 </html>
 
