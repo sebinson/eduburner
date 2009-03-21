@@ -13,12 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
@@ -45,23 +42,27 @@ public class Course extends EntityObject {
 
 	private static final long serialVersionUID = -1025308879798159789L;
 
+	@Expose
 	private String title;
-
+	@Expose
 	private String description;
 
 	// This might be open, closed, planned, or discontinued, for example
+	@Expose
 	private CourseStatus status;
-
+	@Expose
 	private Date startDate;
-
+	@Expose
 	private Date endDate;
 
 	// 成员
 	private List<UserData> members = Lists.newArrayList();
 
 	private List<CourseResource> courseResources = Lists.newArrayList();
-	
+
 	private Set<CoursePermission> permissions = Sets.newHashSet();
+
+	private List<CourseTag> tags = Lists.newArrayList();
 
 	public String getTitle() {
 		return title;
@@ -117,10 +118,20 @@ public class Course extends EntityObject {
 	public List<CourseResource> getCourseResources() {
 		return courseResources;
 	}
-	
-	@OneToMany(mappedBy="course", fetch=FetchType.LAZY)
+
+	@OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
 	public Set<CoursePermission> getPermissions() {
 		return permissions;
+	}
+
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinTable(name = "rel_course_coursetag", joinColumns = { @JoinColumn(name = "course_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+	public List<CourseTag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<CourseTag> courses) {
+		this.tags = courses;
 	}
 
 	public void setPermissions(Set<CoursePermission> permissions) {
@@ -130,8 +141,8 @@ public class Course extends EntityObject {
 	public void setCourseResources(List<CourseResource> courseResources) {
 		this.courseResources = courseResources;
 	}
-	
-	public void addMemeber(UserData userData){
+
+	public void addMemeber(UserData userData) {
 		this.members.add(userData);
 	}
 
@@ -139,5 +150,5 @@ public class Course extends EntityObject {
 	public String toString() {
 		return JsonUtils.toJsonMap("title", title, "description", description);
 	}
-	
+
 }

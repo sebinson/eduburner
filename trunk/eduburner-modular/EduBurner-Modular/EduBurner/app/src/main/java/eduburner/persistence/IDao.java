@@ -17,7 +17,7 @@ public interface IDao {
 
 	public <T> T getInstanceById(Class<T> type, Serializable id);
 
-	public List<?> getAllInstances(Class<?> type);
+	public <T> List<T> getAllInstances(Class<T> type);
 
 	public List<?> getInstancesByDetachedCriteria(DetachedCriteria criteria);
 

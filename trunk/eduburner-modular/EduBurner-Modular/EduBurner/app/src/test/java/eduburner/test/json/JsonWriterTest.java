@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.annotations.Expose;
 
+import eduburner.enumerations.CourseStatus;
 import eduburner.util.JsonUtils;
 
 public class JsonWriterTest extends TestCase{
@@ -23,6 +24,7 @@ public class JsonWriterTest extends TestCase{
 		Car car = new Car();
 		car.setName("name");
 		car.setType("type");
+		car.setStatus(CourseStatus.Closed);
 
 		Wheel wheel = new Wheel();
 		wheel.setName("名称");
@@ -52,6 +54,8 @@ public class JsonWriterTest extends TestCase{
 		private String type;
 		@Expose
 		private Wheel wheel;
+		@Expose
+		private CourseStatus status;
 
 		public Wheel getWheel() {
 			return wheel;
@@ -76,6 +80,16 @@ public class JsonWriterTest extends TestCase{
 		public void setType(String type) {
 			this.type = type;
 		}
+
+		public CourseStatus getStatus() {
+			return status;
+		}
+
+		public void setStatus(CourseStatus status) {
+			this.status = status;
+		}
+		
+		
 	}
 
 	public class Wheel {

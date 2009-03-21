@@ -1,6 +1,6 @@
 .eb-form-container {
 	border: 1px solid #CFCFCF;
-	width: 600px;
+	width: 90%;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 }
@@ -107,6 +107,7 @@
     font:normal 1em tahoma, arial, helvetica, sans-serif;
     line-height:16px;
     width:200px;
+	color: #7F7F7F;
 }
 
 .form-clear {

@@ -52,7 +52,7 @@
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 		    <li><a id="create-course-link" href="/courses/new">创建课程</a></li>
-		    <li><a href="/courses/new">课程列表</a></li>
+		    <li><a href="/courses/">课程列表</a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -67,6 +67,7 @@
     <div class="form-element">
       	<input id="${name}" name="${name}" style="width:180px" class="form-text form-field" ${attrs}/>
       	<span class="form-invalid-msg hidden"></span>
+      	<span class="form-field-desc <#if desc==''>hidden</#if>">${desc}</span>
     </div>
     <div class="form-clear-left"></div>
   </div>
@@ -79,6 +80,8 @@
     </label>
     <div class="form-element">
       	<@spring.formInput "${name}" "class='form-text form-field' ${attrs}" />
+      	<span class="form-invalid-msg hidden"></span>
+      	<span class="form-field-desc <#if desc==''>hidden</#if>">${desc}</span>
     </div>
     <div class="form-clear-left"></div>
   </div>
