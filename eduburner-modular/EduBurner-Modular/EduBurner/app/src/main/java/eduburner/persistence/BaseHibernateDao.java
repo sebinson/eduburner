@@ -47,7 +47,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	}
 
 	@Override
-	public List<?> getAllInstances(Class<?> type) {
+	public <T> List<T> getAllInstances(Class<T> type) {
 		return getHibernateTemplate().find("from " + type.getName());
 	}
 

@@ -10,6 +10,7 @@
 		<mapping class="eduburner.entity.user.UserLog" />
 		<mapping class="eduburner.entity.user.PermissionBase" />
 		<mapping class="eduburner.entity.course.Course" />
+		<mapping class="eduburner.entity.course.CourseTag" />
 		<mapping class="eduburner.entity.course.CourseResource" />
 		<mapping class="eduburner.entity.course.CoursePermission" />
 		<mapping class="eduburner.entity.Entry" />

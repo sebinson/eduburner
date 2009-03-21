@@ -1,4 +1,4 @@
-<#macro masterPage title="" css=[] js=[]>
+<#macro masterPage title="" css=[]>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -9,6 +9,9 @@
 	  
       <link type="text/css" rel="stylesheet" href="/static/yui/reset-fonts-grids/reset-fonts-grids.css" />
       <link rel="stylesheet" type="text/css" href="/static/yui/button/assets/skins/sam/button.css">
+      <link type="text/css" rel="stylesheet" href="/static/yui/calendar/assets/skins/sam/calendar.css"> 
+      <link type="text/css" rel="stylesheet" href="/static/yui/datatable/assets/skins/sam/datatable.css">
+       
       <link type="text/css" rel="stylesheet" href="/static/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/form.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/tools.css" />
@@ -16,14 +19,19 @@
       
       <script type="text/javascript" src="/static/scripts/libs/jquery-1.3.2.min.js"></script>
       <script type="text/javascript" src="/static/scripts/libs/mootools-1.2.1-core.js"></script>
-      <script type="text/javascript" src="/static/yui/yahoo-dom-event/yahoo-dom-event.js"></script> 
-      <script type="text/javascript" src="/static/yui/element/element-min.js"></script> 
-      <script type="text/javascript" src="/static/yui/button/button-min.js"></script>
-      <script type="text/javascript" src="/static/scripts/common.js"></script>
       
-      <#list js as jsFile>   		
-		  <script type="text/javascript" src="/static/scripts/${jsFile}"></script>
-      </#list>
+      <script type="text/javascript" src="/static/yui/yahoo-dom-event/yahoo-dom-event.js"></script> 
+      <script type="text/javascript" src="/static/yui/element/element-min.js"></script>
+      <script type="text/javascript" src="/static/yui/datasource/datasource-min.js"></script>
+      <script type="text/javascript" src="/static/yui/json/json-min.js"></script>
+      <script type="text/javascript" src="/static/yui/connection/connection-min.js"></script>
+      <script type="text/javascript" src="/static/yui/get/get-min.js"></script>
+      <script type="text/javascript" src="/static/yui/dragdrop/dragdrop-min.js"></script>
+      <script type="text/javascript" src="/static/yui/calendar/calendar-min.js"></script> 
+      <script type="text/javascript" src="/static/yui/button/button-min.js"></script>
+      <script type="text/javascript" src="/static/yui/datatable/datatable-min.js"></script> 
+      
+      <script type="text/javascript" src="/static/scripts/common.js"></script>
       
       <script type="text/javascript"> 
 	      YAHOO.util.Event.onDOMReady(function(){
@@ -72,7 +80,7 @@
     	<div class="loading-indicator">
 			<img src="/static/images/indicator_blue.gif" width="32" height="32" style="float:left;vertical-align:top;"/>
 		</div>
-	 </div>
+	  </div>
   </body>
 </html>
 

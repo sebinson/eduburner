@@ -1,6 +1,6 @@
 <@layout.masterPage title="登录" >
     <form id="login-form" method="POST" action="/j_spring_security_check">
-        <div class="eb-form-container" style="margin-top: 20px; margin-left: 60px; margin-bottom: 30px;">
+        <div class="eb-form-container" style="margin-top: 20px; margin-left: 60px; margin-bottom: 30px; width:500px;">
     	    <div class="eb-form">
     	    	<div class="form-header">
     				<h2>系统登录</h2>

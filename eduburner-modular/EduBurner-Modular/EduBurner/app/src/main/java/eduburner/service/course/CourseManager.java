@@ -1,15 +1,18 @@
 package eduburner.service.course;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import eduburner.entity.course.Course;
+import eduburner.entity.course.CourseTag;
 import eduburner.service.BaseManager;
 
 @Component("courseManager")
 @Transactional
-public class CourseManager extends BaseManager implements ICourseManager
-{
+public class CourseManager extends BaseManager implements ICourseManager {
+	
 	@Override
 	public void createCourse(Course course) {
 		dao.save(course);
@@ -29,5 +32,22 @@ public class CourseManager extends BaseManager implements ICourseManager
 	public void removeCourse(long courseId) {
 		dao.remove(getCourseById(courseId));
 	}
-	
+
+	@Override
+	public List<Course> getAllCourses() {
+		return dao.getAllInstances(Course.class);
+	}
+
+	@Override
+	public CourseTag getCourseTag(String tagName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CourseTag getOrInsertCourseTag(String tagName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
