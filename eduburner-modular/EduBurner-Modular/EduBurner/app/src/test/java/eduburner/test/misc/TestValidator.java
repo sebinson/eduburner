@@ -1,11 +1,11 @@
-package eduburner.test;
+package eduburner.test.misc;
+
+import junit.framework.TestCase;
 
 import org.hibernate.validator.InvalidValue;
 
 import eduburner.entity.user.User;
 import eduburner.validation.AnnotationValidator;
-import eduburner.validation.AnnotationValidator;
-import junit.framework.TestCase;
 
 public class TestValidator extends TestCase{
 	

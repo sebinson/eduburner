@@ -15,18 +15,22 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import eduburner.entity.user.User;
 import eduburner.enumerations.Message;
+import eduburner.json.JsonHelper;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
 public class BaseController {
 
-	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	//private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	
+	private static final String DATE_FORMAT = "yyyy-MM-dd";
 
 	private static final long serialVersionUID = -1474235451943654164L;
 
@@ -105,6 +109,16 @@ public class BaseController {
 			response.getWriter().write(jsonValue);
 		} catch (IOException e) {
 			logger.error("failed to render message: " + msg.name(), e);
+		}
+	}
+	
+	protected void renderJson(HttpServletResponse response, Model model){
+		response.setContentType("text/plain;charset=UTF-8");
+		try {
+			String jsonValue = JsonHelper.toJson(model);
+			response.getWriter().write(jsonValue);
+		} catch (IOException e) {
+			logger.error("failed to render json: ", e);
 		}
 	}
 }

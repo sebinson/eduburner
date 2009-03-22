@@ -148,12 +148,14 @@ window.EventList = {
 	};
 	
 	$.waiting = {
-		start: function(){
-			//$("#overlay").show();
+		start: function(showOverlay){
+			if(showOverlay === true){
+				$("#overlay").show();
+			}
 			$("#loading").show();
 		},
 		stop: function(){
-			//$("#overlay").hide();
+			$("#overlay").hide();
 			$("#loading").hide();
 		}
 	}
