@@ -46,7 +46,7 @@ public class CourseTagsPropertyEditor extends PropertyEditorSupport {
 	public String getAsText() {
 		logger.debug("entering getAsText method...");
 		List<CourseTag> tags = (List<CourseTag>) getValue();
-		if (null == tags) {
+		if (null == tags || tags.size() == 0) {
 			return "";
 		}
 		StringBuilder sb = new StringBuilder("");

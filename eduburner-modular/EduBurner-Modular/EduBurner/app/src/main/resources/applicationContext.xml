@@ -41,7 +41,7 @@
 	</tx:advice>
 	-->
 	
-	<bean id="springBeanUtils" class="sharetime.util.SpringBeanUtils" />
+	<bean id="springBeanUtils" class="eduburner.util.SpringBeanUtils" />
 	
 	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
 	

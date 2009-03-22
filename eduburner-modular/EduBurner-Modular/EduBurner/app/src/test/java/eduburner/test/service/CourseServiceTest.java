@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import eduburner.entity.course.Course;
+import eduburner.entity.course.CourseTag;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.service.course.ICourseManager;
@@ -40,5 +41,13 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 		Assert.assertEquals(1, count);
 		Assert.assertEquals(1, udCount);
 		
+	}
+	
+	@Test
+	public void testCourseTag(){
+		CourseTag ct = courseManager.getOrInsertCourseTag("tagname");
+		Assert.assertNotNull(ct.getId());
+		int count = getCount("select count(*) from course_tag");
+		Assert.assertEquals(1, count);
 	}
 }
