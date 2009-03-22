@@ -139,11 +139,55 @@
 		
 	});
 	
+	var CourseListPage = new Class({
+		Extends: Page,
+		
+		buildState: function(){
+			return this.id;
+		},
+		
+		updateUi: function(state){
+			this.loadPage();
+		},
+		
+		loadPage: function(){
+			var dataSource = [
+				{title: 'title1', startDate:'1999-9-9', endDate:'1999-9-9', tags:'tags'},
+				{title: 'title1', startDate:'1999-9-9', endDate:'1999-9-9', tags:'tags'}
+			];
+			
+			this.buildTable(dataSource);
+		},
+		
+		buildTable: function(dataSource){
+			$('#main-content').html('<div id="courses-table"></div>');
+			var columnDefs = [
+	            {key:"title", label:"课程名称", sortable:true},
+	            {key:"startDate", label: "开始时间", sortable:true},
+	            {key:"endDate", label: "结束时间", sortable:true},
+	            {key:"tags", label:"标签"},
+				{key:"operations", label:"操作"}
+	        ];
+			
+			var dataSource = new YAHOO.util.DataSource(dataSource); 
+	        dataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY; 
+			dataSource.responseSchema = { 
+	            fields: ["title","startDate","endDate","tags"] 
+	        }; 
+			
+			var coursesTable = new YAHOO.widget.DataTable("courses-table", 
+	                columnDefs, dataSource, {caption:"课程列表"});
+			
+		}
+	});
+	
 	window.HomePage = HomePage;
 	window.EditCoursePage = EditCoursePage;
+	window.CourseListPage = CourseListPage;
 	
 	PageMapping.extend({
 		'main': HomePage,
-		'editcourse': EditCoursePage
+		'editcourse': EditCoursePage,
+		'courses': CourseListPage
 	});
 })(jQuery);

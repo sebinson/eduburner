@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
-import org.testng.annotations.DataProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -67,6 +66,7 @@ public class Course extends EntityObject {
 
 	private Set<CoursePermission> permissions = Sets.newHashSet();
 
+	@Expose
 	private List<CourseTag> tags = Lists.newArrayList();
 
 	@NotNull(message = "课程名不能为空！")

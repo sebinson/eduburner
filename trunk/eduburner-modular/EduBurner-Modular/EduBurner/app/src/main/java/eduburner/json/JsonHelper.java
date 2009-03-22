@@ -25,6 +25,7 @@ public class JsonHelper {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation()
 				.registerTypeAdapter(BeanPropertyBindingResult.class, new BindingResultSerializer())
+				//.registerTypeAdapter(MockBindingResult.class, new BindingResultSerializer())
 				.create();
 
 		return gson.toJson(obj);
