@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.google.common.collect.Lists;
 
 import eduburner.entity.EntityObject;
-import eduburner.util.JsonUtils;
+import eduburner.json.JsonHelper;
 
 @Entity
 @Table(name = "course_tag")
@@ -21,6 +21,8 @@ public class CourseTag extends EntityObject {
 	private static final long serialVersionUID = -4435877401860345611L;
 	private String name;
 	private List<Course> courses = Lists.newArrayList();
+	
+	public CourseTag(){}
 	
 	public CourseTag(String name){
 		this.name = name;
@@ -46,7 +48,7 @@ public class CourseTag extends EntityObject {
 
 	@Override
 	public String toString() {
-		return JsonUtils.toJsonMap("name", name);
+		return JsonHelper.toJsonMap("name", name);
 	}
 
 }

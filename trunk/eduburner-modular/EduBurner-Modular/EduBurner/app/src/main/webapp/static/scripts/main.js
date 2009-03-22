@@ -113,6 +113,28 @@
         	Event.addListener(['startDate', 'endDate'], 'focus', showCal);
         	Event.addListener(['startDate', 'endDate'], 'blur', hideCal);
         	cal1.render();
+			
+			var $form = $('#course-form'),
+				targetUrl = $form.attr('action'),
+				method = $form.attr('method');
+			$form.bind('submit', function(e){
+				e.preventDefault();
+				var formArray = $.formUtils.formToArray($form);
+				$.waiting.start();
+				$.ajax({
+					url: targetUrl,
+					type: method,
+					data: $.param(formArray),
+					dataType: "json",
+					success: function(data){
+						$.waiting.stop();
+					},
+					error: function(xreq, msg){
+						$.waiting.stop();
+					}
+				});
+				return false;
+			});
 		}
 		
 	});

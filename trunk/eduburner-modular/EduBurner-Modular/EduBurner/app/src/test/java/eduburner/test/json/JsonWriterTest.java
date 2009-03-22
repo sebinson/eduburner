@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.annotations.Expose;
 
 import eduburner.enumerations.CourseStatus;
-import eduburner.util.JsonUtils;
+import eduburner.json.JsonHelper;
 
 public class JsonWriterTest extends TestCase{
 
@@ -44,7 +44,7 @@ public class JsonWriterTest extends TestCase{
 		model.put("cars", list);
 		model.put("wheel", wheel);
 
-		logger.debug("josn: " + JsonUtils.toJson(model));
+		logger.debug("josn: " + JsonHelper.toJson(model));
 	}
 
 	public class Car {

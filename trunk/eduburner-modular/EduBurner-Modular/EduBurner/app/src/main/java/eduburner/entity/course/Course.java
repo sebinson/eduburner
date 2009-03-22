@@ -13,6 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.Length;
+import org.hibernate.validator.NotNull;
+import org.testng.annotations.DataProvider;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gson.annotations.Expose;
@@ -20,7 +24,7 @@ import com.google.gson.annotations.Expose;
 import eduburner.entity.EntityObject;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.CourseStatus;
-import eduburner.util.JsonUtils;
+import eduburner.json.JsonHelper;
 
 /**
  * 课程类，一门课程有多个学生，有讨论区和共享资源
@@ -47,13 +51,14 @@ public class Course extends EntityObject {
 	@Expose
 	private String description;
 
-	// This might be open, closed, planned, or discontinued, for example
 	@Expose
 	private CourseStatus status;
 	@Expose
 	private Date startDate;
 	@Expose
 	private Date endDate;
+	
+	private UserData creator;
 
 	// 成员
 	private List<UserData> members = Lists.newArrayList();
@@ -64,6 +69,8 @@ public class Course extends EntityObject {
 
 	private List<CourseTag> tags = Lists.newArrayList();
 
+	@NotNull(message = "课程名不能为空！")
+	@Length(min = 3, message = "课程名最少 {min}个字符")
 	public String getTitle() {
 		return title;
 	}
@@ -148,7 +155,7 @@ public class Course extends EntityObject {
 
 	@Override
 	public String toString() {
-		return JsonUtils.toJsonMap("title", title, "description", description);
+		return JsonHelper.toJsonMap("title", title, "description", description);
 	}
 
 }

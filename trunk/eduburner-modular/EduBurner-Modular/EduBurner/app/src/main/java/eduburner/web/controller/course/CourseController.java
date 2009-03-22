@@ -3,6 +3,7 @@ package eduburner.web.controller.course;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import eduburner.entity.course.Course;
+import eduburner.enumerations.Message;
+import eduburner.json.JsonHelper;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
 import eduburner.validation.CourseValidator;
@@ -57,10 +60,16 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses", method = RequestMethod.POST)
-	public void create(@ModelAttribute("course") Course course, BindingResult bi) {
+	public void create(@ModelAttribute("course") Course course, BindingResult br, Model model, HttpServletResponse response) {
 		//TODO: check permission
-		new CourseValidator().validate(course, bi);
-		courseManager.createCourse(course);
+		new CourseValidator().validate(course, br);
+		if(br.hasErrors()){
+			model.addAttribute("msg", Message.ERROR);
+			renderJson(response, model);
+		}else{
+			courseManager.createCourse(course);
+			renderMsg(response, Message.OK);
+		}
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.PUT)

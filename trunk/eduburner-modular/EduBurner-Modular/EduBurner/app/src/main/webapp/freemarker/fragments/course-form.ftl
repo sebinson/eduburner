@@ -1,4 +1,4 @@
-<form id="course-form" method="POST" action="/courses">
+<form id="course-form" method="POST" action="<@spring.url '/courses'/>">
 	<@spring.bind "course.*" />
 	<div class="eb-form-container">
 	  <div class="eb-form">
@@ -6,8 +6,8 @@
 			<h2>创建课程</h2>
 		</div>
 		<@ui.springFormInput label="课程名称" name="course.title" attrs='style="width:253px"' required=true/>
-		<@ui.springFormInput label="开始时间" name="course.startDate" attrs='style="width:120px"' required=true/>
-		<@ui.springFormInput label="结束时间" name="course.endDate" attrs='style="width:120px"' required=true />
+		<@ui.springFormInput label="开始时间" name="course.startDate" attrs='style="width:120px" readonly' required=true/>
+		<@ui.springFormInput label="结束时间" name="course.endDate" attrs='style="width:120px" readonly' required=true />
 		<@ui.springFormTextarea label="课程描述" name="course.description" attrs='style="height:78px;width:253px"' required=true/>
 		<@ui.springFormInput label="课程标签" name="course.tags" attrs='style="width:253px"' required=true desc="标签之间以逗号分隔"/> <!--TODO: 提供一个选择标签的方式-->
 		<div class="seperator"></div>
