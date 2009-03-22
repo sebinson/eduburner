@@ -22,7 +22,7 @@ public class BindingResultSerializer implements JsonSerializer<BindingResult>{
 	public JsonElement serialize(BindingResult src, Type typeOfSrc,
 			JsonSerializationContext context) {
 		
-		logger.debug("begin to serialize binding result...");
+		logger.debug("begin to serialize binding result... type: " + typeOfSrc.toString());
 		
 		JsonObject jsonObj = new JsonObject();
 		List<FieldError> fieldErrors = src.getFieldErrors();

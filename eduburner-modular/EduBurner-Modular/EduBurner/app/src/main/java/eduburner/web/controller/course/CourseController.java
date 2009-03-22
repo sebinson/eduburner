@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import eduburner.entity.course.Course;
 import eduburner.enumerations.Message;
-import eduburner.json.JsonHelper;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
 import eduburner.validation.CourseValidator;
@@ -32,17 +31,20 @@ public class CourseController extends BaseController {
 	private ICourseManager courseManager;
 
 	private static String COURSE_FORM = "fragments/course-form";
-	private static String COURSE_LIST = "fragments/course-list";
+	private static String COURSE_VIEW = "fragments/course-view";
 
 	@RequestMapping(value = "/courses/")
-	public String index() {
+	public void index(Model model, HttpServletResponse response) {
 		List<Course> courses = courseManager.getAllCourses();
-		return null;
+		model.addAttribute("courses", courses);
+		renderJson(response, model);
 	}
 
 	@RequestMapping(value = "/courses/{courseId}")
-	public String show(@PathVariable("courseId") long courseId) {
-		return null;
+	public String show(@PathVariable("courseId") long courseId, Model model) {
+		Course course = courseManager.getCourseById(courseId);
+		model.addAttribute("course", course);
+		return COURSE_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/new")

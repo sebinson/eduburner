@@ -75,6 +75,11 @@ window.PageMapping = $H();
 				e.preventDefault();
 				PageMgr.goToPage(PageMapping.keyOf(EditCoursePage));
 			});
+			
+			$('#course-list-link').bind('click', function(e){
+				e.preventDefault();
+				PageMgr.goToPage(PageMapping.keyOf(CourseListPage));
+			});
 		};
 		
 		this.onDomReady = function(){

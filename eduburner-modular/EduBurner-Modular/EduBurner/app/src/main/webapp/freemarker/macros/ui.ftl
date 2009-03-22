@@ -52,7 +52,7 @@
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 		    <li><a id="create-course-link" href="/courses/new">创建课程</a></li>
-		    <li><a href="/courses/">课程列表</a></li>
+		    <li><a id="course-list-link" href="/courses/">课程列表</a></li>
 	      </ul>
 	    </div>
 	  </div>
