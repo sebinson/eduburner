@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -135,6 +136,16 @@ public class Course extends EntityObject {
 	@JoinTable(name = "rel_course_coursetag", joinColumns = { @JoinColumn(name = "course_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
 	public List<CourseTag> getTags() {
 		return tags;
+	}
+	
+	@ManyToOne()
+	@JoinColumn(name = "fk_creator_id")
+	public UserData getCreator() {
+		return creator;
+	}
+
+	public void setCreator(UserData creator) {
+		this.creator = creator;
 	}
 
 	public void setTags(List<CourseTag> courses) {
