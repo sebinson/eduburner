@@ -1,4 +1,4 @@
-package eduburner.controller.course;
+package eduburner.web.controller.course;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import eduburner.controller.BaseController;
 import eduburner.entity.course.Course;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
 import eduburner.validation.CourseValidator;
+import eduburner.web.controller.BaseController;
 
 @Controller
 public class CourseController extends BaseController {

@@ -1,4 +1,4 @@
-package eduburner.controller.user;
+package eduburner.web.controller.user;
 
 import javax.servlet.http.HttpServletRequest;
 

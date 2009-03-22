@@ -1,4 +1,4 @@
-package eduburner.controller.user;
+package eduburner.web.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import eduburner.controller.BaseController;
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
 import eduburner.persistence.EntityExistsException;
+import eduburner.web.controller.BaseController;
 
 @Controller
 @RequestMapping("/account/signup")

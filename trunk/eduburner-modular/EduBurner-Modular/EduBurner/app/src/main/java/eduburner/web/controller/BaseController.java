@@ -1,4 +1,4 @@
-package eduburner.controller;
+package eduburner.web.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
