@@ -69,6 +69,7 @@ public class CourseController extends BaseController {
 			model.addAttribute("msg", Message.ERROR);
 			renderJson(response, model);
 		}else{
+			course.setCreator(getRemoteUserDataObj());
 			courseManager.createCourse(course);
 			renderMsg(response, Message.OK);
 		}

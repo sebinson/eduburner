@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import eduburner.entity.user.User;
+import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
 import eduburner.json.JsonHelper;
 import eduburner.service.user.IRoleManager;
@@ -91,6 +92,14 @@ public class BaseController {
 			}
 		}
 		return null;
+	}
+	
+	public UserData getRemoteUserDataObj(){
+		User user =  getRemoteUserObj();
+		if(user == null){
+			return null;
+		}
+		return userManager.getUserData(user);
 	}
 
 	protected Long getRemoteUserId() {
