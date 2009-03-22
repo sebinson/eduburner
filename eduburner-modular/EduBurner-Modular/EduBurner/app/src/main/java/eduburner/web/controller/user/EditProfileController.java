@@ -1,4 +1,4 @@
-package eduburner.controller.user;
+package eduburner.web.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import eduburner.controller.BaseController;
 import eduburner.entity.user.User;
+import eduburner.web.controller.BaseController;
 
 @Controller
 @RequestMapping("/profile")
