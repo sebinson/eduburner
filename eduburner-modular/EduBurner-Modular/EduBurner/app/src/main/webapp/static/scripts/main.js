@@ -151,28 +151,47 @@
 		},
 		
 		loadPage: function(){
-			var dataSource = [
-				{title: 'title1', startDate:'1999-9-9', endDate:'1999-9-9', tags:'tags'},
-				{title: 'title1', startDate:'1999-9-9', endDate:'1999-9-9', tags:'tags'}
-			];
-			
-			this.buildTable(dataSource);
+			var self = this;
+			$.waiting.start();
+			$.ajax({
+				url: '/courses/',
+				type: 'GET',
+				dataType: 'json',
+				success:function(data){
+					$.waiting.stop();
+					var dataSource = [];
+					$.each(data.courses, function(i, c){
+						c.tags = c.tags.map(function(tag){return tag.name}).join(',');
+						dataSource.push(c);
+					});
+					self.buildTable(dataSource);
+				},
+				error: function(data){
+					$.waiting.stop();
+				}
+			});
 		},
 		
 		buildTable: function(dataSource){
+			
+			var formatOperations = function(elCell, oRecord, oColumn, oData){
+				 var c = oRecord.getData();
+				 elCell.innerHTML = '<a href="/courses/' + c.id +  '/edit">编缉</a>&nbsp;|&nbsp;<a href="/delete">删除</a>';
+			};
+			
 			$('#main-content').html('<div id="courses-table"></div>');
 			var columnDefs = [
 	            {key:"title", label:"课程名称", sortable:true},
 	            {key:"startDate", label: "开始时间", sortable:true},
 	            {key:"endDate", label: "结束时间", sortable:true},
 	            {key:"tags", label:"标签"},
-				{key:"operations", label:"操作"}
+				{key:"operations", label:"操作", formatter: formatOperations}
 	        ];
 			
 			var dataSource = new YAHOO.util.DataSource(dataSource); 
 	        dataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY; 
 			dataSource.responseSchema = { 
-	            fields: ["title","startDate","endDate","tags"] 
+	            fields: ["title","startDate","endDate","tags", "id"] 
 	        }; 
 			
 			var coursesTable = new YAHOO.widget.DataTable("courses-table", 
