@@ -46,8 +46,14 @@ public class CourseManager extends BaseManager implements ICourseManager {
 
 	@Override
 	public CourseTag getOrInsertCourseTag(String tagName) {
-		// TODO Auto-generated method stub
-		return null;
+		List tags = dao.find("FROM CourseTag WHERE name= ?", tagName);
+		if(tags.size() > 0){
+			return (CourseTag)tags.get(0);
+		}else{
+			CourseTag ct = new CourseTag(tagName);
+			dao.save(ct);
+			return ct;
+		}
 	}
 
 }

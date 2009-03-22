@@ -19,6 +19,7 @@ import eduburner.controller.BaseController;
 import eduburner.entity.course.Course;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
+import eduburner.validation.CourseValidator;
 
 @Controller
 public class CourseController extends BaseController {
@@ -57,8 +58,8 @@ public class CourseController extends BaseController {
 
 	@RequestMapping(value = "/courses", method = RequestMethod.POST)
 	public void create(@ModelAttribute("course") Course course, BindingResult bi) {
-		// check permission
-		// validate
+		//TODO: check permission
+		new CourseValidator().validate(course, bi);
 		courseManager.createCourse(course);
 	}
 
