@@ -61,7 +61,7 @@ public class CourseController extends BaseController {
 		return COURSE_FORM;
 	}
 
-	@RequestMapping(value = "/courses", method = RequestMethod.POST)
+	@RequestMapping(value = "/courses/", method = RequestMethod.POST)
 	public void create(@ModelAttribute("course") Course course, BindingResult br, Model model, HttpServletResponse response) {
 		//TODO: check permission
 		new CourseValidator().validate(course, br);
@@ -75,14 +75,16 @@ public class CourseController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.PUT)
-	public void update() {
-
+	@RequestMapping(value = "/courses/", method = RequestMethod.PUT)
+	public void update(@ModelAttribute Course course, HttpServletResponse response) {
+		courseManager.updateCourse(course);
+		renderMsg(response, Message.OK);
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.DELETE)
-	public void destroy() {
-
+	public void destroy(@PathVariable long courseId, HttpServletResponse response) {
+		courseManager.removeCourse(courseId);
+		renderMsg(response, Message.OK);
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/entries", method = RequestMethod.POST)

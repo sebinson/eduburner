@@ -37,7 +37,8 @@
 	    <h4 class="sidebar-block-header">我的课程</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a href="/courses/new">历史</a></li>
+		    <li><a id="course-link-1" href="/courses/1" i="1"><img src="/static/images/silk/book_open.png"/><span>历史</span></a></li>
+		    <li><a id="course-link-2" href="/courses/2" i="2"><img src="/static/images/silk/book_open.png"/><span>语文</span></a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -51,8 +52,31 @@
 	    <h4 class="sidebar-block-header">课程管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a id="create-course-link" href="/courses/new">创建课程</a></li>
-		    <li><a id="course-list-link" href="/courses/">课程列表</a></li>
+		    <li><a id="create-course-link" href="/courses/new"><img src="/static/images/silk/book_add.png"/><span>创建课程</span></a></li>
+		    <li><a id="course-list-link" href="/courses/"><img src="/static/images/silk/table_multiple.png"/><span>课程列表</span></a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="sidebar-block spacing">
+	  <div class="sidebar-block-inner">
+	    <h4 class="sidebar-block-header">用户管理</h4>
+	    <div class="sidebar-block-content">
+	      <ul class="sidebar-block-list">
+		    <li><a id="create-course-link" href="/courses/new"><img src="/static/images/silk/user_add.png"/><span>添加用户</span></a></li>
+		    <li><a id="course-list-link" href="/courses/"><img src="/static/images/silk/user_edit.png"/><span>编缉用户</span></a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="sidebar-block spacing">
+	  <div class="sidebar-block-inner">
+	    <h4 class="sidebar-block-header">系统管理</h4>
+	    <div class="sidebar-block-content">
+	      <ul class="sidebar-block-list">
+		    <li><a id="create-course-link" href="/courses/new"><img src="/static/images/silk/bullet_wrench.png"/><span>系统设置</span></a></li>
 	      </ul>
 	    </div>
 	  </div>
