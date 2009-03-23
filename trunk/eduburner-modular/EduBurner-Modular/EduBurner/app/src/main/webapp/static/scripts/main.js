@@ -72,7 +72,47 @@
 		},
 		
 		updateUi: function(state){
+			this.loadPage();
+		},
+		
+		loadPage: function(){
+			this.bindEvents();
+		},
+		
+		bindEvents: function(){
 			
+		},
+	});
+	
+	var CoursePage = new Class({
+		Extends: Page,
+		
+		courseId: null,
+		
+		buildState: function(){
+		    return [this.id, this.courseId].join('/');
+		},
+		
+		updateUi: function(state){
+			var stateArr = state.split('/');
+			this.id = stateArr[0],
+			this.courseId = stateArr[1];
+			this.loadPage();
+		},
+		
+		loadPage: function(){
+			$('ul.sidebar-block-list>li>a').removeClass('selected');
+			$('#course-link-' + this.courseId).addClass('selected');
+			$.waiting.start();
+			$.ajax({
+				url: '/courses/' + this.courseId,
+				type:'GET',
+				success: function(data){
+					$.waiting.stop();
+					$('#main-content').html(data);
+					var tabView = new YAHOO.widget.TabView('single-course');	
+				}
+			});
 		}
 	});
 	
@@ -152,6 +192,8 @@
 		
 		loadPage: function(){
 			var self = this;
+			$('ul.sidebar-block-list>li>a').removeClass('selected');
+			$('#course-list-link').addClass('selected');
 			$.waiting.start();
 			$.ajax({
 				url: '/courses/',
@@ -203,10 +245,12 @@
 	window.HomePage = HomePage;
 	window.EditCoursePage = EditCoursePage;
 	window.CourseListPage = CourseListPage;
+	window.CoursePage = CoursePage;
 	
 	PageMapping.extend({
 		'main': HomePage,
 		'editcourse': EditCoursePage,
-		'courses': CourseListPage
+		'courselist': CourseListPage,
+		'courses' : CoursePage
 	});
 })(jQuery);

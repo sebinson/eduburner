@@ -28,20 +28,20 @@ window.PageMapping = $H();
 	};
     
     var PageMgr = new function(){
-        var _pageCache = $H();
-        var _currentPageId = null;
+        var pageCache = $H();
+        var currentPageId = null;
 		
 		var adjustSize = function(){
-			if(!_currentPageId){
+			if(!currentPageId){
 				
 			}
 		};
 		
 		var getPageById = function(pageId){
-			var page = _pageCache[pageId];
+			var page = pageCache[pageId];
 			if(!page){
 				page = new PageMapping[pageId](pageId);
-				_pageCache[pageId] = page;
+				pageCache[pageId] = page;
 			}
 			return page;
 		};
@@ -49,8 +49,8 @@ window.PageMapping = $H();
 		var onStateChange = function(type, args){
 			var token = args[0];
 			//do some clear work for previous page
-			if(_currentPageId){
-				getPageById(_currentPageId).clear();
+			if(currentPageId){
+				getPageById(currentPageId).clear();
 			}
 			var page = getPageById(Page.getIdByToken(token));
 			page.updateUi(token);
@@ -63,7 +63,8 @@ window.PageMapping = $H();
 				PageMgr.goToPage(PageMapping.keyOf(HomePage));
 			}else{
 				var pageId = Page.getIdByToken(hash);
-				getPageById(pageId).updateUi();
+				getPageById(pageId).updateUi(hash);
+				currentPageId = pageId;
 			}
 		};
 		
@@ -79,6 +80,13 @@ window.PageMapping = $H();
 			$('#course-list-link').bind('click', function(e){
 				e.preventDefault();
 				PageMgr.goToPage(PageMapping.keyOf(CourseListPage));
+			});
+			
+			$('#course-link-1').bind('click', function(e){
+				e.preventDefault();
+				PageMgr.goToPage(PageMapping.keyOf(CoursePage), {
+					courseId: $(this).attr('i')
+				});
 			});
 		};
 		

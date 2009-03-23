@@ -96,7 +96,7 @@
     padding:2px;
     padding-left:18px;
     font:normal 1em tahoma, arial, helvetica, sans-serif;
-    background: transparent url(../images/warning.gif) no-repeat 0 2px;
+    background: transparent url(../images/silk/error.png) no-repeat 0 2px;
     line-height:16px;
     width:200px;
 }
