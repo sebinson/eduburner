@@ -32,24 +32,28 @@ public abstract class PermissionBase extends EntityObject {
 	protected long denyMask;
 
 	protected String description;
-
 	protected Role role;
+	
+	private boolean implied;
 
 	public PermissionBase() {
 		allowMask = 0L;
 		denyMask = -1L;
+		implied = true;
 	}
 
 	public PermissionBase(Role role) {
 		this.role = role;
 		allowMask = 0L;
 		denyMask = -1L;
+		implied = true;
 	}
 
-	public PermissionBase(Role role, Permission allowMask, Permission denyMask) {
+	public PermissionBase(Role role, Permission allowMask, Permission denyMask, boolean impliedPermissions) {
 		this.role = role;
 		this.allowMask = allowMask.val();
 		this.denyMask = denyMask.val();
+		this.implied = impliedPermissions;
 	}
 
 	// borrowed from community server's PermissionBase.cs
@@ -128,6 +132,14 @@ public abstract class PermissionBase extends EntityObject {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	public boolean isImplied() {
+		return implied;
+	}
+
+	public void setImplied(boolean implied) {
+		this.implied = implied;
+	}
 	
 	@Override
 	public boolean equals(Object obj){
@@ -150,4 +162,5 @@ public abstract class PermissionBase extends EntityObject {
 		return new ToStringBuilder(this).append("id", id).append("description",
 				description).toString();
 	}
+
 }

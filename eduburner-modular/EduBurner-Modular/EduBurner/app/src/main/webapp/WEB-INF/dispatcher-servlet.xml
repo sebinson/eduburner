@@ -15,15 +15,28 @@
  
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="viewClass" value="eduburner.web.view.EduBurnerFreeMarkerView" />
-		<property name="cache" value="true" />
-		<property name="prefix" value="" />
-		<property name="suffix" value=".ftl" />
-		<property name="contentType" value="text/html;charset=utf-8"></property>
+	
+	<bean id="jsonView" class="eduburner.web.view.EduBurnerJsonView"/>
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">  
+	    <property name="mediaTypes">  
+	        <map>  
+	            <entry key="json" value="application/json;charset=UTF-8"/>  
+	        </map>  
+	    </property>  
+	    <property name="viewResolvers">  
+	        <list>  
+			   <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	           <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+					<property name="exposeSpringMacroHelpers" value="true" />
+					<property name="viewClass" value="eduburner.web.view.EduBurnerFreeMarkerView" />
+					<property name="cache" value="true" />
+					<property name="prefix" value="" />
+					<property name="suffix" value=".ftl" />
+					<property name="contentType" value="text/html;charset=utf-8"></property>
+				</bean>
+	        </list>  
+	    </property>  
 	</bean>
 
 	<!-- Configurer that sets up a shared FreeMarker Configuration for FreeMarker views -->
