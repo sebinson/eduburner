@@ -65,12 +65,12 @@ public class CourseController extends BaseController {
 		//TODO: check permission
 		new CourseValidator().validate(course, br);
 		if(br.hasErrors()){
-			model.addAttribute("msg", Message.ERROR);
+			setReturnMsg(model, Message.ERROR);
 			return JSON_VIEW;
 		}else{
 			course.setCreator(getRemoteUserDataObj());
 			courseManager.createCourse(course);
-			model.addAttribute("msg", Message.OK);
+			setReturnMsg(model, Message.OK);
 			return JSON_VIEW;
 		}
 	}
@@ -78,14 +78,14 @@ public class CourseController extends BaseController {
 	@RequestMapping(value = "/courses/", method = RequestMethod.PUT)
 	public String update(@ModelAttribute Course course, Model model) {
 		courseManager.updateCourse(course);
-		model.addAttribute("msg", Message.OK);
+		setReturnMsg(model, Message.OK);
 		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.DELETE)
 	public String destroy(@PathVariable long courseId, Model model) {
 		courseManager.removeCourse(courseId);
-		model.addAttribute("msg", Message.OK);
+		setReturnMsg(model, Message.OK);
 		return JSON_VIEW;
 	}
 
