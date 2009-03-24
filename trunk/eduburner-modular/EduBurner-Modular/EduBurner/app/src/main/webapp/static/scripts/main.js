@@ -196,8 +196,9 @@
 			$('#course-list-link').addClass('selected');
 			$.waiting.start();
 			$.ajax({
-				url: '/courses/',
+				url: '/courses.json',
 				type: 'GET',
+				contentType: 'application/json',
 				dataType: 'json',
 				success:function(data){
 					$.waiting.stop();

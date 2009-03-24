@@ -1,5 +1,6 @@
 package eduburner.entity.user;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.GrantedAuthority;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import eduburner.entity.EntityObject;
@@ -29,7 +33,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 	private String description;
 
 	protected Set<User> users = Sets.newHashSet();
-	
+
 	protected Set<PermissionBase> permissions = Sets.newHashSet();
 
 	@Column(name = "name", nullable = false, unique = true)
@@ -63,14 +67,26 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@OneToMany(mappedBy="role", fetch=FetchType.LAZY)
+
+	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
 	public Set<PermissionBase> getPermissions() {
 		return permissions;
 	}
 
 	public void setPermissions(Set<PermissionBase> permissions) {
 		this.permissions = permissions;
+	}
+
+	@Transient
+	public String getUsersString() {
+		Iterable<String> iter = Iterables.transform(getUsers(),
+				new Function<User, String>() {
+					@Override
+					public String apply(User from) {
+						return from.getUsername();
+					}
+				});
+		return StringUtils.join(iter.iterator(), ",");
 	}
 
 	@Override
@@ -89,5 +105,5 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public String toString() {
 		return this.name;
 	}
-	
+
 }

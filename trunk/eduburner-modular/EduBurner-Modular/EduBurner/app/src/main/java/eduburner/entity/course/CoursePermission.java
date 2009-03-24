@@ -26,8 +26,8 @@ public class CoursePermission extends PermissionBase {
 		this.course = course;
 	}
 	
-	public CoursePermission(Course course, Role role, Permission allowMask, Permission denyMask){
-		super(role, allowMask, denyMask);
+	public CoursePermission(Course course, Role role, Permission allowMask, Permission denyMask, boolean implied){
+		super(role, allowMask, denyMask, implied);
 		this.course = course;
 	}
 	

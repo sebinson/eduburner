@@ -3,7 +3,6 @@ package eduburner.web.controller.course;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,11 +32,11 @@ public class CourseController extends BaseController {
 	private static String COURSE_FORM = "fragments/course-form";
 	private static String COURSE_VIEW = "fragments/course-view";
 
-	@RequestMapping(value = "/courses/")
-	public void index(Model model, HttpServletResponse response) {
+	@RequestMapping(value = "/courses.*", method=RequestMethod.GET)
+	public String index(Model model) {
 		List<Course> courses = courseManager.getAllCourses();
 		model.addAttribute("courses", courses);
-		renderJson(response, model);
+		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}")
@@ -62,29 +61,32 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/", method = RequestMethod.POST)
-	public void create(@ModelAttribute("course") Course course, BindingResult br, Model model, HttpServletResponse response) {
+	public String create(@ModelAttribute("course") Course course, BindingResult br, Model model) {
 		//TODO: check permission
 		new CourseValidator().validate(course, br);
 		if(br.hasErrors()){
 			model.addAttribute("msg", Message.ERROR);
-			renderJson(response, model);
+			return JSON_VIEW;
 		}else{
 			course.setCreator(getRemoteUserDataObj());
 			courseManager.createCourse(course);
-			renderMsg(response, Message.OK);
+			model.addAttribute("msg", Message.OK);
+			return JSON_VIEW;
 		}
 	}
 
 	@RequestMapping(value = "/courses/", method = RequestMethod.PUT)
-	public void update(@ModelAttribute Course course, HttpServletResponse response) {
+	public String update(@ModelAttribute Course course, Model model) {
 		courseManager.updateCourse(course);
-		renderMsg(response, Message.OK);
+		model.addAttribute("msg", Message.OK);
+		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable long courseId, HttpServletResponse response) {
+	public String destroy(@PathVariable long courseId, Model model) {
 		courseManager.removeCourse(courseId);
-		renderMsg(response, Message.OK);
+		model.addAttribute("msg", Message.OK);
+		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/entries", method = RequestMethod.POST)
