@@ -1,11 +1,9 @@
 package eduburner.web.controller;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +21,6 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
-import eduburner.json.JsonHelper;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
@@ -112,24 +109,7 @@ public class BaseController {
 		return userManager.getUserByUsername(username);
 	}
 	
-	protected void renderMsg(HttpServletResponse response, Message msg){
-		response.setContentType("text/plain;charset=UTF-8");
-		try {
-			//String jsonValue = new Gson().toJson(ImmutableMap.of("msg", msg.name()));
-			String jsonValue = "{msg: " + msg.name() + "}";
-			response.getWriter().write(jsonValue);
-		} catch (IOException e) {
-			logger.error("failed to render message: " + msg.name(), e);
-		}
-	}
-	
-	protected void renderJson(HttpServletResponse response, Model model){
-		response.setContentType("text/plain;charset=UTF-8");
-		try {
-			String jsonValue = JsonHelper.toJson(model);
-			response.getWriter().write(jsonValue);
-		} catch (IOException e) {
-			logger.error("failed to render json: ", e);
-		}
+	protected void setReturnMsg(Model model, Message msg){
+		model.addAttribute("msg", msg);
 	}
 }
