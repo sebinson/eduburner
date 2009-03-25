@@ -6,7 +6,7 @@
         <li class="selected"><a href="#course-message"><em>消息</em></a></li>
         <li><a href="#course-member"><em>成员</em></a></li>
         <li><a href="#course-resource"><em>资源</em></a></li>
-        <li><a href="#course-manage"><em>管理</em></a></li>
+        <li style="margin-right:15px"><a href="#course-manage"><em>管理</em></a></li>
     </ul>            
     <div class="yui-content">
         <div id="course-message">

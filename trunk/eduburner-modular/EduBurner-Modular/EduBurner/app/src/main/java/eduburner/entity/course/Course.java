@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.annotations.Expose;
 
 import eduburner.entity.EntityObject;
+import eduburner.entity.Entry;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.CourseStatus;
 import eduburner.json.JsonHelper;
@@ -66,6 +67,8 @@ public class Course extends EntityObject {
 	private List<CourseResource> courseResources = Lists.newArrayList();
 
 	private Set<CoursePermission> permissions = Sets.newHashSet();
+	
+	private List<Entry> entries = Lists.newArrayList();
 
 	@Expose
 	private List<CourseTag> tags = Lists.newArrayList();
@@ -118,6 +121,15 @@ public class Course extends EntityObject {
 		return members;
 	}
 
+	@OneToMany(mappedBy="course", cascade = CascadeType.REMOVE)
+	public List<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
+	}
+
 	public void setMembers(List<UserData> members) {
 		this.members = members;
 	}
@@ -143,6 +155,7 @@ public class Course extends EntityObject {
 	public UserData getCreator() {
 		return creator;
 	}
+	
 
 	public void setCreator(UserData creator) {
 		this.creator = creator;
