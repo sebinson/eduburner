@@ -35,7 +35,7 @@ public class BaseController {
 	protected static final Logger logger = LoggerFactory
 			.getLogger(BaseController.class);
 
-	public static String JSON_VIEW = "jsonView";
+	public static final String JSON_VIEW = "jsonView";
 
 	@Autowired
 	@Qualifier("userManager")

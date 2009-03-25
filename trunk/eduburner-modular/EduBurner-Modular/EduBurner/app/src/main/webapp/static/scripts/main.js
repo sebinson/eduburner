@@ -238,8 +238,40 @@
 	        }; 
 			
 			var coursesTable = new YAHOO.widget.DataTable("courses-table", 
-	                columnDefs, dataSource, {caption:"课程列表"});
+	                columnDefs, dataSource);
 			
+		}
+	});
+	
+	var EditUserPage = new Class({
+		Extends: Page,
+		
+		buildState: function(){
+			return this.id;
+		},
+		
+		updateUi: function(state){
+			this.loadPage();
+		},
+		
+		loadPage : function(){
+			var self = this;
+			$.waiting.start();
+		    $.ajax({
+				url: '/users/new',
+				type: 'GET',
+				success: function(data){
+					$.waiting.stop();
+					$('#main-content').html(data);
+					self.initPage();
+				}
+			});
+		},
+		
+		initPage: function(){
+			var submitBtn = new YAHOO.widget.Button('submit-button');
+			$('ul.sidebar-block-list>li>a').removeClass('selected');
+			$('#user-create-link').addClass('selected');
 		}
 	});
 	
@@ -247,11 +279,13 @@
 	window.EditCoursePage = EditCoursePage;
 	window.CourseListPage = CourseListPage;
 	window.CoursePage = CoursePage;
+	window.EditUserPage = EditUserPage;
 	
 	PageMapping.extend({
 		'main': HomePage,
 		'editcourse': EditCoursePage,
 		'courselist': CourseListPage,
-		'courses' : CoursePage
+		'courses' : CoursePage,
+		'edituser': EditUserPage
 	});
 })(jQuery);

@@ -1,5 +1,9 @@
-<form id="course-form" method="POST" action="<@spring.url '/users'/>">
+<form id="course-form" method="POST" action="<@spring.url '/users.json'/>">
 	<@spring.bind "user.*" />
+	<#if user.id?has_content>
+		<input type="hidden" name="id" value="${user.id}/>
+		<input type="hidden" name="_method" value="PUT" />
+	</#if>
 	<div class="eb-form-container">
 	  <div class="eb-form">
 	  	<div class="form-header">

@@ -1,6 +1,6 @@
 package eduburner.enumerations;
 
-public enum Permission {
+public enum PermissionType {
 	VIEW,
 	CREATE,
 	EDIT,
@@ -33,7 +33,7 @@ public enum Permission {
 		}
 	};
 	
-	public static Permission fromVal(long val){
+	public static PermissionType fromVal(long val){
 		if(val == 0x0000000000000001L){
 			return VIEW;
 		}else if(val == 0x0000000000000002L){

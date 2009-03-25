@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 
 import eduburner.entity.user.PermissionBase;
 import eduburner.entity.user.Role;
-import eduburner.enumerations.Permission;
+import eduburner.enumerations.PermissionType;
 
 @Entity
 @DiscriminatorValue("eduburner.entity.course.CoursePermission")
@@ -26,21 +26,21 @@ public class CoursePermission extends PermissionBase {
 		this.course = course;
 	}
 	
-	public CoursePermission(Course course, Role role, Permission allowMask, Permission denyMask, boolean implied){
+	public CoursePermission(Course course, Role role, PermissionType allowMask, PermissionType denyMask, boolean implied){
 		super(role, allowMask, denyMask, implied);
 		this.course = course;
 	}
 	
 	public boolean canView(){
-		return getBit(Permission.VIEW);
+		return getBit(PermissionType.VIEW);
 	}
 	
 	public boolean canEdit(){
-		return getBit(Permission.EDIT);
+		return getBit(PermissionType.EDIT);
 	}
 	
 	public boolean canSetPermissions(){
-		return getBit(Permission.SET_PERMISSIONS);
+		return getBit(PermissionType.SET_PERMISSIONS);
 	}
 
 	@ManyToOne

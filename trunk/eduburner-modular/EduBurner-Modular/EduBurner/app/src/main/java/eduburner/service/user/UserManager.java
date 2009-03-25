@@ -32,6 +32,12 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	@Qualifier("passwordEncoder")
 	private PasswordEncoder passwordEncoder;
 
+	@Override
+	public List<User> getAllUsers() {
+		return dao.getAllInstances(User.class);
+	}
+
+	@Override
 	public void createUser(User user) throws EntityExistsException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering saveUser method...");
@@ -44,15 +50,18 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		}
 	}
 
+	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		return getUserByUsername(username);
 	}
 
+	@Override
 	public void updateUser(User user) {
 		dao.saveOrUpdate(user);
 	}
 
+	@Override
 	public void alterPassword(User user, String newPassword)
 			throws UsernameNotFoundException {
 		User foundUser = getUserByUsername(user.getUsername());
@@ -61,6 +70,7 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		updateUser(foundUser);
 	}
 
+	@Override
 	public User getUserByUsername(String username) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 		criteria.add(Restrictions.eq("username", username));
@@ -68,6 +78,7 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		return user;
 	}
 
+	@Override
 	public User getUserById(long userId) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering getUserById method");
@@ -75,6 +86,7 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		return dao.getInstanceById(User.class, new Long(userId));
 	}
 
+	@Override
 	public void removeUser(long userId) {
 		dao.remove(getUserById(userId));
 	}

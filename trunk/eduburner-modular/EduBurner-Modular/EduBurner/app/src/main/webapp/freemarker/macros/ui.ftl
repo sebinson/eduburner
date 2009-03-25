@@ -61,12 +61,13 @@
 	
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
-	    <h4 class="sidebar-block-header">安全设置</h4>
+	    <h4 class="sidebar-block-header">用户管理</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a id="create-course-link" href="/courses/new"><img src="/static/images/silk/user_edit.png"/><span>用户管理</span></a></li>
-		    <li><a id="course-list-link" href="/courses/"><img src="/static/images/silk/key.png"/><span>角色管理</span></a></li>
-		    <li><a id="course-list-link" href="/courses/"><img src="/static/images/silk/shield.png"/><span>权限管理</span></a></li>
+	      	<li><a id="user-create-link" href="/users/new"><img src="/static/images/silk/user_add.png"/><span>添加用户</span></a></li>
+		    <li><a id="user-list-link" href="/courses/new"><img src="/static/images/silk/user_edit.png"/><span>用户列表</span></a></li>
+		    <li><a id="role-manage-link" href="/courses/"><img src="/static/images/silk/key.png"/><span>角色管理</span></a></li>
+		    <li><a id="perm-manage-link" href="/courses/"><img src="/static/images/silk/shield.png"/><span>权限管理</span></a></li>
 		    <!--
 		    <li><a id="course-list-link" href="/courses/"><img src="/static/images/silk/page_key.png"/><span>安全设置</span></a></li>
 		    -->

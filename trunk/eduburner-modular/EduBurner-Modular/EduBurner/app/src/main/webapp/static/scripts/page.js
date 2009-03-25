@@ -1,4 +1,4 @@
-window.PageMapping = $H();
+window.PageMapping = new Hash();
 
 (function($){
     var Page = new Class({
@@ -87,6 +87,11 @@ window.PageMapping = $H();
 				PageMgr.goToPage(PageMapping.keyOf(CoursePage), {
 					courseId: $(this).attr('i')
 				});
+			});
+			
+			$('#user-create-link').bind('click', function(e){
+				e.preventDefault();
+				PageMgr.goToPage(PageMapping.keyOf(EditUserPage));
 			});
 		};
 		
