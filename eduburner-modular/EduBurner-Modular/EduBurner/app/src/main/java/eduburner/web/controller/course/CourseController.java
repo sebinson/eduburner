@@ -29,11 +29,11 @@ public class CourseController extends BaseController {
 	@Qualifier("courseManager")
 	private ICourseManager courseManager;
 
-	private static String COURSE_FORM = "fragments/course-form";
-	private static String COURSE_VIEW = "fragments/course-view";
+	private static final String COURSE_FORM = "fragments/course-form";
+	private static final String COURSE_VIEW = "fragments/course-view";
 
 	@RequestMapping(value = "/courses.*", method=RequestMethod.GET)
-	public String index(Model model) {
+	public String list(Model model) {
 		List<Course> courses = courseManager.getAllCourses();
 		model.addAttribute("courses", courses);
 		return JSON_VIEW;

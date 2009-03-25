@@ -4,7 +4,7 @@ import eduburner.entity.course.Course;
 import eduburner.entity.course.CoursePermission;
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
-import eduburner.enumerations.Permission;
+import eduburner.enumerations.PermissionType;
 import eduburner.service.BaseManager;
 
 public class CoursePermissionManager extends BaseManager implements ICoursePermisionManager{
@@ -23,7 +23,7 @@ public class CoursePermissionManager extends BaseManager implements ICoursePermi
 	}
 
 	@Override
-	public boolean hasPermission(User user, Course course, Permission permission) {
+	public boolean hasPermission(User user, Course course, PermissionType permission) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -16,8 +16,9 @@ import com.google.common.collect.Maps;
 import eduburner.json.JsonHelper;
 
 public class EduBurnerJsonView extends AbstractView {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(EduBurnerJsonView.class);
+
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(EduBurnerJsonView.class);
 
 	public EduBurnerJsonView() {
 		setContentType("application/json;charset=UTF-8");
@@ -28,14 +29,16 @@ public class EduBurnerJsonView extends AbstractView {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		LOGGER.debug("begin to render json");
-		
-		Map<String, Object> mapToRender = Maps.filterKeys(model, new Predicate<String>(){
-			@Override
-			public boolean apply(String input) {
-				return (!input.contains(BindingResult.MODEL_KEY_PREFIX));
-			}
-		});
-		
+
+		//TODO: remove binding result first, should find a way to transform binding result to errors in json format
+		Map<String, Object> mapToRender = Maps.filterKeys(model,
+				new Predicate<String>() {
+					@Override
+					public boolean apply(String input) {
+						return (!input.contains(BindingResult.MODEL_KEY_PREFIX));
+					}
+				});
+
 		String jsonValue = JsonHelper.toJson(mapToRender);
 		response.getWriter().write(jsonValue);
 	}

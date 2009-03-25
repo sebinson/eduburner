@@ -1,10 +1,14 @@
 package eduburner.service.user;
 
+import java.util.List;
+
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
 
 public interface IUserManager {
+	
+	public List<User> getAllUsers();
 
 	public User getUserById(long userId);
 
