@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.google.common.collect.Lists;
 
+import eduburner.entity.course.Course;
 import eduburner.entity.user.UserData;
 
 @Entity
@@ -29,8 +30,9 @@ public class Entry extends EntityObject {
 	private boolean hidden;
 	
 	private UserData user;
-	private List<Comment> comments = Lists.newArrayList();
+	private Course course;
 	private Service service;
+	private List<Comment> comments = Lists.newArrayList();
 
 	public String getEntryId() {
 		return entryId;
@@ -81,6 +83,16 @@ public class Entry extends EntityObject {
 			comments = new ArrayList<Comment>();
 		}
 		return comments;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="fk_course_id")
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public void setEntryId(String id) {
