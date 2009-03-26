@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
+import eduburner.enumerations.RoleType;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
@@ -41,12 +42,18 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		User user = new User();
 		user.setUsername("user");
 		user.setPassword("password");
-		user.addRole(roleManager.getRoleByName(Role.DEFAULT_ROLE_NAME));
+		Role roleByName = roleManager.getRoleByName(RoleType.User.toString());
+		user.addRole(roleByName);
 		try {
 			userManager.createUser(user);
+			roleManager.updateRole(roleByName);
 		} catch (Exception e) {
-			Assert.fail("创建用户失败");
-			e.printStackTrace();
+			Assert.fail("创建用户失败", e);
+		}
+		
+		Role role = roleManager.getRoleByName(RoleType.User.toString());
+		for(User usr : role.getUsers()){
+			logger.debug("users for role is: " + usr.getUsername());
 		}
 	}
 
@@ -122,7 +129,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(passwordEncoder.encodePassword(password, null));
-		Role role = roleManager.getRoleByName(Role.DEFAULT_ROLE_NAME);
+		Role role = roleManager.getRoleByName(RoleType.User.toString());
 		user.addRole(role);
 		userManager.updateUser(user);
 		return user;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
+import eduburner.enumerations.RoleType;
 import eduburner.persistence.EntityExistsException;
 import eduburner.web.controller.BaseController;
 
@@ -49,7 +50,7 @@ public class SignupController extends BaseController {
 
 		user.setEnabled(true);
 		// Set the default user role on this new user
-		user.addRole(roleManager.getRoleByName(Role.DEFAULT_ROLE_NAME));
+		user.addRole(roleManager.getRoleByName(RoleType.User.toString()));
 
 		try {
 			userManager.createUser(user);

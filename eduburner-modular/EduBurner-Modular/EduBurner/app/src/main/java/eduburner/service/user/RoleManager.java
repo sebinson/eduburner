@@ -35,4 +35,9 @@ public class RoleManager extends BaseManager implements IRoleManager {
 	public void createRole(Role role) throws EntityExistsException {
 		dao.save(role);
 	}
+
+	@Override
+	public void updateRole(Role role) {
+		dao.update(role);
+	}
 }

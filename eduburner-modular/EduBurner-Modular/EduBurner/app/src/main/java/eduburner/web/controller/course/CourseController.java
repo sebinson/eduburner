@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import eduburner.entity.course.Course;
+import eduburner.entity.user.User;
+import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
@@ -32,7 +34,7 @@ public class CourseController extends BaseController {
 	private static final String COURSE_FORM = "fragments/course-form";
 	private static final String COURSE_VIEW = "fragments/course-view";
 
-	@RequestMapping(value = "/courses.*", method=RequestMethod.GET)
+	@RequestMapping(value = "/courses.*", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Course> courses = courseManager.getAllCourses();
 		model.addAttribute("courses", courses);
@@ -61,13 +63,14 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/", method = RequestMethod.POST)
-	public String create(@ModelAttribute("course") Course course, BindingResult br, Model model) {
-		//TODO: check permission
+	public String create(@ModelAttribute("course") Course course,
+			BindingResult br, Model model) {
+		// TODO: check permission
 		new CourseValidator().validate(course, br);
-		if(br.hasErrors()){
+		if (br.hasErrors()) {
 			setReturnMsg(model, Message.ERROR);
 			return JSON_VIEW;
-		}else{
+		} else {
 			course.setCreator(getRemoteUserDataObj());
 			courseManager.createCourse(course);
 			setReturnMsg(model, Message.OK);
@@ -83,9 +86,20 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.DELETE)
-	public String destroy(@PathVariable long courseId, Model model) {
+	public String destroy(@PathVariable("courseId") long courseId, Model model) {
 		courseManager.removeCourse(courseId);
 		setReturnMsg(model, Message.OK);
+		return JSON_VIEW;
+	}
+
+	@RequestMapping(value = "/courses/{courseId}/users/{userId}", method = RequestMethod.POST)
+	public String addMember(@PathVariable("courseId") long courseId,
+			@PathVariable("userId") long userId, Model model) {
+		UserData user = userManager.getUserDataByUserId(userId);
+		Course course = courseManager.getCourseById(courseId);
+		course.addMemeber(user);
+		courseManager.updateCourse(course);
+		userManager.updateUserDate(user);
 		return JSON_VIEW;
 	}
 

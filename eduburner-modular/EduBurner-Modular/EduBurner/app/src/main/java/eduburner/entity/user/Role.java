@@ -25,8 +25,6 @@ import eduburner.entity.EntityObject;
 public class Role extends EntityObject implements GrantedAuthority {
 	private static final long serialVersionUID = -908605749081541265L;
 
-	public static final String DEFAULT_ROLE_NAME = "role_user";
-
 	private String name;
 
 	private String description;
@@ -74,6 +72,11 @@ public class Role extends EntityObject implements GrantedAuthority {
 
 	public void setPermissions(Set<PermissionBase> permissions) {
 		this.permissions = permissions;
+	}
+	
+	public void addUser(User user){
+		this.users.add(user);
+		user.getRoles().add(this);
 	}
 
 	@Transient
