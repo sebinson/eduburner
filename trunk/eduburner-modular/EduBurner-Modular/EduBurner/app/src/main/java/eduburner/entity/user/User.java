@@ -121,7 +121,7 @@ public class User extends EntityObject implements UserDetails {
 		return roles.toArray(new GrantedAuthority[0]);
 	}
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	public Set<Role> getRoles() {
 		return roles;
@@ -178,6 +178,7 @@ public class User extends EntityObject implements UserDetails {
 
 	public void addRole(Role role) {
 		this.roles.add(role);
+		role.users.add(this);
 	}
 
 	@Transient

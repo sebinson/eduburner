@@ -33,4 +33,6 @@ public interface IRoleManager {
 	 *            the role's rolename
 	 */
 	public void removeRole(String rolename);
+	
+	public void updateRole(Role role);
 }
