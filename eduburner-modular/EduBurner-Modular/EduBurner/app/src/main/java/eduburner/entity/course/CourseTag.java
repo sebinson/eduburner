@@ -50,7 +50,7 @@ public class CourseTag extends EntityObject {
 
 	@Override
 	public String toString() {
-		return JsonHelper.toJsonMap("name", name);
+		return "name: "+name;
 	}
 
 }

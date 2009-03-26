@@ -1,11 +1,12 @@
 package eduburner.json;
 
-import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  * json helper，可以用类似userToJson, courseToJson的方法
@@ -13,45 +14,39 @@ import com.google.gson.GsonBuilder;
  * @author zhangyf@gmail.com
  * 
  */
+
+@Component("jsonHelper")
 public class JsonHelper {
+	
+	@Autowired
+	@Qualifier("gson")
+	private Gson gson;
 
-	public static String toJson(Object obj) {
-
-		/**
-		 * By default, if you mark a field as transient, it will be excluded. If
-		 * you are not willing to mark the field as transient, you can use the @Expose
-		 * annotation instead. To use this annotation
-		 */
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation()
-				.registerTypeAdapter(BeanPropertyBindingResult.class, new BindingResultSerializer())
-				//.registerTypeAdapter(MockBindingResult.class, new BindingResultSerializer())
-				.create();
-
+	public String toJson(Object obj) {
 		return gson.toJson(obj);
 	}
 
-	public static <K, V> String toJsonMap(K k1, V v1) {
-		return new Gson().toJson(ImmutableMap.of(k1, v1));
+	public <K, V> String toJsonMap(K k1, V v1) {
+		return gson.toJson(ImmutableMap.of(k1, v1));
 	}
 
-	public static <K, V> String toJsonMap(K k1, V v1, K k2, V v2) {
-		return new Gson().toJson(ImmutableMap.of(k1, v1, k2, v2));
+	public <K, V> String toJsonMap(K k1, V v1, K k2, V v2) {
+		return gson.toJson(ImmutableMap.of(k1, v1, k2, v2));
 	}
 
-	public static <K, V> String toJsonMap(K k1, V v1, K k2, V v2, K k3, V v3) {
-		return new Gson().toJson(ImmutableMap.of(k1, v1, k2, v2, k3, v3));
+	public <K, V> String toJsonMap(K k1, V v1, K k2, V v2, K k3, V v3) {
+		return gson.toJson(ImmutableMap.of(k1, v1, k2, v2, k3, v3));
 	}
 
-	public static <E> String toJsonArray(E e1) {
-		return new Gson().toJson(ImmutableList.of(e1));
+	public <E> String toJsonArray(E e1) {
+		return gson.toJson(ImmutableList.of(e1));
 	}
 
-	public static <E> String toJsonArray(E e1, E e2) {
-		return new Gson().toJson(ImmutableList.of(e1, e2));
+	public <E> String toJsonArray(E e1, E e2) {
+		return gson.toJson(ImmutableList.of(e1, e2));
 	}
 
-	public static <E> String toJsonArray(E e1, E e2, E e3) {
-		return new Gson().toJson(ImmutableList.of(e1, e2, e3));
+	public <E> String toJsonArray(E e1, E e2, E e3) {
+		return gson.toJson(ImmutableList.of(e1, e2, e3));
 	}
 }

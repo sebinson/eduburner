@@ -51,4 +51,10 @@ public class UserController extends BaseController {
 			return JSON_VIEW;
 		}
 	}
+	
+	@RequestMapping(value="users", method=RequestMethod.PUT)
+	public String update(@ModelAttribute("user") User user, BindingResult br, Model model){
+		userManager.updateUser(user);
+		return JSON_VIEW;
+	}
 }

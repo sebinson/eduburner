@@ -13,7 +13,7 @@
         	<div>发新消息</div>
         </div>
         <div id="course-member">
-        	<div>发新消息</div>
+        	<div>添加成员</div>
         </div>
         <div id="course-resource">
         	<div>上传资源</div>
