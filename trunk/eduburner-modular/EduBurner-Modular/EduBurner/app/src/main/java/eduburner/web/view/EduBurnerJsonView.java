@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -38,8 +39,11 @@ public class EduBurnerJsonView extends AbstractView {
 						return (!input.contains(BindingResult.MODEL_KEY_PREFIX));
 					}
 				});
+		
+		ApplicationContext ctx = getApplicationContext();
+		JsonHelper jsonHelper = (JsonHelper)ctx.getBean("jsonHelper");
 
-		String jsonValue = JsonHelper.toJson(mapToRender);
+		String jsonValue = jsonHelper.toJson(mapToRender);
 		response.getWriter().write(jsonValue);
 	}
 

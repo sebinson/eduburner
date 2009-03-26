@@ -5,21 +5,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.testng.annotations.Test;
 
 import com.google.gson.annotations.Expose;
 
 import eduburner.enumerations.CourseStatus;
 import eduburner.json.JsonHelper;
+import eduburner.test.service.BaseServiceTestSupport;
 
-public class JsonWriterTest extends TestCase{
+public class JsonWriterTest extends BaseServiceTestSupport{
+	
+	@Autowired
+	@Qualifier("jsonHelper")
+	private JsonHelper jsonHelper;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(JsonWriterTest.class);
 
+	@Test
 	public void testJsonWriter() {
 		Car car = new Car();
 		car.setName("name");
@@ -44,7 +51,9 @@ public class JsonWriterTest extends TestCase{
 		model.put("cars", list);
 		model.put("wheel", wheel);
 
-		logger.debug("josn: " + JsonHelper.toJson(model));
+		logger.debug("josn: " + jsonHelper.toJson(model));
+		logger.debug("json1: " + jsonHelper.toJson(car));
+		logger.debug("json2: " + jsonHelper.toJson(wheel));
 	}
 
 	public class Car {

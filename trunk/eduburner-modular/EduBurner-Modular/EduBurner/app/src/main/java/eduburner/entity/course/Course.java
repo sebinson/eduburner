@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -179,7 +180,7 @@ public class Course extends EntityObject {
 
 	@Override
 	public String toString() {
-		return JsonHelper.toJsonMap("title", title, "description", description);
+		return "title: " +title + " description: " + description; 
 	}
 
 }
