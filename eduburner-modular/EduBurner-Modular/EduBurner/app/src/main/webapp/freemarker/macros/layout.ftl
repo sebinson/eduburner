@@ -10,12 +10,12 @@
       <link type="text/css" rel="stylesheet" href="/static/yui/reset-fonts-grids/reset-fonts-grids.css" />
       <link rel="stylesheet" type="text/css" href="/static/yui/button/assets/skins/sam/button.css">
       <link type="text/css" rel="stylesheet" href="/static/yui/calendar/assets/skins/sam/calendar.css"> 
+      <link rel="stylesheet" type="text/css" href="/static/yui/container/assets/skins/sam/container.css">
       <link type="text/css" rel="stylesheet" href="/static/yui/datatable/assets/skins/sam/datatable.css">
       <link rel="stylesheet" type="text/css" href="/static/yui/tabview/assets/skins/sam/tabview.css"> 
        
       <link type="text/css" rel="stylesheet" href="/static/styles/main.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/form.css" />
-      <link type="text/css" rel="stylesheet" href="/static/styles/tools.css" />
       <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
       
       <script type="text/javascript" src="/static/scripts/libs/jquery-1.3.2.min.js"></script>
@@ -31,7 +31,8 @@
       <script type="text/javascript" src="/static/yui/calendar/calendar-min.js"></script> 
       <script type="text/javascript" src="/static/yui/button/button-min.js"></script>
       <script type="text/javascript" src="/static/yui/tabview/tabview-min.js"></script> 
-      <script type="text/javascript" src="/static/yui/datatable/datatable-min.js"></script> 
+      <script type="text/javascript" src="/static/yui/datatable/datatable-min.js"></script>
+      <script type="text/javascript" src="/static/yui/container/container-min.js"></script> 
       
       <script type="text/javascript" src="/static/scripts/common.js"></script>
       

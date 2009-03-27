@@ -175,6 +175,7 @@ public class Course extends EntityObject {
 	}
 
 	public void addMemeber(UserData userData) {
+		
 		this.members.add(userData);
 		userData.getCourses().add(this);
 	}
