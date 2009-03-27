@@ -73,11 +73,6 @@ public class Role extends EntityObject implements GrantedAuthority {
 	public void setPermissions(Set<PermissionBase> permissions) {
 		this.permissions = permissions;
 	}
-	
-	public void addUser(User user){
-		this.users.add(user);
-		user.getRoles().add(this);
-	}
 
 	@Transient
 	public String getUsersString() {

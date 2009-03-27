@@ -88,6 +88,7 @@
 		Extends: Page,
 		
 		courseId: null,
+		tabView: null,
 		
 		buildState: function(){
 		    return [this.id, this.courseId].join('/');
@@ -101,6 +102,7 @@
 		},
 		
 		loadPage: function(){
+			var self = this;
 			$('ul.sidebar-block-list>li>a').removeClass('selected');
 			$('#course-link-' + this.courseId).addClass('selected');
 			$.waiting.start();
@@ -110,9 +112,30 @@
 				success: function(data){
 					$.waiting.stop();
 					$('#main-content').html(data);
-					var tabView = new YAHOO.widget.TabView('single-course');	
+					self.initPage();
 				}
 			});
+		},
+		
+		initPage: function(){
+			this.tabView = new YAHOO.widget.TabView('single-course');
+			
+			/*
+			var addMemberBtn = new YAHOO.widget.Button('add-member-btn');
+			var handleCancel = function() {
+			    this.cancel();
+			}
+			var handleSubmit = function() {
+			    this.submit();
+			}
+			var myButtons = [ { text:"确定", handler:handleSubmit, isDefault:true },
+			                  { text:"取消", handler:handleCancel } ];
+			var selUserDlg = new YAHOO.widget.Dialog('sel-user-dlg');
+			selUserDlg.cfg.queueProperty("buttons", myButtons);
+			selUserDlg.render();
+			selUserDlg.hide();
+			YAHOO.util.Event.addListener('add-member-btn', 'click', selUserDlg.show, selUserDlg, true);
+			*/
 		}
 	});
 	

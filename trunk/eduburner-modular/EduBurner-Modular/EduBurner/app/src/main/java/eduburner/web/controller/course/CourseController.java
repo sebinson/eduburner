@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eduburner.entity.course.Course;
-import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
 import eduburner.propertyeditor.CourseTagsPropertyEditor;
@@ -92,17 +92,24 @@ public class CourseController extends BaseController {
 		return JSON_VIEW;
 	}
 
-	@RequestMapping(value = "/courses/{courseId}/users/{userId}", method = RequestMethod.POST)
-	public String addMember(@PathVariable("courseId") long courseId,
-			@PathVariable("userId") long userId, Model model) {
-		UserData user = userManager.getUserDataByUserId(userId);
+	@RequestMapping(value = "/courses/{courseId}/users", method = RequestMethod.POST)
+	public String addMember(@PathVariable("courseId") long courseId, @RequestParam String username) {
+		UserData user = userManager.getUserDataByUsername(username);
 		Course course = courseManager.getCourseById(courseId);
 		course.addMemeber(user);
 		courseManager.updateCourse(course);
 		userManager.updateUserDate(user);
 		return JSON_VIEW;
 	}
-
+	
+	@RequestMapping(value = "/courses/{courseId}/users/{userId}", method = RequestMethod.DELETE)
+	public String removeMember(@PathVariable("courseId") long courseId,
+			@PathVariable("userId") long userId, Model model) {
+		UserData user = userManager.getUserDataByUserId(userId);
+		Course course = courseManager.getCourseById(courseId);
+		return JSON_VIEW;
+	}
+	
 	@RequestMapping(value = "/courses/{courseId}/entries", method = RequestMethod.POST)
 	public void createCourseEntry(@PathVariable("courseId") long courseId,
 			Model model) {

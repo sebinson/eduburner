@@ -178,7 +178,7 @@ public class User extends EntityObject implements UserDetails {
 
 	public void addRole(Role role) {
 		this.roles.add(role);
-		role.users.add(this);
+		role.getUsers().add(this);
 	}
 
 	@Transient
