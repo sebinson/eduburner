@@ -12,25 +12,27 @@
         <div id="course-message">
         	<div>发新消息</div>
         </div>
+        
         <div id="course-member">
-        	<div>添加成员</div>
-        	<div id="add-members-section" style="display: none;">
-	            <form class="simple-form" action="" method="post" name="addMembersForm">
+        	<div style="margin-top:5px;"><span style="float:left;margin-right:3px;"><img src="/static/images/silk/user_add.png"/></span><span class="link" id="add-member-link">添加成员</span></div>
+        	<div id="add-members-section" class="hidden" style="margin-top:10px;">
+	            <form class="simple-form" method="post" name="addMembersForm" id="add-members-form">
 	                <fieldset>
 	                    <label for="usersToAdd">
 						    <span class="legend">添加成员</span>
 							<input type="text" tabindex="2" size="60" id="users-to-add" name="usersToAdd"/>
 						</label>                    
-						<a id="user-picker" class="icon search-icon" href="#">User Picker</a>
 	                    <fieldset class="submit">
 	                        <input type="submit" value="添 加"/>                        
-	                        <input type="submit" value="取 消" id="cancel-button"/>                    
 	                    </fieldset>
 	                    <p class="desc">输入用户名，以豆号分隔</p>
 	                </fieldset>
 	            </form>
         	</div>
+        	<div id="course-member-list">
+        	</div>
         </div>
+        
         <div id="course-resource">
         	<div>上传资源</div>
         </div>

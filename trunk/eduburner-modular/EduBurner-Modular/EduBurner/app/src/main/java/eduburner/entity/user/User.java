@@ -21,6 +21,7 @@ import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
 import com.google.common.collect.Sets;
+import com.google.gson.annotations.Expose;
 
 import eduburner.entity.EntityObject;
 import eduburner.enumerations.RoleType;
@@ -31,27 +32,19 @@ import eduburner.enumerations.RoleType;
 public class User extends EntityObject implements UserDetails {
 
 	private static final long serialVersionUID = 3619044126921173168L;
-
+	@Expose
 	private String username;
-
 	private String password;
-
 	private String confirmPassword;
-
+	@Expose
 	private String fullname;
-
+	@Expose
 	private String email;
-
 	private Integer version;
-
 	private Set<Role> roles = Sets.newHashSet();
-
 	private boolean enabled = true;
-
 	private boolean accountExpired = false;
-
 	private boolean accountLocked = false;
-
 	private boolean credentialsExpired = false;
 
 	@NotNull(message = "用户名不能为空！")

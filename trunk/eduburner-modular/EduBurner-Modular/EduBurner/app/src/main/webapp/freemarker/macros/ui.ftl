@@ -37,8 +37,9 @@
 	    <h4 class="sidebar-block-header">我的课程</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-		    <li><a id="course-link-1" href="/courses/1" i="1"><img src="/static/images/silk/book_open.png"/><span>历史</span></a></li>
-		    <li><a id="course-link-2" href="/courses/2" i="2"><img src="/static/images/silk/book_open.png"/><span>语文</span></a></li>
+	      	<#list user.courses as c>
+	      		<li><a id="course-link-${c.id}" href="/courses/${c.id}" i="${c.id}"><img src="/static/images/silk/book_open.png"/><span>${c.title}</span></a></li>
+	      	</#list>
 	      </ul>
 	    </div>
 	  </div>

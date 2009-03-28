@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.google.common.collect.Lists;
+import com.google.gson.annotations.Expose;
 
 import eduburner.entity.Comment;
 import eduburner.entity.EntityObject;
@@ -28,12 +29,13 @@ import eduburner.entity.course.Course;
 public class UserData extends EntityObject {
 	private static final long serialVersionUID = -8000191009583356867L;
 
+	@Expose
 	private String username;
-
+	@Expose
 	private String fullname;
-
+	@Expose
 	private String email;
-
+	@Expose
 	private long userId;
 
 	// 加上个人头像
