@@ -2,32 +2,89 @@
     <div id="logo">
     	<a href="/">EduBurner</a>
     </div>
-    <div id="linkbar">
-        <#if principal?has_content>
-             ${principal.username?default("")}
-             &nbsp;|&nbsp; <a href="/account/settings">设置</a>
-             &nbsp;|&nbsp; <a href="/account/logout">退出</a>
-        <#else>
-        	<a id="signup-link" href="/account/login">登录</a>
-            &nbsp;|&nbsp; <a id="signup-link" href="/account/signup">注册</a>
-        </#if>
-    </div>
+    <@ui.navMenuBar />
+    <@ui.menubar />
     <div class="clear"></div>
     <div class="bottom"><span class="corner-bottom"><span class="corner-left"></span></span></div>
+</#macro>
+
+<#macro navMenuBar>
+	<div class="top-nav-menu-bar">
+		<ul class="menu-list">
+			<#if principal?has_content>
+				<li class="menu" style="margin-left:35px">
+					<div class="menu-title">
+						<a href="/">首页</a>
+					</div>
+				</li>
+				<#if principal.administrator>
+				<li class="menu last">
+					<div class="menu-title">
+						<a href="/admin">管理</a>
+					</div>
+				</li>
+				</#if>
+				<li class="menu">
+					<div class="menu-title">
+						<a href="#">消息</a>
+					</div>
+				</li>
+			</#if>
+		</ul>
+	</div>
+</#macro>
+
+<#macro menubar>
+	<div class="top-menu-bar">
+		<ul class="menu-list">
+			<#if principal?has_content>
+				<li class="menu">
+					<div class="menu-title last">
+						<a href="/account/logout">退出</a>
+					</div>
+				</li>
+				<#if principal.administrator>
+				<li class="menu last">
+					<div class="menu-title">
+						<a href="/account/setting">设置</a>
+					</div>
+				</li>
+				</#if>
+				<li class="menu">
+					<div class="menu-title">
+						<a href="#">${principal.username?default("")}</a>
+					</div>
+				</li>
+			<#else>
+				<li class="menu last">
+					<div class="menu-title">
+						<a href="/account/signup">注册</a>
+					</div>
+				</li>
+				<li class="menu">
+					<div class="menu-title">
+						<a href="/account/login">登录</a>
+					</div>
+				</li>
+			</#if>
+		</ul>
+	</div>
 </#macro>
 
 <#macro footer>
     &copy; EduBurner
 </#macro>
 
-
-<#macro navbar>
-  <#if principal?has_content>
-	<@ui.courseList />
-	<#if principal.administrator>
-	<@ui.adminMenu />
+<#macro userNavBar>
+	<#if principal?has_content>
+		<@ui.courseList />
 	</#if>
-  </#if>
+</#macro>
+
+<#macro adminNavBar>
+	<#if principal?has_content && principal.administrator>
+		<@ui.adminMenu />
+	</#if>
 </#macro>
 
 <#macro courseList>
@@ -59,7 +116,6 @@
 	    </div>
 	  </div>
 	</div>
-	
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">用户管理</h4>
@@ -76,7 +132,6 @@
 	    </div>
 	  </div>
 	</div>
-	
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
 	    <h4 class="sidebar-block-header">系统管理</h4>

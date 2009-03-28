@@ -1,4 +1,4 @@
-<@layout.masterPage title="注册" >
+<@layout.masterPage title="注册" pageType="anonyPage">
     <form id="signup-form" method="POST" action="<@spring.url '/account/signup' />">
     	<@spring.bind "user.*"/>
         <div class="eb-form-container" style="margin-top: 20px; margin-left: 60px; margin-bottom: 30px;">
