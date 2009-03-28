@@ -1,9 +1,9 @@
-a:focus, .unselectable { -moz-outline: 0; -moz-user-select: none; -khtml-user-select: none; user-select: none; }
+a, a:focus, .unselectable { color: #003366; -moz-outline: 0; -moz-user-select: none; -khtml-user-select: none; user-select: none; }
+.link { text-decoration: underline; cursor: pointer; }
 p { line-height:140%; margin:0pt; padding:1em 0 0 0; }
 label { color:#666666; font-weight:bold; }
 h1, h2, h3, h4 { color:#333333; font-weight: 600; font-size: 14px; }
 textarea { resize: none;}
-.link { text-decoration: underline; cursor: pointer; }
 .clear { clear:both; }
 .clearer { clear:both; font-size:1px; height:1px; line-height:1px; margin-bottom:-1px; overflow:hidden; }
 .hidden { display:none; }

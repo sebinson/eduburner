@@ -118,8 +118,36 @@
 		},
 		
 		initPage: function(){
+			var self = this;
 			this.tabView = new YAHOO.widget.TabView('single-course');
 			
+			$('#add-member-link').bind('click', function(e){
+				if($('#add-members-section').hasClass('hidden')){
+					$('#add-members-section').removeClass('hidden');
+					$(this).html('取消');
+				}else{
+					$('#add-members-section').addClass('hidden');
+					$(this).html('添加成员');
+				}
+			});
+			
+			$('#add-members-form').bind('submit', function(e){
+				e.preventDefault();
+				//TODO: form validation
+				var usernames = $('#users-to-add').val();
+				$.ajax({
+					url: '/courses/' + self.courseId + '/users',
+			        type: 'POST',
+					data: {username: usernames},
+					dataType: 'json', 
+					success: function(){
+						
+					},
+					error: function(){
+						
+					}
+				});
+			});
 			/*
 			var addMemberBtn = new YAHOO.widget.Button('add-member-btn');
 			var handleCancel = function() {

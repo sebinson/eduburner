@@ -93,15 +93,18 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/users", method = RequestMethod.POST)
-	public String addMember(@PathVariable("courseId") long courseId, @RequestParam String username) {
+	public String addMember(@PathVariable("courseId") long courseId,
+			@RequestParam("username") String username, Model model) {
 		UserData user = userManager.getUserDataByUsername(username);
 		Course course = courseManager.getCourseById(courseId);
 		course.addMemeber(user);
 		courseManager.updateCourse(course);
 		userManager.updateUserDate(user);
+		List<UserData> members = course.getMembers();
+		model.addAttribute("members", members);
 		return JSON_VIEW;
 	}
-	
+
 	@RequestMapping(value = "/courses/{courseId}/users/{userId}", method = RequestMethod.DELETE)
 	public String removeMember(@PathVariable("courseId") long courseId,
 			@PathVariable("userId") long userId, Model model) {
@@ -109,11 +112,11 @@ public class CourseController extends BaseController {
 		Course course = courseManager.getCourseById(courseId);
 		return JSON_VIEW;
 	}
-	
+
 	@RequestMapping(value = "/courses/{courseId}/entries", method = RequestMethod.POST)
 	public void createCourseEntry(@PathVariable("courseId") long courseId,
 			Model model) {
-
+		
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/entries")

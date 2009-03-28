@@ -148,15 +148,26 @@ window.EventList = {
 	};
 	
 	$.waiting = {
-		start: function(showOverlay){
+		start: function(msg){
+			/*
 			if(showOverlay === true){
 				$("#overlay").show();
 			}
 			$("#loading").show();
+			*/
+			$("#top-loading").show();
+			if(msg){
+				$("#top-loading").html(msg);
+			}else{
+				$("#top-loading").html("正在加载...");
+			}
 		},
 		stop: function(){
+			/*
 			$("#overlay").hide();
 			$("#loading").hide();
+			*/
+			$("#top-loading").hide();
 		}
 	}
 })(jQuery)

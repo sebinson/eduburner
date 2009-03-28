@@ -84,6 +84,9 @@
 			<img src="/static/images/indicator_blue.gif" width="32" height="32" style="float:left;vertical-align:top;"/>
 		</div>
 	  </div>
+	   <div id="top-loading" style="display:none">
+		    加载中...
+	   </div>
   </body>
 </html>
 
