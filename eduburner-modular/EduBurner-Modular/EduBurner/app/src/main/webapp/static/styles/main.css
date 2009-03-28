@@ -21,6 +21,65 @@ textarea { resize: none;}
 #hist-iframe { position:absolute; top:0; left:0; width:1px; height:1px; visibility:hidden; }
 #nav { margin-left: 5px; }
 .eb-footer { border-top:2px solid #3B5998; clear:both; margin:auto; margin-top: 20px; padding:5px 0; text-align:center; color:#777777; }
-#logo { float: left; width: 258px; font-size: 20px; font-weight: bolder; margin: 5px 0 0 10px; color: #FFFFFF; }
+#logo { float: left; font-size: 18px; font-weight: bold; margin: 5px 0 0 10px; color: #FFFFFF; }
 	#logo a { text-decoration: none; }
-#linkbar { float: right; padding: .5em 1em; color: #FFFFFF; font-size:12px; }
+
+.top-menu-bar{
+	float: right;
+	font-size: 13px;
+}
+
+.top-menu-bar ul.menu-list{}
+
+.top-menu-bar ul.menu-list li{
+	float:right;
+	display: inline;
+}
+
+.top-menu-bar ul.menu-list li.menu{
+	margin:0 3px 0 0;
+}
+
+.top-menu-bar ul.menu-list li.last{}
+
+.top-menu-bar ul.menu-list li .menu-title{}
+
+.top-menu-bar .menu-title a, .top-menu-bar .menu-title a:hover{
+	text-decoration: none;
+	padding:2px 2px 4px 5px;
+	display:block;
+}
+
+.top-menu-bar .menu-title a:hover{
+	background: #5C75AA;
+}
+
+.top-nav-menu-bar{
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.top-nav-menu-bar ul.menu-list{}
+
+.top-nav-menu-bar ul.menu-list li{
+	float:left;
+	display: inline;
+}
+
+.top-nav-menu-bar ul.menu-list li.menu{
+	margin:5px 3px 0 0;
+}
+
+.top-nav-menu-bar ul.menu-list li.last{}
+
+.top-nav-menu-bar ul.menu-list li .menu-title{}
+
+.top-nav-menu-bar .menu-title a, .top-nav-menu-bar .menu-title a:hover{
+	text-decoration: none;
+	padding:3px 8px 4px 8px;
+	display:block;
+}
+
+.top-nav-menu-bar .menu-title a:hover{
+	background: #5C75AA;
+}

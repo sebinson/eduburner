@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -26,14 +25,13 @@ import eduburner.entity.EntityObject;
 import eduburner.entity.Entry;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.CourseStatus;
-import eduburner.json.JsonHelper;
 
 /**
  * 课程类，一门课程有多个学生，有讨论区和共享资源
  * 
  * 能mashup的就mashup
  * 
- * 日历借助google calendar 每个人的学习笔记借助google notebook? 文章分享借助google reader
+ * 日历借助google calendar 文章分享借助google reader
  * 
  * 每位同学需要有一个空间，列出其所在的课程，学生可以写微博客 是否需要建立好友关系？
  * 
@@ -175,7 +173,6 @@ public class Course extends EntityObject {
 	}
 
 	public void addMemeber(UserData userData) {
-		
 		this.members.add(userData);
 		userData.getCourses().add(this);
 	}

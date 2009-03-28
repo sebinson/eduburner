@@ -81,7 +81,7 @@
 		
 		bindEvents: function(){
 			
-		},
+		}
 	});
 	
 	var CoursePage = new Class({
@@ -136,7 +136,7 @@
 				//TODO: form validation
 				var usernames = $('#users-to-add').val();
 				$.ajax({
-					url: '/courses/' + self.courseId + '/users',
+					url: '/courses/' + self.courseId + '/users.json',
 			        type: 'POST',
 					data: {username: usernames},
 					dataType: 'json', 

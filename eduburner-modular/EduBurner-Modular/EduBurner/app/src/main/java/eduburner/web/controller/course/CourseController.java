@@ -100,8 +100,7 @@ public class CourseController extends BaseController {
 		course.addMemeber(user);
 		courseManager.updateCourse(course);
 		userManager.updateUserDate(user);
-		List<UserData> members = course.getMembers();
-		model.addAttribute("members", members);
+		model.addAttribute("course", course);
 		return JSON_VIEW;
 	}
 

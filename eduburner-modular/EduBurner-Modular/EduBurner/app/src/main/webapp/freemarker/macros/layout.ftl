@@ -1,4 +1,4 @@
-<#macro masterPage title="" css=[]>
+<#macro masterPage title="" css=[] pageType="userPage">
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -35,6 +35,8 @@
       <script type="text/javascript" src="/static/yui/container/container-min.js"></script> 
       
       <script type="text/javascript" src="/static/scripts/common.js"></script>
+      <script type="text/javascript" src="/static/scripts/history.js"></script>
+	  <script type="text/javascript" src="/static/scripts/page.js"></script>
       
       <script type="text/javascript"> 
 	      YAHOO.util.Event.onDOMReady(function(){
@@ -58,11 +60,14 @@
          	<@ui.header />
          </div>
          <#-- end of site header -->
-         
       	 <div id="bd" class="eb-body">
       	     <div id="nav" class="yui-b">
-      	        <#-- nav bar -->
-      	     	<@ui.navbar />
+      	        <#if pageType == "userPage">
+      	        	<@ui.userNavBar />
+      	        <#elseif pageType == "adminPage">
+      	            <@ui.adminNavBar />
+      	        <#elseif pageType == "anonyPage">
+      	        </#if>
       	     </div>
       	     <div id="yui-main">
       	         <div id="main" class="yui-b">
