@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.model;
 
 import static eduburner.crawler.enumerations.FetchStatusCodes.S_BLOCKED_BY_CUSTOM_PROCESSOR;
 import static eduburner.crawler.enumerations.FetchStatusCodes.S_BLOCKED_BY_USER;

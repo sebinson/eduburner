@@ -3,10 +3,12 @@ package eduburner.crawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FetchThread implements Runnable{
+import eduburner.crawler.model.CrawlUri;
+
+public class ToeThread implements Runnable{
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(FetchThread.class);
+			.getLogger(ToeThread.class);
 
 	private static final String STEP_NASCENT = "NASCENT";
 	private static final String STEP_ABOUT_TO_GET_URI = "ABOUT_TO_GET_URI";
