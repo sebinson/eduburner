@@ -11,9 +11,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <artifactId>EduBurner-Fetcher</artifactId>
+    <artifactId>EduBurner-Crwler</artifactId>
     <packaging>jar</packaging>
-    <name>EduBurner Fetcher Module</name>
+    <name>EduBurner Crawler Module</name>
     
     <build>
         <testResources>
