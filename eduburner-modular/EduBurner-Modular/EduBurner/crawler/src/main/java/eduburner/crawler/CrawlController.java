@@ -2,7 +2,7 @@ package eduburner.crawler;
 
 import javax.annotation.PostConstruct;
 
-public class FetchController implements ICrawlController {
+public class CrawlController implements ICrawlController {
 	
 	private ICrawlFrontier frontier;
 	
