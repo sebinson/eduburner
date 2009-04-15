@@ -1,4 +1,4 @@
-package eduburner.crawler.batch;
+package eduburner.crawler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class Crawler implements ICrawler{
 	private JobParameters jobParameters = new JobParameters();
 	
 	@Override
-	public void launchJob(){
+	public void launchFetchJob(){
 		try {
 			launcher.run(job, jobParameters);
 		} catch (JobExecutionAlreadyRunningException e) {

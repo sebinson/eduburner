@@ -21,39 +21,6 @@ import eduburner.crawler.model.CrawlUri;
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
-	private ICrawlController crawlController;
-
-	/**
-	 * lock to allow holding all worker ToeThreads from taking URIs already on
-	 * the outbound queue; they acquire read permission before take()ing;
-	 * frontier can acquire write permission to hold threads
-	 */
-	protected ReentrantReadWriteLock outboundLock = new ReentrantReadWriteLock(
-			true);
-
-	/**
-	 * All known queues.
-	 */
-	protected Map<String, WorkQueue> allQueues = null;
-	// of classKey -> ClassKeyQueue
-
-	/**
-	 * All per-class queues whose first item may be handed out. Linked-list of
-	 * keys for the queues.
-	 */
-	protected BlockingQueue<String> readyClassQueues;
-
-	/** all per-class queues from whom a URI is outstanding */
-	protected Bag inProcessQueues = BagUtils.synchronizedBag(new HashBag()); // of
-																				// ClassKeyQueue
-
-	transient protected WorkQueue longestActiveQueue = null;
-
-	protected int highestPrecedenceWaiting = Integer.MAX_VALUE;
-
-	public void loadUris(List<CrawlUri> uris) {
-
-	}
 
 	@Override
 	public long failedFetchCount() {
@@ -64,13 +31,19 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	@Override
 	public void finished(CrawlUri uri) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void loadUris(List<CrawlUri> uris) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -88,7 +61,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	@Override
 	public void schedule(CrawlUri uri) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -96,5 +69,5 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 }
