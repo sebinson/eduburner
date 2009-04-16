@@ -10,10 +10,12 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-public class Crawler implements ICrawler{
+@Component("crawlController")
+public class CrawlController implements ICrawlController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(Crawler.class);
+	private static final Logger logger = LoggerFactory.getLogger(CrawlController.class);
 
 	@Autowired
 	@Qualifier("launcher")

@@ -1,5 +1,7 @@
 package eduburner.crawler;
 
-public interface ICrawler {
+public interface ICrawlController {
+	
 	public void launchFetchJob();
+	
 }
