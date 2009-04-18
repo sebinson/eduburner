@@ -19,12 +19,11 @@ package org.springmodules.lucene.index.factory.concurrent;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.springmodules.lucene.index.LuceneIndexAccessException;
 import org.springmodules.lucene.index.factory.LuceneIndexReader;
 import org.springmodules.lucene.index.factory.LuceneIndexWriter;
-
-import edu.emory.mathcs.backport.java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Concurrent {@link org.springmodules.lucene.index.factory.IndexFactory}

@@ -22,6 +22,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.springmodules.lucene.search.LuceneSearchException;
 import org.springmodules.lucene.search.core.HitExtractor;
 import org.springmodules.lucene.search.core.QueryCreator;
 import org.springmodules.lucene.search.factory.SearcherFactory;

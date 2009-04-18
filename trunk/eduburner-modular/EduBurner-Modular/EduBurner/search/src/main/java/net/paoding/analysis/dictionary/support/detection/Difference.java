@@ -15,7 +15,6 @@
  */
 package net.paoding.analysis.dictionary.support.detection;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 

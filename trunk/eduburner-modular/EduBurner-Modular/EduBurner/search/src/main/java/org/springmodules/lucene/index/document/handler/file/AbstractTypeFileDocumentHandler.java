@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.springmodules.lucene.index.document.handler.file.AbstractInputStreamDocumentHandler;
 
 /**
  * @author Thierry Templier

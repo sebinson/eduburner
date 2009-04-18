@@ -17,7 +17,6 @@
 package org.springmodules.lucene.search.core;
 
 import java.io.IOException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
