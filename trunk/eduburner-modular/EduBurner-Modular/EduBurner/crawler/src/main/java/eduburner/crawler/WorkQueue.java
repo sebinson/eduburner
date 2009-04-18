@@ -24,19 +24,18 @@ public class WorkQueue implements Serializable {
 	private String classKey;
 	private long wakeTime;
 
-	private Queue<CrawlUri> uriQueue;
+	private Queue<CrawlUri> uriQueue = new LinkedBlockingQueue<CrawlUri>();
 
 	public WorkQueue(String classKey) {
 		this.classKey = classKey;
-		this.uriQueue = new LinkedBlockingQueue<CrawlUri>();
 		this.wakeTime = System.currentTimeMillis();
 	}
 
 	public void addUri(CrawlUri uri) {
-		if(this.classKey.equals(uri.getClassKey())){
+		if (this.classKey.equals(uri.getClassKey())) {
 			logger.debug("add uri to work queue");
 			uriQueue.add(uri);
-		}else{
+		} else {
 			logger.debug("uri do not belong to this queue.");
 		}
 	}

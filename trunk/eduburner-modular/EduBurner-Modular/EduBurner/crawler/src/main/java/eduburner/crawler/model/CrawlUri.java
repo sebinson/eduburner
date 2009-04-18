@@ -24,4 +24,9 @@ public class CrawlUri {
 	public String getClassKey(){
 		return DigestUtils.md5Hex(UrlUtils.getHostFromUrl(this.uri));
 	}
+
+	public String getUri() {
+		return uri;
+	}
+	
 }
