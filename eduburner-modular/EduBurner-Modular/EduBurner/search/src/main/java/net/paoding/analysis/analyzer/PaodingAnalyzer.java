@@ -19,7 +19,6 @@ import java.util.Properties;
 
 import net.paoding.analysis.Constants;
 import net.paoding.analysis.analyzer.estimate.TryPaodingAnalyzer;
-import net.paoding.analysis.knife.Knife;
 import net.paoding.analysis.knife.Paoding;
 import net.paoding.analysis.knife.PaodingMaker;
 
@@ -38,7 +37,7 @@ import net.paoding.analysis.knife.PaodingMaker;
  * 
  * @see PaodingAnalyzerBean
  * 
- * @since 1.0
+ * modified by zhangyf@gmail.com
  * 
  */
 public class PaodingAnalyzer extends PaodingAnalyzerBean {
@@ -97,57 +96,4 @@ public class PaodingAnalyzer extends PaodingAnalyzerBean {
 		TryPaodingAnalyzer.main(args);
 	}
 
-	// --------------------------------------------------
-
-	/**
-	 * @param knife
-	 * @param default_mode
-	 * @deprecated
-	 */
-	public PaodingAnalyzer(Knife knife, int mode) {
-		super(knife, mode);
-	}
-
-	/**
-	 * 等价于maxMode()
-	 * 
-	 * @param knife
-	 * @return
-	 * @deprecated
-	 */
-	public static PaodingAnalyzer queryMode(Knife knife) {
-		return maxMode(knife);
-	}
-
-	/**
-	 * 
-	 * @param knife
-	 * @return
-	 * @deprecated
-	 */
-	public static PaodingAnalyzer defaultMode(Knife knife) {
-		return new PaodingAnalyzer(knife, MOST_WORDS_MODE);
-	}
-
-	/**
-	 * 
-	 * @param knife
-	 * @return
-	 * @deprecated
-	 */
-	public static PaodingAnalyzer maxMode(Knife knife) {
-		return new PaodingAnalyzer(knife, MAX_WORD_LENGTH_MODE);
-	}
-
-	/**
-	 * 等价于defaultMode()
-	 * 
-	 * @param knife
-	 * @return
-	 * @deprecated
-	 * 
-	 */
-	public static PaodingAnalyzer writerMode(Knife knife) {
-		return defaultMode(knife);
-	}
 }

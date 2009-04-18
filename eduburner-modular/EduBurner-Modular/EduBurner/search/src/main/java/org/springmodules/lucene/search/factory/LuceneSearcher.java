@@ -33,37 +33,64 @@ import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.search.Weight;
 
 /**
- * Interface representing the contract of the Lucene Searcher class. It
- * allows unit tests with this resource and improves management of this
- * kind of resources.
+ * Interface representing the contract of the Lucene Searcher class. It allows
+ * unit tests with this resource and improves management of this kind of
+ * resources.
  * 
- * All the method of the Searcher class are present in this interface
- * and, so allow to make all the operations of this class. 
- *  
+ * All the method of the Searcher class are present in this interface and, so
+ * allow to make all the operations of this class.
+ * 
  * @author Thierry Templier
  * @see Searcher
  */
 public interface LuceneSearcher {
-	void close() throws IOException;
-	Document doc(int i) throws IOException;
-	int docFreq(Term term) throws IOException;
-	int[] docFreqs(Term[] terms) throws IOException;
-	Explanation explain(Query query, int doc) throws IOException;
-	Explanation explain(Weight weight, int doc) throws IOException;
-	Similarity getSimilarity();
-	int maxDoc() throws IOException;
-	Query rewrite(Query query) throws IOException;
-	LuceneHits search(Query query) throws IOException;
-	LuceneHits search(Query query, Filter filter) throws IOException;
-	void search(Query query, Filter filter, HitCollector results) throws IOException;
-	TopDocs search(Query query, Filter filter, int n) throws IOException;
-	TopFieldDocs search(Query query, Filter filter, int n, Sort sort) throws IOException;
-	LuceneHits search(Query query, Filter filter, Sort sort) throws IOException;
-	void search(Query query, HitCollector results) throws IOException;
-	LuceneHits search(Query query, Sort sort) throws IOException;
-	void search(Weight weight, Filter filter, HitCollector results) throws IOException;
-	TopDocs search(Weight weight, Filter filter, int n) throws IOException;
-	TopFieldDocs search(Weight weight, Filter filter, int n, Sort sort) throws IOException;
-	void setSimilarity(Similarity similarity);
-	IndexReader getIndexReader();
+	public void close() throws IOException;
+
+	public Document doc(int i) throws IOException;
+
+	public int docFreq(Term term) throws IOException;
+
+	public int[] docFreqs(Term[] terms) throws IOException;
+
+	public Explanation explain(Query query, int doc) throws IOException;
+
+	public Explanation explain(Weight weight, int doc) throws IOException;
+
+	public Similarity getSimilarity();
+
+	public int maxDoc() throws IOException;
+
+	public Query rewrite(Query query) throws IOException;
+
+	public LuceneHits search(Query query) throws IOException;
+
+	public LuceneHits search(Query query, Filter filter) throws IOException;
+
+	public void search(Query query, Filter filter, HitCollector results)
+			throws IOException;
+
+	public TopDocs search(Query query, Filter filter, int n) throws IOException;
+
+	public TopFieldDocs search(Query query, Filter filter, int n, Sort sort)
+			throws IOException;
+
+	public LuceneHits search(Query query, Filter filter, Sort sort)
+			throws IOException;
+
+	public void search(Query query, HitCollector results) throws IOException;
+
+	public LuceneHits search(Query query, Sort sort) throws IOException;
+
+	public void search(Weight weight, Filter filter, HitCollector results)
+			throws IOException;
+
+	public TopDocs search(Weight weight, Filter filter, int n)
+			throws IOException;
+
+	public TopFieldDocs search(Weight weight, Filter filter, int n, Sort sort)
+			throws IOException;
+
+	public void setSimilarity(Similarity similarity);
+
+	public IndexReader getIndexReader();
 }
