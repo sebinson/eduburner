@@ -16,10 +16,6 @@
 
 package org.springmodules.lucene.search;
 
-import java.io.IOException;
-
-import org.apache.lucene.queryParser.ParseException;
-import org.springframework.core.NestedRuntimeException;
 import org.springmodules.lucene.LuceneException;
 
 /**

@@ -16,13 +16,6 @@
 
 package org.springmodules.lucene.search.factory;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.store.Directory;
 import org.springmodules.lucene.index.factory.IndexFactory;
 

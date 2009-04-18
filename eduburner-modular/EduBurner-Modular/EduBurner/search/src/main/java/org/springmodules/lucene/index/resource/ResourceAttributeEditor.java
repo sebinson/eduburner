@@ -18,6 +18,7 @@ package org.springmodules.lucene.index.resource;
 
 import java.beans.PropertyEditorSupport;
 
+import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.util.StringUtils;
 
 /**
