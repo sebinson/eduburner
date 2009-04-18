@@ -28,6 +28,8 @@ import org.springmodules.lucene.LuceneException;
  */
 public class DocumentHandlerException extends LuceneException {
 
+	private static final long serialVersionUID = -3998319978105067771L;
+
 	/**
 	 * Constructor for LuceneIndexingException.
 	 * @param msg message

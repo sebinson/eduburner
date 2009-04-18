@@ -33,6 +33,8 @@ import org.springframework.core.NestedRuntimeException;
  */
 public abstract class LuceneException extends NestedRuntimeException {
 
+	private static final long serialVersionUID = 134834189015662320L;
+
 	/**
 	 * Constructor for LuceneException.
 	 * @param msg message

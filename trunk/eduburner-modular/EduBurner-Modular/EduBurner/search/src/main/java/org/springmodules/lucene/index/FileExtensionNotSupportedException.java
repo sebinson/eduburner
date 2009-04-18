@@ -27,6 +27,8 @@ import org.springmodules.lucene.LuceneException;
  */
 public class FileExtensionNotSupportedException extends LuceneException {
 
+	private static final long serialVersionUID = 2573099244255944999L;
+
 	/**
 	 * Constructor for FileExtensionNotSupportedException.
 	 * @param msg message
