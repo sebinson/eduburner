@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import org.springframework.security.GrantedAuthority;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -83,7 +83,8 @@ public class Role extends EntityObject implements GrantedAuthority {
 						return from.getUsername();
 					}
 				});
-		return Join.join(",", iter.iterator());
+
+		return Joiner.on(",").join(iter);
 	}
 
 	@Override

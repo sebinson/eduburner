@@ -4,15 +4,11 @@ import java.io.Serializable;
 import java.lang.ref.SoftReference;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
-
-import org.springframework.stereotype.Component;
 
 import eduburner.crawler.model.CrawlUri;
 
@@ -23,18 +19,16 @@ import eduburner.crawler.model.CrawlUri;
  * Round-robins between all queues.
  */
 
-@Component("crawlFrontier")
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
 
 	private Map<String, WorkQueue> workQueueMap = new ConcurrentHashMap<String, WorkQueue>();
-	private BlockingQueue<String> readyQueue;
-	private Queue<String> inProgressQueue = new ConcurrentLinkedQueue<String>();
+	private BlockingQueue<WorkQueue> readyQueue;
 	private DelayQueue<DelayedWorkQueue> snoozeQueue;
-	
-	protected void startManagerThread(){
-		
+
+	protected void startManagerThread() {
+
 	}
 
 	@Override
@@ -85,14 +79,41 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		return 0;
 	}
 
-	protected WorkQueue getQueueFor(String classKey) {
+	protected WorkQueue getQueueForClassKey(String classKey) {
 		return null;
 	}
+	
+	/**
+     * Wake any queues sitting in the snoozed queue whose time has come.
+     */
+    protected void wakeQueues() {
+        DelayedWorkQueue waked; 
+        while((waked = snoozeQueue.poll())!=null) {
+            WorkQueue queue = waked.getWorkQueue();
+            queue.setWakeTime(0L);
+            readyQueue.add(queue);
+        }
+    }
 
-	class DelayedWorkQueue implements Delayed, Serializable {
+	private static class ManagerThread implements Runnable {
+
+		@Override
+		public void run() {
+			
+		}
+
+	}
+
+	private class DelayedWorkQueue implements Delayed, Serializable {
 
 		private static final long serialVersionUID = -6415390806576526923L;
-		private static final long SNOOZE_LONG_MS = 5L * 60L * 1000L;
+		/**
+		 * When a snooze target for a queue is longer than this amount, the
+		 * queue will be "long snoozed" instead of "short snoozed". A
+		 * "long snoozed" queue may be swapped to disk because it's not needed
+		 * soon.
+		 */
+		private static final long SNOOZE_LONG_MS = 180L * 60L * 1000L;
 		public String classKey;
 		public long wakeTime;
 
@@ -117,7 +138,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		public DelayedWorkQueue(WorkQueue queue) {
 			this.classKey = queue.getClassKey();
 			this.wakeTime = queue.getWakeTime();
-
 			this.workQueue = queue;
 		}
 
@@ -134,7 +154,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		public WorkQueue getWorkQueue() {
 			if (workQueue == null) {
 				// This is a recently deserialized DelayedWorkQueue instance
-				WorkQueue result = getQueueFor(classKey);
+				WorkQueue result = getQueueForClassKey(classKey);
 				setWorkQueue(result);
 				return result;
 			}
@@ -143,7 +163,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 				SoftReference<WorkQueue> ref = (SoftReference) workQueue;
 				WorkQueue result = ref.get();
 				if (result == null) {
-					result = getQueueFor(classKey);
+					result = getQueueForClassKey(classKey);
 				}
 				setWorkQueue(result);
 				return result;

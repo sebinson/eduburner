@@ -11,9 +11,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <artifactId>EduBurner-Analysis</artifactId>
+    <artifactId>EduBurner-Search</artifactId>
     <packaging>jar</packaging>
-    <name>Paoding Analysis</name>
+    <name>Spring Lucene Modules and Paoding Analysis</name>
     
     <build>
         <testResources>
