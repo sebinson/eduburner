@@ -2,11 +2,11 @@ package eduburner.crawler;
 
 import java.util.List;
 
-import eduburner.crawler.model.CrawlUri;
+import eduburner.crawler.model.CrawlURI;
 
 public interface ICrawlFrontier {
 
-	public void loadUris(List<CrawlUri> uris);
+	public void loadUris(List<CrawlURI> uris);
 
 	/**
 	 * Get the next URI that should be processed. If no URI becomes availible
@@ -16,7 +16,7 @@ public interface ICrawlFrontier {
 	 * @throws InterruptedException
 	 * @throws EndedException
 	 */
-	CrawlUri next();
+	CrawlURI next();
 
 	/**
 	 * Returns true if the frontier contains no more URIs to crawl.
@@ -48,7 +48,7 @@ public interface ICrawlFrontier {
 	 * 
 	 * @see CrawlURI#setSchedulingDirective(int)
 	 */
-	public void schedule(CrawlUri uri);
+	public void schedule(CrawlURI uri);
 
 	/**
 	 * Report a URI being processed as having finished processing.
@@ -63,7 +63,7 @@ public interface ICrawlFrontier {
 	 * @param cURI
 	 *            The URI that has finished processing.
 	 */
-	public void finished(CrawlUri uri);
+	public void finished(CrawlURI uri);
 
 	/**
 	 * Number of URIs <i>queued</i> up and waiting for processing.
