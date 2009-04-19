@@ -1,4 +1,4 @@
-package eduburner.crawler.httpclient;
+package eduburner.crawler.http;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
