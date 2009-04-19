@@ -32,6 +32,10 @@ public class ToeThread implements Runnable{
     // indicator that a thread is now surplus based on current desired
     // count; it should wrap up cleanly
     private volatile boolean shouldRetire = false;
+    
+    public ToeThread(ICrawlController crawlController){
+    	this.crawlController = crawlController;
+    }
 
 	@Override
 	public void run() {
