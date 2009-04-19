@@ -3,7 +3,7 @@ package eduburner.crawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eduburner.crawler.model.CrawlUri;
+import eduburner.crawler.model.CrawlURI;
 
 public class ToeThread implements Runnable{
 
@@ -22,7 +22,7 @@ public class ToeThread implements Runnable{
 	// activity monitoring, debugging, and problem detection
     private String step = STEP_NASCENT;
     
-    private CrawlUri currentCrawUri;
+    private CrawlURI currentCrawUri;
     private long atStepSince;
     private long lastStartTime;
     private long lastFinishTime;
@@ -43,7 +43,7 @@ public class ToeThread implements Runnable{
 				
 				setStep(STEP_ABOUT_TO_GET_URI);
 				
-				CrawlUri cUri = crawlController.getFrontier().next();
+				CrawlURI cUri = crawlController.getFrontier().next();
 				
 				synchronized(this) {
                     continueCheck();
@@ -97,7 +97,7 @@ public class ToeThread implements Runnable{
      * Set currentCuri, updating thread name as appropriate
      * @param curi
      */
-    private void setCurrentCuri(CrawlUri curi) {
+    private void setCurrentCuri(CrawlURI curi) {
         currentCrawUri = curi;
     }
     

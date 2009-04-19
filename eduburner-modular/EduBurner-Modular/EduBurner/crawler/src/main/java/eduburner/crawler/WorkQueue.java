@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eduburner.crawler.model.CrawlUri;
+import eduburner.crawler.model.CrawlURI;
 
 /**
  * A single queue of related URIs to visit, grouped by a classKey (typically
@@ -24,14 +24,14 @@ public class WorkQueue implements Serializable {
 	private String classKey;
 	private long wakeTime;
 
-	private Queue<CrawlUri> uriQueue = new LinkedBlockingQueue<CrawlUri>();
+	private Queue<CrawlURI> uriQueue = new LinkedBlockingQueue<CrawlURI>();
 
 	public WorkQueue(String classKey) {
 		this.classKey = classKey;
 		this.wakeTime = System.currentTimeMillis();
 	}
 
-	public void addUri(CrawlUri uri) {
+	public void addUri(CrawlURI uri) {
 		if (this.classKey.equals(uri.getClassKey())) {
 			logger.debug("add uri to work queue");
 			uriQueue.add(uri);
@@ -40,7 +40,7 @@ public class WorkQueue implements Serializable {
 		}
 	}
 
-	public CrawlUri nextUri() {
+	public CrawlURI nextUri() {
 		return uriQueue.poll();
 	}
 

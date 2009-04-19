@@ -10,7 +10,10 @@ import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-import eduburner.crawler.model.CrawlUri;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import eduburner.crawler.model.CrawlURI;
 
 /**
  * A common Frontier base using several queues to hold pending URIs.
@@ -22,6 +25,8 @@ import eduburner.crawler.model.CrawlUri;
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
+	
+	private static final Logger logger = LoggerFactory.getLogger(WorkQueueFrontier.class);
 
 	private Map<String, WorkQueue> workQueueMap = new ConcurrentHashMap<String, WorkQueue>();
 	private BlockingQueue<WorkQueue> readyQueue;
@@ -32,7 +37,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	@Override
-	public void loadUris(List<CrawlUri> uris) {
+	public void loadUris(List<CrawlURI> uris) {
 		// TODO Auto-generated method stub
 
 	}
@@ -44,7 +49,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	@Override
-	public void finished(CrawlUri uri) {
+	public void finished(CrawlURI uri) {
 		// TODO Auto-generated method stub
 
 	}
@@ -56,9 +61,8 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	@Override
-	public CrawlUri next() {
-		// TODO Auto-generated method stub
-		return null;
+	public CrawlURI next() {
+		return readyQueue.poll().nextUri();
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	@Override
-	public void schedule(CrawlUri uri) {
+	public void schedule(CrawlURI uri) {
 		// TODO Auto-generated method stub
 
 	}
@@ -84,6 +88,22 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 	
 	/**
+	 * finisehd, add work queue current uri belongs to snooze queue
+	 * @param uri
+	 */
+	protected void processFinished(CrawlURI uri){
+		long now = System.currentTimeMillis();
+		uri.clearUp();
+		long delay = uri.getMinCrawlInterval();
+		WorkQueue wq = workQueueMap.get(uri.getClassKey());
+		if(wq != null){
+			addToSnoozeQueue(wq, now, delay);
+		}else{
+			logger.warn("failed to get workqueue for url: " + uri.getUrl());
+		}
+	}
+	
+	/**
      * Wake any queues sitting in the snoozed queue whose time has come.
      */
     protected void wakeQueues() {
@@ -91,15 +111,25 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
         while((waked = snoozeQueue.poll())!=null) {
             WorkQueue queue = waked.getWorkQueue();
             queue.setWakeTime(0L);
-            readyQueue.add(queue);
+            addToReadyQueue(queue);
         }
     }
+	
+    private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
+        long nextTime = now + delay;
+        wq.setWakeTime(nextTime);
+        snoozeQueue.add(new DelayedWorkQueue(wq));
+    }
+    
+    private void addToReadyQueue(WorkQueue qu){
+    	readyQueue.add(qu);
+    }
 
-	private static class ManagerThread implements Runnable {
+	private class ManagerThread implements Runnable {
 
 		@Override
 		public void run() {
-			
+			WorkQueueFrontier.this.wakeQueues();
 		}
 
 	}
