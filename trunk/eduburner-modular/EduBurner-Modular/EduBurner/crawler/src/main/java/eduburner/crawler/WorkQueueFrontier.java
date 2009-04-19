@@ -2,16 +2,18 @@ package eduburner.crawler;
 
 import java.io.Serializable;
 import java.lang.ref.SoftReference;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.MapMaker;
 
 import eduburner.crawler.model.CrawlURI;
 
@@ -25,39 +27,46 @@ import eduburner.crawler.model.CrawlURI;
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
-	
-	private static final Logger logger = LoggerFactory.getLogger(WorkQueueFrontier.class);
 
-	private Map<String, WorkQueue> workQueueMap = new ConcurrentHashMap<String, WorkQueue>();
+	private static final Logger logger = LoggerFactory
+			.getLogger(WorkQueueFrontier.class);
+
+	protected AtomicLong queuedUriCount = new AtomicLong(0);
+	protected AtomicLong succeededFetchCount = new AtomicLong(0);
+	protected AtomicLong failedFetchCount = new AtomicLong(0);
+
+	private Map<String, WorkQueue> workQueueMap;
 	private BlockingQueue<WorkQueue> readyQueue;
 	private DelayQueue<DelayedWorkQueue> snoozeQueue;
+	
+	public WorkQueueFrontier() {
+		workQueueMap = new MapMaker().makeMap();
+		readyQueue = new LinkedBlockingDeque<WorkQueue>();
+		snoozeQueue = new DelayQueue<DelayedWorkQueue>();
+	}
+	
+	@Override
+	public void initTasks(){
+		
+	}
 
 	protected void startManagerThread() {
 
 	}
 
 	@Override
-	public void loadUris(List<CrawlURI> uris) {
+	public void schedule(CrawlURI uri) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public long failedFetchCount() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
 	public void finished(CrawlURI uri) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return queuedUriCount.get() == 0L;
 	}
 
 	@Override
@@ -67,63 +76,61 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	@Override
 	public long queuedUriCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return queuedUriCount.get();
 	}
 
 	@Override
-	public void schedule(CrawlURI uri) {
-		// TODO Auto-generated method stub
-
+	public long failedFetchCount() {
+		return failedFetchCount.get();
 	}
 
 	@Override
 	public long succeededFetchCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return succeededFetchCount.get();
 	}
 
 	protected WorkQueue getQueueForClassKey(String classKey) {
-		return null;
+		return workQueueMap.get(classKey);
 	}
-	
+
 	/**
 	 * finisehd, add work queue current uri belongs to snooze queue
+	 * 
 	 * @param uri
 	 */
-	protected void processFinished(CrawlURI uri){
+	protected void processFinished(CrawlURI uri) {
 		long now = System.currentTimeMillis();
 		uri.clearUp();
 		long delay = uri.getMinCrawlInterval();
 		WorkQueue wq = workQueueMap.get(uri.getClassKey());
-		if(wq != null){
+		if (wq != null) {
 			addToSnoozeQueue(wq, now, delay);
-		}else{
+		} else {
 			logger.warn("failed to get workqueue for url: " + uri.getUrl());
 		}
 	}
-	
+
 	/**
-     * Wake any queues sitting in the snoozed queue whose time has come.
-     */
-    protected void wakeQueues() {
-        DelayedWorkQueue waked; 
-        while((waked = snoozeQueue.poll())!=null) {
-            WorkQueue queue = waked.getWorkQueue();
-            queue.setWakeTime(0L);
-            addToReadyQueue(queue);
-        }
-    }
-	
-    private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
-        long nextTime = now + delay;
-        wq.setWakeTime(nextTime);
-        snoozeQueue.add(new DelayedWorkQueue(wq));
-    }
-    
-    private void addToReadyQueue(WorkQueue qu){
-    	readyQueue.add(qu);
-    }
+	 * Wake any queues sitting in the snoozed queue whose time has come.
+	 */
+	protected void wakeQueues() {
+		DelayedWorkQueue waked;
+		while ((waked = snoozeQueue.poll()) != null) {
+			WorkQueue queue = waked.getWorkQueue();
+			queue.setWakeTime(0L);
+			addToReadyQueue(queue);
+		}
+	}
+
+	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
+		long nextTime = now + delay;
+		wq.setWakeTime(nextTime);
+		snoozeQueue.add(new DelayedWorkQueue(wq));
+	}
+
+	private void addToReadyQueue(WorkQueue qu) {
+		readyQueue.add(qu);
+	}
 
 	private class ManagerThread implements Runnable {
 

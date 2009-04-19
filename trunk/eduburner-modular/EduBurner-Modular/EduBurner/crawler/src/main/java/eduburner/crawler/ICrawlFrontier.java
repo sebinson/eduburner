@@ -1,12 +1,10 @@
 package eduburner.crawler;
 
-import java.util.List;
-
 import eduburner.crawler.model.CrawlURI;
 
 public interface ICrawlFrontier {
 
-	public void loadUris(List<CrawlURI> uris);
+	public void initTasks();
 
 	/**
 	 * Get the next URI that should be processed. If no URI becomes availible
@@ -16,7 +14,7 @@ public interface ICrawlFrontier {
 	 * @throws InterruptedException
 	 * @throws EndedException
 	 */
-	CrawlURI next();
+	public CrawlURI next();
 
 	/**
 	 * Returns true if the frontier contains no more URIs to crawl.
@@ -29,7 +27,7 @@ public interface ICrawlFrontier {
 	 * 
 	 * @return true if the frontier contains no more URIs to crawl.
 	 */
-	boolean isEmpty();
+	public boolean isEmpty();
 
 	/**
 	 * Schedules a CrawlURI.
