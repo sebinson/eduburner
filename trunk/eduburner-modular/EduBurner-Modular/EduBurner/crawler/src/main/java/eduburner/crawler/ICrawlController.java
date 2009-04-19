@@ -1,5 +1,9 @@
 package eduburner.crawler;
 
+import java.util.List;
+
+import eduburner.crawler.processor.IProcessor;
+
 public interface ICrawlController {
 	public void initTasks();
 	/**
@@ -36,4 +40,6 @@ public interface ICrawlController {
 	public void requestCrawlResume();
 	
 	public void acquireContinuePermission();
+	
+	public List<IProcessor> getProcessors();
 }

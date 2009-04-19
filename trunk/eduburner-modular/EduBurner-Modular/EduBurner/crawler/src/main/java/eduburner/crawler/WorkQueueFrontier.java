@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.google.common.collect.MapMaker;
 
@@ -24,6 +25,7 @@ import eduburner.crawler.model.CrawlURI;
  * Round-robins between all queues.
  */
 
+@Component("workQueueFrontier")
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
