@@ -99,8 +99,18 @@ public class CrawlController implements ICrawlController {
 
 	@Override
 	public void requestCrawlResume() {
-		// TODO Auto-generated method stub
-
+		if(toeThreadPool.isShutdown()){
+			setUpToePool();
+		}
+		if (state != State.PAUSING && state != State.PAUSED && state != State.CHECKPOINTING) {
+            // Can't resume if not been told to pause or if we're in middle of
+            // a checkpoint.
+            return;
+        }
+		
+		crawlFrontier.resume();
+		
+		fireCrawlStateChangeEvent(State.RUNNING, CrawlStatus.RUNNING);
 	}
 	
 	@Override
