@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.MapMaker;
 
+import eduburner.crawler.event.CrawlStatusListener;
 import eduburner.crawler.model.CrawlURI;
 
 /**
@@ -27,7 +28,7 @@ import eduburner.crawler.model.CrawlURI;
  */
 
 @Component("workQueueFrontier")
-public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
+public class WorkQueueFrontier implements ICrawlFrontier, CrawlStatusListener, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
 
@@ -261,5 +262,41 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 			// must be consistent/stable over time
 			return this.classKey.compareTo(other.getClassKey());
 		}
+	}
+
+	@Override
+	public void crawlEnded(String exitMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void crawlEnding(String exitMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void crawlPaused(String statusMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void crawlPausing(String statusMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void crawlResuming(String statusMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void crawlStarted(String message) {
+		// TODO Auto-generated method stub
+		
 	}
 }
