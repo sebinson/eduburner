@@ -99,6 +99,26 @@ public interface ICrawlFrontier {
 	 * @return Number of URIs that failed to process.
 	 */
 	public long failedFetchCount();
+	
+	
+	/**
+     * Notify Frontier that it should end the crawl, giving
+     * any worker ToeThread that askss for a next() an 
+     * EndedException. 
+     */
+    public void terminate();
+    
+    /**
+     * Notify Frontier that it should not release any URIs, instead
+     * holding all threads, until instructed otherwise. 
+     */
+    public void pause();
+    
+    /**
+     * Resumes the release of URIs to crawl, allowing worker
+     * ToeThreads to proceed. 
+     */
+    public void resume();
 
 	/**
 	 * Enumeration of possible target states.

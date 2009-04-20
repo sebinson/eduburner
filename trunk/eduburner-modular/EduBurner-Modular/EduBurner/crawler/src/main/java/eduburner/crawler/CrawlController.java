@@ -1,5 +1,6 @@
 package eduburner.crawler;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,17 +11,14 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 
+import eduburner.crawler.enumerations.CrawlStatus;
+import eduburner.crawler.event.CrawlStatusListener;
 import eduburner.crawler.processor.IProcessor;
 
 /**
- * crawler module for eduburner. 
- * 
- * 包eduburner.crawler下的代码，实现原理和命名方式参考 heritrix <a href="http://crawler.archive.org/">http://crawler.archive.org/</a>
- * 
- * 部分代码也来自于 heritrix
  * 
  * @author zhangyf@gmail.com
- *
+ * 
  */
 @Component("crawlController")
 public class CrawlController implements ICrawlController {
@@ -29,9 +27,18 @@ public class CrawlController implements ICrawlController {
 
 	private ExecutorService toeThreadPool;
 	private int maxToeThreadSize;
-	
+
+	public static enum State {
+		NASCENT, RUNNING, PAUSED, PAUSING, CHECKPOINTING, STOPPING, FINISHED, STARTED, PREPARING
+	}
+
+	transient private State state = State.NASCENT;
+
+	private List<CrawlStatusListener> crawlStatusListeners = Lists
+			.newArrayList();
+
 	private List<IProcessor> processors = Lists.newArrayList();
-	
+
 	@Autowired
 	@Qualifier("workQueueFrontier")
 	private ICrawlFrontier crawlFrontier;
@@ -40,16 +47,9 @@ public class CrawlController implements ICrawlController {
 		maxToeThreadSize = DEFAULT_MAX_TOE_THREAD_SIZE;
 		toeThreadPool = Executors
 				.newFixedThreadPool(DEFAULT_MAX_TOE_THREAD_SIZE);
-		init();
 	}
 
-	private void init() {
-		for (int i = 0; i < maxToeThreadSize; i++) {
-			toeThreadPool.execute(new ToeThread(this));
-		}
-	}
-	
-	public List<IProcessor> getProcessors(){
+	public List<IProcessor> getProcessors() {
 		return processors;
 	}
 
@@ -76,9 +76,18 @@ public class CrawlController implements ICrawlController {
 
 	}
 
+	
 	@Override
-	public void requestCrawlCheckpoint() throws IllegalStateException {
-		// TODO Auto-generated method stub
+	public void requestCrawlStart() {
+		fireCrawlStateChangeEvent(State.PREPARING, CrawlStatus.PREPARING);
+		
+		setUpToePool();
+		
+		fireCrawlStateChangeEvent(State.STARTED, CrawlStatus.PENDING);
+		
+        state = State.RUNNING;
+        
+        fireCrawlStateChangeEvent(this.state, CrawlStatus.RUNNING);
 
 	}
 
@@ -93,17 +102,65 @@ public class CrawlController implements ICrawlController {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
-	public void requestCrawlStart() {
+	public void requestCrawlCheckpoint() throws IllegalStateException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void requestCrawlStop() {
-		// TODO Auto-generated method stub
+		synchronized (this) {
+			
+		}
+	}
+	
+	private void setUpToePool() {
+		for (int i = 0; i < maxToeThreadSize; i++) {
+			toeThreadPool.execute(new ToeThread(this));
+		}
+	}
 
+	/**
+	 * Send crawl change event to all listeners.
+	 * 
+	 * @param newState
+	 *            State change we're to tell listeners' about.
+	 * @param message
+	 *            Message on state change.
+	 * @see #sendCheckpointEvent(File) for special case event sending telling
+	 *      listeners to checkpoint.
+	 */
+	protected void fireCrawlStateChangeEvent(State newState, CrawlStatus status) {
+		this.state = newState;
+		for (CrawlStatusListener listener : crawlStatusListeners) {
+			switch (newState) {
+			case PAUSED:
+				listener.crawlPaused(status.getDescription());
+				break;
+			case RUNNING:
+				listener.crawlResuming(status.getDescription());
+				break;
+			case PAUSING:
+				listener.crawlPausing(status.getDescription());
+				break;
+			case STARTED:
+				listener.crawlStarted(status.getDescription());
+				break;
+			case STOPPING:
+				listener.crawlEnding(status.getDescription());
+				break;
+			case FINISHED:
+				listener.crawlEnded(status.getDescription());
+				break;
+			case PREPARING:
+				listener.crawlResuming(status.getDescription());
+				break;
+			default:
+				throw new RuntimeException("Unknown state: " + newState);
+			}
+		}
 	}
 
 }
