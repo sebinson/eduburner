@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -40,20 +41,20 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	private Map<String, WorkQueue> workQueueMap;
 	private BlockingQueue<WorkQueue> readyQueue;
 	private DelayQueue<DelayedWorkQueue> snoozeQueue;
-	
+
 	public WorkQueueFrontier() {
 		workQueueMap = new MapMaker().makeMap();
 		readyQueue = new LinkedBlockingDeque<WorkQueue>();
 		snoozeQueue = new DelayQueue<DelayedWorkQueue>();
 	}
-	
+
 	@Override
-	public void initTasks(){
-		
+	public void initTasks() {
+
 	}
 
 	protected void startManagerThread() {
-
+		Executors.newFixedThreadPool(1).execute(new ManagerThread());
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	@Override
 	public void finished(CrawlURI uri) {
-		
+
 	}
 
 	@Override
@@ -89,6 +90,24 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	@Override
 	public long succeededFetchCount() {
 		return succeededFetchCount.get();
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void terminate() {
+		// TODO Auto-generated method stub
+
 	}
 
 	protected WorkQueue getQueueForClassKey(String classKey) {
