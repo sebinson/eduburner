@@ -162,5 +162,15 @@ public class CrawlController implements ICrawlController {
 			}
 		}
 	}
+	
+	//injected by spring
+	public void setCrawlStatusListeners(
+			List<CrawlStatusListener> crawlStatusListeners) {
+		this.crawlStatusListeners = crawlStatusListeners;
+	}
+
+	public void setProcessors(List<IProcessor> processors) {
+		this.processors = processors;
+	}
 
 }
