@@ -130,7 +130,7 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>1.6.0-beta4</version>
+			<version>1.6.0-beta5</version>
 		</dependency>
 
 		<dependency>
@@ -360,7 +360,7 @@
 			3.1.0.GA
 		</hibernate-validator.version>
 		<lucene.version>2.4.1</lucene.version>
-		<spring.version>3.0.0.M2</spring.version>
+		<spring.version>3.0.0.M3</spring.version>
 		<spring.security.version>2.0.4</spring.security.version>
 
 		<!-- Testing dependency versions -->
