@@ -15,7 +15,7 @@
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
        	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 	
-	<context:property-placeholder location="classpath:jdbc.properties,classpath:lucene.properties"/>
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<context:annotation-config/>
 	 
