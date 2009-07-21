@@ -1,0 +1,367 @@
+/******************************* nav block *******************************/
+.sidebar-block {
+	padding: 4px 0 8px 0;
+	width: 94%;
+	overflow: hidden;
+	background-color: #E2EECD;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: 1px solid #BBBBBB;
+}
+
+.sidebar-block-inner {
+	padding: 0 8px 2px 8px;
+	overflow: hidden;
+	min-height: 40px;
+}
+
+.sidebar-block-header {
+	padding: 2px 0 2px 0;
+	border-bottom: solid 1px #fff;
+	font-weight: bolder;
+	font-size: 110%;
+	color: #333;
+}
+
+.sidebar-block-content {
+	margin-top: 8px;
+	font-size: 100%;
+}
+
+.sidebar-block-footer {
+	border-top: 1px solid #FFFFFF;
+	font-size: 100%;
+	margin: 8px 0 0 0;
+	padding: 4px 0 0 0;
+}
+
+.sidebar-block-content ul.sidebar-block-list li {
+	margin: 0 0 5px 5px;
+	padding: 0 5px 0 18px;
+	display: block;
+	float: left;
+	clear: left;
+	background: url('../images/bullet-arrow.gif') no-repeat center left;
+}
+
+.sidebar-block-content ul.sidebar-block-list li.selected {
+	background-color: #d2e6bd;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.sidebar-block-content ul.sidebar-block-list li.selected a {
+	color: #000;
+	text-decoration: none;
+	cursor: default;
+}
+
+.sidebar-block-content ul.sidebar-tag-cloud {
+	line-height: 225%;
+	list-style-type: none;
+}
+
+.sidebar-block-content ul.sidebar-tag-cloud li {
+	
+}
+
+/************************************* tags *****************************/
+.tag-cloud {
+	background-color: #F7F7F7;
+	color: #999999;
+	line-height: 250%;
+	list-style-type: none;
+	margin: 16px 0px;
+	padding: 16px 8px;
+}
+
+.tag1,.tag2,.tag3,.tag3,.tag4,.tag5,.tag6 {
+	display: inline;
+}
+
+.tag1 a:link,.tag1 a:visited,.tag1 a:active {
+	color: #000000;
+	font-size: 225%;
+	font-weight: 900;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag2 a:link,.tag2 a:visited,.tag2 a:active {
+	color: #111111;
+	font-size: 195%;
+	font-weight: 800;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag3 a:link,.tag3 a:visited,.tag3 a:active {
+	color: #222222;
+	font-size: 170%;
+	font-weight: 600;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag4 a:link,.tag4 a:visited,.tag4 a:active {
+	color: #333333;
+	font-size: 140%;
+	font-weight: 500;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag5 a:link,.tag5 a:visited,.tag5 a:active {
+	color: #444444;
+	font-size: 120%;
+	font-weight: 300;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag6 a:link,.tag6 a:visited,.tag6 a:active {
+	color: #555555;
+	font-size: 10%;
+	font-weight: 200;
+	margin-right: 6px;
+	text-decoration: none;
+}
+
+.tag1 a:hover,.tag2 a:hover,.tag3 a:hover,.tag4 a:hover,.tag5 a:hover,.tag6 a:hover
+	{
+	text-decoration: underline;
+}
+
+/******************************************************************************/
+#overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 1000;
+	background-color: #333333;
+	filter: alpha(opacity =     40);
+	moz-opacity: 0.4;
+	opacity: 0.4;
+}
+
+/**** ie6 hack ********/
+.ie #overlay {
+	height: expression(document.body.scrollHeight >   document.body.offsetHeight ?   document.body.scrollHeight :   document.body.offsetHeight +   'px');
+}
+
+#loading {
+	position: absolute;
+	left: 45%;
+	top: 40%;
+	padding: 2px;
+	z-index: 20001;
+	height: auto;
+}
+
+#loading .loading-indicator {
+	height: auto;
+}
+
+#top-loading {
+	left: 45%;
+	margin-left: -26px;
+	position: absolute;
+	top: 10px;
+	z-index: 20001;
+	color: #222222;
+	font-weight: bolder;
+	padding: 5px 8px;
+	background-color: #E2EECD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+/******************************* form style *****************************************/
+.form-area {
+	margin: 2px 0;
+}
+
+.form-title {
+	color: #999999;
+	font-size: 140%;
+	font-weight: bold;
+	margin: 0px;
+	padding: 4px 4px 4px 0px;
+}
+
+}
+.form-desc {
+	padding: 8px 2px 8px 0px;
+}
+
+div.form-field-name {
+	color: #666666;
+	font-weight: bold;
+	font-size: 110%;
+	padding: 8px 2px 2px;
+}
+
+}
+div.form-field-desc {
+	color: #000000;
+	font-size: 90%;
+	font-weight: normal;
+	padding: 2px;
+}
+
+div.form-field {
+	color: #000000;
+	padding: 2px;
+}
+
+/********************************* list area ********************************************/
+.list-area {
+	
+}
+
+.list-title {
+	background-color: #D2E6BD;
+	border: 1px solid #CCCCCC;
+	color: #698D73;
+	font-size: 110%;
+	font-weight: bold;
+	margin: 0px;
+	padding: 4px;
+}
+
+.list-title a,.list-title a:visited,.list-title a:active,.list-title a:hover
+	{
+	color: #698D73;
+}
+
+.list-header {
+	background-color: #EEEEEE;
+	border-color: #EEEEEE;
+	border-style: solid;
+	border-width: 1px;
+	color: #666666;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 2px 2px 2px 4px;
+	text-align: center;
+}
+
+.list-cell {
+	border-color: #EEEEEE;
+	border-style: solid;
+	border-width: 0px 1px 1px 0px;
+	color: #333333;
+	font-size: 100%;
+	padding: 2px;
+	text-align: left;
+}
+
+.list-cell-left-most {
+	border-width: 0px 1px 1px 1px;
+	padding: 4px;
+}
+
+/***************************************************************************************/
+.message-error {
+	margin: 8px;
+	padding: 4px;
+	font-size: 100%;
+	color: #443333;
+	font-weight: bold;
+	border: solid;
+	border-width: 1px;
+	border-color: #999999;
+	background-color: #EBD9D9;
+}
+
+.small-message-error {
+	padding: 2px;
+	font-size: 80%;
+	font-weight: bold;
+	color: #990000;
+}
+
+.message-success {
+	margin: 8px;
+	padding: 4px;
+	font-size: 100%;
+	color: #334433;
+	font-weight: bold;
+	border: solid;
+	border-width: 1px;
+	border-color: #999999;
+	background-color: #cfe7c0;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.small-message-success {
+	padding: 2px;
+	font-size: 80%;
+	font-weight: bold;
+	color: #334433;
+}
+
+/****************** pagination **********************************
+<ul id="pagination">
+<li class="previous-off">«前一页</li>
+<li class="active">1</li>
+<li><a href="?page=2">2</a></li>
+<li><a href="?page=3">3</a></li>
+<li><a href="?page=4">4</a></li>
+<li><a href="?page=5">5</a></li>
+<li><a href="?page=6">6</a></li>
+<li><a href="?page=7">7</a></li>
+<li class="next"><a href="?page=2">后一页 »</a></li>
+</ul> 
+*****************************************************************/
+#pagination{
+	clear: both;
+	float: right;
+}
+
+#pagination li {
+	font-size: 12px;
+	list-style: none;
+	margin-right: 2px;
+}
+
+#pagination a {
+	border: solid 1px #9aafe5 margin-right : 2px;
+}
+
+#pagination .previous-off,#pagination-digg .next-off {
+	border: solid 1px #DEDEDE;
+	color : #888888; 
+	display : block;
+	float: left;
+	font-weight: bold;
+	margin-right: 2px;
+	padding: 3px 4px;
+}
+
+#pagination .next a,#pagination-digg .previous a {
+	font-weight: bold;
+}
+
+#pagination .active {
+	background: #2e6ab1;
+	color: #FFFFFF;
+	font-weight: bold;
+	display: block;
+	float: left;
+	padding: 4px 6px;
+}
+
+#pagination a:link,#pagination-digg a:visited {
+	color: #0e509e display : block;
+	float: left;
+	padding: 3px 6px;
+	text-decoration: none;
+}
+
+#pagination a:hover {
+	border: solid 1px #0e509e
+}

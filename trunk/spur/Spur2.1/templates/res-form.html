@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	EduTech Spur -- 填加资源
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript" src="/static/scripts/res-form.js"></script>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+    <h4 class="sidebar-block-header">操作</h4>
+    <div class="sidebar-block-content">
+      <ul class="sidebar-block-list">
+	    <li class="selected">添加资源</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block main_content %}
+<div id="main-content">
+  <div id="breadcrumb">
+	 <a href="/">首页</a> » <a href="/resource/">资源</a> » 填加资源
+  </div>
+  <h2 class="common-title">添加资源</h2>
+  <div id="message-area" class="message-error hidden">
+  </div>
+  <form id="add-res-form" action="/resources/{{ id }}" method="POST">
+    {% if id %}
+  		<input type="hidden" name="_method" value="PUT"/>
+  	{% endif %}
+    <div class="form-area">
+      <div class="form-field-name">
+          <label>网址（必填）：</label>
+      </div>
+      <div class="form-field">
+         <span id="url-msg" class="hidden">网址不能为空</span>
+         <input id="entry-title" type="text" name="url" class="input-big" style="width:80%"/>
+      </div>
+      <div class="form-field-name">
+          <label>Feed地址：</label>
+      </div>
+      <div class="form-field">
+         <input id="entry-title" type="text" name="feedurl" class="input-big" style="width:80%"/>
+      </div>
+      <div class="form-field-name">
+          <label>描述:</label>
+      </div>
+      <div class="form-field">
+         <textarea id="entry-text" name="description" style="width:80%;height:150px;"></textarea>
+      </div>
+      <div class="form-field-name">
+          <label>标签（以逗号分隔）:</label>
+      </div>
+      <div class="form-field">
+         <input id="tags-input" type="text" name="tags" class="input-big" style="width:80%"/>
+         <!-- 
+         <span style="margin-left:20px;"><a href="">选择标签</a></span>
+         -->
+      </div>
+      <div class="form-field">
+         <input type="submit" value="提 交"/>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

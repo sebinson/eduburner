@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	EduTech Spur
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+    <div class="sidebar-block-content">
+      <ul class="sidebar-block-list">
+	    <li class="selected">本站项目</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block main_content %}
+<div id="main-content">
+    <div id="breadcrumb">
+	  <a href="/">首页</a> » 开源项目
+	</div>
+	<h2 class="common-title">本站开源项目</h2>
+	<div class="resource">
+		<div class="resource-item" style="font-size:115%;font-weight: bolder">
+			EduBurner
+		</div>
+		<div class="resource-item">
+		    EduBurner试图帮助学习者更有效的利用社会性软件促进学习；
+		    Eduburner收集学习者的google reader的分享，delicious的收藏等资源汇集到某一门课程里；
+		    EduBurner会通过网络爬虫进行抓取，将这些资源 汇集在系统内部，供学习者分享；
+		    EduBurner并不试图构建复杂的系统，而是尽量利用现有的资源做<a href="http://en.wikipedia.org/wiki/Mashup_(web_application_hybrid)" target="_blank">mashup</a>；
+		          通过日志分析报告，教师能够掌握学习者的行为，调整教学策略。
+		</div>
+		<div class="resource-item">
+			EduBurner使用Java语言开发。使用的技术主要包括：Maven，Hibernate， Spring， JQuery，Rome等。
+		</div>
+		<div class="resource-item">
+			项目主页：http://code.google.com/p/eduburner/
+		</div>
+		<div class="resource-item">
+			源码获取: svn co http://eduburner.googlecode.com/svn/trunk/ eduburner-read-only
+		</div>
+	</div>
+</div>
+{% endblock %}
+
