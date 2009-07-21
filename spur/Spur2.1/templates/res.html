@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	EduTech Spur
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="/static/scripts/res.js"></script>
+
+{% endblock %}
+
+{% block sidebar %}
+
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+  	<h4 class="sidebar-block-header">关于资源</h4>
+    <div class="sidebar-block-content">
+                希望能够收集一些好的教育技术方面的网站，能够帮助对于教育技术感兴趣人。<br/>
+	如果您有这方面的相关资源，欢迎添加。<br/>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+    <h4 class="sidebar-block-header">操作</h4>
+    <div class="sidebar-block-content">
+      <ul class="sidebar-block-list">
+	    <li><a href="/resources/new">添加资源</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+  	<h4 class="sidebar-block-header">资源标签</h4>
+    <div class="sidebar-block-content">
+      <ul id="tag-cloud" class="sidebar-tag-cloud">
+        {% for tag in tags %}
+        	<li class="tag{{ tag.weight }}"><a kn="{{ tag.key_name }}" href="/resources/{{ tag.name }}">{{ tag.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="sidebar-block-footer">
+      <a id="all-tags-link" href="/resources/tags">所有资源标签</a>	
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block main_content %}
+<div id="main-content">
+	<div id="breadcrumb">
+		<a href="/">首页</a> » 教育技术资源
+	</div>
+	{% for res in page.object_list %}
+	<div class="resource">
+		<div class="resource-item">
+			网址：<a href="{{ res.link }}">{{ res.link }}</a>
+		</div>
+		{% if res.feed_link %}
+		<div class="resource-item">
+			feed：<a href="{{ res.feed_link }}">{{ res.feed_link }}</a>
+		</div>
+		{% endif %}
+		{% if res.description %}
+		<div class="resource-item">
+			资源描述：{{ res.description }}
+		</div>
+		{% endif %}
+		<div class="resource-item">
+			<span>标签：{% for tag in res.res_tags %} {{ tag.name }} &nbsp;&nbsp; {% endfor %}</span>
+		</div>
+		<div class="resource-actions">
+			<a href="http://www.google.com/bookmarks/mark?op=add&bkmk={{ res.encoded_feed_url }}" target="_blank">加入Google Bookmark</a> &nbsp;&nbsp;&nbsp; 
+			<a href="http://fusion.google.com/add?feedurl={{ res.encoded_feed_url }}" target="_blank">订阅到Google Reader</a> &nbsp;&nbsp;&nbsp;   
+			<a href="http://reader.yodao.com/b.do?url={{ res.encoded_feed_url }}" target="_blank">订阅到有道阅读</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
+

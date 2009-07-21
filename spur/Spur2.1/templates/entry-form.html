@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	EduTech Spur -- 提交文章
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="/static/styles/autocomplete.css" type="text/css" />
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/static/scripts/entry-form.js"></script>
+
+<script type="text/javascript" src="/static/scripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+      		tinyMCE.init({
+				mode : "textareas",
+				language : "zh",
+	    		theme : "advanced",
+        		theme_advanced_toolbar_location : "top",
+        		theme_advanced_toolbar_align : "left",
+        		theme_advanced_path : false,
+        		theme_advanced_buttons1 : "bold,italic,underline,strikethrough,fontsizeselect,formatselect,separator,undo,redo,separator,link, image, table,separator,bullist,numlist,separator,outdent,indent,separator,conflink, confimage, forecolor,hr,emotions,charmap,code, separator,fullscreen",
+        		theme_advanced_buttons2 : "",
+        		theme_advanced_buttons3 : "",
+        		theme_advanced_resizing : true,
+        		theme_advanced_resize_horizontal : false,
+        		theme_advanced_statusbar_location : "bottom",
+        		theme_advanced_path : false,
+        		plugins : "table,paste,emotions,fullscreen"
+			});
+</script>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+    <h4 class="sidebar-block-header">操作</h4>
+    <div class="sidebar-block-content">
+      <ul class="sidebar-block-list">
+	    <li class="selected">提交文章</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block main_content %}
+<div id="main-content">
+  <div id="breadcrumb">
+	 <a href="/">首页</a> » 提交文章
+  </div>
+  <h2 class="common-title">提交文章</h2>
+  <div id="message-area" class="message-error hidden">
+  </div>
+  <form id="add-entry-form" action="/entries/" method="POST">
+  	{% if id %}
+  		<input type="hidden" name="_method" value="PUT"/>
+		<input type="hidden" name="id" value="{{ entry.id }}"/>
+  	{% endif %}
+    <div class="form-area">
+      <div class="form-field-name">
+          <label>标题：</label>
+      </div>
+      <div class="form-field">
+         <span id="title-msg" class="hidden">标题不能为空</span>
+         <input id="entry-title" type="text" name="title" class="input-big" style="width:80%" value="{{ entry.title }}"/>
+      </div>
+      <div class="form-field-name">
+          <label>内容:</label>
+      </div>
+      <div class="form-field">
+         <span id="text-msg" class="hidden">正文内容不能为空</span>
+         <textarea id="entry-text" name="text" style="width:80%;height:240px;"> {{ entry.text }} </textarea>
+      </div>
+      <div class="form-field-name">
+          <label>标签（以逗号分隔）:</label>
+      </div>
+      <div class="form-field">
+         <input id="tags-input" type="text" name="tags" class="input-big" style="width:80%" value="{{ entry.tags_as_string }}"/>
+      </div>
+      <div class="form-field">
+         <input type="submit" value="提 交"/>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra-nodes %}
+<div class="hidden">
+   <span id="tags-str">
+    {% for tag in tags %}
+    	{{ tag.name }},
+    {% endfor %}
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Strict//EN”
+“http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd”>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+	<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8” />
+	
+	<link rel="stylesheet" href="/static/styles/reset-fonts-grids.css" type="text/css" />
+	<link rel="stylesheet" href="/static/styles/main.css" type="text/css" />
+	<link rel="stylesheet" href="/static/styles/fragments.css" type="text/css" />
+	{% block styles %}
+	{% endblock %}
+    
+	<title>
+    	{% block title %}
+        	首页
+    	{% endblock %}
+	</title>
+     
+</head>
+<body>
+  <div class="site-doc yui-d3">
+    <div id="hd">
+      <div id="logo">
+      	<a href="/"><i>EduTech Spur</i></a>
+      </div>
+      <div id="linkbar">
+      	{% block linkbar %}
+      	  {% if user.is_sign_in %}欢迎你，{{ user.email }} | {% endif %}
+            <a href="/">首页</a> 
+          <!--  
+          | <a href="/synd/">聚合</a>
+		  | <a href="/articles/">文章</a>
+          | <a href="/resources/">知识库</a>
+          -->
+          | <a href="/resources/">资源</a>
+          <!-- 
+          | <a href="/activity/">活动</a> 
+          | <a href="/projects/">开源项目</a> 
+		  -->
+          {% if user.is_admin %} | <a href="/admin/">管理</a> {% endif %}
+          | {% if user.is_sign_in %}
+          		<a href = "{{ sign_out_url }}" >登出</a>
+            {% else %}
+                <a href = "{{ sign_in_url }}" >登录</a>
+            {% endif %}          
+        {% endblock %}
+      </div>
+      <div class="clear"></div>
+	</div>
+	<div id="bd" class="yui-t5">
+	  <div class="yui-main">
+	    <div id="main" class="yui-b">
+	      {% block main_content %}
+		  {% endblock %}
+	    </div>
+	  </div>
+	  <div id="nav" class="yui-b">
+		{% block sidebar %}
+		{% endblock %}
+	  </div>
+	</div>
+	<div id="ft">
+		EduTech Spur. 联系邮箱: rockmaple(at)gmail.com. Powered By Google App Engine
+	</div>
+  </div>
+  <div id="overlay" style="display:none"></div>
+  <div id="top-loading" style="display:none">
+  	加载中...
+  </div>
+  
+  {% block extra_nodes %}
+  {% endblock %}
+  
+  <script type="text/javascript" src="/static/scripts/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="/static/scripts/common.js"></script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>

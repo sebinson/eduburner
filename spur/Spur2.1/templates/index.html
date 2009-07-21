@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	EduTech Spur
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="/static/scripts/home.js"></script>
+{% endblock %}
+
+{% block sidebar %}
+
+<div class="sidebar-block spacing">
+  <div class="sidebar-block-inner">
+  	<h4 class="sidebar-block-header">关于首页内容</h4>
+    <div class="sidebar-block-content">
+      这里是一些和教育技术相关的文章。<br/>
+     其内容源为某个帐户的RSS阅读器的分享，delicious的收藏和一些教育技术相关的feed。<br/>
+	    出于对原作者版权的尊重，这里只提供文章的标题和链接。<br/>
+	    本页内容由系统每三十分钟自动更新一次。
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block main_content %}
+<div id="main-content">
+	{% for entry in page.object_list %}
+	<div class="feed-entry">
+      <div class="title"><a href="{{ entry.link }}" target="_balank">{{ entry.title }}</a></div>
+	  <div class="info">{{ entry.desplay_date }} - {{ entry.domain_name }}</div>
+    </div>
+	{% endfor %}
+</div>
+{% endblock %}
+
