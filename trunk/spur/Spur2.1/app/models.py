@@ -12,12 +12,13 @@ from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
-import utils
+from utils import util
+from utils import page
 import constants
-from paginator import *
 
-gen_key_name = lambda s: 'kn' + uuid.uuid3(uuid.NAMESPACE_URL, utils.encode_str(s)).get_hex()
+gen_key_name = lambda s: 'kn' + uuid.uuid3(uuid.NAMESPACE_URL, util.encode_str(s)).get_hex()
 
+COUNTER_NAME_TOTAL_ENTRY_COUNT = 'total_entry_count'
 _SHARDS_PER_COUNTER = 20
 #http://feeds.feedburner.com/~r/AppEngineFan/~3/310349458/efficient-global-counters.html
 class ShardCounter(db.Model):
@@ -27,13 +28,13 @@ class ShardCounter(db.Model):
     @classmethod
     def get_count(cls, nameOfCounter):
         memcache_id = '/ShardCounter/%s' %  nameOfCounter
-        result = utils.get_from_cache(memcache_id)
+        result = memcache.get(memcache_id)
         if not (result == None):
             return result
         result = 0
         for shard in cls.gql('WHERE name=:1', nameOfCounter):
             result += shard.count
-        memcache.set(memcache_id, result)
+        memcache.set(memcache_id, result, 60)
         return result
     @classmethod
     def update_count(cls, nameOfCounter, delta):
@@ -89,14 +90,8 @@ class Account(db.Model):
     @property
     def is_sign_in(self):
         return not self.email == 'anonymous@gmail.com' 
-    
 
-class Permission(db.Model):
-    username     = db.StringProperty()
-    object_type  = db.StringProperty()
-    object_id    = db.IntegerProperty()
-    date_created = db.DateTimeProperty()
-
+#for friendfeed
 class Service(db.Model):
     service_id       = db.StringProperty()
     profile_url      = db.StringProperty()
@@ -106,7 +101,7 @@ class Service(db.Model):
     @classmethod
     def get_service(cls, service_id, profile_url, entry_type, name):
         memcache_id = ':'.join(['service', service_id, profile_url]);
-        service = utils.get_from_cache(memcache_id)
+        service = memcache.get(memcache_id)
         if service is None:
             service = cls.gql('WHERE service_id = :1 AND profile_url = :2', service_id, profile_url).get();
             if service is None:
@@ -126,7 +121,7 @@ class FeedEntry(db.Model):
     @classmethod
     def get_all(cls):
         memcache_id = 'feed_entries'
-        all_entries = utils.get_from_cache(memcache_id)
+        all_entries = memcache.get(memcache_id)
         if all_entries is None:
             all_entries = cls.gql('ORDER BY published DESC').fetch(1000)
             memcache.set(memcache_id, all_entries)
@@ -147,11 +142,13 @@ class FeedEntry(db.Model):
     
     @property
     def domain_name(self):
-        return utils.extract_domain_name(self.link)
+        return util.extract_domain_name(self.link)
     
     @property
     def desplay_date(self):
-        return utils.get_display_date(self.published)
+        return util.get_display_date(self.published)
+
+#end models for friendfeed
     
 class Entry(db.Model):
     """The class representing an entry in the blog"""
@@ -248,12 +245,12 @@ class Entry(db.Model):
         
     @property
     def local_put_time(self):
-        return utils.get_local_time(self.pub_time).strftime('%Y-%m-%d %H:%M')
+        return util.get_local_time(self.pub_time).strftime('%Y-%m-%d %H:%M')
     
     @property
     def content_summary(self):
         logging.debug('begin to generate summary')
-        summary = utils.get_summary(self.text)
+        summary = util.get_summary(self.text)
         return summary
     
     @property
@@ -324,7 +321,9 @@ class EntryComment(db.Model):
             self.weblog_entry.put()
     
 class Res(db.Model):
+    #resource url
     link  = db.StringProperty()
+    #feed url
     feed_link = db.StringProperty()
     description  = db.StringProperty()
     author = db.StringProperty()

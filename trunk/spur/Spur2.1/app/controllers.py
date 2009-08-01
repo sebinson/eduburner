@@ -1,14 +1,6 @@
 #coding=utf-8
 
 import logging
-# DeadlineExceededError can live in two different places
-# TODO(guido): simplify once this is fixed.
-try:
-  # When deployed
-  from google.appengine.runtime import DeadlineExceededError
-except ImportError:
-  # In the development server
-  from google.appengine.runtime.apiproxy_errors import DeadlineExceededError
 
 from google.appengine.api import users
 from google.appengine.ext import db
@@ -16,8 +8,8 @@ from google.appengine.api import memcache
 
 from models import *
 from app import *
-import utils
-from paginator import *
+from utils import util
+from utils import page
 import constants
 
 ### Decorators for request handlers ###
