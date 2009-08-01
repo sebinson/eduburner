@@ -7,9 +7,7 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 
 from models import *
-from app import *
-from utils import util
-from utils import page
+from framework.controller import *
 import constants
 
 ### Decorators for request handlers ###
@@ -33,22 +31,15 @@ def admin_required(func):
   return admin_wrapper
 #######################################################
 
-class IndexController(RestController):
+class IndexController(BaseController):
     def index(self, kwds = None):
-        page = utils.get_from_cache(constants.FEED_FIRST_PAGE_CACHE_KEY)
+        page = memcache.get(constants.FEED_FIRST_PAGE_CACHE_KEY)
         if page is None:
             page = FeedEntry.get_page(1)
             memcache.set(constants.FEED_FIRST_PAGE_CACHE_KEY, page)
         self.render('index', {'page' : page})
         
-        #page = utils.get_from_cache(constants.FIRST_PAGE_CACHE_KEY)
-        #if page is None:
-            #page = Entry.get_page(1)
-            #memcache.set(constants.FIRST_PAGE_CACHE_KEY, page)
-        #tags = EntryTag.all_entry_tags().fetch(constants.DEFAULT_PAGE_SIZE)
-        #self.render('index', {'page' : page, 'tags' : tags})
-        
-class EntryController(RestController):
+class EntryController(BaseController):
     #如果tag_key_name不为空，则显示某一个Tag下的Entry
     def index(self, kwds = None):
         if kwds != None and len(kwds) > 0:
@@ -138,7 +129,7 @@ class EntryController(RestController):
         entry.tags_as_str = request.get('tags')
         entry.author      = self.get_account().email
 
-class EntryCommentController(RestController):
+class EntryCommentController(BaseController):
     def index(self, kwds = None):
         pass
     def show(self, id, kwds = None):
@@ -151,7 +142,7 @@ class EntryCommentController(RestController):
         pass
     
         
-class ResourceController(RestController):
+class ResourceController(BaseController):
     def index(self, kwds = None):
         logging.debug('entering index method')
         if kwds == None or len(kwds) == 0:
@@ -221,25 +212,25 @@ class ResourceController(RestController):
         res.tags_as_str = request.get('tags')
         res.author = self.get_account().email
 
-class EntryTagController(RestController):
+class EntryTagController(BaseController):
     def index(self, kwds = None):
         tags = EntryTag.all_entry_tags().fetch(constants.DEFAULT_PAGE_SIZE)
         self.render('frag/entry-tags', {'tags' : tags})
 
-class ResTagController(RestController):
+class ResTagController(BaseController):
     def index(self, kwds = None):
         tags = ResTag.all_res_tags().fetch(constants.DEFAULT_PAGE_SIZE)
         self.render('frag/res-tags', {'tags' : tags})
 
-class ProjectController(RestController):
+class ProjectController(BaseController):
     def index(self, kwds = None):
         self.render('projects')
 
-class AdminController(RestController):
+class AdminController(BaseController):
     @admin_required
     def index(self, kwds = None):
         self.render('admin')
 
-class ErrorController(RestController):
+class ErrorController(BaseController):
     def index(self, kwds = None):
         self.render('error')        

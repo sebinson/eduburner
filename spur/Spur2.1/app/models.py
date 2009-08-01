@@ -137,8 +137,8 @@ class FeedEntry(db.Model):
         total_count = len(all_entries)
         offset = (page_index - 1) * page_size
         end = offset + page_size if offset + page_size < total_count else total_count
-        page = Page(all_entries[offset:end], page_index, total_count, page_size)
-        return page
+        p = page.Page(all_entries[offset:end], page_index, total_count, page_size)
+        return p
     
     @property
     def domain_name(self):
@@ -232,8 +232,8 @@ class Entry(db.Model):
         entries = cls.gql('WHERE status = :1 ORDER BY pub_time DESC', 'PUBLISHED').fetch(page_size, offset)
         entry_count = ShardCounter.get_count(constants.TOTAL_ENTRY_COUNT)
         logging.debug('entry count: ' + str(entry_count))
-        page = Page(entries, page_num, entry_count, page_size)
-        return page
+        p = page.Page(entries, page_num, entry_count, page_size)
+        return p
     
     def approve(self):
         self.status = 'PUBLISHED'
@@ -345,8 +345,8 @@ class Res(db.Model):
         offset = (page_num - 1) * page_size
         resources = Res.gql('WHERE status = :1 ORDER BY pub_time', 'PUBLISHED').fetch(page_size, offset)
         res_count = ShardCounter.get_count(constants.TOTAL_ENTRY_COUNT)
-        page = Page(resources, page_num, res_count, page_size)
-        return page
+        p = page.Page(resources, page_num, res_count, page_size)
+        return p
         
     
     def save(self):
