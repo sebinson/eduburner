@@ -12,7 +12,7 @@ from app.framework import mapper
 from app.controllers import *
 
 
-def initRoutes():
+def initMapper():
     m = mapper.Mapper()
     m.connect('/entries/',                      controller = EntryController)
     m.connect('/tags/{tag_key_name}/entries',    controller = EntryController)
@@ -24,7 +24,7 @@ def initRoutes():
     m.connect('/admin/',                        controller = AdminController)
         
 def main():
-    logging.getLogger().setLevel(settings.LOGGING_LEVEL)
+    logging.getLogger().setLevel(config.LOGGING_LEVEL)
     
     cfg = config.Config()
     cfg.template_dir = os.path.join(os.path.dirname(__file__), 'templates')
