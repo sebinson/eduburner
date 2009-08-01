@@ -5,19 +5,19 @@ api_version: 1
 
 handlers:
 - url: /static
-    static_dir: static
+  static_dir: static
   
 - url: /favicon.ico
-	static_files: static/images/favicon.ico
-	upload: static/images/favicon.ico
-	mime_type: image/x-icon
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+  mime_type: image/x-icon
 
 - url: /robots.txt
-	static_files: static/robots.txt
-	upload: static/robots.txt 
+  static_files: static/robots.txt
+  upload: static/robots.txt 
   
 - url: /.*
-    script: main.py
+  script: main.py
 
 
  
