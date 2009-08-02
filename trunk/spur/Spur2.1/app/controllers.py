@@ -226,6 +226,14 @@ class ProjectController(BaseController):
     def index(self, kwds = None):
         self.render('projects')
 
+class FriendFeedController(BaseController):
+    def index(self, kwds = None):
+        pass
+
+class GReaderSharedController(BaseController):
+    def index(self, kwds = None):
+        pass
+
 class AdminController(BaseController):
     @admin_required
     def index(self, kwds = None):

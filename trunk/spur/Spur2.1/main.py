@@ -14,14 +14,16 @@ from app.controllers import *
 
 def initMapper():
     m = mapper.Mapper()
-    m.connect('/entries/',                      controller = EntryController)
+    m.connect('/entries/',                       controller = EntryController)
     m.connect('/tags/{tag_key_name}/entries',    controller = EntryController)
-    m.connect('/resources/',                    controller = ResourceController)
+    m.connect('/resources/',                     controller = ResourceController)
     m.connect('/tags/{tag_key_name}/resources',  controller = ResourceController)
-    m.connect('/entrytags/',                    controller = EntryTagController)
-    m.connect('/resourcetags/',                 controller = ResTagController)
-    m.connect('/projects/',                     controller = ProjectController)
-    m.connect('/admin/',                        controller = AdminController)
+    m.connect('/entrytags/',                     controller = EntryTagController)
+    m.connect('/resourcetags/',                  controller = ResTagController)
+    m.connect('/projects/',                      controller = ProjectController)
+    m.connect('/admin/',                         controller = AdminController)
+    m.connect('/friendfeed/',                    controller = FriendFeedController)
+    m.connect('/reader/',                        controller = GReaderSharedController)
         
 def main():
     logging.getLogger().setLevel(config.LOGGING_LEVEL)
