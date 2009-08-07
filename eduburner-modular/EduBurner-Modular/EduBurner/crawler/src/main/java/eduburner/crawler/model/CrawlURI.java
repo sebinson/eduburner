@@ -31,6 +31,10 @@ public class CrawlURI {
 		this.classKey = DigestUtils.md5Hex(UrlUtils.getHostFromUrl(this.url));
 	}
 
+	/**
+	 * 最短抓取时间间隔
+	 * @return
+	 */
 	public long getMinCrawlInterval() {
 		return 0L;
 	}
