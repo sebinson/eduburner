@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.google.common.collect.MapMaker;
 
@@ -25,8 +24,6 @@ import eduburner.crawler.model.CrawlURI;
  * Uses in-memory map of all known 'queues' inside a single database.
  * Round-robins between all queues.
  */
-
-@Component("workQueueFrontier")
 public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
@@ -50,7 +47,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	@Override
 	public void initTasks() {
-
 	}
 
 	protected void startManagerThread() {
@@ -64,6 +60,12 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	@Override
 	public void finished(CrawlURI uri) {
+
+	}
+	
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -93,12 +95,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
@@ -116,7 +112,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 
 	/**
 	 * finisehd, add work queue current uri belongs to snooze queue
-	 * 
 	 * @param uri
 	 */
 	protected void processFinished(CrawlURI uri) {
@@ -130,7 +125,18 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 			logger.warn("failed to get workqueue for url: " + uri.getUrl());
 		}
 	}
+	
 
+	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
+		long nextTime = now + delay;
+		wq.setWakeTime(nextTime);
+		snoozeQueue.add(new DelayedWorkQueue(wq));
+	}
+
+	private void addToReadyQueue(WorkQueue qu) {
+		readyQueue.add(qu);
+	}
+	
 	/**
 	 * Wake any queues sitting in the snoozed queue whose time has come.
 	 */
@@ -143,16 +149,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		}
 	}
 
-	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
-		long nextTime = now + delay;
-		wq.setWakeTime(nextTime);
-		snoozeQueue.add(new DelayedWorkQueue(wq));
-	}
-
-	private void addToReadyQueue(WorkQueue qu) {
-		readyQueue.add(qu);
-	}
-
 	private class ManagerThread implements Runnable {
 
 		@Override
@@ -161,7 +157,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		}
 
 	}
-
+	@SuppressWarnings("unchecked")
 	private class DelayedWorkQueue implements Delayed, Serializable {
 
 		private static final long serialVersionUID = -6415390806576526923L;
@@ -217,7 +213,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 				return result;
 			}
 			if (workQueue instanceof SoftReference) {
-				@SuppressWarnings("unchecked")
 				SoftReference<WorkQueue> ref = (SoftReference) workQueue;
 				WorkQueue result = ref.get();
 				if (result == null) {
