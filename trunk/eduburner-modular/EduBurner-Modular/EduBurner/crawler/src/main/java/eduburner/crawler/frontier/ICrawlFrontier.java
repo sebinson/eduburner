@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.frontier;
 
 import eduburner.crawler.model.CrawlURI;
 
@@ -125,11 +125,9 @@ public interface ICrawlFrontier {
 	 */
 	public enum State {
 		RUN, // juggle/prioritize/emit; usual state
-		HOLD, // enter a consistent, stable, checkpointable state ASAP
 		PAUSE, // enter a stable state where no URIs are in-progress; unlike
 		// HOLD requires all in-process URIs to complete
 		FINISH
 	}; // end and cleanup; may not return to any other state after
 	// this state is requested/reached
-
 }

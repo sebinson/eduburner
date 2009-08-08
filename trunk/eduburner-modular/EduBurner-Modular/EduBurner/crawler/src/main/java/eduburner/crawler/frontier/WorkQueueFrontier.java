@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.frontier;
 
 import java.io.Serializable;
 import java.lang.ref.SoftReference;
@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.MapMaker;
 
+import eduburner.crawler.ICrawlController;
+import eduburner.crawler.WorkQueue;
 import eduburner.crawler.model.CrawlURI;
 
 /**
@@ -34,10 +36,23 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	protected AtomicLong queuedUriCount = new AtomicLong(0);
 	protected AtomicLong succeededFetchCount = new AtomicLong(0);
 	protected AtomicLong failedFetchCount = new AtomicLong(0);
+	
+	/**
+     * Distinguished frontier manager thread which handles all juggling
+     * of URI queues and queues/maps of queues for proper ordering/delay of
+     * URI processing. 
+     */
+    transient Thread managerThread;
+	/** last Frontier.State reached; used to suppress duplicate notifications */
+    State lastReachedState = null;
+    /** Frontier.state that manager thread should seek to reach */
+    State targetState = State.PAUSE;
 
 	private Map<String, WorkQueue> workQueueMap;
 	private BlockingQueue<WorkQueue> readyQueue;
 	private DelayQueue<DelayedWorkQueue> snoozeQueue;
+	
+	private ICrawlController controller;
 
 	public WorkQueueFrontier() {
 		workQueueMap = new MapMaker().makeMap();
@@ -50,23 +65,39 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	}
 
 	protected void startManagerThread() {
-		Executors.newSingleThreadExecutor().execute(new ManagerThread());
+		managerThread = new Thread(){
+			public void run(){
+				WorkQueueFrontier.this.managementTasks();
+			}
+		};
+		Executors.newSingleThreadExecutor().execute(managerThread);
 	}
 
 	@Override
 	public void schedule(CrawlURI uri) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void pause() {
+		
+	}
+	
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
 
 	@Override
-	public void finished(CrawlURI uri) {
+	public void terminate() {
+		// TODO Auto-generated method stub
 
 	}
 	
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
+	public void finished(CrawlURI uri) {
+		
 	}
 
 	@Override
@@ -94,18 +125,6 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		return succeededFetchCount.get();
 	}
 
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void terminate() {
-		// TODO Auto-generated method stub
-
-	}
-
 	protected WorkQueue getQueueForClassKey(String classKey) {
 		return workQueueMap.get(classKey);
 	}
@@ -126,6 +145,47 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 		}
 	}
 	
+	/**
+	 * Wake any queues sitting in the snoozed queue whose time has come.
+	 */
+	protected void managementTasks() {
+		assert Thread.currentThread() == managerThread;
+		
+		while(true){
+			switch(targetState){
+			case RUN:
+				reachedState(State.RUN);
+				if(isEmpty()){
+					targetState = State.PAUSE;
+				}
+				break;
+			case PAUSE:
+				
+				break;
+			case FINISH:
+				break;
+			}
+		}
+		
+		/*DelayedWorkQueue waked = null;
+		while(true){
+			waked = snoozeQueue.poll();
+			if(waked != null){
+				WorkQueue queue = waked.getWorkQueue();
+				queue.setWakeTime(0L);
+				addToReadyQueue(queue);
+			}
+		}
+		
+		logger.info("ending frontier manager thread.");*/
+	}
+	
+	protected void reachedState(State justReached) {
+        if(justReached != lastReachedState) {
+            controller.noteFrontierState(justReached);
+            lastReachedState = justReached;
+        }
+    }
 
 	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
 		long nextTime = now + delay;
@@ -136,27 +196,7 @@ public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
 	private void addToReadyQueue(WorkQueue qu) {
 		readyQueue.add(qu);
 	}
-	
-	/**
-	 * Wake any queues sitting in the snoozed queue whose time has come.
-	 */
-	protected void wakeQueues() {
-		DelayedWorkQueue waked;
-		while ((waked = snoozeQueue.poll()) != null) {
-			WorkQueue queue = waked.getWorkQueue();
-			queue.setWakeTime(0L);
-			addToReadyQueue(queue);
-		}
-	}
 
-	private class ManagerThread implements Runnable {
-
-		@Override
-		public void run() {
-			WorkQueueFrontier.this.wakeQueues();
-		}
-
-	}
 	@SuppressWarnings("unchecked")
 	private class DelayedWorkQueue implements Delayed, Serializable {
 
