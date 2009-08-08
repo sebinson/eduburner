@@ -32,20 +32,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	private static final Logger logger = LoggerFactory
 			.getLogger(WorkQueueFrontier.class);
 
-	protected AtomicLong queuedUriCount = new AtomicLong(0);
-	protected AtomicLong succeededFetchCount = new AtomicLong(0);
-	protected AtomicLong failedFetchCount = new AtomicLong(0);
 	
-	/**
-     * Distinguished frontier manager thread which handles all juggling
-     * of URI queues and queues/maps of queues for proper ordering/delay of
-     * URI processing. 
-     */
-    transient Thread managerThread;
-	/** last Frontier.State reached; used to suppress duplicate notifications */
-    State lastReachedState = null;
-    /** Frontier.state that manager thread should seek to reach */
-    State targetState = State.PAUSE;
 
 	private Map<String, WorkQueue> workQueueMap;
 	private BlockingQueue<WorkQueue> readyQueue;
@@ -295,5 +282,35 @@ public class WorkQueueFrontier extends AbstractFrontier {
 			// must be consistent/stable over time
 			return this.classKey.compareTo(other.getClassKey());
 		}
+	}
+
+	@Override
+	protected CrawlURI findEligibleURI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getInProcessCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void processFinish(CrawlURI caUri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void processScheduleAlways(CrawlURI caUri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void processScheduleIfUnique(CrawlURI caUri) {
+		// TODO Auto-generated method stub
+		
 	}
 }
