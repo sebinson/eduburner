@@ -224,4 +224,10 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
 }
