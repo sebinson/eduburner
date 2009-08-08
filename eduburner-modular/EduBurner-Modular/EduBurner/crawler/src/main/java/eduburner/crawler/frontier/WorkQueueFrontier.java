@@ -6,17 +6,14 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.MapMaker;
 
-import eduburner.crawler.ICrawlController;
 import eduburner.crawler.model.CrawlURI;
 
 /**
@@ -38,64 +35,13 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	private BlockingQueue<WorkQueue> readyQueue;
 	private DelayQueue<DelayedWorkQueue> snoozeQueue;
 	
-	private ICrawlController controller;
 
 	public WorkQueueFrontier() {
 		workQueueMap = new MapMaker().makeMap();
 		readyQueue = new LinkedBlockingDeque<WorkQueue>();
 		snoozeQueue = new DelayQueue<DelayedWorkQueue>();
 	}
-
-	@Override
-	public void initTasks() {
-	}
-
-	protected void startManagerThread() {
-		managerThread = new Thread(){
-			public void run(){
-				WorkQueueFrontier.this.managementTasks();
-			}
-		};
-		Executors.newSingleThreadExecutor().execute(managerThread);
-	}
-
-	@Override
-	public void schedule(CrawlURI uri) {
-		// TODO Auto-generated method stub
-	}
 	
-	@Override
-	public void pause() {
-		
-	}
-	
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void terminate() {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void finished(CrawlURI uri) {
-		
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return queuedUriCount.get() == 0L;
-	}
-
-	@Override
-	public CrawlURI next() {
-		return null;
-	}
-
 	@Override
 	public long queuedUriCount() {
 		return queuedUriCount.get();
@@ -131,47 +77,6 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		}
 	}
 	
-	/**
-	 * Wake any queues sitting in the snoozed queue whose time has come.
-	 */
-	protected void managementTasks() {
-		assert Thread.currentThread() == managerThread;
-		
-		while(true){
-			switch(targetState){
-			case RUN:
-				reachedState(State.RUN);
-				if(isEmpty()){
-					targetState = State.PAUSE;
-				}
-				break;
-			case PAUSE:
-				
-				break;
-			case FINISH:
-				break;
-			}
-		}
-		
-		/*DelayedWorkQueue waked = null;
-		while(true){
-			waked = snoozeQueue.poll();
-			if(waked != null){
-				WorkQueue queue = waked.getWorkQueue();
-				queue.setWakeTime(0L);
-				addToReadyQueue(queue);
-			}
-		}
-		
-		logger.info("ending frontier manager thread.");*/
-	}
-	
-	protected void reachedState(State justReached) {
-        if(justReached != lastReachedState) {
-            controller.noteFrontierState(justReached);
-            lastReachedState = justReached;
-        }
-    }
 
 	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
 		long nextTime = now + delay;
@@ -312,5 +217,11 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected void processScheduleIfUnique(CrawlURI caUri) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected long getMaxInWait() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
