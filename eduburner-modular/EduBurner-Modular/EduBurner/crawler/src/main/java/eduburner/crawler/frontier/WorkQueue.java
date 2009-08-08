@@ -17,9 +17,7 @@ import eduburner.crawler.model.CrawlURI;
  */
 public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 		Delayed {
-
 	private static final long serialVersionUID = 2941833658867158238L;
-
 	private static final Logger logger = LoggerFactory
 			.getLogger(WorkQueue.class);
 
@@ -31,7 +29,7 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 	/** Total number of stored items */
 	private long count = 0;
 	/** Total number of items ever enqueued */
-    private long enqueueCount = 0;
+	private long enqueueCount = 0;
 	/** The next item to be returned */
 	protected CrawlURI peekItem = null;
 	/** Last URI enqueued */
@@ -47,25 +45,26 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 		this.classKey = classKey;
 	}
 
-    /**
-     * Add the given CrawlURI, noting its addition in running count. (It
-     * should not already be present.)
-     * 
-     * @param frontier Work queues manager.
-     * @param curi CrawlURI to insert.
-     */
-    protected void enqueue(final WorkQueueFrontier frontier,
-        CrawlURI curi) {
-        try {
-            insert(frontier, curi, false);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        count++;
-        enqueueCount++;
-    }
-    
+	/**
+	 * Add the given CrawlURI, noting its addition in running count. (It should
+	 * not already be present.)
+	 * 
+	 * @param frontier
+	 *            Work queues manager.
+	 * @param curi
+	 *            CrawlURI to insert.
+	 */
+	protected void enqueue(final WorkQueueFrontier frontier, CrawlURI curi) {
+		try {
+			insert(frontier, curi, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		count++;
+		enqueueCount++;
+	}
+
 	public CrawlURI peek(final WorkQueueFrontier frontier) {
 		if (peekItem == null && count > 0) {
 			try {
@@ -80,6 +79,22 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 		}
 		return peekItem;
 	}
+	
+	 /**
+     * Update the given CrawlURI, which should already be present. (This
+     * is not checked.) Equivalent to an enqueue without affecting the count.
+     * 
+     * @param frontier Work queues manager.
+     * @param curi CrawlURI to update.
+     */
+    public void update(final WorkQueueFrontier frontier, CrawlURI curi) {
+        try {
+            insert(frontier, curi, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 	/**
 	 * Remove the peekItem from the queue and adjusts the count.
@@ -112,6 +127,24 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 		return unit.convert(getWakeTime() - System.currentTimeMillis(),
 				TimeUnit.MILLISECONDS);
 	}
+	
+	public void setActive(final WorkQueueFrontier frontier, final boolean b) {
+        if(active != b) {
+            active = b;
+            logger.debug((active ? "queue set active: " : "queue unset active: ") + 
+                    this.getClassKey());
+            try {
+                if(active) {
+                    resume(frontier);
+                } else {
+                    suspend(frontier);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+	}
 
 	public String getClassKey() {
 		return classKey;
@@ -120,33 +153,43 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 	public long getWakeTime() {
 		return wakeTime;
 	}
+
 	public void setWakeTime(long wakeTime) {
 		this.wakeTime = wakeTime;
 	}
-	
-	/**
-     * Insert the given curi, whether it is already present or not. 
-     * @param frontier WorkQueueFrontier.
-     * @param curi CrawlURI to insert.
-     * @throws IOException
-     */
-    private void insert(final WorkQueueFrontier frontier, CrawlURI curi,
-            boolean overwriteIfPresent)
-        throws IOException {
-        insertItem(frontier, curi, overwriteIfPresent);
-        lastQueued = curi.toString();
-    }
 
-    /**
-     * Insert the given curi, whether it is already present or not.
-     * Hook for subclasses. 
-     * 
-     * @param frontier WorkQueueFrontier.
-     * @param curi CrawlURI to insert.
-     * @throws IOException  if there was a problem while inserting the item
-     */
-    protected abstract void insertItem(final WorkQueueFrontier frontier,
-        CrawlURI curi, boolean overwriteIfPresent) throws IOException;
+	public long getCount() {
+		return count;
+	}
+
+	/**
+	 * Insert the given curi, whether it is already present or not.
+	 * 
+	 * @param frontier
+	 *            WorkQueueFrontier.
+	 * @param curi
+	 *            CrawlURI to insert.
+	 * @throws IOException
+	 */
+	private void insert(final WorkQueueFrontier frontier, CrawlURI curi,
+			boolean overwriteIfPresent) throws IOException {
+		insertItem(frontier, curi, overwriteIfPresent);
+		lastQueued = curi.toString();
+	}
+
+	/**
+	 * Insert the given curi, whether it is already present or not. Hook for
+	 * subclasses.
+	 * 
+	 * @param frontier
+	 *            WorkQueueFrontier.
+	 * @param curi
+	 *            CrawlURI to insert.
+	 * @throws IOException
+	 *             if there was a problem while inserting the item
+	 */
+	protected abstract void insertItem(final WorkQueueFrontier frontier,
+			CrawlURI curi, boolean overwriteIfPresent) throws IOException;
 
 	/**
 	 * Returns first item from queue (does not delete)
@@ -171,5 +214,23 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 	 */
 	protected abstract void deleteItem(final WorkQueueFrontier frontier,
 			final CrawlURI item) throws IOException;
+	
+	 /**
+     * Suspends this WorkQueue. Closes all connections to resources etc.
+     * 
+     * @param frontier
+     * @throws IOException
+     */
+    protected void suspend(final WorkQueueFrontier frontier) throws IOException {
+    }
+
+    /**
+     * Resumes this WorkQueue. Eventually opens connections to resources etc.
+     * 
+     * @param frontier
+     * @throws IOException
+     */
+    protected void resume(final WorkQueueFrontier frontier) throws IOException {
+    }
 
 }
