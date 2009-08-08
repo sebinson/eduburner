@@ -75,7 +75,13 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	}
 
 	/**
-	 * Wake any queues sitting in the snoozed queue whose time has come.
+	 * Main loop of frontier's managerThread. Only exits when State.FINISH is
+	 * requested (perhaps automatically at URI exhaustion) and reached.
+	 * 
+	 * General strategy is to try to fill outbound queue, then process an item
+	 * from inbound queue, and repeat. A HOLD (to be implemented) or PAUSE puts
+	 * frontier into a stable state that won't be changed asynchronously by
+	 * worker thread activity.
 	 */
 	protected void managementTasks() {
 		assert Thread.currentThread() == managerThread;
@@ -158,8 +164,13 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	}
 
 	@Override
-	public CrawlURI next() {
-		return null;
+	public CrawlURI next() throws InterruptedException {
+		// perhaps hold without taking ready outbound items
+		outboundLock.readLock().lockInterruptibly();
+		outboundLock.readLock().unlock();
+
+		CrawlURI retval = outbound.take();
+		return retval;
 	}
 
 	/**
@@ -175,6 +186,27 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 				outbound.put(crawlable);
 			} else {
 				break;
+			}
+		}
+	}
+
+	/**
+	 * Drain the inbound queue of update events, or at the very least wait until
+	 * some additional delayed-queue URI becomes available.
+	 * 
+	 * @throws InterruptedException
+	 */
+	protected void drainInbound() throws InterruptedException {
+		int batch = inbound.size();
+		for (int i = 0; i < batch; i++) {
+			inbound.take().process();
+		}
+		if (batch == 0) {
+			// always do at least one timed try
+			InEvent toProcess = inbound.poll(getMaxInWait(),
+					TimeUnit.MILLISECONDS);
+			if (toProcess != null) {
+				toProcess.process();
 			}
 		}
 	}
@@ -263,27 +295,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 				inbound.put(ev);
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	/**
-	 * Drain the inbound queue of update events, or at the very least wait until
-	 * some additional delayed-queue URI becomes available.
-	 * 
-	 * @throws InterruptedException
-	 */
-	protected void drainInbound() throws InterruptedException {
-		int batch = inbound.size();
-		for (int i = 0; i < batch; i++) {
-			inbound.take().process();
-		}
-		if (batch == 0) {
-			// always do at least one timed try
-			InEvent toProcess = inbound.poll(getMaxInWait(),
-					TimeUnit.MILLISECONDS);
-			if (toProcess != null) {
-				toProcess.process();
 			}
 		}
 	}
@@ -431,8 +442,21 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 		@Override
 		public void process() {
 			processSetTargetState(target);
-			// TODO: perhaps null reachedState, because until new state is
-			// reached it's misleading?
 		}
+	}
+	
+	@Override
+	public long queuedUriCount() {
+		return queuedUriCount.get();
+	}
+
+	@Override
+	public long failedFetchCount() {
+		return failedFetchCount.get();
+	}
+
+	@Override
+	public long succeededFetchCount() {
+		return succeededFetchCount.get();
 	}
 }

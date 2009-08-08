@@ -9,6 +9,9 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.collections.Bag;
+import org.apache.commons.collections.BagUtils;
+import org.apache.commons.collections.bag.HashBag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,63 +32,121 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	private static final Logger logger = LoggerFactory
 			.getLogger(WorkQueueFrontier.class);
 
+	private Map<String, WorkQueue> allQueues;
+	private BlockingQueue<String> readyClassQueues;
+	private DelayQueue<DelayedWorkQueue> snoozeQueues;
 	
-
-	private Map<String, WorkQueue> workQueueMap;
-	private BlockingQueue<WorkQueue> readyQueue;
-	private DelayQueue<DelayedWorkQueue> snoozeQueue;
-	
+	protected Bag inProcessQueues = BagUtils.synchronizedBag(new HashBag());
 
 	public WorkQueueFrontier() {
-		workQueueMap = new MapMaker().makeMap();
-		readyQueue = new LinkedBlockingDeque<WorkQueue>();
-		snoozeQueue = new DelayQueue<DelayedWorkQueue>();
-	}
-	
-	@Override
-	public long queuedUriCount() {
-		return queuedUriCount.get();
+		super();
 	}
 
 	@Override
-	public long failedFetchCount() {
-		return failedFetchCount.get();
+	public void initTasks() {
+		super.initTasks();
 	}
 
-	@Override
-	public long succeededFetchCount() {
-		return succeededFetchCount.get();
+	protected void initInternalQueues(boolean recycle) {
+		allQueues = new MapMaker().makeMap();
+
+		readyClassQueues = new LinkedBlockingDeque<String>();
+		snoozeQueues = new DelayQueue<DelayedWorkQueue>();
 	}
 
 	protected WorkQueue getQueueForClassKey(String classKey) {
-		return workQueueMap.get(classKey);
+		return allQueues.get(classKey);
 	}
 
 	/**
 	 * finisehd, add work queue current uri belongs to snooze queue
+	 * 
 	 * @param uri
 	 */
-	protected void processFinished(CrawlURI uri) {
+	protected void processFinish(CrawlURI uri) {
 		long now = System.currentTimeMillis();
 		uri.clearUp();
 		long delay = uri.getMinCrawlInterval();
-		WorkQueue wq = workQueueMap.get(uri.getClassKey());
+		WorkQueue wq = allQueues.get(uri.getClassKey());
 		if (wq != null) {
 			addToSnoozeQueue(wq, now, delay);
 		} else {
 			logger.warn("failed to get workqueue for url: " + uri.getUrl());
 		}
 	}
-	
 
 	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
 		long nextTime = now + delay;
 		wq.setWakeTime(nextTime);
-		snoozeQueue.add(new DelayedWorkQueue(wq));
+		snoozeQueues.add(new DelayedWorkQueue(wq));
 	}
 
-	private void addToReadyQueue(WorkQueue qu) {
-		readyQueue.add(qu);
+	private void addToReadyQueue(WorkQueue queue) {
+		queue.setActive(this, true);
+		try {
+			readyClassQueues.put(queue.getClassKey());
+		} catch (InterruptedException e) {
+			logger.warn("failed to add queue " + queue.getClassKey() + " to ready queue");
+			e.printStackTrace();
+		}
+	}
+
+	 /**
+     * Return the next CrawlURI eligible to be processed (and presumably
+     * visited/fetched) by a a worker thread.
+     *
+     * Relies on the readyClassQueues having been loaded with
+     * any work queues that are eligible to provide a URI. 
+     *
+     * @return next CrawlURI eligible to be processed, or null if none available
+     *
+     */
+	@Override
+	protected CrawlURI findEligibleURI() {
+		assert Thread.currentThread() == managerThread;
+		wakeQueues();
+		
+		int activationsWanted = 
+            outbound.remainingCapacity() - readyClassQueues.size();
+		
+		return null;
+	}
+	
+	/**
+     * Wake any queues sitting in the snoozed queue whose time has come.
+     */
+    protected void wakeQueues() {
+        DelayedWorkQueue waked; 
+        while((waked = snoozeQueues.poll())!=null) {
+            WorkQueue queue = waked.getWorkQueue();
+            queue.setWakeTime(0);
+            queue.setActive(this, true);
+            addToReadyQueue(queue);
+        }
+    }
+
+	@Override
+	protected int getInProcessCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void processScheduleAlways(CrawlURI caUri) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void processScheduleIfUnique(CrawlURI caUri) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected long getMaxInWait() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -187,47 +248,5 @@ public class WorkQueueFrontier extends AbstractFrontier {
 			// must be consistent/stable over time
 			return this.classKey.compareTo(other.getClassKey());
 		}
-	}
-
-	@Override
-	protected CrawlURI findEligibleURI() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected int getInProcessCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected void processFinish(CrawlURI caUri) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void processScheduleAlways(CrawlURI caUri) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void processScheduleIfUnique(CrawlURI caUri) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected long getMaxInWait() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 }

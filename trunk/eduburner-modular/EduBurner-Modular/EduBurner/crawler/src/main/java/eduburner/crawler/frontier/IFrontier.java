@@ -11,10 +11,11 @@ public interface IFrontier {
 	 * during the time specified null will be returned.
 	 * 
 	 * @return the next URI that should be processed.
+	 * @throws InterruptedException 
 	 * @throws InterruptedException
 	 * @throws EndedException
 	 */
-	public CrawlURI next();
+	public CrawlURI next() throws InterruptedException;
 
 	/**
 	 * Returns true if the frontier contains no more URIs to crawl.
@@ -113,12 +114,7 @@ public interface IFrontier {
      * holding all threads, until instructed otherwise. 
      */
     public void pause();
-    
-    /**
-     * Resumes the release of URIs to crawl, allowing worker
-     * ToeThreads to proceed. 
-     */
-    public void resume();
+
 
 	/**
 	 * Enumeration of possible target states.
