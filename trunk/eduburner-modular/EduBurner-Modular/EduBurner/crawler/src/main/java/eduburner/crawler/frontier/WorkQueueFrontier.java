@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.MapMaker;
 
 import eduburner.crawler.ICrawlController;
-import eduburner.crawler.WorkQueue;
 import eduburner.crawler.model.CrawlURI;
 
 /**
@@ -26,7 +25,7 @@ import eduburner.crawler.model.CrawlURI;
  * Uses in-memory map of all known 'queues' inside a single database.
  * Round-robins between all queues.
  */
-public class WorkQueueFrontier implements ICrawlFrontier, Serializable {
+public class WorkQueueFrontier implements IFrontier, Serializable {
 
 	private static final long serialVersionUID = 5723257498212526250L;
 

@@ -2,7 +2,7 @@ package eduburner.crawler;
 
 import java.util.List;
 
-import eduburner.crawler.frontier.ICrawlFrontier;
+import eduburner.crawler.frontier.IFrontier;
 import eduburner.crawler.processor.IProcessor;
 
 public interface ICrawlController {
@@ -31,7 +31,7 @@ public interface ICrawlController {
 	 */
 	public void requestCrawlPause();
 	
-	public ICrawlFrontier getFrontier();
+	public IFrontier getFrontier();
 	
 	public void releaseContinuePermission();
 
@@ -44,5 +44,5 @@ public interface ICrawlController {
 	
 	public List<IProcessor> getProcessors();
 	
-	public void noteFrontierState(ICrawlFrontier.State reachedState);
+	public void noteFrontierState(IFrontier.State reachedState);
 }

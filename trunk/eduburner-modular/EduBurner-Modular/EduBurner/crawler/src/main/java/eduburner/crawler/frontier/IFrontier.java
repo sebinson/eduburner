@@ -2,7 +2,7 @@ package eduburner.crawler.frontier;
 
 import eduburner.crawler.model.CrawlURI;
 
-public interface ICrawlFrontier {
+public interface IFrontier {
 
 	public void initTasks();
 
