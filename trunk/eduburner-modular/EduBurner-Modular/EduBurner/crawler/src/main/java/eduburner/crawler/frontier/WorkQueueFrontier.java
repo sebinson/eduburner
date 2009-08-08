@@ -25,7 +25,7 @@ import eduburner.crawler.model.CrawlURI;
  * Uses in-memory map of all known 'queues' inside a single database.
  * Round-robins between all queues.
  */
-public class WorkQueueFrontier implements IFrontier, Serializable {
+public class WorkQueueFrontier extends AbstractFrontier {
 
 	private static final long serialVersionUID = 5723257498212526250L;
 
@@ -106,7 +106,7 @@ public class WorkQueueFrontier implements IFrontier, Serializable {
 
 	@Override
 	public CrawlURI next() {
-		return readyQueue.poll().nextUri();
+		return null;
 	}
 
 	@Override
