@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import eduburner.crawler.enumerations.CrawlStatus;
 import eduburner.crawler.event.CrawlStatusListener;
+import eduburner.crawler.frontier.ICrawlFrontier;
 import eduburner.crawler.processor.IProcessor;
 
 /**
@@ -174,6 +175,12 @@ public class CrawlController implements ICrawlController {
 
 	public void setProcessors(List<IProcessor> processors) {
 		this.processors = processors;
+	}
+
+	@Override
+	public void noteFrontierState(ICrawlFrontier.State reachedState) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
