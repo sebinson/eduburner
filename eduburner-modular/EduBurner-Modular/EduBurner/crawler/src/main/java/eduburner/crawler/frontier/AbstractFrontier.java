@@ -2,7 +2,7 @@ package eduburner.crawler.frontier;
 
 import eduburner.crawler.model.CrawlURI;
 
-public class AbstractFrontier implements ICrawlFrontier {
+public class AbstractFrontier implements IFrontier {
 
 	@Override
 	public long failedFetchCount() {

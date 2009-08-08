@@ -1,4 +1,4 @@
-package eduburner.crawler;
+package eduburner.crawler.frontier;
 
 import java.io.Serializable;
 import java.util.Queue;

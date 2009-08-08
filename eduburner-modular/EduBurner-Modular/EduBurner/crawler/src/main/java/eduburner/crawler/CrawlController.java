@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 
 import eduburner.crawler.enumerations.CrawlStatus;
 import eduburner.crawler.event.CrawlStatusListener;
-import eduburner.crawler.frontier.ICrawlFrontier;
+import eduburner.crawler.frontier.IFrontier;
 import eduburner.crawler.processor.IProcessor;
 
 /**
@@ -35,7 +35,7 @@ public class CrawlController implements ICrawlController {
 
 	private List<IProcessor> processors = Lists.newArrayList();
 
-	private ICrawlFrontier crawlFrontier;
+	private IFrontier crawlFrontier;
 
 	public CrawlController() {
 		maxToeThreadSize = DEFAULT_MAX_TOE_THREAD_SIZE;
@@ -54,7 +54,7 @@ public class CrawlController implements ICrawlController {
 	}
 
 	@Override
-	public ICrawlFrontier getFrontier() {
+	public IFrontier getFrontier() {
 		return crawlFrontier;
 	}
 
@@ -178,7 +178,7 @@ public class CrawlController implements ICrawlController {
 	}
 
 	@Override
-	public void noteFrontierState(ICrawlFrontier.State reachedState) {
+	public void noteFrontierState(IFrontier.State reachedState) {
 		// TODO Auto-generated method stub
 		
 	}
