@@ -102,8 +102,6 @@ public class CrawlController implements ICrawlController {
             return;
         }
 		
-		crawlFrontier.resume();
-		
 		fireCrawlStateChangeEvent(State.RUNNING, CrawlStatus.RUNNING);
 	}
 	
