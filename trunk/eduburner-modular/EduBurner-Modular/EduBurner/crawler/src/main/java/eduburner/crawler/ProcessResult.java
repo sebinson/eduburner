@@ -22,7 +22,6 @@ public class ProcessResult {
         this(status, null);
     }
     
-    
     private ProcessResult(ProcessStatus status, String jumpName) {
         this.status = status;
         this.jumpTarget = jumpName;

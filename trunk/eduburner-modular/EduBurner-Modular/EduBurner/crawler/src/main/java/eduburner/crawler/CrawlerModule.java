@@ -6,6 +6,7 @@ public class CrawlerModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		
 	}
 
 }
