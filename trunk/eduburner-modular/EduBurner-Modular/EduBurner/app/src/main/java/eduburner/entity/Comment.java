@@ -18,8 +18,9 @@ public class Comment extends EntityObject {
 	private Date date;
 	private String commentId;
 	private String body;
-	
+	//author
 	private UserData user;
+	//entry comment belongs to
 	private Entry  entry;
 	
 	public String getCommentId() {

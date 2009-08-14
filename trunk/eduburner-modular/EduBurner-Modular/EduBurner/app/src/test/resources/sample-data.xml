@@ -114,7 +114,7 @@
       <null/>
     </row>
   </table>
-  <table name="course_member">
+  <table name="rel_user_course">
     <column>course_id</column>
     <column>member_id</column>
     <row>
@@ -195,7 +195,7 @@
     <column>type</column>
   </table>
   
-  <table name="user_course">
+  <table name="rel_user_course">
     <column>member_id</column>
     <column>course_id</column>
     <row>
@@ -213,7 +213,7 @@
     <column>actionDate</column>
     <column>userId</column>
   </table>
-  <table name="user_role">
+  <table name="rel_user_role">
     <column>user_id</column>
     <column>role_id</column>
     <row>

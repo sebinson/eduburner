@@ -43,6 +43,7 @@ public class UserData extends EntityObject {
 	
 	private List<Course> courses = Lists.newArrayList();
 	
+	//comments user made
 	private List<Comment> comments = Lists.newArrayList();
 
 	public UserData() {
@@ -97,7 +98,7 @@ public class UserData extends EntityObject {
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-	@JoinTable(name = "user_course", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
+	@JoinTable(name = "rel_user_course", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
 	public List<Course> getCourses() {
 		return courses;
 	}
