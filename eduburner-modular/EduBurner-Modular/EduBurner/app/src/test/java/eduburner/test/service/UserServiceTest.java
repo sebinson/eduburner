@@ -110,7 +110,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		role.setName("rolename");
 		roleManager.saveRole(role);
 		int after = getCount("SELECT COUNT(*) FROM role;");
-		int here = getCount("SELECT COUNT(*) FROM user_role;");
+		int here = getCount("SELECT COUNT(*) FROM rel_user_role;");
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("before is: " + before);

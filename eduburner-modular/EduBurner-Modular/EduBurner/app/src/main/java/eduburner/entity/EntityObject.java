@@ -12,6 +12,9 @@ import com.google.gson.annotations.Expose;
 @MappedSuperclass
 public abstract class EntityObject implements Serializable {
 	private static final long serialVersionUID = 3949782437769940769L;
+	
+	public static final String VALUES_SEPERATOR = ",";
+	
 	@Expose
 	protected Long id;
 	
@@ -24,6 +27,8 @@ public abstract class EntityObject implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 
 	public abstract String toString();
 
