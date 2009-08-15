@@ -44,6 +44,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public CourseTag getOrInsertCourseTag(String tagName) {
 		List tags = dao.find("FROM CourseTag WHERE name= ?", tagName);
