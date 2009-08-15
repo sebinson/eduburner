@@ -1,4 +1,4 @@
-<form id="course-form" method="POST" action="<@spring.url '/courses.json'/>">
+<form id="course-form" method="POST" action="<@spring.url '/courses/'/>">
 	<@spring.bind "course.*" />
 	<div class="eb-form-container">
 	  <div class="eb-form">

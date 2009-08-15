@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
 import eduburner.enumerations.RoleType;
+import eduburner.persistence.EntityExistsException;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
@@ -131,7 +132,11 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		user.setPassword(passwordEncoder.encodePassword(password, null));
 		Role role = roleManager.getRoleByName(RoleType.User.toString());
 		user.addRole(role);
-		userManager.updateUser(user);
+		try {
+			userManager.createUser(user);
+		} catch (EntityExistsException e) {
+			e.printStackTrace();
+		}
 		return user;
 	}
 

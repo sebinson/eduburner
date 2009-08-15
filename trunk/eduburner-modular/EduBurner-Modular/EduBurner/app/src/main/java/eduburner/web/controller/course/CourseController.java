@@ -65,12 +65,14 @@ public class CourseController extends BaseController {
 	@RequestMapping(value = "/courses/", method = RequestMethod.POST)
 	public String create(@ModelAttribute("course") Course course,
 			BindingResult br, Model model) {
+		logger.debug("entering create method...");
 		// TODO: check permission
 		new CourseValidator().validate(course, br);
 		if (br.hasErrors()) {
 			setReturnMsg(model, Message.ERROR);
 			return JSON_VIEW;
 		} else {
+			logger.debug("begin to create course");
 			course.setCreator(getRemoteUserDataObj());
 			courseManager.createCourse(course);
 			setReturnMsg(model, Message.OK);
