@@ -92,7 +92,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	// just show how to change test order
 	@Test(dependsOnMethods = { "testTreatingAUserCausesADatabaseRowToBeInserted" }, alwaysRun = true)
 	public void testGetUser() {
-		User user = userManager.getUserById(1);
+		User user = userManager.getUserById("5cb64b881e5438ba9a76ca60fc05aea4");
 		if (logger.isDebugEnabled()) {
 			logger.debug("user's password is: " + user.getPassword());
 		}

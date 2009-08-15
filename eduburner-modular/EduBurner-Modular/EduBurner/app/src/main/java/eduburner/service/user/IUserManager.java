@@ -2,6 +2,7 @@ package eduburner.service.user;
 
 import java.util.List;
 
+import eduburner.entity.Entry;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
@@ -10,7 +11,7 @@ public interface IUserManager {
 	
 	public List<User> getAllUsers();
 
-	public User getUserById(long userId);
+	public User getUserById(String userId);
 
 	public void createUser(User user) throws EntityExistsException;
 
@@ -20,9 +21,9 @@ public interface IUserManager {
 
 	public User getUserByUsername(String username);
 
-	public void removeUser(long userId);
+	public void removeUser(String userId);
 
-	public UserData getUserDataByUserId(long userId);
+	public UserData getUserDataByUserId(String userId);
 	
 	public UserData getUserDataByUsername(String username);
 
@@ -31,4 +32,7 @@ public interface IUserManager {
 	public void updateUserDate(UserData ud);
 	
 	public UserData getUserData(User user);
+	
+	public void createEntry(String userId, String courseId, Entry entry);
+	
 }
