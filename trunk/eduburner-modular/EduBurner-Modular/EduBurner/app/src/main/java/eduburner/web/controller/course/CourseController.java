@@ -42,7 +42,7 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}")
-	public String show(@PathVariable("courseId") long courseId, Model model) {
+	public String show(@PathVariable("courseId") String courseId, Model model) {
 		Course course = courseManager.getCourseById(courseId);
 		model.addAttribute("course", course);
 		return COURSE_VIEW;
@@ -56,7 +56,7 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/edit")
-	public String edit(@PathVariable("courseId") long courseId, Model model) {
+	public String edit(@PathVariable("courseId") String courseId, Model model) {
 		Course course = courseManager.getCourseById(courseId);
 		model.addAttribute("course", course);
 		return COURSE_FORM;
@@ -86,14 +86,14 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}", method = RequestMethod.DELETE)
-	public String destroy(@PathVariable("courseId") long courseId, Model model) {
+	public String destroy(@PathVariable("courseId") String courseId, Model model) {
 		courseManager.removeCourse(courseId);
 		setReturnMsg(model, Message.OK);
 		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/users", method = RequestMethod.POST)
-	public String addMember(@PathVariable("courseId") long courseId,
+	public String addMember(@PathVariable("courseId") String courseId,
 			@RequestParam("username") String username, Model model) {
 		UserData user = userManager.getUserDataByUsername(username);
 		Course course = courseManager.getCourseById(courseId);
@@ -105,21 +105,21 @@ public class CourseController extends BaseController {
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/users/{userId}", method = RequestMethod.DELETE)
-	public String removeMember(@PathVariable("courseId") long courseId,
-			@PathVariable("userId") long userId, Model model) {
+	public String removeMember(@PathVariable("courseId") String courseId,
+			@PathVariable("userId") String userId, Model model) {
 		UserData user = userManager.getUserDataByUserId(userId);
 		Course course = courseManager.getCourseById(courseId);
 		return JSON_VIEW;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/entries", method = RequestMethod.POST)
-	public void createCourseEntry(@PathVariable("courseId") long courseId,
+	public void createCourseEntry(@PathVariable("courseId") String courseId,
 			Model model) {
 		
 	}
 
 	@RequestMapping(value = "/courses/{courseId}/entries")
-	public void courseEntries(@PathVariable("courseId") long courseId,
+	public void courseEntries(@PathVariable("courseId") String courseId,
 			Model model) {
 
 	}

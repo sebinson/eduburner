@@ -101,7 +101,7 @@ public class BaseController {
 		return userManager.getUserData(user);
 	}
 
-	protected Long getRemoteUserId() {
+	protected String getRemoteUserId() {
 		return getRemoteUserObj().getId();
 	}
 

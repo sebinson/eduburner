@@ -17,6 +17,7 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import eduburner.entity.Entry;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
@@ -79,15 +80,15 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 
 	@Override
-	public User getUserById(long userId) {
+	public User getUserById(String userId) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering getUserById method");
 		}
-		return dao.getInstanceById(User.class, new Long(userId));
+		return dao.getInstanceById(User.class, userId);
 	}
 
 	@Override
-	public void removeUser(long userId) {
+	public void removeUser(String userId) {
 		dao.remove(getUserById(userId));
 	}
 
@@ -95,7 +96,7 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	 * get UserData, if of UserData found, create new one
 	 */
 	@Override
-	public UserData getUserDataByUserId(long userId) {
+	public UserData getUserDataByUserId(String userId) {
 		User user = getUserById(userId);
 		return getUserData(user);
 	}
@@ -130,5 +131,10 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	@Override
 	public void updateUserDate(UserData ud) {
 		dao.update(ud);
+	}
+
+	@Override
+	public void createEntry(String userId, String courseId, Entry entry) {
+		
 	}
 }

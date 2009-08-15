@@ -9,13 +9,13 @@ public interface ICourseManager {
 	
 	public List<Course> getAllCourses();
 	
-	public Course getCourseById(long courseId);
+	public Course getCourseById(String courseId);
 	
 	public void createCourse(Course course);
 	
 	public void updateCourse(Course course);
 	
-	public void removeCourse(long courseId);
+	public void removeCourse(String courseId);
 	
 	public CourseTag getCourseTag(String tagName);
 	

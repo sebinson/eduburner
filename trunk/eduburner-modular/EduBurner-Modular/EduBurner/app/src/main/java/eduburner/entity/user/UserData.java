@@ -36,7 +36,7 @@ public class UserData extends EntityObject {
 	@Expose
 	private String email;
 	@Expose
-	private long userId;
+	private String userId;
 
 	// 加上个人头像
 	private byte[] profilePicture;
@@ -72,11 +72,11 @@ public class UserData extends EntityObject {
 		this.username = username;
 	}
 
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

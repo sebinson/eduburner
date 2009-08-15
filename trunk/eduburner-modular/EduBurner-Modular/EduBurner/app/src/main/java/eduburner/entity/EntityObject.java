@@ -2,33 +2,35 @@ package eduburner.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.google.gson.annotations.Expose;
 
 @MappedSuperclass
 public abstract class EntityObject implements Serializable {
 	private static final long serialVersionUID = 3949782437769940769L;
-	
+
 	public static final String VALUES_SEPERATOR = ",";
-	
+
 	@Expose
-	protected Long id;
-	
+	protected String id;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
+	@Column(length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
 
 	public abstract String toString();
 
@@ -38,16 +40,10 @@ public abstract class EntityObject implements Serializable {
 		if (!(o instanceof EntityObject))
 			return false;
 		EntityObject entityObject = (EntityObject) o;
-		return id == entityObject.getId();
+		return id.equals(entityObject.getId());
 	}
 
 	public int hashCode() {
-		long idValue;
-		if (null != id) {
-			idValue = id.longValue();
-		} else {
-			idValue = 0;
-		}
-		return (int) (idValue ^ idValue >>> 32);
+		return id.hashCode();
 	}
 }

@@ -35,7 +35,7 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping(value="users/{userId}", method=RequestMethod.GET)
-	public String show(@PathVariable long userId, Model model){
+	public String show(@PathVariable String userId, Model model){
 		User user = userManager.getUserById(userId);
 		model.addAttribute("user", user);
 		return USER_VIEW;

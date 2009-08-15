@@ -20,7 +20,7 @@ public class UserLog extends EntityObject {
 
 	private static final long serialVersionUID = -8282684097913298667L;
 
-	private long userId;
+	private String userId;
 	//json格式
 	/**
 	 * 
@@ -35,11 +35,11 @@ public class UserLog extends EntityObject {
 	private String action;
 	private Date actionDate;
 
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

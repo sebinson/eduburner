@@ -19,8 +19,8 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	}
 
 	@Override
-	public Course getCourseById(long courseId) {
-		return dao.getInstanceById(Course.class, new Long(courseId));
+	public Course getCourseById(String courseId) {
+		return dao.getInstanceById(Course.class, courseId);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	}
 
 	@Override
-	public void removeCourse(long courseId) {
+	public void removeCourse(String courseId) {
 		dao.remove(getCourseById(courseId));
 	}
 

@@ -12,7 +12,7 @@
     <column>username</column>
     <column>version</column>
     <row>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
       <value>false</value>
       <value>false</value>
       <value>false</value>
@@ -24,7 +24,7 @@
       <value>1</value>
     </row>
     <row>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>false</value>
       <value>false</value>
       <value>false</value>
@@ -41,14 +41,14 @@
     <column>description</column>
     <column>name</column>
     <row>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
       <value><![CDATA[
 				Administrator role (can edit Users)
 			]]></value>
       <value>ROLE_SystemAdmin</value>
     </row>
     <row>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea7</value>
       <value><![CDATA[
 				Default role for all Users
 			]]></value>
@@ -63,19 +63,19 @@
     <column>userId</column>
     <column>username</column>
     <row>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea8</value>
       <value>rockmaple@163.com</value>
       <value>lliu</value>
       <null/>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>admin</value>
     </row>
     <row>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea9</value>
       <value>st416@gse.pku.edu.cn</value>
       <value>zhangyf</value>
       <null/>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
       <value>rockmaple</value>
     </row>
   </table>
@@ -96,7 +96,7 @@
     <column>title</column>
     <column>fk_creator_id</column>
     <row>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
       <value>history</value>
       <value><![CDATA[2009-03-29 00:00:00.0]]></value>
       <value><![CDATA[2009-03-14 00:00:00.0]]></value>
@@ -105,7 +105,7 @@
       <null/>
     </row>
     <row>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aec4</value>
       <value>chinese</value>
       <value><![CDATA[2009-03-29 00:00:00.0]]></value>
       <value><![CDATA[2009-03-14 00:00:00.0]]></value>
@@ -118,20 +118,20 @@
     <column>course_id</column>
     <column>member_id</column>
     <row>
-      <value>1</value>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea9</value>
     </row>
 	<row>
-      <value>2</value>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aec4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea9</value>
     </row>
 	<row>
-      <value>2</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aec4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea8</value>
     </row>
     <row>
-      <value>1</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea8</value>
     </row>
   </table>
   <table name="course_resource">
@@ -143,11 +143,11 @@
     <column>id</column>
     <column>name</column>
     <row>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05afa4</value>
       <value>history</value>
     </row>
     <row>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aga4</value>
       <value>chinese</value>
     </row>
   </table>
@@ -178,12 +178,12 @@
     <column>tag_id</column>
     <column>course_id</column>
     <row>
-      <value>1</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05afa4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
     </row>
     <row>
-      <value>2</value>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aga4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aec4</value>
     </row>
   </table>
   
@@ -199,12 +199,12 @@
     <column>member_id</column>
     <column>course_id</column>
     <row>
-      <value>2</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
     </row>
     <row>
-      <value>1</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aeb4</value>
     </row>
   </table>
   <table name="user_log">
@@ -217,12 +217,12 @@
     <column>user_id</column>
     <column>role_id</column>
     <row>
-      <value>1</value>
-      <value>2</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea7</value>
     </row>
     <row>
-      <value>2</value>
-      <value>1</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
+      <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
     </row>
   </table>
 </dataset>
