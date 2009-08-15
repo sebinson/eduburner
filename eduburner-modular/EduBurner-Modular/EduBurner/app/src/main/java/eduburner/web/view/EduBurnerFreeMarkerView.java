@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
  * add base and securityHelper to model, so it can be accessed. e.g.
  * ${securityHelper.principal?default("")}
  * 
- * @author rockmaple
+ * @author zhangyf@gmail.com
  * 
  */
 public class EduBurnerFreeMarkerView extends FreeMarkerView {
