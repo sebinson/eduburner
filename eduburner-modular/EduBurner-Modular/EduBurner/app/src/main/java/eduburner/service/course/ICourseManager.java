@@ -24,5 +24,5 @@ public interface ICourseManager {
 	public CourseTag getCourseTag(String tagName);
 	
 	public CourseTag getOrInsertCourseTag(String tagName);
-
+	
 }
