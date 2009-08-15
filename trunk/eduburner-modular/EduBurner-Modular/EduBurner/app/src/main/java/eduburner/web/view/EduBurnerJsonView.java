@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -31,20 +32,23 @@ public class EduBurnerJsonView extends AbstractView {
 			throws Exception {
 		LOGGER.debug("begin to render json");
 
-		//TODO: remove binding result first, should find a way to transform binding result to errors in json format
-		Map<String, Object> mapToRender = Maps.filterKeys(model,
-				new Predicate<String>() {
-					@Override
-					public boolean apply(String input) {
-						return (!input.contains(BindingResult.MODEL_KEY_PREFIX));
-					}
-				});
+		Map<String, Object> mapToRender = filterModel(model);
 		
 		ApplicationContext ctx = getApplicationContext();
 		JsonHelper jsonHelper = (JsonHelper)ctx.getBean("jsonHelper");
 
 		String jsonValue = jsonHelper.toJson(mapToRender);
-		response.getWriter().write(jsonValue);
+		
+		IOUtils.write(jsonValue, response.getOutputStream(), "UTF-8");
+	}
+	
+	protected Map<String, Object> filterModel(Map<String, Object> model) {
+		return Maps.filterValues(model, new Predicate<Object>() {
+			@Override
+			public boolean apply(Object input) {
+				return !(input instanceof BindingResult);
+			}
+		});
 	}
 
 }
