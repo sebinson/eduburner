@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseTag;
 import eduburner.service.BaseManager;
 
+@SuppressWarnings("unchecked")
 @Component("courseManager")
 @Transactional
 public class CourseManager extends BaseManager implements ICourseManager {
@@ -54,11 +53,14 @@ public class CourseManager extends BaseManager implements ICourseManager {
 
 	@Override
 	public CourseTag getCourseTag(String tagName) {
-		// TODO Auto-generated method stub
-		return null;
+		List tags = dao.find("FROM CourseTag WHERE name= ?", tagName);
+		if(tags.size() > 0){
+			return (CourseTag)tags.get(0);
+		}else{
+			return null;
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public CourseTag getOrInsertCourseTag(String tagName) {
 		List tags = dao.find("FROM CourseTag WHERE name= ?", tagName);

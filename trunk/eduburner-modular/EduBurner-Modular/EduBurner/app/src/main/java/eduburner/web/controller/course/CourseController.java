@@ -69,7 +69,8 @@ public class CourseController extends BaseController {
 			return JSON_VIEW;
 		} else {
 			logger.debug("begin to create course");
-			course.setCreator(getRemoteUserDataObj());
+			UserData userData = getRemoteUserDataObj();
+			course.setCreator(userData);
 			courseManager.createCourse(course, true);
 			setReturnMsg(model, Message.OK);
 			return JSON_VIEW;
