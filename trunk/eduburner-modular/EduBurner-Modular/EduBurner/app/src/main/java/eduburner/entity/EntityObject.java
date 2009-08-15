@@ -44,6 +44,10 @@ public abstract class EntityObject implements Serializable {
 	}
 
 	public int hashCode() {
-		return id.hashCode();
+		if(id != null){
+			return id.hashCode();
+		}else{
+			return 0;
+		}
 	}
 }
