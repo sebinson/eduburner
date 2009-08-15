@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gson.annotations.Expose;
@@ -176,9 +178,17 @@ public class Course extends EntityObject {
 		this.courseResources = courseResources;
 	}
 
-	public void addMemeber(UserData userData) {
-		this.members.add(userData);
-		userData.getCourses().add(this);
+	public void addMemeber(final UserData userData) {
+		boolean containUser = Iterables.any(members, new Predicate<UserData>() {
+			@Override
+			public boolean apply(UserData input) {
+				return userData.getId().equals(input.getId());
+			}
+		});
+		
+		if(!containUser){
+			members.add(userData);
+		}
 	}
 
 	public String getTagsAsString() {
