@@ -255,7 +255,7 @@
 					$.waiting.stop();
 					var dataSource = [];
 					$.each(data.courses, function(i, c){
-						c.tags = c.tags.map(function(tag){return tag.name}).join(',');
+						c.tags = c.tagsAsString || '';
 						dataSource.push(c);
 					});
 					self.buildTable(dataSource);

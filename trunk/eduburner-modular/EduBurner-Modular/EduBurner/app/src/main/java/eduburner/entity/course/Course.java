@@ -73,6 +73,7 @@ public class Course extends EntityObject {
 
 	private List<CourseTag> tags = Lists.newArrayList();
 	
+	@Expose
 	private String tagsAsString;
 
 	@NotNull(message = "课程名不能为空！")
