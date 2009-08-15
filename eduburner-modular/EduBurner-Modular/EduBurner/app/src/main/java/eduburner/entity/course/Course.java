@@ -1,5 +1,6 @@
 package eduburner.entity.course;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
@@ -69,8 +71,9 @@ public class Course extends EntityObject {
 	
 	private List<Entry> entries = Lists.newArrayList();
 
-	@Expose
 	private List<CourseTag> tags = Lists.newArrayList();
+	
+	private String tagsAsString;
 
 	@NotNull(message = "课程名不能为空！")
 	@Length(min = 3, message = "课程名最少 {min}个字符")
@@ -160,8 +163,8 @@ public class Course extends EntityObject {
 		this.creator = creator;
 	}
 
-	public void setTags(List<CourseTag> courses) {
-		this.tags = courses;
+	public void setTags(List<CourseTag> tags) {
+		this.tags = tags;
 	}
 
 	public void setPermissions(Set<CoursePermission> permissions) {
@@ -175,6 +178,22 @@ public class Course extends EntityObject {
 	public void addMemeber(UserData userData) {
 		this.members.add(userData);
 		userData.getCourses().add(this);
+	}
+
+	public String getTagsAsString() {
+		return tagsAsString;
+	}
+
+	public void setTagsAsString(String tagsAsString) {
+		this.tagsAsString = tagsAsString;
+	}
+	
+	@Transient
+	public List<String> getTagsStringList(){
+		if(tagsAsString == null){
+			return Lists.newArrayList();
+		}
+		return Arrays.asList(tagsAsString.trim().split(EntityObject.VALUES_SEPERATOR));
 	}
 
 	@Override
