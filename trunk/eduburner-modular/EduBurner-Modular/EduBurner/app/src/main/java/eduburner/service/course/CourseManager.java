@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseTag;
 import eduburner.service.BaseManager;
@@ -15,6 +18,16 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	
 	@Override
 	public void createCourse(Course course) {
+		createCourse(course, false);
+	}
+
+	@Override
+	public void createCourse(Course course, boolean updateTagsString) {
+		
+		if(updateTagsString){
+			updateCourseTagsForTagsString(course);
+		}
+		
 		dao.save(course);
 	}
 
@@ -55,6 +68,21 @@ public class CourseManager extends BaseManager implements ICourseManager {
 			dao.save(ct);
 			return ct;
 		}
+	}
+
+	@Override
+	public void updateCourseTagsForTagsString(Course course) {
+		List<String> tagsStringList = course.getTagsStringList();
+
+		List<CourseTag> tags = (List<CourseTag>) Iterables.transform(
+				tagsStringList, new Function<String, CourseTag>() {
+					@Override
+					public CourseTag apply(String from) {
+						return getOrInsertCourseTag(from);
+					}
+				});
+		
+		course.setTags(tags);
 	}
 
 }

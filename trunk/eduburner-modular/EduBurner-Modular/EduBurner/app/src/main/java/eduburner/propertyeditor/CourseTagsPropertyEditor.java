@@ -12,6 +12,10 @@ import eduburner.entity.course.CourseTag;
 import eduburner.service.course.ICourseManager;
 import eduburner.util.SpringBeanUtils;
 
+/**
+ * do not need this any more
+ */
+@Deprecated
 public class CourseTagsPropertyEditor extends PropertyEditorSupport {
 
 	private static final String DEFAULT_SEPARATOR = ",";

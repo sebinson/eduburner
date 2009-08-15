@@ -2,14 +2,11 @@ package eduburner.web.controller.course;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import eduburner.entity.course.Course;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
-import eduburner.propertyeditor.CourseTagsPropertyEditor;
 import eduburner.service.course.ICourseManager;
 import eduburner.validation.CourseValidator;
 import eduburner.web.controller.BaseController;
@@ -74,7 +70,7 @@ public class CourseController extends BaseController {
 		} else {
 			logger.debug("begin to create course");
 			course.setCreator(getRemoteUserDataObj());
-			courseManager.createCourse(course);
+			courseManager.createCourse(course, true);
 			setReturnMsg(model, Message.OK);
 			return JSON_VIEW;
 		}
@@ -126,10 +122,4 @@ public class CourseController extends BaseController {
 
 	}
 
-	@Override
-	protected void doInitBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) {
-		binder.registerCustomEditor(List.class, "tags",
-				new CourseTagsPropertyEditor());
-	}
 }
