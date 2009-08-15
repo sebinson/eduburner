@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseTag;
@@ -72,15 +73,13 @@ public class CourseManager extends BaseManager implements ICourseManager {
 
 	@Override
 	public void updateCourseTagsForTagsString(Course course) {
-		List<String> tagsStringList = course.getTagsStringList();
-
-		List<CourseTag> tags = (List<CourseTag>) Iterables.transform(
-				tagsStringList, new Function<String, CourseTag>() {
-					@Override
-					public CourseTag apply(String from) {
-						return getOrInsertCourseTag(from);
-					}
-				});
+		
+		List<CourseTag> tags = Lists.newArrayList();
+		
+		for(String t : course.getTagsStringList()){
+			CourseTag ct = getOrInsertCourseTag(t);
+			tags.add(ct);
+		}
 		
 		course.setTags(tags);
 	}
