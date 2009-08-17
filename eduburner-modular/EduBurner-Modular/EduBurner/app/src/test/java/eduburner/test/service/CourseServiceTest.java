@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import eduburner.entity.course.Course;
+import eduburner.entity.course.CourseResource;
 import eduburner.entity.course.CourseTag;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
@@ -44,6 +45,28 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 		Assert.assertEquals(course1.getMembers().size(), 1);
 		Assert.assertEquals(ud.getCourses().size(), 1);
 		
+	}
+	
+	//测试一下一对多情况下的级联
+	@Test
+	public void testCourseResource(){
+		Course c = new Course();
+		c.setTitle("new course");
+		c.setDescription("desc");
+		
+		CourseResource cr = new CourseResource();
+		cr.setName("adaf");
+		cr.setCourse(c);
+		
+		c.getCourseResources().add(cr);
+		
+		Assert.assertNull(cr.getId());
+		
+		courseManager.createCourse(c);
+		
+		Assert.assertNotNull(cr.getId());
+		
+		logger.debug("course resource id is: " + cr.getId());
 	}
 	
 	@Test
