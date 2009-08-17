@@ -45,6 +45,11 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 			throws DataAccessException {
 		return getHibernateTemplate().find(queryString, values);
 	}
+	
+	@Override
+	public <T> List<T> findByValueBean(String queryString, T valueBean) {
+		return getHibernateTemplate().findByValueBean(queryString, valueBean);
+	}
 
 	@Override
 	public <T> List<T> getAllInstances(Class<T> type) {
@@ -190,9 +195,5 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public void removeAll(Collection<?> entities) {
 		getHibernateTemplate().deleteAll(entities);
 	}
-
-	@Override
-	public <T> List<T> findByValueBean(String queryString, T valueBean) {
-		return getHibernateTemplate().findByValueBean(queryString, valueBean);
-	}
+	
 }

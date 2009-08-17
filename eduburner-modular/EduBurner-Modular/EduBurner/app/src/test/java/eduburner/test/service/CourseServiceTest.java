@@ -1,5 +1,7 @@
 package eduburner.test.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.Assert;
@@ -28,13 +30,17 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 		Course course = new Course();
 		course.setTitle("new course");
 		course.setDescription("desc");
-		courseManager.createCourse(course);
 		
 		User user = userManager.getUserByUsername("rockmaple");
 		UserData ud = userManager.getUserData(user);
-		course.addMemeber(ud);
+		ud.addCourse(course);
 		
-		courseManager.updateCourse(course);
+		courseManager.createCourse(course);
+		userManager.updateUserDate(ud);
+		
+		List<Course> courses = courseManager.getAllCourses();
+		
+		logger.debug("courses length: " + courses.size());
 		
 		int count = getCount("SELECT count(*) FROM course");
 		int udCount = getCount("SELECT count(*) FROM user_data");

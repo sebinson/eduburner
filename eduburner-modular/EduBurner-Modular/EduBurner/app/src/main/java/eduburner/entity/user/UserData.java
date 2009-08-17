@@ -15,9 +15,9 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.MapMaker;
-import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 
 import eduburner.entity.Comment;
@@ -60,6 +60,17 @@ public class UserData extends EntityObject {
 		fullname = user.getFullname();
 		userId = user.getId();
 		email = user.getEmail();
+	}
+	
+	public void addCourse(final Course course){
+		boolean containCourse = Iterables.any(this.courses, new Predicate<Course>(){
+			@Override
+			public boolean apply(Course input) {
+				return input.getId().equals(course.getId());
+			}});
+		if(!containCourse){
+			courses.add(course);
+		}
 	}
 
 	public String getFullname() {

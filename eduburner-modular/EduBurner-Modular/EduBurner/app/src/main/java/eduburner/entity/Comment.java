@@ -35,6 +35,8 @@ public class Comment extends EntityObject {
 		return date;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_user_id")
 	public UserData getUser() {
 		return user;
 	}
@@ -46,9 +48,7 @@ public class Comment extends EntityObject {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_user_id")
+	
 	public void setUser(UserData user) {
 		this.user = user;
 	}
@@ -58,6 +58,7 @@ public class Comment extends EntityObject {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_entry_id")
 	public Entry getEntry() {
 		return entry;
 	}
