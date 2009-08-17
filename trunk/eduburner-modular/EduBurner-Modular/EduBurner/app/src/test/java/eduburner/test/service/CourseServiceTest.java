@@ -30,20 +30,19 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 		Course course = new Course();
 		course.setTitle("new course");
 		course.setDescription("desc");
+		course.setTagsAsString("tag1,tag2");
 		
 		User user = userManager.getUserByUsername("rockmaple");
 		UserData ud = userManager.getUserData(user);
-		ud.addCourse(course);
 		
-		courseManager.createCourse(course);
-		userManager.updateUserDate(ud);
+		courseManager.createCourse(course, ud, true);
 		
-		List<Course> courses = courseManager.getAllCourses();
+		Course course1 = courseManager.getCourseById(course.getId());
 		
-		logger.debug("courses length: " + courses.size());
-		
-		int count = getCount("SELECT count(*) FROM course");
-		int udCount = getCount("SELECT count(*) FROM user_data");
+		Assert.assertEquals(course1.getTags().size(), 2);
+		Assert.assertEquals(course1.getCreator().getUsername(), "rockmaple");
+		Assert.assertEquals(course1.getMembers().size(), 1);
+		Assert.assertEquals(ud.getCourses().size(), 1);
 		
 	}
 	

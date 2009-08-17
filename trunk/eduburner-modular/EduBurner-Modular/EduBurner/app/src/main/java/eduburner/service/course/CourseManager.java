@@ -44,6 +44,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 		
 		if(creator != null){
 			course.setCreator(creator);
+			course.addMemeber(creator);
 		}
 		
 		dao.save(course);
