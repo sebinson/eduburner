@@ -13,7 +13,7 @@ import eduburner.entity.EntityObject;
  */
 
 @Entity
-@Table(name="invite")
+@Table(name="invitation")
 public class Invitation extends EntityObject {
 	
 	private static final long serialVersionUID = -5419101643348077726L;
@@ -21,9 +21,8 @@ public class Invitation extends EntityObject {
 	private String code;  //the code for the invite
 	private String email; //the email this invite went to
 	
-	@ManyToOne
 	private UserData requestor;
-	@ManyToOne
+	
 	private UserData candidate;
 	
 	private boolean isAccepted;
@@ -44,6 +43,7 @@ public class Invitation extends EntityObject {
 		this.email = email;
 	}
 
+	@ManyToOne
 	public UserData getRequestor() {
 		return requestor;
 	}
@@ -52,6 +52,7 @@ public class Invitation extends EntityObject {
 		this.requestor = requestor;
 	}
 
+	@ManyToOne
 	public UserData getCandidate() {
 		return candidate;
 	}
