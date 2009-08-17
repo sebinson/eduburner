@@ -13,8 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.MapMaker;
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 
 import eduburner.entity.Comment;
@@ -139,7 +142,8 @@ public class UserData extends EntityObject {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("username", username).append(
-				"fullname", fullname).toString();
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("username", username).append("fullname", fullname)
+				.toString();
 	}
 }
