@@ -120,12 +120,12 @@ public class Course extends EntityObject {
 		this.endDate = endDate;
 	}
 
-	@ManyToMany(mappedBy="courses")
+	@ManyToMany(mappedBy="courses", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	public List<UserData> getMembers() {
 		return members;
 	}
 
-	@OneToMany(mappedBy="course", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy="course", cascade = CascadeType.ALL)
 	public List<Entry> getEntries() {
 		return entries;
 	}
@@ -138,7 +138,7 @@ public class Course extends EntityObject {
 		this.members = members;
 	}
 
-	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "course", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	public List<CourseResource> getCourseResources() {
 		return courseResources;
 	}
@@ -156,12 +156,11 @@ public class Course extends EntityObject {
 		return tags;
 	}
 	
-	@ManyToOne()
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "fk_creator_id")
 	public UserData getCreator() {
 		return creator;
 	}
-	
 
 	public void setCreator(UserData creator) {
 		this.creator = creator;
