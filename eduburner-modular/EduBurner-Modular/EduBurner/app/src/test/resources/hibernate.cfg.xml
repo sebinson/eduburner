@@ -7,6 +7,7 @@
 		<mapping class="eduburner.entity.user.User" />
 		<mapping class="eduburner.entity.user.Role" />
 		<mapping class="eduburner.entity.user.UserData" />
+		<mapping class="eduburner.entity.user.Invitation" />
 		<mapping class="eduburner.entity.user.UserLog" />
 		<mapping class="eduburner.entity.user.PermissionBase" />
 		<mapping class="eduburner.entity.course.Course" />
