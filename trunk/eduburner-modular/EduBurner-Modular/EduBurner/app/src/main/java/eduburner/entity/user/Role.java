@@ -44,8 +44,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 		return description;
 	}
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER, mappedBy = "roles")
-	@JoinTable(name = "rel_user_role", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	@ManyToMany(mappedBy = "roles")
 	public Set<User> getUsers() {
 		return users;
 	}

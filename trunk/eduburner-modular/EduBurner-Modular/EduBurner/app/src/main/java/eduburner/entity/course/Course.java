@@ -120,8 +120,7 @@ public class Course extends EntityObject {
 		this.endDate = endDate;
 	}
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-	@JoinTable(name = "rel_user_course", joinColumns = { @JoinColumn(name = "course_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
+	@ManyToMany(mappedBy="courses")
 	public List<UserData> getMembers() {
 		return members;
 	}
@@ -150,7 +149,9 @@ public class Course extends EntityObject {
 	}
 
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-	@JoinTable(name = "rel_course_coursetag", joinColumns = { @JoinColumn(name = "course_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+	@JoinTable(name = "rel_course_coursetag", 
+			joinColumns = { @JoinColumn(name = "course_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "tag_id") })
 	public List<CourseTag> getTags() {
 		return tags;
 	}

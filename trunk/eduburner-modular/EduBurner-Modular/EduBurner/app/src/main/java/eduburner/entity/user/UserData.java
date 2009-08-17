@@ -98,7 +98,9 @@ public class UserData extends EntityObject {
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-	@JoinTable(name = "rel_user_course", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
+	@JoinTable(name = "rel_user_course", 
+			joinColumns = { @JoinColumn(name = "member_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "course_id") })
 	public List<Course> getCourses() {
 		return courses;
 	}
