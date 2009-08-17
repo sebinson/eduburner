@@ -70,8 +70,7 @@ public class CourseController extends BaseController {
 		} else {
 			logger.debug("begin to create course");
 			UserData userData = getRemoteUserDataObj();
-			course.setCreator(userData);
-			courseManager.createCourse(course, true);
+			courseManager.createCourse(course, userData, true);
 			setReturnMsg(model, Message.OK);
 			return JSON_VIEW;
 		}
@@ -96,7 +95,7 @@ public class CourseController extends BaseController {
 			@RequestParam("username") String username, Model model) {
 		UserData user = userManager.getUserDataByUsername(username);
 		Course course = courseManager.getCourseById(courseId);
-		course.addMemeber(user);
+		user.addCourse(course);
 		courseManager.updateCourse(course);
 		userManager.updateUserDate(user);
 		model.addAttribute("course", course);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseTag;
+import eduburner.entity.user.UserData;
 
 public interface ICourseManager {
 	
@@ -14,6 +15,8 @@ public interface ICourseManager {
 	public void createCourse(Course course);
 	
 	public void createCourse(Course course, boolean updateTagsString);
+	
+	public void createCourse(Course coures, UserData creator, boolean updateTagsString);
 	
 	public void updateCourse(Course course);
 	

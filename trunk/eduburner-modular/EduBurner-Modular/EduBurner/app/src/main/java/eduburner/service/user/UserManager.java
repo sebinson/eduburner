@@ -40,9 +40,8 @@ public class UserManager extends BaseManager implements UserDetailsService,
 
 	@Override
 	public void createUser(User user) throws EntityExistsException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("entering saveUser method...");
-		}
+		logger.debug("entering saveUser method...");
+		
 		try {
 			dao.save(user);
 		} catch (DataIntegrityViolationException e) {

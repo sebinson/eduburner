@@ -179,19 +179,6 @@ public class Course extends EntityObject {
 		this.courseResources = courseResources;
 	}
 
-	public void addMemeber(final UserData userData) {
-		boolean containUser = Iterables.any(members, new Predicate<UserData>() {
-			@Override
-			public boolean apply(UserData input) {
-				return userData.getId().equals(input.getId());
-			}
-		});
-		
-		if(!containUser){
-			members.add(userData);
-		}
-	}
-
 	public String getTagsAsString() {
 		return tagsAsString;
 	}
