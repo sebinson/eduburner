@@ -1,6 +1,7 @@
 package eduburner.entity.user;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import eduburner.entity.EntityObject;
@@ -13,16 +14,19 @@ import eduburner.entity.EntityObject;
 
 @Entity
 @Table(name="invite")
-public class Invite extends EntityObject {
+public class Invitation extends EntityObject {
 	
 	private static final long serialVersionUID = -5419101643348077726L;
 	
 	private String code;  //the code for the invite
 	private String email; //the email this invite went to
-	private String fromActorId;
-	private String toUserId;
 	
-	private Status status;
+	@ManyToOne
+	private UserData requestor;
+	@ManyToOne
+	private UserData candidate;
+	
+	private boolean isAccepted;
 	
 	public String getCode() {
 		return code;
@@ -40,37 +44,32 @@ public class Invite extends EntityObject {
 		this.email = email;
 	}
 
-	public String getFromActorId() {
-		return fromActorId;
+	public UserData getRequestor() {
+		return requestor;
 	}
 
-	public void setFromActorId(String fromActorId) {
-		this.fromActorId = fromActorId;
+	public void setRequestor(UserData requestor) {
+		this.requestor = requestor;
 	}
 
-	public String getToUserId() {
-		return toUserId;
+	public UserData getCandidate() {
+		return candidate;
 	}
 
-	public void setToUserId(String toUserId) {
-		this.toUserId = toUserId;
+	public void setCandidate(UserData candidate) {
+		this.candidate = candidate;
 	}
 
-	public Status getStatus() {
-		return status;
+	public boolean isAccepted() {
+		return isAccepted;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setAccepted(boolean isAccepted) {
+		this.isAccepted = isAccepted;
 	}
 
 	@Override
 	public String toString() {
 		return "code: " + code;
 	}
-	
-	public enum Status{
-		ACTIVE, BLOCKED
-	}
-
 }

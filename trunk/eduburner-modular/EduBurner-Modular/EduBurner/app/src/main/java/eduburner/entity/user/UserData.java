@@ -40,11 +40,14 @@ public class UserData extends EntityObject {
 
 	// 加上个人头像
 	private byte[] profilePicture;
-	
+
 	private List<Course> courses = Lists.newArrayList();
-	
-	//comments user made
+
+	// comments user made
 	private List<Comment> comments = Lists.newArrayList();
+
+	private List<Invitation> incomingInvitations = Lists.newArrayList();
+	private List<Invitation> outgoingInvitations = Lists.newArrayList();
 
 	public UserData() {
 	}
@@ -98,9 +101,7 @@ public class UserData extends EntityObject {
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-	@JoinTable(name = "rel_user_course", 
-			joinColumns = { @JoinColumn(name = "member_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "course_id") })
+	@JoinTable(name = "rel_user_course", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
 	public List<Course> getCourses() {
 		return courses;
 	}
@@ -109,7 +110,7 @@ public class UserData extends EntityObject {
 		this.courses = courses;
 	}
 
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -117,7 +118,25 @@ public class UserData extends EntityObject {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
+
+	@OneToMany(mappedBy = "candidate", cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
+	public List<Invitation> getIncomingInvitations() {
+		return incomingInvitations;
+	}
+
+	public void setIncomingInvitations(List<Invitation> incomingInvitations) {
+		this.incomingInvitations = incomingInvitations;
+	}
+
+	@OneToMany(mappedBy = "requestor", cascade = { CascadeType.PERSIST })
+	public List<Invitation> getOutgoingInvitations() {
+		return outgoingInvitations;
+	}
+
+	public void setOutgoingInvitations(List<Invitation> outgoingInvitations) {
+		this.outgoingInvitations = outgoingInvitations;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("username", username).append(
