@@ -1,6 +1,7 @@
 package eduburner.entity.user;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -44,6 +45,7 @@ public class Invitation extends EntityObject {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="fk_requestor_id")
 	public UserData getRequestor() {
 		return requestor;
 	}
@@ -53,6 +55,7 @@ public class Invitation extends EntityObject {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="fk_candidate_id")
 	public UserData getCandidate() {
 		return candidate;
 	}
