@@ -36,23 +36,7 @@
       <value>1</value>
     </row>
   </table>
-  <table name="user_data">
-    <column>id</column>
-    <column>email</column>
-    <column>fullname</column>
-    <column>profilePicture</column>
-    <column>userId</column>
-    <column>username</column>
-    <row>
-      <value>40288184231cb4b601231cb4defe0001</value>
-      <value>rockmaple@163.com</value>
-      <value>lliu</value>
-      <null/>
-      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
-      <value>admin</value>
-    </row>
-  </table>
-    <table name="role">
+  <table name="role">
     <column>id</column>
     <column>description</column>
     <column>name</column>
@@ -71,108 +55,6 @@
       <value>ROLE_User</value>
     </row>
   </table>
-  <table name="comment">
-    <column>id</column>
-    <column>body</column>
-    <column>commentId</column>
-    <column>date</column>
-    <column>user</column>
-    <column>entry_id</column>
-  </table>
-  <table name="course">
-    <column>id</column>
-    <column>description</column>
-    <column>endDate</column>
-    <column>startDate</column>
-    <column>status</column>
-    <column>tagsAsString</column>
-    <column>title</column>
-    <column>fk_creator_id</column>
-    <row>
-      <value>40288184231cb4b601231cbb617f0003</value>
-      <value><![CDATA[Ming History]]></value>
-      <value><![CDATA[2009-08-30 00:00:00.0]]></value>
-      <value><![CDATA[2009-08-01 00:00:00.0]]></value>
-      <null/>
-      <null/>
-      <value>history</value>
-      <value>40288184231cb4b601231cb4defe0001</value>
-    </row>
-    <row>
-      <value>40288184231ed35f01231ed42d4b0003</value>
-      <value><![CDATA[Chinese Courese]]></value>
-      <value><![CDATA[2009-08-30 00:00:00.0]]></value>
-      <value><![CDATA[2009-08-01 00:00:00.0]]></value>
-      <null/>
-      <value>chinese,course</value>
-      <value>Chinese</value>
-      <value>40288184231cb4b601231cb4defe0001</value>
-    </row>
-  </table>
-  <table name="course_resource">
-    <column>id</column>
-    <column>name</column>
-    <column>fk_course_id</column>
-  </table>
-  <table name="course_tag">
-    <column>id</column>
-    <column>name</column>
-    <row>
-      <value>40288184231cb4b601231cbb60650002</value>
-      <value>history</value>
-    </row>
-    <row>
-      <value>40288184231ed35f01231ed42c420001</value>
-      <value>chinese</value>
-    </row>
-    <row>
-      <value>40288184231ed35f01231ed42cee0002</value>
-      <value>course</value>
-    </row>
-  </table>
-  <table name="entry">
-    <column>id</column>
-    <column>anonymous</column>
-    <column>entryId</column>
-    <column>hidden</column>
-    <column>link</column>
-    <column>published</column>
-    <column>title</column>
-    <column>updated</column>
-    <column>user</column>
-    <column>fk_course_id</column>
-    <column>fk_service_id</column>
-  </table>
-  <table name="permission">
-    <column>acl_class</column>
-    <column>id</column>
-    <column>allowMask</column>
-    <column>denyMask</column>
-    <column>description</column>
-    <column>implied</column>
-    <column>fk_role_id</column>
-    <column>fk_course_id</column>
-  </table>
-  <table name="rel_course_coursetag">
-    <column>tag_id</column>
-    <column>course_id</column>
-    <row>
-      <value>40288184231cb4b601231cbb60650002</value>
-      <value>40288184231cb4b601231cbb617f0003</value>
-    </row>
-    <row>
-      <value>40288184231ed35f01231ed42c420001</value>
-      <value>40288184231ed35f01231ed42d4b0003</value>
-    </row>
-    <row>
-      <value>40288184231ed35f01231ed42cee0002</value>
-      <value>40288184231ed35f01231ed42d4b0003</value>
-    </row>
-  </table>
-  <table name="rel_user_course">
-    <column>course_id</column>
-    <column>member_id</column>
-  </table>
   <table name="rel_user_role">
     <column>user_id</column>
     <column>role_id</column>
@@ -184,18 +66,5 @@
       <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
     </row>
-  </table>
-  <table name="service">
-    <column>id</column>
-    <column>iconUrl</column>
-    <column>name</column>
-    <column>profileUrl</column>
-    <column>type</column>
-  </table>
-  <table name="user_log">
-    <column>id</column>
-    <column>action</column>
-    <column>actionDate</column>
-    <column>userId</column>
   </table>
 </dataset>

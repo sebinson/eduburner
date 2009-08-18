@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import eduburner.entity.user.UserData;
 
 @Entity
-@Table(name="like")
+@Table(name="user_like_entry")
 public class Like extends EntityObject{
 
 	private static final long serialVersionUID = 802007405441401721L;
@@ -17,7 +17,7 @@ public class Like extends EntityObject{
 	private Entry entry;
 
 	@ManyToOne
-	@JoinColumn(name="fk_user_id")
+	@JoinColumn(name="fk_userdata_id")
 	public UserData getUser() {
 		return user;
 	}
