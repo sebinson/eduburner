@@ -22,6 +22,7 @@ import com.google.gson.annotations.Expose;
 
 import eduburner.entity.Comment;
 import eduburner.entity.EntityObject;
+import eduburner.entity.Like;
 import eduburner.entity.course.Course;
 
 /**
@@ -52,6 +53,8 @@ public class UserData extends EntityObject {
 	private List<Invitation> incomingInvitations = Lists.newArrayList();
 	private List<Invitation> outgoingInvitations = Lists.newArrayList();
 
+	private List<Like> likes = Lists.newArrayList();
+
 	public UserData() {
 	}
 
@@ -61,14 +64,16 @@ public class UserData extends EntityObject {
 		userId = user.getId();
 		email = user.getEmail();
 	}
-	
-	public void addCourse(final Course course){
-		boolean containCourse = Iterables.any(this.courses, new Predicate<Course>(){
-			@Override
-			public boolean apply(Course input) {
-				return input.getId().equals(course.getId());
-			}});
-		if(!containCourse){
+
+	public void addCourse(final Course course) {
+		boolean containCourse = Iterables.any(this.courses,
+				new Predicate<Course>() {
+					@Override
+					public boolean apply(Course input) {
+						return input.getId().equals(course.getId());
+					}
+				});
+		if (!containCourse) {
 			courses.add(course);
 		}
 	}
@@ -149,6 +154,15 @@ public class UserData extends EntityObject {
 
 	public void setOutgoingInvitations(List<Invitation> outgoingInvitations) {
 		this.outgoingInvitations = outgoingInvitations;
+	}
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST })
+	public List<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
 	}
 
 	@Override

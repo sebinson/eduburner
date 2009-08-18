@@ -33,6 +33,7 @@ public class Entry extends EntityObject {
 	private Course course;
 	private Service service;
 	private List<Comment> comments = Lists.newArrayList();
+	private List<Like> likes = Lists.newArrayList();
 
 	public String getEntryId() {
 		return entryId;
@@ -129,6 +130,15 @@ public class Entry extends EntityObject {
 
 	public void setUser(UserData user) {
 		this.user = user;
+	}
+
+	@OneToMany(mappedBy="entry", fetch=FetchType.LAZY)
+	public List<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
 	}
 
 	public String toString() {

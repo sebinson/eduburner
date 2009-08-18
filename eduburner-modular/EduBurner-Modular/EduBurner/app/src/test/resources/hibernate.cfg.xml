@@ -15,6 +15,7 @@
 		<mapping class="eduburner.entity.course.CourseResource" />
 		<mapping class="eduburner.entity.course.CoursePermission" />
 		<mapping class="eduburner.entity.Entry" />
+		<mapping class="eduburner.entity.Like" />
 		<mapping class="eduburner.entity.Comment" />
 		<mapping class="eduburner.entity.Service" />
 	</session-factory>
