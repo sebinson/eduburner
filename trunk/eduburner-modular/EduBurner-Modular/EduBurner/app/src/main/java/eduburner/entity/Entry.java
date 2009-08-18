@@ -21,8 +21,8 @@ import eduburner.entity.user.UserData;
 public class Entry extends EntityObject {
 	private static final long serialVersionUID = -1018771380257973544L;
 	
-	private String entryId;
 	private String title;
+	private String content;
 	private String link;
 	private Date published;
 	private Date updated;
@@ -34,10 +34,6 @@ public class Entry extends EntityObject {
 	private Service service;
 	private List<Comment> comments = Lists.newArrayList();
 	private List<Like> likes = Lists.newArrayList();
-
-	public String getEntryId() {
-		return entryId;
-	}
 
 	public String getTitle() {
 		return title;
@@ -96,10 +92,6 @@ public class Entry extends EntityObject {
 		this.course = course;
 	}
 
-	public void setEntryId(String id) {
-		this.entryId = id;
-	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -141,8 +133,16 @@ public class Entry extends EntityObject {
 		this.likes = likes;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String toString() {
-		return "Entry{" + "id='" + entryId + '\'' + ", title='" + title + '\''
+		return "Entry{" + "id='" + id + '\'' + ", title='" + title + '\''
 				+ ", link='" + link + '\'' + ", published=" + published
 				+ ", updated=" + updated + ", hidden=" + hidden + ", user="
 				+ user + '}';
