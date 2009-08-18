@@ -49,6 +49,23 @@
 	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
 	<bean id="abdera" class="org.apache.abdera.Abdera" />
 	
+	<!-- cache -->
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:ehcache.xml</value>
+		</property>
+	</bean>
+	<bean id="cache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="cacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>eduburner.cache</value>
+		</property>
+	</bean>
+	
 	<import resource="classpath:applicationContext-hibernate.xml" />
 	<import resource="classpath:applicationContext-security.xml" />
 </beans>
