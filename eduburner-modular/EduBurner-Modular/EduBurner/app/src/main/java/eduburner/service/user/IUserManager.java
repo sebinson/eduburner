@@ -42,4 +42,6 @@ public interface IUserManager {
 	
 	public void addEntryComment(String userId, String entryId, Comment comment);
 	
+	public void getHomePageEntriesForUser(User user);
+	
 }

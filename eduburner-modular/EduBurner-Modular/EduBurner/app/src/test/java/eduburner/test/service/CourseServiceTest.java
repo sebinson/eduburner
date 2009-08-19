@@ -23,7 +23,7 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 	@Qualifier("userManager")
 	private IUserManager userManager;
 	
-	@Test
+	//@Test
 	public void testCreateCourse(){
 		
 		Course course = new Course();
@@ -46,7 +46,7 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 	}
 	
 	//测试一下一对多情况下的级联
-	@Test
+	//@Test
 	public void testCourseResource(){
 		Course c = new Course();
 		c.setTitle("new course");
@@ -67,7 +67,7 @@ public class CourseServiceTest extends BaseServiceTestSupport {
 		logger.debug("course resource id is: " + cr.getId());
 	}
 	
-	@Test
+	//@Test
 	public void testCourseTag(){
 		CourseTag ct = courseManager.getOrInsertCourseTag("tagname");
 		Assert.assertNotNull(ct.getId());

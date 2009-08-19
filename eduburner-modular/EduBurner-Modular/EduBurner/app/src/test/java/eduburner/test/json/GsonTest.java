@@ -20,7 +20,7 @@ public class GsonTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testMultiThread() throws InterruptedException {
 		final Gson gson = new Gson();
 

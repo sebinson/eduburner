@@ -30,8 +30,12 @@ public class TestDataGenerator {
 	}
 	
 	public static List<Course> genCourses(){
-		
-		return null;
+		List<Course> courses = Lists.newArrayList();
+		for(int i=0; i<10; i++){
+			Course c = genCourse("course" +i);
+			courses.add(c);
+		}
+		return courses;
 	}
 	
 	public static Course genCourse(String coursename){
@@ -43,7 +47,12 @@ public class TestDataGenerator {
 	}
 	
 	public static List<Entry> genEntries(){
-		return null;
+		List<Entry> entries = Lists.newArrayList();
+		for(int i=0; i<100; i++){
+			Entry e = genEntry("entry content " + i);
+			entries.add(e);
+		}
+		return entries;
 	}
 	
 	public static Entry genEntry(String content){

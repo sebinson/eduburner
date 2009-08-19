@@ -158,4 +158,10 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void getHomePageEntriesForUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
 }

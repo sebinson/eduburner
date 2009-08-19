@@ -10,7 +10,7 @@ public class TestDateFormat {
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	
-	@Test
+	//@Test
 	public void testDateFormat(){
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 		//String s = simpleDateFormat.format(new Date());

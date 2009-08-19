@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class TestMediaType {
 	
-	@Test
+	//@Test
 	public void testMediaType(){
 		MediaType type1 = MediaType.parseMediaType("application/json;charset=UTF-8");
 		MediaType type2 = MediaType.parseMediaType("application/json;charset=UTF-8");
