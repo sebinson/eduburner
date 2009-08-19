@@ -36,6 +36,458 @@
       <value>1</value>
     </row>
   </table>
+  <table name="user_data">
+    <column>id</column>
+    <column>email</column>
+    <column>fullname</column>
+    <column>profilePicture</column>
+    <column>userId</column>
+    <column>username</column>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>rockmaple@163.com</value>
+      <value>lliu</value>
+      <null/>
+      <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
+      <value>admin</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>st416@gse.pku.edu.cn</value>
+      <value>zhangyf</value>
+      <null/>
+      <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
+      <value>rockmaple</value>
+    </row>
+  </table>
+  <table name="comment">
+    <column>id</column>
+    <column>body</column>
+    <column>commentId</column>
+    <column>date</column>
+    <column>fk_entry_id</column>
+    <column>fk_user_id</column>
+  </table>
+  <table name="course">
+    <column>id</column>
+    <column>description</column>
+    <column>endDate</column>
+    <column>startDate</column>
+    <column>status</column>
+    <column>tagsAsString</column>
+    <column>title</column>
+    <column>fk_creator_id</column>
+    <row>
+      <value>40288182233355f401233355fdcf000d</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>Chinese</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d000e</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>English</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d000f</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>History</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0010</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>Politics</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0011</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>Joke</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0012</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>Realestate</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0013</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>worklife</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0014</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>modenchn</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0015</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>itexpress</value>
+      <null/>
+    </row>
+    <row>
+      <value>40288182233355f401233355fe2d0016</value>
+      <null/>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <null/>
+      <null/>
+      <value>java</value>
+      <null/>
+    </row>
+  </table>
+  <table name="course_resource">
+    <column>id</column>
+    <column>name</column>
+    <column>fk_course_id</column>
+  </table>
+  <table name="course_tag">
+    <column>id</column>
+    <column>name</column>
+  </table>
+  <table name="entry">
+    <column>id</column>
+    <column>anonymous</column>
+    <column>content</column>
+    <column>hidden</column>
+    <column>link</column>
+    <column>published</column>
+    <column>title</column>
+    <column>updated</column>
+    <column>fk_course_id</column>
+    <column>fk_service_id</column>
+    <column>fk_userdata_id</column>
+    <row>
+      <value>40288182233355f401233356066a006d</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 86]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f401233356067a006e</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 87]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f4012333560699006f</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 88]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335606a90070</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 89]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335606b80071</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 90]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607740072</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 91]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607830073</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 92]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607930074</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 93]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607b20075</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 94]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607c20076</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 95]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607d20077</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 96]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607e10078</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 97]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f40123335607f10079</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 98]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+    <row>
+      <value>40288182233355f4012333560800007a</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <null/>
+      <value><![CDATA[entry content 99]]></value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fdbf0002</value>
+    </row>
+  </table>
+  <table name="invitation">
+    <column>id</column>
+    <column>accepted</column>
+    <column>code</column>
+    <column>email</column>
+    <column>fk_candidate_id</column>
+    <column>fk_requestor_id</column>
+  </table>
+  <table name="permission">
+    <column>acl_class</column>
+    <column>id</column>
+    <column>allowMask</column>
+    <column>denyMask</column>
+    <column>description</column>
+    <column>implied</column>
+    <column>fk_role_id</column>
+    <column>fk_course_id</column>
+  </table>
+  <table name="rel_course_coursetag">
+    <column>course_id</column>
+    <column>tag_id</column>
+  </table>
+  <table name="rel_user_course">
+    <column>member_id</column>
+    <column>course_id</column>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fdcf000d</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d000e</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d000f</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0010</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0011</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0012</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0013</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0014</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0015</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fd910001</value>
+      <value>40288182233355f401233355fe2d0016</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fdcf000d</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d000e</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d000f</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0010</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0011</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0012</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0013</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0014</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0015</value>
+    </row>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fe2d0016</value>
+    </row>
+  </table>
   <table name="role">
     <column>id</column>
     <column>description</column>
@@ -66,5 +518,23 @@
       <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
     </row>
+  </table>
+    <table name="service">
+    <column>id</column>
+    <column>iconUrl</column>
+    <column>name</column>
+    <column>profileUrl</column>
+    <column>type</column>
+  </table>
+  <table name="user_like_entry">
+    <column>id</column>
+    <column>fk_entry_id</column>
+    <column>fk_userdata_id</column>
+  </table>
+  <table name="user_log">
+    <column>id</column>
+    <column>action</column>
+    <column>actionDate</column>
+    <column>userId</column>
   </table>
 </dataset>
