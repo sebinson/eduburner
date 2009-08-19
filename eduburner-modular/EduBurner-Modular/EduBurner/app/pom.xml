@@ -223,5 +223,10 @@
 			<artifactId>freemarker</artifactId>
 			<version>${freemarker.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>eduburner</groupId>
+			<artifactId>EduBurner-Search</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
     </dependencies>
 </project>
