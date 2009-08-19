@@ -2,12 +2,12 @@
     <div id="logo">
     	<a href="/">EduBurner</a>
     </div>
-    <@ui.navMenuBar />
     <@ui.menubar />
     <div class="clear"></div>
     <div class="bottom"><span class="corner-bottom"><span class="corner-left"></span></span></div>
 </#macro>
 
+<!-- 目前用不上   -->
 <#macro navMenuBar>
 	<div class="top-nav-menu-bar">
 		<ul class="menu-list">
@@ -38,13 +38,20 @@
 	<div class="top-menu-bar">
 		<ul class="menu-list">
 			<#if principal?has_content>
+			    <!--
+			    <li class="menu">
+			    	<div id="top-search">
+			    		
+			    	</div>
+			    </li>
+			    -->
 				<li class="menu">
 					<div class="menu-title last">
 						<a href="/account/logout">退出</a>
 					</div>
 				</li>
 				<#if principal.administrator>
-				<li class="menu last">
+				<li class="menu">
 					<div class="menu-title">
 						<a href="/account/setting">设置</a>
 					</div>
@@ -72,26 +79,41 @@
 </#macro>
 
 <#macro footer>
-    &copy; EduBurner
+    &copy;2009 EduBurner
 </#macro>
 
 <#macro userNavBar>
+	<@ui.leftNav />
 	<#if principal?has_content>
 		<@ui.courseList />
 	</#if>
 </#macro>
 
 <#macro adminNavBar>
+	<@ui.leftNav />
 	<#if principal?has_content && principal.administrator>
 		<@ui.adminMenu />
 	</#if>
+</#macro>
+
+<#macro leftNav>
+	<div class="sidebar-block spacing">
+	  <div class="sidebar-block-inner">
+	    <h4 class="sidebar-block-header">导航</h4>
+	    <div class="sidebar-block-content">
+	      <ul class="sidebar-block-list">
+	      	 <li><a href="/"><img src="/static/images/silk/house.png"/><span>首页</span></a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
 </#macro>
 
 <#macro courseList>
 	<#if user?has_content>
 	<div class="sidebar-block spacing">
 	  <div class="sidebar-block-inner">
-	    <h4 class="sidebar-block-header">我的课程</h4>
+	    <h4 class="sidebar-block-header">课程</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 	      	<#list user.courses as c>

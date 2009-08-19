@@ -53,7 +53,7 @@
 	<bean id="cacheManager"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation">
-			<value>classpath:ehcache.xml</value>
+			<value>classpath:ehcache-spring.xml</value>
 		</property>
 	</bean>
 	<bean id="cache"
