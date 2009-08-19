@@ -110,7 +110,9 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	@Override
 	public UserData getUserData(User user) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(UserData.class);
-		criteria.add(Restrictions.eq("username", user.getUsername()));
+		String username = user.getUsername();
+		logger.debug("username is: "+username);
+		criteria.add(Restrictions.eq("username", username));
 
 		List<?> userDatas = dao.getInstancesByDetachedCriteria(criteria);
 
@@ -129,14 +131,15 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 
 	@Override
-	public void updateUserDate(UserData ud) {
+	public void updateUserData(UserData ud) {
 		dao.update(ud);
 	}
 	
 	@Override
 	public void createEntry(String userId, Entry entry) {
-		// TODO Auto-generated method stub
-		
+		UserData ud = getUserDataByUserId(userId);
+		entry.setUser(ud);
+		dao.save(entry);
 	}
 
 	@Override

@@ -97,7 +97,7 @@ public class CourseController extends BaseController {
 		Course course = courseManager.getCourseById(courseId);
 		user.addCourse(course);
 		courseManager.updateCourse(course);
-		userManager.updateUserDate(user);
+		userManager.updateUserData(user);
 		model.addAttribute("course", course);
 		return JSON_VIEW;
 	}
