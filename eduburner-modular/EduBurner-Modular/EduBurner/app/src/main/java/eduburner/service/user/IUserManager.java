@@ -30,7 +30,7 @@ public interface IUserManager {
 
 	public UserData createUserData(User user);
 
-	public void updateUserDate(UserData ud);
+	public void updateUserData(UserData ud);
 	
 	public UserData getUserData(User user);
 	
