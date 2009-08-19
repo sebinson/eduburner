@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,7 +42,7 @@ public class UserData extends EntityObject {
 	private String userId;
 
 	// 加上个人头像
-	private byte[] profilePicture;
+	private String profilePicture;
 
 	private List<Course> courses = Lists.newArrayList();
 
@@ -102,12 +101,11 @@ public class UserData extends EntityObject {
 		this.userId = userId;
 	}
 
-	@Lob
-	public byte[] getProfilePicture() {
+	public String getProfilePicture() {
 		return profilePicture;
 	}
 
-	public void setProfilePicture(byte[] profilePicture) {
+	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

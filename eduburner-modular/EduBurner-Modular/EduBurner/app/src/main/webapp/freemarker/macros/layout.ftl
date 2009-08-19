@@ -54,7 +54,7 @@
   <body>
   	  <iframe id="hist-iframe" class="hidden"></iframe>
       <input id="hist-field" type="hidden"/>
-      <div id="doc3" class="yui-t2">
+      <div id="doc4" class="yui-t2">
       	 <#-- begin of site header -->
          <div id="hd" class="eb-header">
          	<@ui.header />
@@ -83,6 +83,7 @@
       	 </div>
       	 <#-- end of site footer -->
       </div>
+      
       <div id="overlay" style="display:none"></div>
       <div id="loading" style="display:none">
     	<div class="loading-indicator">

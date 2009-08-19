@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
-	<batch:job id="fetchJob">
+	<batch:job id="indexJob">
 		<batch:step id="urlFetch" >
 		    <batch:tasklet transaction-manager="transactionManager">
 		    	<batch:chunk reader="indexReader" writer="indexWriter" processor="indexProcessor"

@@ -17,6 +17,7 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import eduburner.entity.Comment;
 import eduburner.entity.Entry;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
@@ -131,9 +132,27 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	public void updateUserDate(UserData ud) {
 		dao.update(ud);
 	}
+	
+	@Override
+	public void createEntry(String userId, Entry entry) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void createEntry(String userId, String courseId, Entry entry) {
+		
+	}
+
+	@Override
+	public void addEntryComment(String userId, String entryId, Comment comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void likeEntry(String userId, Entry entry) {
+		// TODO Auto-generated method stub
 		
 	}
 }

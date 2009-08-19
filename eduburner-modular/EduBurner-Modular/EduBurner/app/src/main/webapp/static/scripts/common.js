@@ -149,12 +149,6 @@ window.EventList = {
 	
 	$.waiting = {
 		start: function(msg){
-			/*
-			if(showOverlay === true){
-				$("#overlay").show();
-			}
-			$("#loading").show();
-			*/
 			$("#top-loading").show();
 			if(msg){
 				$("#top-loading").html(msg);
@@ -163,10 +157,6 @@ window.EventList = {
 			}
 		},
 		stop: function(){
-			/*
-			$("#overlay").hide();
-			$("#loading").hide();
-			*/
 			$("#top-loading").hide();
 		}
 	}
