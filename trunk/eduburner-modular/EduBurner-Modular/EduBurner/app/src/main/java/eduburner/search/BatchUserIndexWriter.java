@@ -4,23 +4,25 @@ import java.util.List;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springmodules.lucene.index.factory.IndexFactory;
 
 import eduburner.entity.user.User;
 
 @Component("userIndexWriter")
 public class BatchUserIndexWriter implements ItemWriter<User> {
 
-	private IndexWriter indexWriter;
-	private IndexReader indexReader;
+	@Autowired
+	@Qualifier("indexFactory")
+	private IndexFactory indexFactory;
 
 	@Override
 	public void write(List<? extends User> users) throws Exception {
 		for (User user : users) {
-			indexWriter.addDocument(buildDocument(user));
+			indexFactory.getIndexWriter().addDocument(buildDocument(user));
 		}
 	}
 

@@ -68,4 +68,6 @@
 	
 	<import resource="classpath:applicationContext-hibernate.xml" />
 	<import resource="classpath:applicationContext-security.xml" />
+	<import resource="classpath:applicationContext-search.xml" />
+	
 </beans>

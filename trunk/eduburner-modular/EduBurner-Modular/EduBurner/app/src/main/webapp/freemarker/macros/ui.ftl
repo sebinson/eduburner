@@ -102,7 +102,7 @@
 	    <h4 class="sidebar-block-header">导航</h4>
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
-	      	 <li><a href="/"><img src="/static/images/silk/house.png"/><span>首页</span></a></li>
+	      	 <li><a id="home" href="/"><img src="/static/images/silk/house.png"/><span>首页</span></a></li>
 	      </ul>
 	    </div>
 	  </div>

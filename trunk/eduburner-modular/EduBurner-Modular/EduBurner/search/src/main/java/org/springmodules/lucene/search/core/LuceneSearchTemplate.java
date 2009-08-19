@@ -61,9 +61,9 @@ public interface LuceneSearchTemplate {
 	 * @return the search results
 	 * @see QueryCreator#createQuery(Analyzer)
 	 */
-	List search(QueryCreator queryCreator, HitExtractor extractor);
+	List<?> search(QueryCreator queryCreator, HitExtractor extractor);
 
-	List search(QueryCreator queryCreator, HitExtractor extractor, QueryResultCreator resultCreator);
+	List<?> search(QueryCreator queryCreator, HitExtractor extractor, QueryResultCreator resultCreator);
 
 	/**
 	 * Search the index basing a Lucene query created outside the template.
@@ -72,9 +72,9 @@ public interface LuceneSearchTemplate {
 	 * @param extractor the extractor of hit informations
 	 * @return the search results
 	 */
-	List search(Query query, HitExtractor extractor);
+	List<?> search(Query query, HitExtractor extractor);
 
-	List search(Query query, HitExtractor extractor, QueryResultCreator resultCreator);
+	List<?> search(Query query, HitExtractor extractor, QueryResultCreator resultCreator);
 
 	/**
 	 * Search the index basing a Lucene query created thanks to a callback

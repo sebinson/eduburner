@@ -10,6 +10,7 @@ public class IndexController extends BaseController {
 
 	@RequestMapping(value = "/")
 	public String index() {
+		
 		return INDEX_PAGE;
 	}
 }

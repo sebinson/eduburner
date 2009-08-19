@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -25,6 +27,11 @@ import com.google.gson.annotations.Expose;
 
 import eduburner.entity.EntityObject;
 import eduburner.enumerations.RoleType;
+
+@NamedQueries({ 
+	@NamedQuery(name = "getPermissionsByUserName",
+			    query = "FROM PermissionBase AS p INNER JOIN p.role AS r INNER JOIN r.users AS u WHERE u.username = :username") 
+})
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {

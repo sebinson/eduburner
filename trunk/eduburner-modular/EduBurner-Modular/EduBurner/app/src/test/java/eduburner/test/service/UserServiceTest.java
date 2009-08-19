@@ -38,7 +38,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		// setDefaultRollback(false);
 	}
 
-	@Test
+	//@Test
 	public void testCreateUser() {
 		User user = new User();
 		user.setUsername("user");
@@ -57,7 +57,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testTreatingAUserCausesADatabaseRowToBeInserted() {
 		
 		logger.debug("entering testTreatingAUserCausesADatabaseRowToBeInserted method...");
@@ -90,7 +90,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	}
 
 	// just show how to change test order
-	@Test(dependsOnMethods = { "testTreatingAUserCausesADatabaseRowToBeInserted" }, alwaysRun = true)
+	//@Test(dependsOnMethods = { "testTreatingAUserCausesADatabaseRowToBeInserted" }, alwaysRun = true)
 	public void testGetUser() {
 		User user = userManager.getUserById("5cb64b881e5438ba9a76ca60fc05aea4");
 		if (logger.isDebugEnabled()) {
@@ -103,7 +103,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		Assert.assertEquals(1, user.getAuthorities().length);
 	}
 
-	@Test
+	//@Test
 	public void testGetRole() {
 		int before = getCount("SELECT COUNT(*) FROM role;");
 		Role role = new Role();

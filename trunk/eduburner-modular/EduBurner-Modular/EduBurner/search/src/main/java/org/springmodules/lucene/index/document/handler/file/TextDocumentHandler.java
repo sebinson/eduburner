@@ -63,7 +63,7 @@ public class TextDocumentHandler extends AbstractInputStreamDocumentHandler {
 		//The text is analyzed and indexed but not stored
 		document.add(new Field("contents", new InputStreamReader(inputStream)));
 		if( description.get(FILENAME)!=null ) {
-			document.add(new Field("type", "file", Field.Store.YES, Field.Index.UN_TOKENIZED));
+			document.add(new Field("type", "file", Field.Store.YES, Field.Index.NOT_ANALYZED));
 			document.add(new Field("filename", (String)description.get(FILENAME), Field.Store.YES, Field.Index.UN_TOKENIZED));
 		}
 		return document;
