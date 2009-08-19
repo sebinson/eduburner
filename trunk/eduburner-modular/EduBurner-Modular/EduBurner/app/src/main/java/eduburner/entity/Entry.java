@@ -116,6 +116,8 @@ public class Entry extends EntityObject {
 		this.comments = comments;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="fk_userdata_id")
 	public UserData getUser() {
 		return user;
 	}
