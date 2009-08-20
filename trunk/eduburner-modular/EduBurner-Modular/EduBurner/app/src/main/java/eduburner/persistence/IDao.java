@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.dao.DataAccessException;
 
@@ -59,4 +63,33 @@ public interface IDao {
 	public <T> List<T> findByValueBean(String queryString, T valueBean);
 	
 	public Iterator<?> getIterator(String query);
+
+	<T> T findUnique(String hql, Object... values);
+
+	<T> T findUnique(String hql, Map<String, Object> values);
+
+	int batchExecute(String hql, Object... values);
+
+	int batchExecute(String hql, Map<String, Object> values);
+
+	<T> Page<T> findPage(Page<T> page, String hql, Object... values);
+
+	<T> Page<T> findPage(Page<T> page, String hql, Map<String, Object> values);
+
+	<T> Page<T> findPage(Class<?> type, Page<T> page, Criterion... criterions);
+
+	Query createQuery(String queryString, Object... values);
+
+	Query createQuery(String queryString, Map<String, Object> values);
+
+	<T> T findUniqueBy(Class type, String propertyName, Object value);
+
+	Criteria createCriteria(Class type, Criterion... criterions);
+
+	<T> List<T> find(String hql, Map<String, Object> values);
+
+	<T> List<T> find(Class type, Criterion[] criterions);
+
+	<T> List<T> findBy(Class type, String propertyName, Object value);
+
 }
