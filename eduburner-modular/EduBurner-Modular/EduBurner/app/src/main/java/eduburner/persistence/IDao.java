@@ -2,6 +2,7 @@ package eduburner.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -56,4 +57,6 @@ public interface IDao {
 	public List<?> getAllTypes();
 
 	public <T> List<T> findByValueBean(String queryString, T valueBean);
+	
+	public Iterator<?> getIterator(String query);
 }
