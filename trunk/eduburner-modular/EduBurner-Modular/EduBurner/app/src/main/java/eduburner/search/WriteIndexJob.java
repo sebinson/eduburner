@@ -1,31 +1,31 @@
 package eduburner.search;
 
-import java.util.List;
-
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.springframework.batch.item.ItemWriter;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springmodules.lucene.index.factory.IndexFactory;
 
 import eduburner.entity.user.User;
 
-@Component("userIndexWriter")
-public class BatchUserIndexWriter implements ItemWriter<User> {
-
+/**
+ * 定时写索引
+ * @author zhangyf@gmail.com
+ *
+ */
+public class WriteIndexJob extends QuartzJobBean{
+	
 	@Autowired
 	@Qualifier("indexFactory")
 	private IndexFactory indexFactory;
-
-	@Override
-	public void write(List<? extends User> users) throws Exception {
-		for (User user : users) {
-			indexFactory.getIndexWriter().addDocument(buildDocument(user));
-		}
+	
+	public void writeIndex(){
+		
 	}
-
+	
 	private Document buildDocument(User user) {
 		Document doc = new Document();
 		String id = user.getId();
@@ -40,4 +40,10 @@ public class BatchUserIndexWriter implements ItemWriter<User> {
 		return doc;
 	}
 
+	@Override
+	protected void executeInternal(JobExecutionContext context)
+			throws JobExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 }

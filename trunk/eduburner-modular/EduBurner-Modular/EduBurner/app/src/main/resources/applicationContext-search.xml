@@ -29,5 +29,26 @@
 		class="org.springmodules.lucene.search.factory.SimpleSearcherFactory">
 		<property name="directory" ref="fsDirectory" />
 	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+				<property name="jobDetail" ref="jobDetail" />
+				<property name="cronExpression" value="0/10 * * * * ?" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="org.springframework.batch.sample.quartz.JobLauncherDetails" />
+		<property name="group" value="quartz-search-index" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="jobName" value="footballJob"/>
+				<entry key="jobLocator" value-ref="jobRegistry"/>
+				<entry key="jobLauncher" value-ref="jobLauncher"/>
+			</map>
+		</property>
+	</bean>
 
 </beans>

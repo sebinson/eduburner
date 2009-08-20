@@ -195,5 +195,10 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	public void removeAll(Collection<?> entities) {
 		getHibernateTemplate().deleteAll(entities);
 	}
+
+	@Override
+	public Iterator<?> getIterator(String query) {
+		return getHibernateTemplate().iterate(query);
+	}
 	
 }
