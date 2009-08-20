@@ -329,7 +329,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> Page<T> findPage(final Page<T> page, final String hql, final Map<String, Object> values) {
 		Assert.notNull(page, "page不能为空");

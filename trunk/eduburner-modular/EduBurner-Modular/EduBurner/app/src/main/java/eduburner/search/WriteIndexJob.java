@@ -22,7 +22,10 @@ public class WriteIndexJob extends QuartzJobBean{
 	@Qualifier("indexFactory")
 	private IndexFactory indexFactory;
 	
-	public void writeIndex(){
+	@Override
+	protected void executeInternal(JobExecutionContext context)
+			throws JobExecutionException {
+		// TODO Auto-generated method stub
 		
 	}
 	
@@ -40,10 +43,5 @@ public class WriteIndexJob extends QuartzJobBean{
 		return doc;
 	}
 
-	@Override
-	protected void executeInternal(JobExecutionContext context)
-			throws JobExecutionException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
