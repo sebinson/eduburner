@@ -5,7 +5,7 @@ import java.util.List;
 import eduburner.crawler.frontier.IFrontier;
 import eduburner.crawler.processor.IProcessor;
 
-public interface ICrawlController {
+public interface ICrawler {
 	public void initTasks();
 	/**
 	 * Operator requested crawl begin

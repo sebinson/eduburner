@@ -9,13 +9,12 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.collections.Bag;
-import org.apache.commons.collections.BagUtils;
-import org.apache.commons.collections.bag.HashBag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.MapMaker;
+import com.google.common.collect.Multiset;
 
 import eduburner.crawler.model.CrawlURI;
 
@@ -33,10 +32,10 @@ public class WorkQueueFrontier extends AbstractFrontier {
 			.getLogger(WorkQueueFrontier.class);
 
 	private Map<String, WorkQueue> allQueues;
-	private BlockingQueue<String> readyClassQueues;
-	private DelayQueue<DelayedWorkQueue> snoozeQueues;
 	
-	protected Bag inProcessQueues = BagUtils.synchronizedBag(new HashBag());
+	private BlockingQueue<String> readyClassKeyQueues;
+	private DelayQueue<DelayedWorkQueue> snoozeQueues;
+	protected Multiset<WorkQueue> inProcessQueues = HashMultiset.create();
 
 	public WorkQueueFrontier() {
 		super();
@@ -50,7 +49,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected void initInternalQueues(boolean recycle) {
 		allQueues = new MapMaker().makeMap();
 
-		readyClassQueues = new LinkedBlockingDeque<String>();
+		readyClassKeyQueues = new LinkedBlockingDeque<String>();
 		snoozeQueues = new DelayQueue<DelayedWorkQueue>();
 	}
 
@@ -84,7 +83,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	private void addToReadyQueue(WorkQueue queue) {
 		queue.setActive(this, true);
 		try {
-			readyClassQueues.put(queue.getClassKey());
+			readyClassKeyQueues.put(queue.getClassKey());
 		} catch (InterruptedException e) {
 			logger.warn("failed to add queue " + queue.getClassKey() + " to ready queue");
 			e.printStackTrace();
@@ -107,7 +106,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		wakeQueues();
 		
 		int activationsWanted = 
-            outbound.remainingCapacity() - readyClassQueues.size();
+            outbound.remainingCapacity() - readyClassKeyQueues.size();
 		
 		return null;
 	}

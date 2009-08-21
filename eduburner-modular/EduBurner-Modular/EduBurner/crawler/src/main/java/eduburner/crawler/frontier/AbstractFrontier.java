@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eduburner.crawler.ICrawlController;
+import eduburner.crawler.ICrawler;
 import eduburner.crawler.model.CrawlURI;
 
 public abstract class AbstractFrontier implements IFrontier, Serializable {
@@ -54,7 +54,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	protected ReentrantReadWriteLock outboundLock = new ReentrantReadWriteLock(
 			true);
 
-	protected ICrawlController controller;
+	protected ICrawler controller;
 
 	@Override
 	public void initTasks() {
