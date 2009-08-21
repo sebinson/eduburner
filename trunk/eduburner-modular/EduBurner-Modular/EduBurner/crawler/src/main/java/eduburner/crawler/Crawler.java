@@ -17,7 +17,7 @@ import eduburner.crawler.processor.IProcessor;
  * @author zhangyf@gmail.com
  * 
  */
-public class CrawlController implements ICrawlController {
+public class Crawler implements ICrawler {
 
 	public static final int DEFAULT_MAX_TOE_THREAD_SIZE = 10;
 
@@ -37,7 +37,7 @@ public class CrawlController implements ICrawlController {
 
 	private IFrontier crawlFrontier;
 
-	public CrawlController() {
+	public Crawler() {
 		maxToeThreadSize = DEFAULT_MAX_TOE_THREAD_SIZE;
 		toeThreadPool = Executors
 				.newFixedThreadPool(DEFAULT_MAX_TOE_THREAD_SIZE);
