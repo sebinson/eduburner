@@ -217,3 +217,35 @@
     <div class="form-clear-left"></div>
   </div>
 </#macro>
+
+<#macro postMessageBox>
+  <div class="post-message-box">
+    <div>
+    	<form>
+    		<textarea></textarea>
+    	</form>
+    </div>
+    <div>
+    </div>
+  </div>
+</#macro>
+
+<#macro entryBox entry>
+  <div class="entry">
+  	<div class="profile">
+  	  <a href="/users/${entry.user.username}"><img src="${entry.user.profilePicture}" style="width:50px;height:50px;"/></a>
+  	</div>
+  	<div class="content">
+  	  <div class="entry-body">
+  	  	${entry.title}
+  	  </div>
+  	  <div class="actions">
+  	  </div>
+  	  <div class="likes">
+  	  </div>
+  	  <div class="comments">
+  	  </div>
+  	</div>
+  	<div class="clear"></div>
+  </div>
+</#macro>
