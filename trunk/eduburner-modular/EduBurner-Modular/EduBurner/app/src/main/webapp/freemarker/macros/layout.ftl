@@ -19,7 +19,6 @@
       <link type="text/css" rel="stylesheet" href="/static/styles/fragments.css" />
       
       <script type="text/javascript" src="/static/scripts/libs/jquery-1.3.2.min.js"></script>
-      <script type="text/javascript" src="/static/scripts/libs/mootools-1.2.1-core.js"></script>
       
       <script type="text/javascript" src="/static/yui/yahoo-dom-event/yahoo-dom-event.js"></script> 
       <script type="text/javascript" src="/static/yui/element/element-min.js"></script>
@@ -35,8 +34,6 @@
       <script type="text/javascript" src="/static/yui/container/container-min.js"></script> 
       
       <script type="text/javascript" src="/static/scripts/common.js"></script>
-      <script type="text/javascript" src="/static/scripts/history.js"></script>
-	  <script type="text/javascript" src="/static/scripts/page.js"></script>
       
       <script type="text/javascript"> 
 	      YAHOO.util.Event.onDOMReady(function(){

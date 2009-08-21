@@ -220,12 +220,13 @@
 
 <#macro postMessageBox>
   <div class="post-message-box">
-    <div>
+    <div class="message-form">
     	<form>
     		<textarea></textarea>
     	</form>
     </div>
-    <div>
+    <div class="message-actions">
+        <input type="submit" value="提交"/>
     </div>
   </div>
 </#macro>

@@ -1,8 +1,3 @@
-window.EventList = {
-	HISTORY_LOADED: new YAHOO.util.CustomEvent('history-loaded'),
-	HISTORY_STATE_CHANGED: new YAHOO.util.CustomEvent('history-changed')
-};
-
 (function($){
 
     $.utils = {
