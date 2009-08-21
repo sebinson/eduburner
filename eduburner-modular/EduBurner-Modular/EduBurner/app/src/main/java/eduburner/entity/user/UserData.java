@@ -31,6 +31,8 @@ import eduburner.entity.course.Course;
 @Table(name = "user_data")
 public class UserData extends EntityObject {
 	private static final long serialVersionUID = -8000191009583356867L;
+	
+	public static final String PROFILE_PICTURE_PREFIX = "/static/profiles/";
 
 	@Expose
 	private String username;
@@ -42,7 +44,7 @@ public class UserData extends EntityObject {
 	private String userId;
 
 	// 加上个人头像
-	private String profilePicture;
+	private String profilePicture = PROFILE_PICTURE_PREFIX + "anonymous.gif";
 
 	private List<Course> courses = Lists.newArrayList();
 
