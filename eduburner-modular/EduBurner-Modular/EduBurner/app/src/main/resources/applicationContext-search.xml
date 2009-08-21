@@ -13,8 +13,10 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
+    <!-- 
     <bean id="fsDirectory" class="org.springmodules.lucene.index.support.FSDirectoryFactoryBean">
 		<property name="location" value="d:/eduburner-lucene-index"/>
+		<property name="create" value="true"/>
 	</bean>
 
 	<bean id="indexFactory"
@@ -50,5 +52,5 @@
 			</map>
 		</property>
 	</bean>
-
+	 -->
 </beans>

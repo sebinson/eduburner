@@ -63,7 +63,6 @@ public class GenUserDataTest extends BaseServiceTestSupport{
 		
 		
 		for(Entry e : entries){
-			userManager.createEntry(admin.getId(), e);
 		    userManager.createEntry(user.getId(), e);
 		}
 	}

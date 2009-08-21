@@ -26,7 +26,9 @@
         -->
     </context:component-scan>
     
+    <!--  
     <util:properties id="luceneProperties" location="classpath:lucene.properties" />
+	-->
 	
 	<!--
 	<aop:config proxy-target-class="true">
