@@ -17,11 +17,14 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.ImmutableMap;
+
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
+import eduburner.persistence.Page;
 import eduburner.service.BaseManager;
 
 @Service("userManager")
@@ -73,9 +76,11 @@ public class UserManager extends BaseManager implements UserDetailsService,
 
 	@Override
 	public User getUserByUsername(String username) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+		/*DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 		criteria.add(Restrictions.eq("username", username));
-		User user = (User) dao.getUniqueInstanceByDetachedCriteria(criteria);
+		User user = (User) dao.getUniqueInstanceByDetachedCriteria(criteria);*/
+		
+		User user = dao.findUniqueBy(User.class, "username", username);
 		return user;
 	}
 
@@ -163,5 +168,13 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	public void getHomePageEntriesForUser(User user) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public Page<Entry> getUserEntriesPage(UserData ud, int pageNo){
+		logger.debug("entering getUserEntriesPage method...");
+		Page<Entry> page = new Page<Entry>();
+		page.setPageNo(pageNo);
+		return dao.findPage(page, "from Entry as e where e.user.id = ?", ud.getId());
 	}
 }

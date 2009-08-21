@@ -7,6 +7,7 @@ import eduburner.entity.Entry;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
+import eduburner.persistence.Page;
 
 public interface IUserManager {
 	
@@ -43,5 +44,7 @@ public interface IUserManager {
 	public void addEntryComment(String userId, String entryId, Comment comment);
 	
 	public void getHomePageEntriesForUser(User user);
+
+	Page<Entry> getUserEntriesPage(UserData ud, int pageNo);
 	
 }

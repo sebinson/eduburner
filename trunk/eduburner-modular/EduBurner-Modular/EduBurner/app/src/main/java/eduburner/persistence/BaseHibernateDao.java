@@ -27,6 +27,8 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.ResultTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -41,6 +43,8 @@ import eduburner.util.ReflectionUtils;
 @SuppressWarnings("unchecked")
 @Transactional
 public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BaseHibernateDao.class);
 	
 	@Override
 	public List<?> find(String queryString) throws DataAccessException {
@@ -231,7 +235,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 */
 	@Override
 	public <T> T findUniqueBy(Class type, final String propertyName, final Object value) {
-		Assert.hasText(propertyName, "propertyName不能为空");
+		Assert.hasText(propertyName, "propertyName should not be null");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(type, criterion).uniqueResult();
 	}
@@ -302,10 +306,9 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
-		Assert.notNull(page, "page不能为空");
+		Assert.notNull(page, "page should not be null");
 
 		Query q = createQuery(hql, values);
 
@@ -316,7 +319,8 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 
 		setPageParameter(q, page);
 		List result = q.list();
-		page.setResult(result);
+		
+		page.setItems(result);
 		return page;
 	}
 
@@ -331,10 +335,12 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 */
 	@Override
 	public <T> Page<T> findPage(final Page<T> page, final String hql, final Map<String, Object> values) {
-		Assert.notNull(page, "page不能为空");
+		Assert.notNull(page, "page should not be null.");
 
+		logger.debug("entering findPage method...");
+		
 		Query q = createQuery(hql, values);
-
+		
 		if (page.isAutoCount()) {
 			long totalCount = countHqlResult(hql, values);
 			page.setTotalCount(totalCount);
@@ -343,7 +349,12 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		setPageParameter(q, page);
 
 		List result = q.list();
-		page.setResult(result);
+		
+		if(result == null){
+			logger.warn("result is null ");
+		}
+		
+		page.setItems(result);
 		return page;
 	}
 
@@ -368,7 +379,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 
 		setPageParameter(c, page);
 		List result = c.list();
-		page.setResult(result);
+		page.setItems(result);
 		return page;
 	}
 
@@ -381,7 +392,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 */
 	@Override
 	public Query createQuery(final String queryString, final Object... values) {
-		Assert.hasText(queryString, "queryString不能为空");
+		Assert.hasText(queryString, "queryString should not be null");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			for (int i = 0; i < values.length; i++) {
@@ -398,7 +409,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 */
 	@Override
 	public Query createQuery(final String queryString, final Map<String, Object> values) {
-		Assert.hasText(queryString, "queryString不能为空");
+		Assert.hasText(queryString, "queryString should not be null");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			query.setProperties(values);
@@ -457,7 +468,8 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		return c;
 	}
 
-	/**
+	/**XXX: 这里导致hql只能用小写
+	 * 
 	 * 执行count查询获得本次Hql查询所能获得的对象总数.
 	 * 
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.

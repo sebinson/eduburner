@@ -13,26 +13,31 @@ import com.google.common.collect.Lists;
  * @param <T> Page中记录的类型.
  * 
  * @author calvin
+ * @author rockmaple
  */
 public class Page<T> {
+	
+	public static final int DEFAULT_PAGE_SIZE = 10;
+	
 	// 公共变量 //
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
 
 	//分页参数 //
 	protected int pageNo = 1;
-	protected int pageSize = 1;
+	protected int pageSize = 10;
 	protected String orderBy = null;
 	protected String order = null;
 	protected boolean autoCount = true;
 
 	//返回结果 //
-	protected List<T> result = Lists.newArrayList();
+	protected List<T> items = Lists.newArrayList();
 	protected long totalCount = -1;
 
 	// 构造函数 //
 
 	public Page() {
+		this(DEFAULT_PAGE_SIZE);
 	}
 
 	public Page(final int pageSize) {
@@ -152,12 +157,12 @@ public class Page<T> {
 	/**
 	 * 取得页内的记录列表.
 	 */
-	public List<T> getResult() {
-		return result;
+	public List<T> getItems() {
+		return items;
 	}
 
-	public void setResult(final List<T> result) {
-		this.result = result;
+	public void setItems(final List<T> result) {
+		this.items = result;
 	}
 
 	/**

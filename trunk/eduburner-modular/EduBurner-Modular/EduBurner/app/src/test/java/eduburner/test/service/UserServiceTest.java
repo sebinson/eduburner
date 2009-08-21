@@ -11,10 +11,13 @@ import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import eduburner.entity.Entry;
 import eduburner.entity.user.Role;
 import eduburner.entity.user.User;
+import eduburner.entity.user.UserData;
 import eduburner.enumerations.RoleType;
 import eduburner.persistence.EntityExistsException;
+import eduburner.persistence.Page;
 import eduburner.service.user.IRoleManager;
 import eduburner.service.user.IUserManager;
 
@@ -36,6 +39,20 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	public UserServiceTest() {
 		// make sure the change will affect database
 		// setDefaultRollback(false);
+	}
+	
+	@Test
+	public void testGetPage(){
+		UserData ud = userManager.getUserDataByUsername("rockmaple");
+		Page<Entry> page = userManager.getUserEntriesPage(ud, 1);
+		
+		logger.debug("size is: " + page.getItems().size());
+		
+		logger.debug("total count is: " + page.getTotalCount());
+		
+		Assert.assertNotNull(page);
+		Assert.assertTrue(page.getItems().size() > 0);
+	
 	}
 
 	//@Test
