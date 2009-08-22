@@ -8,6 +8,7 @@ body {
 
 a,a:focus,.unselectable {
 	color: #003366;
+	text-decoration: none;
 	-moz-outline: 0;
 	-moz-user-select: none;
 	-khtml-user-select: none;
@@ -15,8 +16,8 @@ a,a:focus,.unselectable {
 }
 
 .link {
-	text-decoration: underline;
 	cursor: pointer;
+	color: #003366;
 }
 
 p {
