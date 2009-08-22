@@ -25,7 +25,7 @@ public class Entry extends EntityObject {
 	private String title;
 	private String content;
 	private String link;
-	private Date published;
+	private Date published = new Date();
 	private Date updated;
 	private boolean anonymous;
 	private boolean hidden;

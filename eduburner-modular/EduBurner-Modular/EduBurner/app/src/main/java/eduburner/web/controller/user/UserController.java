@@ -34,9 +34,9 @@ public class UserController extends BaseController {
 		return USER_FORM;
 	}
 	
-	@RequestMapping(value="users/{userId}", method=RequestMethod.GET)
-	public String show(@PathVariable String userId, Model model){
-		User user = userManager.getUserById(userId);
+	@RequestMapping(value="users/{username}", method=RequestMethod.GET)
+	public String show(@PathVariable String username, Model model){
+		User user = userManager.getUserByUsername(username);
 		model.addAttribute("user", user);
 		return USER_VIEW;
 	}
@@ -52,9 +52,10 @@ public class UserController extends BaseController {
 		}
 	}
 	
-	@RequestMapping(value="users", method=RequestMethod.PUT)
+	@RequestMapping(value="/users", method=RequestMethod.PUT)
 	public String update(@ModelAttribute("user") User user, BindingResult br, Model model){
 		userManager.updateUser(user);
 		return JSON_VIEW;
 	}
+	
 }

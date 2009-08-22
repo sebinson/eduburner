@@ -28,7 +28,7 @@ public class CourseController extends BaseController {
 	private ICourseManager courseManager;
 
 	private static final String COURSE_FORM = "fragments/course-form";
-	private static final String COURSE_VIEW = "fragments/course-view";
+	private static final String COURSE_VIEW = "course";
 
 	@RequestMapping(value = "/courses.*", method = RequestMethod.GET)
 	public String list(Model model) {

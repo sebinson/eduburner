@@ -32,6 +32,7 @@
       <script type="text/javascript" src="/static/yui/tabview/tabview-min.js"></script> 
       <script type="text/javascript" src="/static/yui/datatable/datatable-min.js"></script>
       <script type="text/javascript" src="/static/yui/container/container-min.js"></script> 
+      <script type="text/javascript" src="/static/yui/uploader/uploader-min.js"></script> 
       
       <script type="text/javascript" src="/static/scripts/common.js"></script>
       

@@ -12,6 +12,24 @@
 			.sidebar-block-content ul.sidebar-block-list li a:hover { background-color: #899BC1; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .sidebar-block-content ul.sidebar-tag-cloud { line-height: 225%; list-style-type: none; }
 	.sidebar-block-content ul.sidebar-tag-cloud li { }
+.sidebar-block-content .avatar-list-area{
+	float:left;
+font-size:120%;
+height:100px;
+margin:12px 12px 0 0;
+overflow:hidden;
+padding:3px 3px 3px 0;
+text-align:center;
+vertical-align:middle;
+width:80px;
+}
+
+.sidebar-block-content .msg{
+}
+
+.sidebar-block-footer a:hover{
+	text-decoration: underline;
+}
 /************************************* tags *****************************/
 .tag1,.tag2,.tag3,.tag3,.tag4,.tag5,.tag6 { display: inline; }
 .tag1 a:link,.tag1 a:visited,.tag1 a:active { color: #000000; font-size: 225%; font-weight: 900; margin-right: 6px; text-decoration: none; }
@@ -91,8 +109,7 @@
 }
 
 .entry .content .actions .link{
-	color: rgb(119, 119, 204);
-	text-decoration: none;
+	
 }
 
 .entry .content .likes{

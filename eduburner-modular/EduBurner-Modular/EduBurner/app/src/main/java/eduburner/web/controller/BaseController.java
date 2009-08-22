@@ -104,6 +104,10 @@ public class BaseController {
 	protected String getRemoteUserId() {
 		return getRemoteUserObj().getId();
 	}
+	
+	protected String getRemoteUser(){
+		return getRemoteUserObj().getUsername();
+	}
 
 	private User getUser(String username) {
 		return userManager.getUserByUsername(username);

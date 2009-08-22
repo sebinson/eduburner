@@ -50,13 +50,11 @@
 						<a href="/account/logout">退出</a>
 					</div>
 				</li>
-				<#if principal.administrator>
 				<li class="menu">
 					<div class="menu-title">
-						<a href="/account/setting">设置</a>
+						<a href="/account/settings">设置</a>
 					</div>
 				</li>
-				</#if>
 				<li class="menu">
 					<div class="menu-title">
 						<a href="#">${principal.username?default("")}</a>
@@ -120,6 +118,9 @@
 	      		<li><a id="course-link-${c.id}" href="/courses/${c.id}" i="${c.id}"><img src="/static/images/silk/book_open.png"/><span>${c.title}</span></a></li>
 	      	</#list>
 	      </ul>
+	    </div>
+	    <div class="sidebar-block-footer">
+	    	<a href="#">浏览/编缉课程</a>
 	    </div>
 	  </div>
 	</div>
