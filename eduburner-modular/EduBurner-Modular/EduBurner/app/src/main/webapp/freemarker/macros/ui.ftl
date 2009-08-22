@@ -141,12 +141,12 @@
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 	      	<#list user.courses as c>
-	      		<li><a id="course-link-${c.id}" href="/courses/${c.id}" i="${c.id}"><img src="/static/images/silk/book_open.png"/><span>${c.title}</span></a></li>
+	      		<li><a id="c-${c.id}" href="/courses/${c.id}" i="${c.id}"><img src="/static/images/silk/book_open.png"/><span>${c.title}</span></a></li>
 	      	</#list>
 	      </ul>
 	    </div>
 	    <div class="sidebar-block-footer">
-	    	<a href="#">浏览/编缉课程</a>
+	    	<a href="/courses/">浏览/编缉课程</a>
 	    </div>
 	  </div>
 	</div>
@@ -309,3 +309,17 @@
   </div>
 </#macro>
 
+<#macro courseListView courses=[]>
+  <div id="courses-grid">
+    <#list courses as c>
+       <div class="single-course">
+       		<div class="picture">
+       			<a href="#"><img style="width:75px;height:75px;" src="${c.picture}" /></a>
+       		</div>
+       		<div class="name">
+       		    <a href="#">${c.title}</a>
+       		</div>
+       </div>
+    </#list>
+  </div>
+</#macro>
