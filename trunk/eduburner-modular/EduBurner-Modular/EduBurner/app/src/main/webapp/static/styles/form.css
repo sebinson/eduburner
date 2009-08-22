@@ -5,7 +5,7 @@
 .eb-form .form-header { margin:0 0 10px; padding:0 0 10px; border-bottom:1px solid #CCCCCC; margin-bottom: 15px; }
 	.eb-form .form-header h2 { font-size: 15px; }
 .form-field { font: normal 1em tahoma, arial, helvetica, sans-serif; }
-.form-text, textarea.form-field { padding: 1px 3px; border: 1px solid #999999; }
+.form-text, textarea.form-field { padding: 1px 3px; border: 1px solid #999999; width:13em}
 .form-text { height: 18px; line-height: 18px; vertical-align: middle; }
 .ie .form-text { margin:-1px 0; height:18px; line-height:18px; }
 .ie textarea.form-field { margin:-1px 0; }

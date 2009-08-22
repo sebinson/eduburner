@@ -15,9 +15,17 @@ a,a:focus,.unselectable {
 	user-select: none;
 }
 
+a:hover: {
+	text-decoration: underline;
+}
+
 .link {
 	cursor: pointer;
 	color: #003366;
+}
+
+.link:hover{
+	text-decoration: underline;
 }
 
 p {

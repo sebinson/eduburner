@@ -42,6 +42,8 @@ public class UserData extends EntityObject {
 	private String email;
 	@Expose
 	private String userId;
+	
+	private String description;
 
 	// 加上个人头像
 	private String profilePicture = PROFILE_PICTURE_PREFIX + "anonymous.gif";
@@ -163,6 +165,14 @@ public class UserData extends EntityObject {
 
 	public void setLikes(List<Like> likes) {
 		this.likes = likes;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

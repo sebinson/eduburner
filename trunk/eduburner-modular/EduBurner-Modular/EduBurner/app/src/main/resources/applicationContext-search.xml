@@ -13,25 +13,31 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-    <!-- 
+    
     <bean id="fsDirectory" class="org.springmodules.lucene.index.support.FSDirectoryFactoryBean">
-		<property name="location" value="d:/eduburner-lucene-index"/>
+    	<property name="location" value="file:///d:/lucene-index/user"/>
+    	<property name="create" value="true"/>
+    </bean>
+
+	<bean id="targetIndexFactory" class="org.springmodules.lucene.index.support.SimpleIndexFactoryBean">
+        <property name="directory" ref="fsDirectory"/>
+        <property name="analyzer">
+            <bean class="org.apache.lucene.analysis.SimpleAnalyzer"/>
+        </property>
+        <property name="resolveLock" value="true"/>
 		<property name="create" value="true"/>
 	</bean>
 
-	<bean id="indexFactory"
-		class="org.springmodules.lucene.index.support.SimpleIndexFactoryBean">
-		<property name="directory" ref="fsDirectory" />
-		<property name="analyzer">
-			<bean class="org.apache.lucene.analysis.SimpleAnalyzer" />
-		</property>
+	<bean id="indexFactory" class="org.springmodules.lucene.index.factory.concurrent.LockIndexFactory">
+		<property name="targetIndexFactory" ref="targetIndexFactory"/>
 	</bean>
+    
+    <bean id="searcherFactory" class="org.springmodules.lucene.search.factory.SimpleSearcherFactory">
+        <property name="directory" ref="fsDirectory"/>
+    </bean>
 
-	<bean id="searcherFactory"
-		class="org.springmodules.lucene.search.factory.SimpleSearcherFactory">
-		<property name="directory" ref="fsDirectory" />
-	</bean>
 	
+	<!-- 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
@@ -52,5 +58,5 @@
 			</map>
 		</property>
 	</bean>
-	 -->
+	-->
 </beans>
