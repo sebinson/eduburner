@@ -83,7 +83,6 @@
 }
 
 .entry .content .entry-info .name a{
-	text-decoration: none;
 }
 
 .entry .content .actions{
@@ -94,4 +93,29 @@
 .entry .content .actions .link{
 	color: rgb(119, 119, 204);
 	text-decoration: none;
+}
+
+.entry .content .likes{
+	padding-left: 21px;
+	margin-top: 8px;
+	background: url(../images/smile.png) no-repeat 0% 0%;
+}
+
+.entry .content .comments{
+	margin-top: 8px;
+}
+
+.entry .content .comments textarea{
+	height: 40px;
+	width: 500px;
+	border: 1px solid #BDC7D8
+}
+
+.entry .content .comments .comment-form{
+	padding-left: 21px;
+	background: url(../images/silk/comment.png) no-repeat 0% 0%;
+}
+
+.entry .content .comments .comment-form .buttons{
+	margin-top: 6px;
 }

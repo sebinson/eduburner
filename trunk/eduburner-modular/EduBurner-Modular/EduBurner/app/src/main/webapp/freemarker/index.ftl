@@ -1,5 +1,8 @@
 <@layout.masterPage title="首页" pageType="userPage">
 	<div id="main-content">
+		<div style="margin:10px 0">
+			<h2>首页</h2>
+		</div>
 		<@ui.postMessageBox/>
 		<div class="entries">
 			<#list page.items as e>

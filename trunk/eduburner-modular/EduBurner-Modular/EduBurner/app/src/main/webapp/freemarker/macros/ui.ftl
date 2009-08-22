@@ -255,8 +255,27 @@
   	  	<span class="like link">喜欢</span>
   	  </div>
   	  <div class="likes">
+  	  	a, b, c喜欢此条目
   	  </div>
   	  <div class="comments">
+  	  	<div class="comment-form">
+  	  	  <form>
+  	  	    <div class="text">
+  	  	      <textarea></textarea>
+  	  	    </div>
+  	  	    <div class="buttons">
+  	  	      <input type="button" value="发布" />
+  	  	      <span class="link">取消</span>
+  	  	    </div>
+  	  	  </form>
+  	  	</div>
+  	  	<#list entry.comments as c>
+  	  	<div class="comment">
+  	  		<div class="comment-content">
+  	  			${c.body}
+  	  		</div>
+  	  	</div>
+  	  	</#list>
   	  </div>
   	</div>
   	<div class="clear"></div>
