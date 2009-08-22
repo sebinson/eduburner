@@ -15,7 +15,7 @@ a,a:focus,.unselectable {
 	user-select: none;
 }
 
-a:hover: {
+a:hover{
 	text-decoration: underline;
 }
 
@@ -232,3 +232,71 @@ textarea {
 	background: #5C75AA;
 }
 
+/******************** profile ********************/
+#profile{
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+#profile .profile-image{
+	float: left;
+}
+
+#profile .profile-body{
+	margin-left: 60px;
+	padding-top: 6px;
+}
+
+#profile .profile-body .name{
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:4px;
+}
+
+#profile .profile-body .actions{
+}
+
+/*************** top search form ***********************/
+
+#top-search{
+	padding:3px 11px 3px 4px;
+	width:172px;
+}
+
+#top-search .search-form-input{
+	float:left;
+	width:151px;
+}
+
+#top-search .search-form-input #q{
+	border: 1px solid #315091;
+	float:left;
+	margin:0;
+	padding:3px 4px;
+	width:143px;
+}
+
+#top-search .search-form-submit{
+	float:left;
+	width:21px;
+}
+
+#top-search .search-form-submit a{
+	background-color: #6D84B4;
+	border:1px solid #315091;
+	display:block;
+	font-size:11px;
+	margin:0;
+	padding:0;
+	text-decoration:none;
+	width:19px;
+}
+
+#top-search .search-form-submit a span{
+	background:transparent url(../images/search_glass.gif) no-repeat scroll 0 70%;
+	display:block;
+	margin:0;
+	padding:3px 0;
+	line-height: 16px;
+}
