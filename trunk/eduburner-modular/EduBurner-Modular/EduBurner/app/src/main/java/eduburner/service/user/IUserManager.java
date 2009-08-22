@@ -18,6 +18,8 @@ public interface IUserManager {
 	public void createUser(User user) throws EntityExistsException;
 
 	public void updateUser(User user);
+	
+	public void uploadUserProfilePicture(String username, String profilePicturePath);
 
 	public void alterPassword(User user, String newPassword);
 

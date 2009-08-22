@@ -1,7 +1,9 @@
 package eduburner.web.controller.user;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -46,18 +48,41 @@ public class UserSettingsController extends BaseController {
 		// Filedata is the default name for file in YUI uploader
 		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest
 				.getFile("Filedata");
-
+        //上传组件的bug, 所以将username传过来，而不是取getRemoteUser
+		String username = request.getParameter("username");
+		
+		String origionalFileName = file.getOriginalFilename();
+		String extension = origionalFileName.substring(origionalFileName.lastIndexOf(".") + 1);
+		String newFileName = "profile." + extension;
 		String uploadDir = request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "/static/profiles/";
+				+ "/static/profiles/" + username + "/";
 
 		logger.debug("upload dir is: " + uploadDir);
+		
+		handleUpload(file, newFileName, uploadDir);
+		
+		String profilePicture = request.getServletPath() + "/static/profiles/" + username + "/" + newFileName;
+		
+		userManager.uploadUserProfilePicture(username, profilePicture);
+		
+		setReturnMsg(model, Message.OK);
+		
+		return JSON_VIEW;
+		
+	}
 
+	private void handleUpload(CommonsMultipartFile file, String newFileName,
+			String uploadDir) throws IOException, FileNotFoundException {
+		// Create the directory if it doesn't exist
+        File dirPath = new File(uploadDir);
+        if (!dirPath.exists()) {
+            dirPath.mkdirs();
+        }
 		// retrieve the file data
 		InputStream stream = file.getInputStream();
 		// write the file to the file specified
-		OutputStream bos = new FileOutputStream(uploadDir
-				+ file.getOriginalFilename());
+		OutputStream bos = new FileOutputStream(uploadDir + newFileName);
 		int bytesRead;
 		byte[] buffer = new byte[8192];
 		while ((bytesRead = stream.read(buffer, 0, 8192)) != -1) {
@@ -66,10 +91,5 @@ public class UserSettingsController extends BaseController {
 		bos.close();
 		// close the stream
 		stream.close();
-		
-		setReturnMsg(model, Message.OK);
-		
-		return JSON_VIEW;
-		
 	}
 }

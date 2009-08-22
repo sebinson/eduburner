@@ -48,4 +48,10 @@
 	    </div>
 	</div>
 	<script type="text/javascript" src="/static/scripts/settings.js"></script>
+	<script type="text/javascript">
+	    window.EB_MODELINFOS = {
+	    	userId: '${principal.id}',
+	    	username: '${principal.username}'
+	    }
+	</script>
 </@layout.masterPage>
