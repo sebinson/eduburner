@@ -32,7 +32,10 @@
 		
 		function handleUpload(event){
 			if (fileID != null) {
-				uploader.upload(fileID, "/account/profilepicture",  "POST");
+				uploader.upload(fileID, "/account/profilepicture",  "POST", {
+					'userId': window.EB_MODELINFOS.userId,
+					'username': window.EB_MODELINFOS.username
+				});
 			}	
 		}
 
