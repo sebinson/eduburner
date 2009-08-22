@@ -278,14 +278,26 @@
   	  <div class="actions">
   	  	<#-- TODO: 13秒钟前 发自 Twitter -->
   	  	<span class="add-comment link">评论</span>
-  	  	<span> - </span>
-  	  	<span class="like link">喜欢</span>
+  	  	<#if (entry.user.username!=principal.username)>
+  	  	   <span> - </span><span class="like link">喜欢</span>
+  	  	<#else>
+  	  	   <span> - </span><span class="link">编缉</span>
+  	  	</#if>
   	  </div>
+  	  <#if (entry.likes?size>0) >
   	  <div class="likes">
   	  	a, b, c喜欢此条目
   	  </div>
+  	  </#if>
   	  <div class="comments">
-  	  	<div class="comment-form">
+  	  	<#list entry.comments as c>
+	  	  	<div class="comment">
+	  	  		<div class="comment-content">
+	  	  			${c.body}
+	  	  		</div>
+	  	  	</div>
+  	  	</#list>
+  	  	<div class="comment-form hidden">
   	  	  <form>
   	  	    <div class="text">
   	  	      <textarea></textarea>
@@ -296,13 +308,6 @@
   	  	    </div>
   	  	  </form>
   	  	</div>
-  	  	<#list entry.comments as c>
-  	  	<div class="comment">
-  	  		<div class="comment-content">
-  	  			${c.body}
-  	  		</div>
-  	  	</div>
-  	  	</#list>
   	  </div>
   	</div>
   	<div class="clear"></div>
