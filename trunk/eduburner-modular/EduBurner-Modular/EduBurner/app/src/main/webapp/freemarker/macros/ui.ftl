@@ -222,11 +222,14 @@
   <div class="post-message-box">
     <div class="message-form">
     	<form>
-    		<textarea></textarea>
+    		<textarea id="post-msg-area"></textarea>
     	</form>
     </div>
     <div class="message-actions">
-        <input type="submit" value="提交"/>
+    	<div class="submit-button">
+        	<input id="submit-msg-button" type="submit" value="发 表"/>
+        </div>
+        <div class="clear"></div>
     </div>
   </div>
 </#macro>
@@ -237,10 +240,19 @@
   	  <a href="/users/${entry.user.username}"><img src="${entry.user.profilePicture}" style="width:50px;height:50px;"/></a>
   	</div>
   	<div class="content">
-  	  <div class="entry-body">
-  	  	${entry.title}
+  	  <div class="entry-info">
+  	  	<div class="name">
+  	  		<a href="${entry.user.profilePicture}">${entry.user.username}</a>
+  	  	</div>
+  	  	<div class="text">
+  	  		${entry.title}
+  	  	</div>
   	  </div>
   	  <div class="actions">
+  	  	<#-- TODO: 13秒钟前 发自 Twitter -->
+  	  	<span class="add-comment link">评论</span>
+  	  	<span> - </span>
+  	  	<span class="like link">喜欢</span>
   	  </div>
   	  <div class="likes">
   	  </div>

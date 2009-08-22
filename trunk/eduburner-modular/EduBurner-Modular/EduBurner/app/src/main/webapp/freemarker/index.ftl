@@ -7,9 +7,15 @@
 			</#list>
 		</div>
 	</div>
-	<script type="text/javascript"> 
+	<script type="text/javascript">
+		function onButtonReady() { 
+	        var submitMsgBtn = new YAHOO.widget.Button("submit-msg-button"); 
+	    } 
+	    YAHOO.util.Event.onContentReady("submit-msg-button", onButtonReady);
+	    
 	    YAHOO.util.Event.onDOMReady(function(){
 		     $('#home').addClass('selected');
+		     $('#post-msg-area').trigger('focus');
 		});
 	</script>
 </@layout.masterPage>
