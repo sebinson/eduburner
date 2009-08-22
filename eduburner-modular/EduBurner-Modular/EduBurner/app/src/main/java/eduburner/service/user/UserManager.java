@@ -17,8 +17,6 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.ImmutableMap;
-
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
 import eduburner.entity.user.User;
@@ -176,5 +174,13 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		Page<Entry> page = new Page<Entry>();
 		page.setPageNo(pageNo);
 		return dao.findPage(page, "from Entry as e where e.user.id = ?", ud.getId());
+	}
+
+	@Override
+	public void uploadUserProfilePicture(String username,
+			String profilePicturePath) {
+		UserData ud = getUserDataByUsername(username);
+		ud.setProfilePicture(profilePicturePath);
+		updateUserData(ud);
 	}
 }

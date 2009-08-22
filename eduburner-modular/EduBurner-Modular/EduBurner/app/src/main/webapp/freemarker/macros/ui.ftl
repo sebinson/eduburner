@@ -34,17 +34,24 @@
 	</div>
 </#macro>
 
+<!-- 目前用不上   -->
 <#macro menubar>
 	<div class="top-menu-bar">
 		<ul class="menu-list">
 			<#if principal?has_content>
-			    <!--
 			    <li class="menu">
 			    	<div id="top-search">
-			    		
+			    		<form id="top-search-form">
+			    			<div class="search-form-input">
+			    				<input id="q" name="q" value="搜索" style="color:#666;" onfocus="this.value=''; this.style.color='#000'" onblur="this.value='搜索'; this.style.color='#666'"/>
+			    			</div>
+			    			<div class="search-form-submit">
+			    			    <a href="#"><span>&nbsp;</span></a>
+			    			</div>
+			    		</form>
 			    	</div>
 			    </li>
-			    -->
+			    <#--
 				<li class="menu">
 					<div class="menu-title last">
 						<a href="/account/logout">退出</a>
@@ -60,6 +67,7 @@
 						<a href="#">${principal.username?default("")}</a>
 					</div>
 				</li>
+				-->
 			<#else>
 				<li class="menu last">
 					<div class="menu-title">
@@ -81,6 +89,7 @@
 </#macro>
 
 <#macro userNavBar>
+    <@ui.navProfile />
 	<@ui.leftNav />
 	<#if principal?has_content>
 		<@ui.courseList />
@@ -92,6 +101,23 @@
 	<#if principal?has_content && principal.administrator>
 		<@ui.adminMenu />
 	</#if>
+</#macro>
+
+<#macro navProfile>
+	<div id="profile">
+		<div class="profile-image">
+			<a href="#"><img style="width: 50px; height: 50px;" src="${user.profilePicture}"/></a>
+		</div>
+		<div class="profile-body">
+			<div class="name">
+				<a href="#">${principal.username}</a>
+			</div>
+			<div class="actions">
+				<a href="/account/settings">设置</a> - <a href="/account/logout">退出</a>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
 </#macro>
 
 <#macro leftNav>
