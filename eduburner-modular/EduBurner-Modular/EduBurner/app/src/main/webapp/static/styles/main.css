@@ -173,7 +173,7 @@ textarea {
 }
 
 .top-menu-bar ul.menu-list li.menu {
-	margin: 5px 0 0 0;
+	margin: 3px 0 0 0;
 }
 
 .top-menu-bar ul.menu-list li.last {
@@ -260,7 +260,7 @@ textarea {
 /*************** top search form ***********************/
 
 #top-search{
-	padding:3px 11px 3px 4px;
+	padding:0 11px 0 4px;
 	width:172px;
 }
 
