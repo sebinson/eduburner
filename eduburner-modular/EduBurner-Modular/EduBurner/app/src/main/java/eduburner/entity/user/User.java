@@ -11,12 +11,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.springframework.security.GrantedAuthority;
@@ -36,6 +41,7 @@ import eduburner.enumerations.RoleType;
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"username", "email" }) })
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends EntityObject implements UserDetails {
 
 	private static final long serialVersionUID = 3619044126921173168L;
@@ -123,6 +129,12 @@ public class User extends EntityObject implements UserDetails {
 
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "rel_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	//Fecth策略定义
+	@Fetch(FetchMode.SUBSELECT)
+	//集合按id排序.
+	@OrderBy("id")
+	//集合中对象的id的缓存.
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public Set<Role> getRoles() {
 		return roles;
 	}

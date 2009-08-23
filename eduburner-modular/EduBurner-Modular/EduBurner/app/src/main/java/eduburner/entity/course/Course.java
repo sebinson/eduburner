@@ -62,6 +62,8 @@ public class Course extends EntityObject {
 	@Expose
 	private Date endDate;
 	
+	private String picture;
+	
 	private UserData creator;
 
 	// 成员
@@ -199,6 +201,14 @@ public class Course extends EntityObject {
 		this.tagsAsString = tagsAsString;
 	}
 	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
 	@Transient
 	public List<String> getTagsStringList(){
 		if(tagsAsString == null){
