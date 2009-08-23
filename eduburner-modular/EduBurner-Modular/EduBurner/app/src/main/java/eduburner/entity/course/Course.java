@@ -33,12 +33,6 @@ import eduburner.enumerations.CourseStatus;
 /**
  * 课程类，一门课程有多个学生，有讨论区和共享资源
  * 
- * 能mashup的就mashup
- * 
- * 日历借助google calendar 文章分享借助google reader
- * 
- * 每位同学需要有一个空间，列出其所在的课程，学生可以写微博客 是否需要建立好友关系？
- * 
  * 课程的计划，进度，考试，如何管理呢？
  * 
  * @author zhangyf@gmail.com
@@ -158,7 +152,7 @@ public class Course extends EntityObject {
 		return tags;
 	}
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "fk_creator_id")
 	public UserData getCreator() {
 		return creator;

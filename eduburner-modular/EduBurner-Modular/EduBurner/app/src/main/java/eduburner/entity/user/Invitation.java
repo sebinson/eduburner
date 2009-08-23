@@ -26,7 +26,7 @@ public class Invitation extends EntityObject {
 	
 	private UserData candidate;
 	
-	private boolean isAccepted;
+	private boolean isAccepted = true;
 	
 	public String getCode() {
 		return code;
@@ -52,6 +52,7 @@ public class Invitation extends EntityObject {
 
 	public void setRequestor(UserData requestor) {
 		this.requestor = requestor;
+		requestor.getOutgoingInvitations().add(this);
 	}
 
 	@ManyToOne
@@ -62,6 +63,7 @@ public class Invitation extends EntityObject {
 
 	public void setCandidate(UserData candidate) {
 		this.candidate = candidate;
+		candidate.getIncomingInvitations().add(this);
 	}
 
 	public boolean isAccepted() {
