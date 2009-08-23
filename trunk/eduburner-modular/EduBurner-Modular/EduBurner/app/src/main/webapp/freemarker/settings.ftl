@@ -49,7 +49,7 @@
 	</div>
 	<script type="text/javascript" src="/static/scripts/settings.js"></script>
 	<script type="text/javascript">
-	    window.EB_MODELINFOS = {
+	    window._EB_SETTINGS_DATA = {
 	    	userId: '${principal.id}',
 	    	username: '${principal.username}'
 	    }

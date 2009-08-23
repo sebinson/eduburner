@@ -33,8 +33,8 @@
 		function handleUpload(event){
 			if (fileID != null) {
 				uploader.upload(fileID, "/account/profilepicture",  "POST", {
-					'userId': window.EB_MODELINFOS.userId,
-					'username': window.EB_MODELINFOS.username
+					'userId': window._EB_SETTINGS_DATA.userId,
+					'username': window._EB_SETTINGS_DATA.username
 				});
 			}	
 		}
