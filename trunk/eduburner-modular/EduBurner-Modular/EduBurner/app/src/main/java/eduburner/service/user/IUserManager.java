@@ -49,4 +49,9 @@ public interface IUserManager {
 
 	Page<Entry> getUserEntriesPage(UserData ud, int pageNo);
 	
+	public void sendInvitation(String requestorName, String candidateName);
+	
+	public void approveInvitation(String requestorName, String candidateName);
+	
+	public List<UserData> getFriends(String username);
 }

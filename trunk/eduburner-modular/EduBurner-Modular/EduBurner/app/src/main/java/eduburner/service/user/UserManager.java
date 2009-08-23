@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
+import eduburner.entity.user.Invitation;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
@@ -182,5 +183,26 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		UserData ud = getUserDataByUsername(username);
 		ud.setProfilePicture(profilePicturePath);
 		updateUserData(ud);
+	}
+
+	@Override
+	public void approveInvitation(String requestorName, String candidateName) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public List<UserData> getFriends(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void sendInvitation(String requestorName, String candidateName) {
+		UserData requestor = getUserDataByUsername(requestorName);
+		UserData candidate = getUserDataByUsername(candidateName);
+		Invitation invitation = new Invitation();
+		invitation.setRequestor(requestor);
+		invitation.setCandidate(candidate);
+		dao.save(invitation);
 	}
 }

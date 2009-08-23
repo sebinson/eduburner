@@ -19,8 +19,9 @@ public class UserController extends BaseController {
 	
 	private static final String USER_VIEW = "fragments/user-view";
 	private static final String USER_FORM = "fragments/user-form";
+	private static final String FRIENDS_VIEW = "friendList";
 
-	@RequestMapping(value="/users", method=RequestMethod.GET)
+	@RequestMapping(value="/users/", method=RequestMethod.GET)
 	public String list(Model model) {
 		List<User> users = userManager.getAllUsers();
 		model.addAttribute("users", users);
@@ -41,7 +42,7 @@ public class UserController extends BaseController {
 		return USER_VIEW;
 	}
 	
-	@RequestMapping(value="/users", method=RequestMethod.POST)
+	@RequestMapping(value="/users.*", method=RequestMethod.POST)
 	public String create(@ModelAttribute("user") User user, BindingResult br, Model model){
 		try {
 			userManager.createUser(user);
@@ -52,10 +53,15 @@ public class UserController extends BaseController {
 		}
 	}
 	
-	@RequestMapping(value="/users", method=RequestMethod.PUT)
+	@RequestMapping(value="/users.*", method=RequestMethod.PUT)
 	public String update(@ModelAttribute("user") User user, BindingResult br, Model model){
 		userManager.updateUser(user);
 		return JSON_VIEW;
 	}
 	
+	@RequestMapping(value="/friends")
+	public String friendList(){
+		
+		return FRIENDS_VIEW;
+	}
 }
