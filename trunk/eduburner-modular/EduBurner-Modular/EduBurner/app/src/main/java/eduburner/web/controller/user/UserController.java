@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import eduburner.entity.user.User;
+import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
 import eduburner.web.controller.BaseController;
 
 @Controller
 public class UserController extends BaseController {
 	
-	private static final String USER_VIEW = "fragments/user-view";
 	private static final String USER_FORM = "fragments/user-form";
+	private static final String USER_VIEW = "user";
 	private static final String FRIENDS_VIEW = "friendList";
 
 	@RequestMapping(value="/users/", method=RequestMethod.GET)
@@ -35,10 +36,10 @@ public class UserController extends BaseController {
 		return USER_FORM;
 	}
 	
-	@RequestMapping(value="users/{username}", method=RequestMethod.GET)
+	@RequestMapping(value="/users/{username}", method=RequestMethod.GET)
 	public String show(@PathVariable String username, Model model){
-		User user = userManager.getUserByUsername(username);
-		model.addAttribute("user", user);
+		UserData user = userManager.getUserDataByUsername(username);
+		model.addAttribute("userToShow", user);
 		return USER_VIEW;
 	}
 	
@@ -59,9 +60,13 @@ public class UserController extends BaseController {
 		return JSON_VIEW;
 	}
 	
+	@RequestMapping(value="/invite.*", method=RequestMethod.POST)
+	public String sendInvitation(){
+		return JSON_VIEW;
+	}
+	
 	@RequestMapping(value="/friends")
 	public String friendList(){
-		
 		return FRIENDS_VIEW;
 	}
 }

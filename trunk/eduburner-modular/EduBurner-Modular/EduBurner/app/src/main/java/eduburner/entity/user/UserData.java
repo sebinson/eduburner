@@ -21,6 +21,7 @@ import com.google.gson.annotations.Expose;
 
 import eduburner.entity.Comment;
 import eduburner.entity.EntityObject;
+import eduburner.entity.Entry;
 import eduburner.entity.Like;
 import eduburner.entity.course.Course;
 
@@ -47,6 +48,8 @@ public class UserData extends EntityObject {
 
 	// 加上个人头像
 	private String profilePicture = PROFILE_PICTURE_PREFIX + "anonymous.gif";
+	
+	private List<Entry> entries = Lists.newArrayList();
 
 	private List<Course> courses = Lists.newArrayList();
 
@@ -119,6 +122,15 @@ public class UserData extends EntityObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@OneToMany(mappedBy="user")
+	public List<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
