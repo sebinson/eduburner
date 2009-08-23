@@ -28,13 +28,14 @@ public class CourseController extends BaseController {
 	private ICourseManager courseManager;
 
 	private static final String COURSE_FORM = "fragments/course-form";
+	private static final String COURSE_LIST = "course-list";
 	private static final String COURSE_VIEW = "course";
 
-	@RequestMapping(value = "/courses.*", method = RequestMethod.GET)
+	@RequestMapping(value = "/courses/", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Course> courses = courseManager.getAllCourses();
 		model.addAttribute("courses", courses);
-		return JSON_VIEW;
+		return COURSE_LIST;
 	}
 
 	@RequestMapping(value = "/courses/{courseId}")
@@ -58,7 +59,7 @@ public class CourseController extends BaseController {
 		return COURSE_FORM;
 	}
 
-	@RequestMapping(value = "/courses/", method = RequestMethod.POST)
+	@RequestMapping(value = "/courses.*", method = RequestMethod.POST)
 	public String create(@ModelAttribute("course") Course course,
 			BindingResult br, Model model) {
 		logger.debug("entering create method...");
