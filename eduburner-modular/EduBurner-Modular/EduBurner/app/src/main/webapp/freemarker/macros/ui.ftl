@@ -34,7 +34,6 @@
 	</div>
 </#macro>
 
-<!-- 目前用不上   -->
 <#macro menubar>
 	<div class="top-menu-bar">
 		<ul class="menu-list">
@@ -315,14 +314,29 @@
 </#macro>
 
 <#macro courseListView courses=[]>
-  <div id="courses-grid">
+  <div class="grid-view">
     <#list courses as c>
-       <div class="single-course">
+       <div class="single-item">
        		<div class="picture">
        			<a href="#"><img style="width:75px;height:75px;" src="${c.picture}" /></a>
        		</div>
        		<div class="name">
        		    <a href="#">${c.title}</a>
+       		</div>
+       </div>
+    </#list>
+  </div>
+</#macro>
+
+<#macro usersListView users=[]>
+  <div class="grid-view">
+    <#list users as u>
+       <div class="single-item">
+       		<div class="picture">
+       			<a href="#"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
+       		</div>
+       		<div class="name">
+       		    <a href="#">${u.username}</a>
        		</div>
        </div>
     </#list>
