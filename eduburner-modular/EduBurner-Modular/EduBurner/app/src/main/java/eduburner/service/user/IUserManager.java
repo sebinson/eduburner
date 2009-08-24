@@ -54,4 +54,6 @@ public interface IUserManager {
 	public void approveInvitation(String requestorName, String candidateName);
 	
 	public List<UserData> getFriends(String username);
+	
+	public List<Entry> getAllEntries();
 }

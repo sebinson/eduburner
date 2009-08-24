@@ -8,7 +8,6 @@ import org.springmodules.lucene.search.support.LuceneSearchSupport;
  * @author zhangyf@gmail.com
  */
 
-@Component("searchService")
 public class SearchService extends LuceneSearchSupport{
 	
 	

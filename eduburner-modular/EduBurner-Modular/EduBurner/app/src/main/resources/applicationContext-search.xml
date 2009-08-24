@@ -13,12 +13,12 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-    
     <bean id="fsDirectory" class="org.springmodules.lucene.index.support.FSDirectoryFactoryBean">
-    	<property name="location" value="file:///d:/lucene-index/user"/>
+    	<property name="location" value="file:///d:/lucene-index/entry"/>
     	<property name="create" value="true"/>
     </bean>
 
+	<!-- indexes -->
 	<bean id="targetIndexFactory" class="org.springmodules.lucene.index.support.SimpleIndexFactoryBean">
         <property name="directory" ref="fsDirectory"/>
         <property name="analyzer">
@@ -31,32 +31,38 @@
 	<bean id="indexFactory" class="org.springmodules.lucene.index.factory.concurrent.LockIndexFactory">
 		<property name="targetIndexFactory" ref="targetIndexFactory"/>
 	</bean>
+	
+	<bean id="indexService" class="eduburner.search.IndexService">
+		<property name="indexFactory" ref="indexFactory" />
+		<property name="analyzer">
+            <bean class="org.apache.lucene.analysis.SimpleAnalyzer"/>
+        </property>
+	</bean>
     
+    <!-- searches -->
     <bean id="searcherFactory" class="org.springmodules.lucene.search.factory.SimpleSearcherFactory">
         <property name="directory" ref="fsDirectory"/>
     </bean>
-
 	
-	<!-- 
+	
+	<!-- cron jobs -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 				<property name="jobDetail" ref="jobDetail" />
-				<property name="cronExpression" value="0/10 * * * * ?" />
+				<property name="cronExpression" value="0 0/1 * * * ?" />
 			</bean>
 		</property>
 	</bean>
 
 	<bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
-		<property name="jobClass" value="org.springframework.batch.sample.quartz.JobLauncherDetails" />
-		<property name="group" value="quartz-search-index" />
+		<property name="jobClass" value="eduburner.search.WriteEntryIndexJob" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="jobName" value="footballJob"/>
-				<entry key="jobLocator" value-ref="jobRegistry"/>
-				<entry key="jobLauncher" value-ref="jobLauncher"/>
+				<entry key="indexService" value-ref="indexService"/>
+				<entry key="userManager" value-ref="userManager" />
 			</map>
 		</property>
 	</bean>
-	-->
+	
 </beans>

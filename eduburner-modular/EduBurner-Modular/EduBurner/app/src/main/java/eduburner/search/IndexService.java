@@ -3,14 +3,12 @@ package eduburner.search;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.Term;
-import org.springframework.stereotype.Component;
 import org.springmodules.lucene.index.core.DocumentCreator;
 import org.springmodules.lucene.index.support.LuceneIndexSupport;
 
 import eduburner.entity.Entry;
 import eduburner.entity.user.UserData;
 
-@Component("indexService")
 public class IndexService extends LuceneIndexSupport implements IIndexService{
 
 	@Override
