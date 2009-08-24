@@ -1,6 +1,7 @@
 package eduburner.search;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -24,18 +25,27 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 	
 	private IUserManager userManager;
 	
+	private AtomicBoolean indexing = new AtomicBoolean(false);
+	
 	@Override
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
+		
+		if(indexing.get()){
+			return;
+		}
+		
+		indexing.set(true);
+		
 		logger.debug("execute cron job");
 		
 		indexService.purgeIndex();
 		
 		List<Entry> entries = userManager.getAllEntries();
-		for(Entry entry : entries){
-			indexService.addEntryDocument(entry);
-		}
 		
+		indexService.indexEntries(entries);
+		
+		indexing.set(false);
 	}
 
 	public void setIndexService(IIndexService indexService) {
