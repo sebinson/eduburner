@@ -15,7 +15,7 @@ import org.springmodules.lucene.search.support.LuceneSearchSupport;
 public class SearchService extends LuceneSearchSupport implements ISearchService{
 	
 	@Override
-	public List search(final String fieldName,final String textToSearch) {
+	public List<?> search(final String fieldName,final String textToSearch) {
 		return getLuceneSearcherTemplate().search(new ParsedQueryCreator() {
 			public QueryParams configureQuery() {
 				return new QueryParams(fieldName, textToSearch);
