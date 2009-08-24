@@ -3,7 +3,6 @@ package eduburner.test.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseResource;

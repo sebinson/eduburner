@@ -41,7 +41,7 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		// setDefaultRollback(false);
 	}
 	
-	@Test
+	//@Test
 	public void testGetPage(){
 		UserData ud = userManager.getUserDataByUsername("rockmaple");
 		Page<Entry> page = userManager.getUserEntriesPage(ud, 1);
@@ -140,6 +140,19 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		role = roleManager.getRoleByName("rolename");
 
 		Assert.assertNotNull(role);
+	}
+	
+	@Test
+	public void testSendInvitation(){
+		
+		
+		userManager.sendInvitation("rockmaple", "admin");
+		
+		UserData user1 = userManager.getUserDataByUsername("admin");
+		UserData user2 = userManager.getUserDataByUsername("rockmaple");
+		
+		Assert.assertEquals(1, user1.getIncomingInvitations().size());
+		Assert.assertEquals(1, user2.getOutgoingInvitations().size());
 	}
 
 	protected User createUser(String username, String password) {

@@ -29,8 +29,9 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 			throws JobExecutionException {
 		logger.debug("execute cron job");
 		
-		List<Entry> entries = userManager.getAllEntries();
+		indexService.purgeIndex();
 		
+		List<Entry> entries = userManager.getAllEntries();
 		for(Entry entry : entries){
 			indexService.addEntryDocument(entry);
 		}

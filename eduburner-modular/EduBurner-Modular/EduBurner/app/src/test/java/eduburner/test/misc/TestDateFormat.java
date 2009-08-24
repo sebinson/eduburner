@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.testng.annotations.Test;
-
 public class TestDateFormat {
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
