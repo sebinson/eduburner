@@ -60,6 +60,8 @@ public class UserData extends EntityObject {
 	private List<Invitation> outgoingInvitations = Lists.newArrayList();
 
 	private List<Like> likes = Lists.newArrayList();
+	
+	private List<UserData> friends = Lists.newArrayList();
 
 	public UserData() {
 	}
@@ -185,6 +187,16 @@ public class UserData extends EntityObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "rel_friends", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "friend_id") })
+	public List<UserData> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<UserData> friends) {
+		this.friends = friends;
 	}
 
 	@Override

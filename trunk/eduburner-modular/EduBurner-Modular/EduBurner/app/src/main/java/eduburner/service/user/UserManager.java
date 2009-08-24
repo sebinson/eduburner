@@ -205,4 +205,9 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		invitation.setCandidate(candidate);
 		dao.save(invitation);
 	}
+
+	@Override
+	public List<Entry> getAllEntries() {
+		return dao.getAllInstances(Entry.class);
+	}
 }

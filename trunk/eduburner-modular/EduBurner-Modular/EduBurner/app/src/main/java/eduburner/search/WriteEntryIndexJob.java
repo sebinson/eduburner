@@ -1,15 +1,15 @@
 package eduburner.search;
 
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
+import java.util.List;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import org.springmodules.lucene.index.factory.IndexFactory;
 
-import eduburner.entity.user.User;
+import eduburner.entity.Entry;
+import eduburner.service.user.IUserManager;
 
 /**
  * 定时写索引
@@ -18,28 +18,31 @@ import eduburner.entity.user.User;
  */
 public class WriteEntryIndexJob extends QuartzJobBean{
 	
+	private static final Logger logger = LoggerFactory.getLogger(WriteEntryIndexJob.class);
 	
+	private IIndexService indexService;
+	
+	private IUserManager userManager;
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
-		// TODO Auto-generated method stub
+		logger.debug("execute cron job");
+		
+		List<Entry> entries = userManager.getAllEntries();
+		
+		for(Entry entry : entries){
+			indexService.addEntryDocument(entry);
+		}
 		
 	}
-	
-	private Document buildDocument(User user) {
-		Document doc = new Document();
-		String id = user.getId();
-		String username = user.getUsername();
-		String fullName = user.getFullname();
-		doc.add(new Field(SearchConstants.FIELD_USER_ID, id,
-				Field.Store.NO, Field.Index.NOT_ANALYZED));
-		doc.add(new Field(SearchConstants.FIELD_USER_USERNAME, username,
-				Field.Store.YES, Field.Index.ANALYZED));
-		doc.add(new Field(SearchConstants.FIELD_USER_FULLNAME, fullName,
-				Field.Store.NO, Field.Index.ANALYZED));
-		return doc;
-	}
 
+	public void setIndexService(IIndexService indexService) {
+		this.indexService = indexService;
+	}
+	
+	public void setUserManager(IUserManager userManager) {
+		this.userManager = userManager;
+	}
 	
 }
