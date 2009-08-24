@@ -16,11 +16,9 @@ import eduburner.entity.user.User;
  * @author zhangyf@gmail.com
  *
  */
-public class WriteIndexJob extends QuartzJobBean{
+public class WriteEntryIndexJob extends QuartzJobBean{
 	
-	@Autowired
-	@Qualifier("indexFactory")
-	private IndexFactory indexFactory;
+	
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context)
