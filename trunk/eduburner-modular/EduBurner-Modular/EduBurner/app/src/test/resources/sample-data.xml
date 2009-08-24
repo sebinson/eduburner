@@ -43,21 +43,24 @@
     <column>profilePicture</column>
     <column>userId</column>
     <column>username</column>
+    <column>description</column>
     <row>
       <value>40288182233355f401233355fd910001</value>
       <value>rockmaple@163.com</value>
       <value>lliu</value>
-      <null/>
+      <value>/static/profiles/anonymous.gif</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>admin</value>
+      <value>desc1</value>
     </row>
     <row>
       <value>40288182233355f401233355fdbf0002</value>
       <value>st416@gse.pku.edu.cn</value>
       <value>zhangyf</value>
-      <null/>
+      <value>/static/profiles/anonymous.gif</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
       <value>rockmaple</value>
+      <value>desc2</value>
     </row>
   </table>
   <table name="comment">
@@ -76,6 +79,7 @@
     <column>status</column>
     <column>tagsAsString</column>
     <column>title</column>
+    <column>picture</column>
     <column>fk_creator_id</column>
     <row>
       <value>40288182233355f401233355fdcf000d</value>
@@ -85,6 +89,7 @@
       <null/>
       <null/>
       <value>Chinese</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -95,6 +100,7 @@
       <null/>
       <null/>
       <value>English</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -105,6 +111,7 @@
       <null/>
       <null/>
       <value>History</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -115,6 +122,7 @@
       <null/>
       <null/>
       <value>Politics</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -125,6 +133,7 @@
       <null/>
       <null/>
       <value>Joke</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -135,6 +144,7 @@
       <null/>
       <null/>
       <value>Realestate</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -145,6 +155,7 @@
       <null/>
       <null/>
       <value>worklife</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -155,6 +166,7 @@
       <null/>
       <null/>
       <value>modenchn</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -165,6 +177,7 @@
       <null/>
       <null/>
       <value>itexpress</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
@@ -175,6 +188,7 @@
       <null/>
       <null/>
       <value>java</value>
+      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
   </table>
@@ -206,7 +220,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 86]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 86]]></value>
       <null/>
       <null/>
       <null/>
@@ -219,7 +233,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 87]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 87]]></value>
       <null/>
       <null/>
       <null/>
@@ -232,7 +246,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 88]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 88]]></value>
       <null/>
       <null/>
       <null/>
@@ -245,7 +259,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 89]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 89]]></value>
       <null/>
       <null/>
       <null/>
@@ -258,7 +272,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 90]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 90]]></value>
       <null/>
       <null/>
       <null/>
@@ -271,7 +285,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 91]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 91]]></value>
       <null/>
       <null/>
       <null/>
@@ -284,7 +298,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 92]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 92]]></value>
       <null/>
       <null/>
       <null/>
@@ -297,7 +311,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 93]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 93]]></value>
       <null/>
       <null/>
       <null/>
@@ -310,7 +324,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 94]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 94]]></value>
       <null/>
       <null/>
       <null/>
@@ -323,7 +337,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 95]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 95]]></value>
       <null/>
       <null/>
       <null/>
@@ -336,7 +350,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 96]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 96]]></value>
       <null/>
       <null/>
       <null/>
@@ -349,7 +363,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 97]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 97]]></value>
       <null/>
       <null/>
       <null/>
@@ -362,7 +376,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 98]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 98]]></value>
       <null/>
       <null/>
       <null/>
@@ -375,7 +389,7 @@
       <value>false</value>
       <null/>
       <null/>
-      <value><![CDATA[entry content 99]]></value>
+      <value><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 99]]></value>
       <null/>
       <null/>
       <null/>
@@ -424,30 +438,6 @@
       <value>40288182233355f401233355fe2d0010</value>
     </row>
     <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0011</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0012</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0013</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0014</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0015</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fd910001</value>
-      <value>40288182233355f401233355fe2d0016</value>
-    </row>
-    <row>
       <value>40288182233355f401233355fdbf0002</value>
       <value>40288182233355f401233355fdcf000d</value>
     </row>
@@ -466,26 +456,6 @@
     <row>
       <value>40288182233355f401233355fdbf0002</value>
       <value>40288182233355f401233355fe2d0011</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fdbf0002</value>
-      <value>40288182233355f401233355fe2d0012</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fdbf0002</value>
-      <value>40288182233355f401233355fe2d0013</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fdbf0002</value>
-      <value>40288182233355f401233355fe2d0014</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fdbf0002</value>
-      <value>40288182233355f401233355fe2d0015</value>
-    </row>
-    <row>
-      <value>40288182233355f401233355fdbf0002</value>
-      <value>40288182233355f401233355fe2d0016</value>
     </row>
   </table>
   <table name="role">

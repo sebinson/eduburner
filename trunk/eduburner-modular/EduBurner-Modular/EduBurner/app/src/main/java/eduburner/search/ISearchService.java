@@ -1,5 +1,9 @@
 package eduburner.search;
 
-public class ISearchService {
+import java.util.List;
+
+public interface ISearchService {
+
+	List search(String fieldName, String textToSearch);
 
 }

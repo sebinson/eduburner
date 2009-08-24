@@ -1,7 +1,6 @@
 package eduburner.test.misc;
 
 import org.springframework.http.MediaType;
-import org.testng.annotations.Test;
 
 public class TestMediaType {
 	
