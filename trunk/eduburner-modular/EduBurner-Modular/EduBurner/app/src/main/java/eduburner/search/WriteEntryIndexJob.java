@@ -21,7 +21,7 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 	
 	private static final Logger logger = LoggerFactory.getLogger(WriteEntryIndexJob.class);
 	
-	private IIndexService indexService;
+	private IEntryIndexService indexService;
 	
 	private IUserManager userManager;
 	
@@ -39,8 +39,6 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 		
 		logger.debug("execute cron job");
 		
-		indexService.purgeIndex();
-		
 		List<Entry> entries = userManager.getAllEntries();
 		
 		indexService.indexEntries(entries);
@@ -48,7 +46,7 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 		indexing.set(false);
 	}
 
-	public void setIndexService(IIndexService indexService) {
+	public void setIndexService(IEntryIndexService indexService) {
 		this.indexService = indexService;
 	}
 	

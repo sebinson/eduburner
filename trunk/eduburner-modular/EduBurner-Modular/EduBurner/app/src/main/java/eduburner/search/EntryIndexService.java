@@ -1,52 +1,62 @@
 package eduburner.search;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.springmodules.lucene.index.core.DocumentsCreator;
-import org.springmodules.lucene.index.support.LuceneIndexSupport;
-
-import com.google.common.collect.Lists;
+import org.springmodules.lucene.index.factory.IndexFactory;
+import org.springmodules.lucene.index.factory.LuceneIndexReader;
+import org.springmodules.lucene.index.factory.LuceneIndexWriter;
 
 import eduburner.entity.Entry;
 
-public class IndexService extends LuceneIndexSupport implements IIndexService{
+public class EntryIndexService implements IEntryIndexService{
+	
+	private IndexFactory indexFactory;
+	private Analyzer analyzer;
 
 	@Override
 	public void indexEntries(final List<Entry> entries){
-		getLuceneIndexTemplate().addDocuments(new DocumentsCreator() {
-			@Override
-			public List<Document> createDocuments() throws Exception {
-				List<Document> docs = Lists.newArrayList();
-				for (Entry entry : entries) {
-					Document doc = new Document();
-					doc
-							.add(new Field(SearchConstants.FIELD_ENTRY_ID,
-									entry.getId(), Field.Store.NO,
-									Field.Index.NOT_ANALYZED));
-					doc
-							.add(new Field(SearchConstants.FIELD_ENTRY_TITLE,
-									entry.getTitle(), Field.Store.YES,
-									Field.Index.ANALYZED));
-					docs.add(doc);
-				}
-				return docs;
+		try {
+			LuceneIndexReader reader = indexFactory.getIndexReader();
+			LuceneIndexWriter writer = indexFactory.getIndexWriter();
+			
+			IndexWriter.unlock(writer.getDirectory());
+			
+			for (Entry entry : entries) {
+
+				reader.deleteDocuments(new Term(SearchConstants.FIELD_ENTRY_ID,
+						entry.getId()));
+
+				Document doc = new Document();
+				doc
+						.add(new Field(SearchConstants.FIELD_ENTRY_ID, entry
+								.getId(), Field.Store.NO,
+								Field.Index.NOT_ANALYZED));
+				doc.add(new Field(SearchConstants.FIELD_ENTRY_TITLE, entry
+						.getTitle(), Field.Store.YES, Field.Index.ANALYZED));
+				writer.addDocument(doc);
+
+				reader.close();
+				writer.optimize();
+				writer.close();
 			}
-		});
-		
-		optimize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	@Override
-	public void optimize(){
-		getLuceneIndexTemplate().optimize();
+
+	public void setIndexFactory(IndexFactory indexFactory) {
+		this.indexFactory = indexFactory;
 	}
-	
-	@Override
-	public void purgeIndex() {
-		getLuceneIndexTemplate().deleteDocuments(new Term("",""));
+
+	public void setAnalyzer(Analyzer analyzer) {
+		this.analyzer = analyzer;
 	}
 	
 	/*
