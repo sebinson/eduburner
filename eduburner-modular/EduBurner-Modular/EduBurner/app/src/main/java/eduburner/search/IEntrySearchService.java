@@ -10,4 +10,6 @@ public interface IEntrySearchService {
 
 	void indexEntries(List<Entry> entries);
 
+	List<Entry> searchEntry(String query);
+
 }
