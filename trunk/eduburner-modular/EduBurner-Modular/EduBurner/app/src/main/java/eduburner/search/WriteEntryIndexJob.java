@@ -21,7 +21,7 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 	
 	private static final Logger logger = LoggerFactory.getLogger(WriteEntryIndexJob.class);
 	
-	private IEntryIndexService indexService;
+	private IEntrySearchService indexService;
 	
 	private IUserManager userManager;
 	
@@ -46,7 +46,7 @@ public class WriteEntryIndexJob extends QuartzJobBean{
 		indexing.set(false);
 	}
 
-	public void setIndexService(IEntryIndexService indexService) {
+	public void setIndexService(IEntrySearchService indexService) {
 		this.indexService = indexService;
 	}
 	
