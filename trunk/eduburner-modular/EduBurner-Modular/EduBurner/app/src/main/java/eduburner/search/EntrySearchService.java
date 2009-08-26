@@ -74,10 +74,8 @@ public class EntrySearchService implements IEntrySearchService, InitializingBean
 				e.setTitle(title);
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
