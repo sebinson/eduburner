@@ -3,8 +3,6 @@ package eduburner.search;
 import java.io.IOException;
 import java.util.List;
 
-import javax.naming.directory.SearchControls;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
