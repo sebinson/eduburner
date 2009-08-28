@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eduburner.crawler.ICrawler;
 import eduburner.crawler.model.CrawlURI;
 
 public abstract class AbstractFrontier implements IFrontier, Serializable {
@@ -53,8 +52,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	 */
 	protected ReentrantReadWriteLock outboundLock = new ReentrantReadWriteLock(
 			true);
-
-	protected ICrawler controller;
 
 	@Override
 	public void initTasks() {
@@ -140,12 +137,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 		} catch (InterruptedException ie) {
 			throw new RuntimeException(ie);
 		}
-		/*
-		 * DelayedWorkQueue waked = null; while(true){ waked =
-		 * snoozeQueue.poll(); if(waked != null){ WorkQueue queue =
-		 * waked.getWorkQueue(); queue.setWakeTime(0L); addToReadyQueue(queue);
-		 * } } logger.info("ending frontier manager thread.");
-		 */
 	}
 
 	@Override
@@ -305,7 +296,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 
 	protected void reachedState(State justReached) {
 		if (justReached != lastReachedState) {
-			controller.noteFrontierState(justReached);
 			lastReachedState = justReached;
 		}
 	}
@@ -444,7 +434,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 			processSetTargetState(target);
 		}
 	}
-	
+
 	@Override
 	public long queuedUriCount() {
 		return queuedUriCount.get();

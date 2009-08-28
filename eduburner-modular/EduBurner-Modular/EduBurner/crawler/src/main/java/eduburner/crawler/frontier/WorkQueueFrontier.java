@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.MapMaker;
@@ -24,6 +25,7 @@ import eduburner.crawler.model.CrawlURI;
  * Uses in-memory map of all known 'queues' inside a single database.
  * Round-robins between all queues.
  */
+@Component("frontier")
 public class WorkQueueFrontier extends AbstractFrontier {
 
 	private static final long serialVersionUID = 5723257498212526250L;
@@ -104,11 +106,36 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected CrawlURI findEligibleURI() {
 		assert Thread.currentThread() == managerThread;
 		wakeQueues();
-		
-		int activationsWanted = 
-            outbound.remainingCapacity() - readyClassKeyQueues.size();
-		
-		return null;
+		WorkQueue readyQ = null;
+		do{
+			String key = readyClassKeyQueues.poll();
+			if(key == null){
+				break;
+			}
+			readyQ = allQueues.get(key);
+			if(readyQ == null){
+				break;
+			}
+			if(readyQ.getCount() == 0){
+				readyQ.clearHeld();
+				readyQ = null;
+			}
+		}while(readyQ == null);
+		if(readyQ == null){
+			return null;
+		}
+		assert !inProcessQueues.contains(readyQ) : "double activation";
+		CrawlURI curi = null;
+        curi = readyQ.peek(this);   
+		if (curi == null) {
+			logger.warn("No CrawlURI from ready non-empty queue "
+					+ readyQ.classKey + "\n");
+			return null;
+		}
+           
+        inProcessQueues.add(readyQ);
+        readyQ.dequeue(this, curi);
+        return curi;
 	}
 	
 	/**
