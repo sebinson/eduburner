@@ -1,3 +1,6 @@
+/**
+ * not used in new version
+ */
 (function($){
 	var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event,
 		cal1, overCalendar = false, currentField = '';
