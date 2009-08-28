@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,9 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
 	private long lastDequeueTime;
 	/** count of errors encountered */
 	private long errorCount = 0;
+	
+	/** Whether queue is already in lifecycle stage */
+    private boolean isHeld = false;
 
 	public WorkQueue(final String classKey) {
 		this.classKey = classKey;
@@ -231,6 +235,33 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
      * @throws IOException
      */
     protected void resume(final WorkQueueFrontier frontier) throws IOException {
+    }
+    
+    /**
+     * Clear isHeld to false
+     */
+    public void clearHeld() {
+		isHeld = false;
+		logger.info("queue unheld: " + getClassKey());
+    }
+
+    /**
+     * Whether the queue is already in a lifecycle stage --
+     * such as ready, in-progress, snoozed -- and thus should
+     * not be redundantly inserted to readyClassQueues
+     * 
+     * @return isHeld
+     */
+    public boolean isHeld() {
+        return isHeld;
+    }
+
+    /**
+     * Set isHeld to true
+     */
+    public void setHeld() {
+		isHeld = true;
+		logger.info("queue held: " + getClassKey());
     }
 
 }

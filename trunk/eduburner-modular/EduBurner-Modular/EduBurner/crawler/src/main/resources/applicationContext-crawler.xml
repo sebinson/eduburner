@@ -15,5 +15,8 @@
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
        	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 	
-
+	<bean id="crawler" class="eduburner.crawler.Crawler">
+	    <property name="" value="" />
+	</bean>
+	
 </beans>
