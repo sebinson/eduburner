@@ -40,12 +40,12 @@
 			<#if principal?has_content>
 			    <li class="menu">
 			    	<div id="top-search">
-			    		<form id="top-search-form">
+			    		<form id="top-search-form" action="/search" method="GET">
 			    			<div class="search-form-input">
-			    				<input id="q" name="q" value="搜索" style="color:#666;" onfocus="this.value=''; this.style.color='#000'" onblur="this.value='搜索'; this.style.color='#666'"/>
+			    				<input id="q" name="q" value="搜索" style="color:#666;" onfocus="this.style.color='#000';if(this.value=='搜索'){this.value='';}" onblur="if(this.value == ''){this.value='搜索'; this.style.color='#666';}"/>
 			    			</div>
 			    			<div class="search-form-submit">
-			    			    <a href="#"><span>&nbsp;</span></a>
+			    			    <a id="submit-top-search-link" href="#" onclick="document.getElementById('top-search-form').submit();return false;"><span>&nbsp;</span></a>
 			    			</div>
 			    		</form>
 			    	</div>
@@ -246,17 +246,17 @@
 
 <#macro postMessageBox>
   <div class="post-message-box">
-    <div class="message-form">
-    	<form>
-    		<textarea id="post-msg-area"></textarea>
-    	</form>
-    </div>
-    <div class="message-actions">
-    	<div class="submit-button">
-        	<input id="submit-msg-button" type="submit" value="发 表"/>
-        </div>
-        <div class="clear"></div>
-    </div>
+    <form id="add-entry-form">
+	    <div class="message-form">
+	    	<textarea id="post-msg-area"></textarea>
+	    </div>
+	    <div class="message-actions">
+	    	<div class="submit-button">
+	        	<input id="submit-msg-button" type="submit" value="发 表"/>
+	        </div>
+	        <div class="clear"></div>
+	    </div>
+    </form>
   </div>
 </#macro>
 
