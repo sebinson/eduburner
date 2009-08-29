@@ -6,7 +6,7 @@
 		<h2 style="margin-bottom:5px">查找课程</h2>
 		<div id="search-course">
 			<form id="search-course-form">
-				<input id="searchCourseInput" type="text" class="form-text" style="width:300px;float:left;margin-top:3px;margin-right:5px;"/>
+				<input id="searchCourseInput" type="text" class="form-text" style="width:300px;height:22px;float:left;margin-right:5px;"/>
 				<input id="search-course-button" type="submit" value="搜 索" />
 			</form>
 		</div>
