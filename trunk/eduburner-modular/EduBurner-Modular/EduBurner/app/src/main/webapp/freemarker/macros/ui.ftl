@@ -261,7 +261,7 @@
 </#macro>
 
 <#macro entryBox entry>
-  <div class="entry">
+  <div class="entry" i=${entry.id}>
   	<div class="profile">
   	  <a href="/users/${entry.user.username}"><img src="${entry.user.profilePicture}" style="width:50px;height:50px;"/></a>
   	</div>
@@ -275,13 +275,13 @@
   	  	</div>
   	  </div>
   	  <div class="actions">
-  	  	<#-- TODO: 13秒钟前 发自 Twitter -->
   	  	<span>${entry.published?datetime}</span>
   	  	<span class="add-comment link">评论</span>
   	  	<#if (entry.user.username!=principal.username)>
   	  	   <span> - </span><span class="like link">喜欢</span>
   	  	<#else>
   	  	   <span> - </span><span class="link">编缉</span>
+  	  	   <span> - </span><span class="link">删除</span>
   	  	</#if>
   	  </div>
   	  <#if (entry.likes?size>0) >
@@ -297,14 +297,14 @@
 	  	  		</div>
 	  	  	</div>
   	  	</#list>
-  	  	<div class="comment-form hidden">
+  	  	<div class="comment-form" style="display:none">
   	  	  <form>
   	  	    <div class="text">
-  	  	      <textarea></textarea>
+  	  	      <textarea name="body"></textarea>
   	  	    </div>
   	  	    <div class="buttons">
-  	  	      <input type="button" value="发布" />
-  	  	      <span class="link">取消</span>
+  	  	      <input type="submit" value="发布" />
+  	  	      <span class="link _cancel_">取消</span>
   	  	    </div>
   	  	  </form>
   	  	</div>

@@ -31,15 +31,10 @@
 	</div>
 	<script type="text/javascript" src="/static/scripts/home.js"></script>
 	<script type="text/javascript">
+	    <#-- 
 		window._EB_HOME_DATA = {
-			'entries' : [
-				<#list page.items as entry>
-					{
-						'index' : ${entry_index},
-						'id' : ${entry.id}
-					},
-				</#list>
-			]
+			'entries' : [<#list page.items as entry>{'id' : ${entry.id}}<#if page.items?last != entry>,</#if></#list>]
 		}
+		-->
 	</script>
 </@layout.masterPage>
