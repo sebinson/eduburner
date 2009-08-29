@@ -126,6 +126,10 @@
 	    <div class="sidebar-block-content">
 	      <ul class="sidebar-block-list">
 	      	 <li><a id="home" href="/"><img src="/static/images/silk/house.png"/><span>首页</span></a></li>
+	      	 <#--
+	      	 <li><a id="home" href="/messages"><img src="/static/images/silk/email_go.png"/><span>消息</span></a></li>
+	      	 -->
+	      	 <li><a id="home" href="/friends"><img src="/static/images/silk/group_go.png"/><span>好友</span></a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -329,17 +333,21 @@
   </div>
 </#macro>
 
-<#macro usersListView users=[]>
+<#macro userListView users=[]>
   <div class="grid-view">
-    <#list users as u>
-       <div class="single-item">
-       		<div class="picture">
-       			<a href="#"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
-       		</div>
-       		<div class="name">
-       		    <a href="#">${u.username}</a>
-       		</div>
-       </div>
-    </#list>
+  	<#if (users?size > 0)>
+	    <#list users as u>
+	       <div class="single-item">
+	       		<div class="picture">
+	       			<a href="#"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
+	       		</div>
+	       		<div class="name">
+	       		    <a href="#">${u.username}</a>
+	       		</div>
+	       </div>
+	    </#list>
+	<#else>
+		<div class="info" style="margin-top:30px;">当前没有好友</div>
+	</#if>
   </div>
 </#macro>
