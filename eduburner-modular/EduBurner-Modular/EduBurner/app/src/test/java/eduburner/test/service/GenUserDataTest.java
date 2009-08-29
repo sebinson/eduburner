@@ -60,10 +60,6 @@ public class GenUserDataTest extends BaseServiceTestSupport{
 		List<Entry> entries = TestDataGenerator.genEntries();
 		
 		
-		
-		for(Entry e : entries){
-		    userManager.createEntry(user.getId(), e);
-		}
 	}
 	
 	private void fillAdminData(){

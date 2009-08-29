@@ -89,12 +89,12 @@
 	}
 	
 	
-	
-	var onButtonReady = function() { 
-        var submitButton = new YAHOO.widget.Button("submit-button"); 
-    } 
-    YAHOO.util.Event.onContentReady("submit-button", onButtonReady);
-	
+    YAHOO.util.Event.onContentReady("submit-button", function(){
+    	var submitButton = new YAHOO.widget.Button("submit-button"); 
+    });
+	YAHOO.util.Event.onContentReady('submit-password-button', function(){
+		var submitPasswordButton = new YAHOO.widget.Button("submit-password-button"); 
+	});
 	YAHOO.util.Event.onDOMReady(function(){
 	     init();
 	});
