@@ -43,9 +43,15 @@
 		    	<div id="password">
 		    		<form id="alter-password-form" method="POST" action="<@spring.url '/account/alterpassword' />">
 		    			 <div style="margin-top: 20px; margin-left: 60px; margin-bottom: 30px;">
-		    			 	<@ui.springFormInput label="密码" name="user.email" required=true />
-		    			 	<@ui.springFormInput label="新密码" name="user.email" required=true />
-		    			 	<@ui.springFormInput label="确认密码" name="user.email" required=true />
+		    			 	<@ui.formInput label="密码" name="origionalPassword" required=true attrs="type='password'"/>
+		    			 	<@ui.formInput label="新密码" name="newPassword" required=true attrs="type='password'"/>
+		    			 	<@ui.formInput label="确认密码" name="confirmPassword" required=true attrs="type='password'"/>
+		    			 	
+		    			 	<div class="form-item">
+				    			<div class="form-element">
+					    			<div class="buttons"><input id="submit-password-button" type="submit" value="提 交" /></div>
+				    			</div>
+				    		</div>
 		    			 </div>
 		    		</form>
 		    	</div>

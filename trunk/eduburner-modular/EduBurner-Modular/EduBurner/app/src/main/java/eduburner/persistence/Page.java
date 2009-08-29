@@ -211,7 +211,7 @@ public class Page<T> {
 	/**
 	 * 是否还有上一页.
 	 */
-	public boolean isHasPreviousPage() {
+	public boolean isHasPrevious() {
 		return (pageNo - 1 >= 1);
 	}
 
@@ -220,7 +220,7 @@ public class Page<T> {
 	 * 当前页为首页时返回首页序号.
 	 */
 	public int getPreviousPage() {
-		if (isHasPreviousPage())
+		if (isHasPrevious())
 			return pageNo - 1;
 		else
 			return pageNo;
