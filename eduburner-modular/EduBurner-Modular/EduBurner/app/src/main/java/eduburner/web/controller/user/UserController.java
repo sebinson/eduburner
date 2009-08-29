@@ -60,6 +60,11 @@ public class UserController extends BaseController {
 		return JSON_VIEW;
 	}
 	
+	@RequestMapping(value="/account/alterpassword", method=RequestMethod.POST)
+	public String alterPassword(){
+		return JSON_VIEW;
+	}
+	
 	@RequestMapping(value="/invite.*", method=RequestMethod.POST)
 	public String sendInvitation(){
 		return JSON_VIEW;

@@ -37,13 +37,13 @@ public interface IUserManager {
 	
 	public UserData getUserData(User user);
 	
-	public void createEntry(String userId, Entry entry);
+	public void createEntry(UserData user, Entry entry);
 	
-	public void createEntry(String userId, String courseId, Entry entry);
+	public void createEntry(UserData user, String courseId, Entry entry);
 	
-	public void likeEntry(String userId, Entry entry);
+	public void likeEntry(UserData user, Entry entry);
 	
-	public void addEntryComment(String userId, String entryId, Comment comment);
+	public void addEntryComment(UserData user, String entryId, Comment comment);
 	
 	public void getHomePageEntriesForUser(User user);
 

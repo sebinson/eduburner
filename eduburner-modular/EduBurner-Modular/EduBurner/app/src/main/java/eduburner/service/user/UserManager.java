@@ -85,9 +85,6 @@ public class UserManager extends BaseManager implements UserDetailsService,
 
 	@Override
 	public User getUserById(String userId) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("entering getUserById method");
-		}
 		return dao.getInstanceById(User.class, userId);
 	}
 
@@ -140,25 +137,25 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 	
 	@Override
-	public void createEntry(String userId, Entry entry) {
-		UserData ud = getUserDataByUserId(userId);
-		entry.setUser(ud);
+	public void createEntry(UserData user, Entry entry) {
+		entry.setUser(user);
+		user.getEntries().add(entry);
 		dao.save(entry);
 	}
 
 	@Override
-	public void createEntry(String userId, String courseId, Entry entry) {
+	public void createEntry(UserData user, String courseId, Entry entry) {
 		
 	}
 
 	@Override
-	public void addEntryComment(String userId, String entryId, Comment comment) {
+	public void addEntryComment(UserData user, String entryId, Comment comment) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void likeEntry(String userId, Entry entry) {
+	public void likeEntry(UserData user, Entry entry) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -174,7 +171,7 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		logger.debug("entering getUserEntriesPage method...");
 		Page<Entry> page = new Page<Entry>();
 		page.setPageNo(pageNo);
-		return dao.findPage(page, "from Entry as e where e.user.id = ?", ud.getId());
+		return dao.findPage(page, "from Entry as e where e.user.id = ? order by e.published desc", ud.getId());
 	}
 
 	@Override

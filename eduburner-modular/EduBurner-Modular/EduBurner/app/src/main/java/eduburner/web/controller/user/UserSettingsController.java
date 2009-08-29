@@ -9,6 +9,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -83,13 +84,7 @@ public class UserSettingsController extends BaseController {
 		InputStream stream = file.getInputStream();
 		// write the file to the file specified
 		OutputStream bos = new FileOutputStream(uploadDir + newFileName);
-		int bytesRead;
-		byte[] buffer = new byte[8192];
-		while ((bytesRead = stream.read(buffer, 0, 8192)) != -1) {
-			bos.write(buffer, 0, bytesRead);
-		}
-		bos.close();
-		// close the stream
-		stream.close();
+		
+		IOUtils.copy(stream, bos);
 	}
 }

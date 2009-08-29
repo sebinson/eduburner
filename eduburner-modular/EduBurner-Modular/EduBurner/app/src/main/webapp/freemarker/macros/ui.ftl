@@ -248,7 +248,7 @@
   <div class="post-message-box">
     <form id="add-entry-form">
 	    <div class="message-form">
-	    	<textarea id="post-msg-area"></textarea>
+	    	<textarea id="post-msg-area" name="entry.title"></textarea>
 	    </div>
 	    <div class="message-actions">
 	    	<div class="submit-button">
@@ -276,6 +276,7 @@
   	  </div>
   	  <div class="actions">
   	  	<#-- TODO: 13秒钟前 发自 Twitter -->
+  	  	<span>${entry.published?datetime}</span>
   	  	<span class="add-comment link">评论</span>
   	  	<#if (entry.user.username!=principal.username)>
   	  	   <span> - </span><span class="like link">喜欢</span>
