@@ -40,6 +40,11 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	public List<User> getAllUsers() {
 		return dao.getAllInstances(User.class);
 	}
+	
+	@Override
+	public List<UserData> getAllUserDatas() {
+		return dao.getAllInstances(UserData.class);
+	}
 
 	@Override
 	public void createUser(User user) throws EntityExistsException {
@@ -183,11 +188,6 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 
 	@Override
-	public void approveInvitation(String requestorName, String candidateName) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public List<UserData> getFriends(String username) {
 		// TODO Auto-generated method stub
 		return null;
@@ -199,8 +199,23 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		UserData candidate = getUserDataByUsername(candidateName);
 		Invitation invitation = new Invitation();
 		invitation.setRequestor(requestor);
+		requestor.getOutgoingInvitations().add(invitation);
 		invitation.setCandidate(candidate);
+		candidate.getIncomingInvitations().add(invitation);
 		dao.save(invitation);
+	}
+	
+	@Override
+	public void approveInvitation(String requestorName, String candidateName) {
+		UserData requestor = getUserDataByUsername(requestorName);
+		UserData candidate = getUserDataByUsername(candidateName);
+		Invitation invitation = dao.findUnique("from Invitation as i where i.requestor.username = ? and i.candidate.username = ?", requestorName, candidateName);
+		if(invitation != null){
+			invitation.setAccepted(true);
+		}
+		dao.update(invitation);
+		requestor.getFriends().add(candidate);
+		dao.update(requestor);
 	}
 
 	@Override

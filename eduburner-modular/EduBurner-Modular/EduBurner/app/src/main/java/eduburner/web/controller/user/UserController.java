@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
@@ -18,11 +21,12 @@ import eduburner.web.controller.BaseController;
 @Controller
 public class UserController extends BaseController {
 	
-	private static final String USER_FORM = "fragments/user-form";
+	private static final String USER_FORM = "fragments/userForm";
 	private static final String USER_VIEW = "user";
 	private static final String FRIENDS_VIEW = "friendList";
+	private static final String SEARCH_FRIENDS_VIEW = "friendSearch";
 
-	@RequestMapping(value="/users/", method=RequestMethod.GET)
+	@RequestMapping(value="/users", method=RequestMethod.GET)
 	public String list(Model model) {
 		List<User> users = userManager.getAllUsers();
 		model.addAttribute("users", users);
@@ -70,8 +74,17 @@ public class UserController extends BaseController {
 		return JSON_VIEW;
 	}
 	
-	@RequestMapping(value="/friends")
-	public String friendList(){
+	@RequestMapping(value="/friends", method=RequestMethod.GET)
+	public String friendList(Model model){
+		List<UserData> friends = getRemoteUserDataObj().getFriends();
+		model.addAttribute("friends", friends);
 		return FRIENDS_VIEW;
+	}
+	
+	@RequestMapping(value="/friends/search", method=RequestMethod.GET)
+	public String searchFriendView(Model model){
+		List<UserData> users = userManager.getAllUserDatas();
+		model.addAttribute("users", users);
+		return SEARCH_FRIENDS_VIEW;
 	}
 }

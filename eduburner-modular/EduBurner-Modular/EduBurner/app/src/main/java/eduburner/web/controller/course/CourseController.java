@@ -27,7 +27,7 @@ public class CourseController extends BaseController {
 	@Qualifier("courseManager")
 	private ICourseManager courseManager;
 
-	private static final String COURSE_FORM = "fragments/course-form";
+	private static final String COURSE_FORM = "fragments/courseForm";
 	private static final String COURSE_LIST = "courseList";
 	private static final String COURSE_VIEW = "course";
 
