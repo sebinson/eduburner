@@ -19,6 +19,12 @@ public interface IDao {
 	public List<?> find(String queryString, Object value) throws DataAccessException;
 	
 	public List<?> find(final String queryString, final Object... values) throws DataAccessException;
+	
+	<T> List<T> find(String hql, Map<String, Object> values);
+
+	<T> List<T> find(Class<T> type, Criterion... criterions);
+
+	<T> List<T> findBy(Class<T> type, String propertyName, Object value);
 
 	public <T> T getInstanceById(Class<T> type, Serializable id);
 
@@ -51,8 +57,6 @@ public interface IDao {
 
 	public void removeAll(Collection<?> entities);
 
-	public void reattach(Object model);
-
 	/**
 	 * 
 	 * @return a List containing all the classes this persistence service knows
@@ -61,8 +65,6 @@ public interface IDao {
 	public List<?> getAllTypes();
 
 	public <T> List<T> findByValueBean(String queryString, T valueBean);
-	
-	public Iterator<?> getIterator(String query);
 
 	<T> T findUnique(String hql, Object... values);
 
@@ -85,11 +87,5 @@ public interface IDao {
 	<T> T findUniqueBy(Class type, String propertyName, Object value);
 
 	Criteria createCriteria(Class type, Criterion... criterions);
-
-	<T> List<T> find(String hql, Map<String, Object> values);
-
-	<T> List<T> find(Class type, Criterion[] criterions);
-
-	<T> List<T> findBy(Class type, String propertyName, Object value);
 
 }

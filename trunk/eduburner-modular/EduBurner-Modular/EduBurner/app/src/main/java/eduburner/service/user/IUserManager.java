@@ -12,6 +12,8 @@ import eduburner.persistence.Page;
 public interface IUserManager {
 	
 	public List<User> getAllUsers();
+	
+	public List<UserData> getAllUserDatas();
 
 	public User getUserById(String userId);
 

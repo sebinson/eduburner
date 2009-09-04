@@ -14,7 +14,6 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.EntityMode;
 import org.hibernate.HibernateException;
-import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -76,11 +75,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	@Override
 	public <T> T getInstanceById(Class<T> type, Serializable id) {
 		return (T) getHibernateTemplate().get(type.getName(), id);
-	}
-	
-	@Override
-	public Iterator<?> getIterator(String query) {
-		return getHibernateTemplate().iterate(query);
 	}
 
 	@Override
@@ -200,10 +194,6 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 		getHibernateTemplate().delete(getHibernateTemplate().merge(instance));
 	}
 
-	public void reattach(Object model) {
-		getSession().lock(model, LockMode.NONE);
-	}
-
 	public List<Class> getAllTypes() {
 		ArrayList<Class> allTypes = new ArrayList<Class>();
 		for (Iterator iter = getSessionFactory().getAllClassMetadata().values()
@@ -224,7 +214,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 * 按属性查找对象列表,匹配方式为相等.
 	 */
 	@Override
-	public <T> List<T> findBy(Class type, final String propertyName, final Object value) {
+	public <T> List<T> findBy(Class<T> type, final String propertyName, final Object value) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return find(type, criterion);
@@ -256,7 +246,7 @@ public class BaseHibernateDao extends HibernateDaoSupport implements IDao {
 	 * @param criterions 数量可变的Criterion.
 	 */
 	@Override
-	public <T> List<T> find(Class type, final Criterion... criterions) {
+	public <T> List<T> find(Class<T> type, final Criterion... criterions) {
 		return createCriteria(type, criterions).list();
 	}
 	

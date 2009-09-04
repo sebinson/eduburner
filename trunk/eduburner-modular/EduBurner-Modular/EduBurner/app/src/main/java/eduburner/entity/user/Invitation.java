@@ -26,7 +26,7 @@ public class Invitation extends EntityObject {
 	
 	private UserData candidate;
 	
-	private boolean isAccepted = true;
+	private boolean isAccepted = false;
 	
 	public String getCode() {
 		return code;
