@@ -28,7 +28,7 @@ public class Page<T> {
 	protected int pageSize = 10;
 	protected String orderBy = null;
 	protected String order = null;
-	protected boolean autoCount = true;
+	protected boolean autoCount = false;
 
 	//返回结果 //
 	protected List<T> items = Lists.newArrayList();

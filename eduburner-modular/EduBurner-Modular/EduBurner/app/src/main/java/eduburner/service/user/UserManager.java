@@ -174,8 +174,10 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	@Override
 	public Page<Entry> getUserEntriesPage(UserData ud, int pageNo){
 		logger.debug("entering getUserEntriesPage method...");
+		long totalCount = dao.findUnique("select count(*) from Entry");
 		Page<Entry> page = new Page<Entry>();
 		page.setPageNo(pageNo);
+		page.setTotalCount(totalCount);
 		return dao.findPage(page, "from Entry as e where e.user.id = ? order by e.published desc", ud.getId());
 	}
 
@@ -189,8 +191,8 @@ public class UserManager extends BaseManager implements UserDetailsService,
 
 	@Override
 	public List<UserData> getFriends(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		UserData user = getUserDataByUsername(username);
+		return user.getFriends();
 	}
 
 	@Override
