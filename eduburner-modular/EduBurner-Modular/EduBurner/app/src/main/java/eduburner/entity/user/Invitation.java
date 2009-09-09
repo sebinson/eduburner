@@ -1,5 +1,7 @@
 package eduburner.entity.user;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,8 @@ public class Invitation extends EntityObject {
 	
 	private String code;  //the code for the invite
 	private String email; //the email this invite went to
+	
+	private Date createTime;
 	
 	private UserData requestor;
 	
@@ -45,7 +49,7 @@ public class Invitation extends EntityObject {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="fk_requestor_id")
+	@JoinColumn(name = "fk_requestor_id")
 	public UserData getRequestor() {
 		return requestor;
 	}
@@ -56,7 +60,7 @@ public class Invitation extends EntityObject {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="fk_candidate_id")
+	@JoinColumn(name = "fk_candidate_id")
 	public UserData getCandidate() {
 		return candidate;
 	}
@@ -72,6 +76,14 @@ public class Invitation extends EntityObject {
 
 	public void setAccepted(boolean isAccepted) {
 		this.isAccepted = isAccepted;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
