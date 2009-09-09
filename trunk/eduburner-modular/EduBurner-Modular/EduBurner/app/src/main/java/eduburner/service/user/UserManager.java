@@ -1,6 +1,8 @@
 package eduburner.service.user;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -154,9 +156,11 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 
 	@Override
-	public void addEntryComment(UserData user, String entryId, Comment comment) {
-		// TODO Auto-generated method stub
-		
+	public void addEntryComment(UserData user, Entry entry, Comment comment) {
+		comment.setUser(user);
+		entry.getComments().add(comment);
+		dao.save(comment);
+		dao.update(entry);
 	}
 
 	@Override
@@ -200,7 +204,9 @@ public class UserManager extends BaseManager implements UserDetailsService,
 		UserData requestor = getUserDataByUsername(requestorName);
 		UserData candidate = getUserDataByUsername(candidateName);
 		Invitation invitation = new Invitation();
+		invitation.setCreateTime(new Date());
 		invitation.setRequestor(requestor);
+		invitation.setCode(UUID.randomUUID().toString());
 		requestor.getOutgoingInvitations().add(invitation);
 		invitation.setCandidate(candidate);
 		candidate.getIncomingInvitations().add(invitation);

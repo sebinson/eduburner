@@ -45,7 +45,7 @@ public interface IUserManager {
 	
 	public void likeEntry(UserData user, Entry entry);
 	
-	public void addEntryComment(UserData user, String entryId, Comment comment);
+	public void addEntryComment(UserData user, Entry entry, Comment comment);
 	
 	public void getHomePageEntriesForUser(User user);
 
