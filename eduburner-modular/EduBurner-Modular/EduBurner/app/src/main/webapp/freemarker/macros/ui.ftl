@@ -109,7 +109,7 @@
 		</div>
 		<div class="profile-body">
 			<div class="name">
-				<a href="#">${principal.username}</a>
+				<a href="/users/${principal.username}">${principal.username}</a>
 			</div>
 			<div class="actions">
 				<a href="/account/settings">设置</a> - <a href="/account/logout">退出</a>
@@ -337,14 +337,16 @@
   <div class="grid-view">
   	<#if (users?size > 0)>
 	    <#list users as u>
+	       <#if u.id != user.id>
 	       <div class="single-item">
 	       		<div class="picture">
-	       			<a href="#"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
+	       			<a href="/users/${u.username}"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
 	       		</div>
 	       		<div class="name">
-	       		    <a href="#">${u.username}</a>
+	       		    <a href="/users/${u.username}">${u.username}</a>
 	       		</div>
 	       </div>
+	       </#if>
 	    </#list>
 	<#else>
 		<div class="info" style="margin-top:30px;">当前没有好友</div>

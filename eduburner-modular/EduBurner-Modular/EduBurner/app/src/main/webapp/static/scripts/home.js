@@ -20,13 +20,16 @@
 	function initAddEntryForm(){
 		$('#add-entry-form').bind('submit', function(e){
 			e.preventDefault();
+			var msg = $.trim($('#post-msg-area').val());
+			if(msg == '') return;
 			$.waiting.start();
 			$.ajax({
 				url: '/entries/',
 				type: 'POST',
-				data: {'title' : $('#post-msg-area').val()},
+				data: {'title' : msg},
 				success: function(data){
 					$.waiting.stop();
+					$('#post-msg-area').val('').trigger('focus');
 					$('#entries').html(data);
 				}
 			});
