@@ -89,7 +89,7 @@
 		</div>
 	  </div>
 	   <div id="top-loading" style="display:none">
-		    加载中...
+		    正在加载...
 	   </div>
   </body>
 </html>

@@ -43,7 +43,7 @@ width:80px;
 .ie #overlay { height: expression(document.body.scrollHeight>document.body.offsetHeight?document.body.scrollHeight:document.body.offsetHeight+ 'px'); }
 #loading { position: absolute; left: 45%; top: 40%; padding: 2px; z-index: 20001; height: auto; }
 	#loading .loading-indicator { height: auto; }
-#top-loading { font-size: 12px; left: 45%; margin-left: -26px;position: absolute; top: 3px;z-index: 20001;color: #222222;font-weight: bolder; padding: 3px 8px;background-color: #E2EECD;-moz-border-radius: 2px; -webkit-border-radius: 2px;}
+#top-loading { font-size: 12px; left: 45%; margin-left: -26px;position: absolute; top: 3px;z-index: 20001;color: #000;font-weight: bold; padding: 3px 8px;background-color: #FFF1A8;-moz-border-radius: 2px; -webkit-border-radius: 2px;}
 .error-box { background:#FFEBE8 none repeat scroll 0 0; border:1px solid #DD3C10; margin:0 0 10px; padding:10px; }
 
 /************************** post message box **********************/
@@ -130,7 +130,7 @@ width:80px;
 	margin-top: 6px;
 }
 
-#create-course-link{
+#create-course-link, #search-friend-link{
 	float:right;
 	margin-right: 20px;
 	margin-top: 10px;
@@ -156,4 +156,8 @@ width:80px;
 
 .pager.bottom{
 	margin-top: 14px;
+}
+
+.pager.head{
+	margin-bottom: 14px;
 }
