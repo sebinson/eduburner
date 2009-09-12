@@ -1,5 +1,6 @@
 package eduburner.crawler;
 
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class ToeThread extends Thread {
 	// activity monitoring, debugging, and problem detection
 	private String step = STEP_NASCENT;
 
-	private long atStepSince;
 	private long lastStartTime;
 	private long lastFinishTime;
 
@@ -153,7 +153,6 @@ public class ToeThread extends Thread {
 
 	private void setStep(String s) {
 		step = s;
-		atStepSince = System.currentTimeMillis();
 	}
 
 	public boolean isShouldRetire() {
@@ -166,5 +165,29 @@ public class ToeThread extends Thread {
 
 	public void retire() {
 		shouldRetire = true;
+	}
+	
+	//TODO: report status
+	public void reportTo(String name, PrintWriter pw){
+		pw.print("[");
+        pw.println(getName());
+        long now = System.currentTimeMillis();
+        long time = 0;
+        pw.print("    ");
+        if(lastFinishTime > lastStartTime) {
+            // That means we finished something after we last started something
+            // or in other words we are not working on anything.
+            pw.print("WAITING for ");
+            time = now - lastFinishTime;
+            pw.print(time);
+        } else if(lastStartTime > 0) {
+            // We are working on something
+            pw.print("ACTIVE for ");
+            time = now-lastStartTime;
+            pw.print(time);
+        }
+        pw.print("]");
+        pw.println();
+        pw.flush();
 	}
 }

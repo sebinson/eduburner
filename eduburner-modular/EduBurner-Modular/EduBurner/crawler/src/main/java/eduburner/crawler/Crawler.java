@@ -49,6 +49,7 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 
 	@Override
 	public void requestCrawlStart() {
+		crawlFrontier.loadSeeds();
 		setUpToePool();
 		state = State.RUNNING;
 		sendCrawlStateChangeEvent(this.state, CrawlStatus.RUNNING);
