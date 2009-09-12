@@ -49,8 +49,8 @@ public class UserSettingsController extends BaseController {
 		// Filedata is the default name for file in YUI uploader
 		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest
 				.getFile("Filedata");
-        //上传组件的bug, 所以将username传过来，而不是取getRemoteUser
-		String username = request.getParameter("username");
+		
+		String username = getRemoteUser();
 		
 		String origionalFileName = file.getOriginalFilename();
 		String extension = origionalFileName.substring(origionalFileName.lastIndexOf(".") + 1);

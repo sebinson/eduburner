@@ -23,13 +23,11 @@ public class Invitation extends EntityObject {
 	
 	private String code;  //the code for the invite
 	private String email; //the email this invite went to
+	private String msg;
 	
 	private Date createTime;
-	
 	private UserData requestor;
-	
 	private UserData candidate;
-	
 	private boolean isAccepted = false;
 	
 	public String getCode() {
@@ -84,6 +82,14 @@ public class Invitation extends EntityObject {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 	@Override

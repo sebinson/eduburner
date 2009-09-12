@@ -14,9 +14,6 @@ public class SpringBeanUtils implements ApplicationContextAware {
 
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("entering setApplicationContext method...");
-		}
 		SpringBeanUtils.applicationContext = applicationContext;
 	}
 

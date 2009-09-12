@@ -47,7 +47,7 @@ public interface IUserManager {
 	
 	public void addEntryComment(UserData user, Entry entry, Comment comment);
 	
-	public void getHomePageEntriesForUser(User user);
+	public Page<Entry> getHomePageEntriesForUser(UserData user, int pageNo);
 
 	Page<Entry> getUserEntriesPage(UserData ud, int pageNo);
 	
@@ -58,4 +58,6 @@ public interface IUserManager {
 	public List<UserData> getFriends(String username);
 	
 	public List<Entry> getAllEntries();
+	
+	public void addFriend(UserData requestor, UserData candidate);
 }
