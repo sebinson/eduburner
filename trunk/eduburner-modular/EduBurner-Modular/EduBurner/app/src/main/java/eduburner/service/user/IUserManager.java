@@ -4,6 +4,7 @@ import java.util.List;
 
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
+import eduburner.entity.course.Course;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
@@ -41,7 +42,7 @@ public interface IUserManager {
 	
 	public void createEntry(UserData user, Entry entry);
 	
-	public void createEntry(UserData user, String courseId, Entry entry);
+	public void createEntry(UserData user, Course course, Entry entry);
 	
 	public void likeEntry(UserData user, Entry entry);
 	

@@ -2,6 +2,8 @@ package eduburner.service.course;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,12 +12,16 @@ import com.google.common.collect.Lists;
 import eduburner.entity.course.Course;
 import eduburner.entity.course.CourseTag;
 import eduburner.entity.user.UserData;
-import eduburner.service.BaseManager;
+import eduburner.persistence.IDao;
 
 @SuppressWarnings("unchecked")
 @Component("courseManager")
 @Transactional
-public class CourseManager extends BaseManager implements ICourseManager {
+public class CourseManager implements ICourseManager {
+	
+	@Autowired
+	@Qualifier("dao")
+	private IDao dao;
 
 	@Override
 	public void createCourse(Course course) {
