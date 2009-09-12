@@ -73,7 +73,6 @@ public class ToeThread extends Thread {
 
 				setStep(STEP_FINISHING_PROCESS);
 				lastFinishTime = System.currentTimeMillis();
-				crawlController.releaseContinuePermission();
 
 				if (shouldRetire) {
 					break; // from while(true)
@@ -81,74 +80,54 @@ public class ToeThread extends Thread {
 			}
 		} catch (InterruptedException e) {
 			logger.warn("toe thread ended with interrupted exception");
+		} catch (Exception e) {
+			logger.warn("Fatal exception in : " + getName());
 		}
 
 		logger.debug("toe thread: " + getName() + " finished finished. ");
 		setCurrentCrawlUri(null);
 		setStep(STEP_FINISHED);
 	}
-	
+
 	private void processCrawlUri() throws InterruptedException {
 		lastStartTime = System.currentTimeMillis();
 		List<IProcessor> processors = crawlController.getProcessors();
 		Iterator<IProcessor> iterator = processors.iterator();
 		IProcessor curProc = iterator.hasNext() ? iterator.next() : null;
 		try {
-			while(curProc != null){
+			while (curProc != null) {
 				setStep(STEP_ABOUT_TO_BEGIN_PROCESSOR);
 				continueCheck();
 				ProcessResult result = curProc.process(currentCrawlUri);
 				switch (result.getProcessStatus()) {
-	                case PROCEED:
-	                    curProc = iterator.hasNext() ? iterator.next() : null;
-	                    break;
-	                case STUCK:
-	                    crawlController.requestCrawlPause();
-	                    curProc = null;
-	                    break;
-	                case FINISH:
-	                    curProc = advanceToPostProcessing(iterator);
-	                    break;
-	                case JUMP:
-	                    //curProc = advanceToNamed(iter, pr.getJumpTarget());
-	                    break;
-	            }
+				case PROCEED:
+					curProc = iterator.hasNext() ? iterator.next() : null;
+					break;
+				case FINISH:
+					curProc = advanceToPostProcessing(iterator);
+					break;
+				}
 			}
 		} catch (RuntimeException ex) {
 			recoverableProblem(ex);
 		}
 		setStep(STEP_DONE_WITH_PROCESSORS);
 	}
-	
-	private IProcessor advanceToPostProcessing(
-            Iterator<IProcessor> iter) {
-        while (iter.hasNext()) {
-        	IProcessor me = iter.next();
-            if (me instanceof IPostProcessor) {
-                return me;
-            }
-        }
-        return null;
-    }
 
-	/**
-	 * Perform checks as to whether normal execution should proceed.
-	 * 
-	 * If an external interrupt is detected, throw an interrupted exception.
-	 * Used before anything that should not be attempted by a 'zombie' thread
-	 * that the Frontier/Crawl has given up on.
-	 * 
-	 * Otherwise, if the controller's memoryGate has been closed, hold until it
-	 * is opened. (Provides a better chance of being able to complete some tasks
-	 * after an OutOfMemoryError.)
-	 * 
-	 * @throws InterruptedException
-	 */
+	private IProcessor advanceToPostProcessing(Iterator<IProcessor> iter) {
+		while (iter.hasNext()) {
+			IProcessor me = iter.next();
+			if (me instanceof IPostProcessor) {
+				return me;
+			}
+		}
+		return null;
+	}
+
 	private void continueCheck() throws InterruptedException {
 		if (Thread.interrupted()) {
 			throw new InterruptedException("die request detected");
 		}
-		crawlController.acquireContinuePermission();
 	}
 
 	/**
@@ -159,7 +138,6 @@ public class ToeThread extends Thread {
 	private void setCurrentCrawlUri(CrawlURI curi) {
 		currentCrawlUri = curi;
 	}
-	
 
 	private void recoverableProblem(Throwable e) {
 		Object previousStep = step;
