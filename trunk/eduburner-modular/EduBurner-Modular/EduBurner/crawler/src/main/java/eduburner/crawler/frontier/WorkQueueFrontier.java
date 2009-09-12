@@ -275,4 +275,10 @@ public class WorkQueueFrontier extends AbstractFrontier {
 			return this.classKey.compareTo(other.getClassKey());
 		}
 	}
+
+	@Override
+	public void loadSeeds() {
+		// TODO Auto-generated method stub
+		
+	}
 }
