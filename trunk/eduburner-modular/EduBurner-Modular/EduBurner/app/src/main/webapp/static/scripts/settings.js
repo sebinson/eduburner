@@ -32,7 +32,7 @@
 		
 		function handleUpload(event){
 			if (fileID != null) {
-				uploader.upload(fileID, "/account/profilepicture",  "POST", {
+				uploader.upload(fileID, "/account/profilepicture;jsessionid=" + window._EB_SETTINGS_DATA.sessionId,  "POST", {
 					'userId': window._EB_SETTINGS_DATA.userId,
 					'username': window._EB_SETTINGS_DATA.username
 				});

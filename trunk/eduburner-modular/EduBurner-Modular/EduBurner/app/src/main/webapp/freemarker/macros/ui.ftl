@@ -284,8 +284,8 @@
   	  	<#if (entry.user.username!=principal.username)>
   	  	   <span> - </span><span class="like link">喜欢</span>
   	  	<#else>
-  	  	   <span> - </span><span class="link">编缉</span>
-  	  	   <span> - </span><span class="link">删除</span>
+  	  	   <span> - </span><span class="edit link">编缉</span>
+  	  	   <span> - </span><span class="remove link">删除</span>
   	  	</#if>
   	  </div>
   	  <#if (entry.likes?size>0) >

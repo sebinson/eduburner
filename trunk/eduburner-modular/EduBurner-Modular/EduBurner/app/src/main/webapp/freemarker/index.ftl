@@ -29,6 +29,7 @@
 			</#if>
 		</div>
 	</div>
+	<div id="remove-dlg-container"></div>
 	<script type="text/javascript" src="/static/scripts/home.js"></script>
 	<script type="text/javascript">
 	    <#-- 

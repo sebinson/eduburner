@@ -4,21 +4,22 @@
 	
 	function init(){
 		
-	}
-	
-	var UserMgr = new function(){
-		
-		this.sendInvitation = function(){
+		$('#invitation-link').bind('click', function(e){
+			e.preventDefault();
 			$.waiting.start();
 			$.ajax({
-				url: '/invite'
+				url: '/friends/add.json',
 				type: 'POST',
-				data: {}
 				dataType: 'json',
-				success: function(){
-				}	
+				data: {'requestor': _EB_USERVIEW_DATA.username, 'candidate':_EB_USERVIEW_DATA.targetUsername},
+				success: function(data){
+					$.waiting.stop();
+					if(data.msg == 'OK'){
+						$('#msg-box').css('visibility', '').html('已成功添加好友');
+					}
+				}
 			});
-		}
+		});
 		
 	}
 	

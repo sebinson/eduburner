@@ -64,7 +64,8 @@
 	<script type="text/javascript">
 	    window._EB_SETTINGS_DATA = {
 	    	userId: '${principal.id}',
-	    	username: '${principal.username}'
+	    	username: '${principal.username}',
+	    	sessionId: '${req.session.id}'
 	    }
 	</script>
 </@layout.masterPage>
