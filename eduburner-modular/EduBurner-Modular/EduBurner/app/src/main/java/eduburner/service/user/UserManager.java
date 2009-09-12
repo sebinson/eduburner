@@ -19,22 +19,28 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
+import eduburner.entity.course.Course;
 import eduburner.entity.user.Invitation;
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
 import eduburner.persistence.EntityExistsException;
 import eduburner.persistence.Page;
-import eduburner.service.BaseManager;
+import eduburner.persistence.user.IUserDao;
 
 @Service("userManager")
 @Transactional
-public class UserManager extends BaseManager implements UserDetailsService,
+public class UserManager implements UserDetailsService,
 		IUserManager {
 	private Logger logger = LoggerFactory.getLogger(UserManager.class);
+	
+	@Autowired
+	@Qualifier("userDao")
+	private IUserDao dao;
 
 	@Autowired
 	@Qualifier("passwordEncoder")
@@ -147,46 +153,39 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	
 	@Override
 	public void createEntry(UserData user, Entry entry) {
-		entry.setUser(user);
-		user.getEntries().add(entry);
-		dao.save(entry);
+		createEntry(user, null, entry);
 	}
 
 	@Override
-	public void createEntry(UserData user, String courseId, Entry entry) {
-		
+	public void createEntry(UserData user, Course course, Entry entry) {
+		entry.setUser(user);
+		user.getEntries().add(entry);
+		if(course != null){
+			entry.setCourse(course);
+		}
+		dao.save(entry);
 	}
 
 	@Override
 	public void addEntryComment(UserData user, Entry entry, Comment comment) {
 		comment.setUser(user);
-		entry.getComments().add(comment);
-		dao.save(comment);
+		entry.addComment(comment);
 		dao.update(entry);
 	}
 
 	@Override
 	public void likeEntry(UserData user, Entry entry) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Page<Entry> getHomePageEntriesForUser(UserData user, int pageNo) {
-		List<String> usernames = Lists.newArrayList();
-		usernames.add(user.getUsername());
-		for(UserData ud : user.getFriends()){
-			usernames.add(ud.getUsername());
-		}
-		long totalCount = dao.findUnique("select count(*) from Entry as e where e.user.username in {?}", usernames);
-		Page<Entry> page = new Page<Entry>();
-		page.setTotalCount(totalCount);
-		return dao.findPage(page, "from Entry as e where e.user.username in {?}", usernames);
+		return dao.getHomePageEntriesForUser(user, pageNo);
 	}
 	
 	@Override
 	public Page<Entry> getUserEntriesPage(UserData ud, int pageNo){
-		long totalCount = dao.findUnique("select count(*) from Entry as e where e.user.id = ? order by e.published desc", ud.getId());
+		long totalCount = dao.findUnique("select count(*) from Entry as e where e.user.id = ?", ud.getId());
 		Page<Entry> page = new Page<Entry>();
 		page.setPageNo(pageNo);
 		page.setTotalCount(totalCount);

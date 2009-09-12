@@ -38,29 +38,48 @@
   </table>
   <table name="user_data">
     <column>id</column>
+    <column>description</column>
     <column>email</column>
     <column>fullname</column>
     <column>profilePicture</column>
     <column>userId</column>
     <column>username</column>
-    <column>description</column>
     <row>
       <value>40288182233355f401233355fd910001</value>
+      <value>desc1</value>
       <value>rockmaple@163.com</value>
       <value>lliu</value>
       <value>/static/profiles/anonymous.gif</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea5</value>
       <value>admin</value>
-      <value>desc1</value>
     </row>
     <row>
       <value>40288182233355f401233355fdbf0002</value>
+      <value>desc2</value>
       <value>st416@gse.pku.edu.cn</value>
       <value>zhangyf</value>
       <value>/static/profiles/anonymous.gif</value>
       <value>5cb64b881e5438ba9a76ca60fc05aea4</value>
       <value>rockmaple</value>
-      <value>desc2</value>
+    </row>
+  </table>
+  <table name="role">
+    <column>id</column>
+    <column>description</column>
+    <column>name</column>
+    <row>
+      <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
+      <value><![CDATA[
+				Administrator role (can edit Users)
+			]]></value>
+      <value>ROLE_SystemAdmin</value>
+    </row>
+    <row>
+      <value>5cb64b881e5438ba9a76ca60fc05aea7</value>
+      <value><![CDATA[
+				Default role for all Users
+			]]></value>
+      <value>ROLE_User</value>
     </row>
   </table>
   <table name="comment">
@@ -75,120 +94,120 @@
     <column>id</column>
     <column>description</column>
     <column>endDate</column>
+    <column>picture</column>
     <column>startDate</column>
     <column>status</column>
     <column>tagsAsString</column>
     <column>title</column>
-    <column>picture</column>
     <column>fk_creator_id</column>
     <row>
       <value>40288182233355f401233355fdcf000d</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>Chinese</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d000e</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>English</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d000f</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>History</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0010</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>Politics</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0011</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>Joke</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0012</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>Realestate</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0013</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>worklife</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0014</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>modenchn</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0015</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>itexpress</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
     <row>
       <value>40288182233355f401233355fe2d0016</value>
       <null/>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
+      <value>/static/images/courses/default.jpg</value>
       <value><![CDATA[2009-08-19 23:45:56.0]]></value>
       <null/>
       <null/>
       <value>java</value>
-      <value><![CDATA[/static/images/courses/default.jpg]]></value>
       <null/>
     </row>
   </table>
@@ -395,12 +414,27 @@
       <null/>
       <value>40288182233355f401233355fdbf0002</value>
     </row>
+    <row>
+      <value>4028818223aeeb630123aeecc40e0001</value>
+      <value>false</value>
+      <null/>
+      <value>false</value>
+      <null/>
+      <value><![CDATA[2009-09-12 23:43:55.0]]></value>
+      <value>我是管理员，呵呵</value>
+      <null/>
+      <null/>
+      <null/>
+      <value>40288182233355f401233355fd910001</value>
+    </row>
   </table>
   <table name="invitation">
     <column>id</column>
     <column>accepted</column>
     <column>code</column>
+    <column>createTime</column>
     <column>email</column>
+    <column>msg</column>
     <column>fk_candidate_id</column>
     <column>fk_requestor_id</column>
   </table>
@@ -417,6 +451,14 @@
   <table name="rel_course_coursetag">
     <column>course_id</column>
     <column>tag_id</column>
+  </table>
+  <table name="rel_friends">
+    <column>user_id</column>
+    <column>friend_id</column>
+    <row>
+      <value>40288182233355f401233355fdbf0002</value>
+      <value>40288182233355f401233355fd910001</value>
+    </row>
   </table>
   <table name="rel_user_course">
     <column>member_id</column>
@@ -458,25 +500,6 @@
       <value>40288182233355f401233355fe2d0011</value>
     </row>
   </table>
-  <table name="role">
-    <column>id</column>
-    <column>description</column>
-    <column>name</column>
-    <row>
-      <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
-      <value><![CDATA[
-				Administrator role (can edit Users)
-			]]></value>
-      <value>ROLE_SystemAdmin</value>
-    </row>
-    <row>
-      <value>5cb64b881e5438ba9a76ca60fc05aea7</value>
-      <value><![CDATA[
-				Default role for all Users
-			]]></value>
-      <value>ROLE_User</value>
-    </row>
-  </table>
   <table name="rel_user_role">
     <column>user_id</column>
     <column>role_id</column>
@@ -489,7 +512,8 @@
       <value>5cb64b881e5438ba9a76ca60fc05aea6</value>
     </row>
   </table>
-    <table name="service">
+  
+  <table name="service">
     <column>id</column>
     <column>iconUrl</column>
     <column>name</column>

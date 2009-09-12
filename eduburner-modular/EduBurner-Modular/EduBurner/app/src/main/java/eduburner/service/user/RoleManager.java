@@ -4,16 +4,22 @@ import javax.persistence.EntityExistsException;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import eduburner.entity.user.Role;
-import eduburner.service.BaseManager;
+import eduburner.persistence.IDao;
 
 @Service("roleManager")
 @Transactional
-public class RoleManager extends BaseManager implements IRoleManager {
+public class RoleManager implements IRoleManager {
 
+	@Autowired
+	@Qualifier("dao")
+	private IDao dao;
+	
 	public Role getRoleById(String id) {
 		return dao.getInstanceById(Role.class, id);
 	}

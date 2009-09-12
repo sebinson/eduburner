@@ -143,6 +143,10 @@ public class Entry extends EntityObject {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public void addComment(Comment c){
+		getComments().add(c);
+	}
 
 	public String toString() {
 		return "Entry{" + "id='" + id + '\'' + ", title='" + title + '\''

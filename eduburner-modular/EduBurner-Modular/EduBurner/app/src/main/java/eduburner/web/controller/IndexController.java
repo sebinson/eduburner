@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import eduburner.entity.Entry;
 import eduburner.persistence.Page;
@@ -22,7 +21,7 @@ public class IndexController extends BaseController {
 		if(p != null){
 			pageNo = Integer.parseInt(p);
 		}
-		Page<Entry> page = userManager.getUserEntriesPage(getRemoteUserDataObj(), pageNo);
+		Page<Entry> page = userManager.getHomePageEntriesForUser(getRemoteUserDataObj(), pageNo);
 		model.addAttribute("page", page);
 		return INDEX_PAGE;
 	}
