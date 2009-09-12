@@ -1,6 +1,5 @@
 <@layout.masterPage title="查找好友" pageType="userPage">
 	<div id="main-content">
-	    
 		<h2 style="margin-bottom:5px">查找好友</h2>
 		<div id="search-friend">
 			<form id="search-friend-form">
@@ -13,5 +12,5 @@
 		<@ui.userListView users/>
 	</div>
 	
-	<script type="text/javascript" src="/static/scripts/friendlist.js"></script>
+	<script type="text/javascript" src="/static/scripts/friendsearch.js"></script>
 </@layout.masterPage>
