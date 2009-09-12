@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eduburner.entity.user.User;
 import eduburner.entity.user.UserData;
+import eduburner.enumerations.Message;
 import eduburner.persistence.EntityExistsException;
 import eduburner.web.controller.BaseController;
 
@@ -69,8 +68,18 @@ public class UserController extends BaseController {
 		return JSON_VIEW;
 	}
 	
-	@RequestMapping(value="/invite.*", method=RequestMethod.POST)
+	@RequestMapping(value="/invite.json", method=RequestMethod.POST)
 	public String sendInvitation(){
+		return JSON_VIEW;
+	}
+	
+	@RequestMapping(value="/friends/add.json", method=RequestMethod.POST)
+	public String addFriend(@RequestParam("requestor") String requestor,
+			@RequestParam("candidate") String candidate, Model model) {
+		UserData u1 = userManager.getUserDataByUsername(requestor);
+		UserData u2 = userManager.getUserDataByUsername(candidate);
+		userManager.addFriend(u1, u2);
+		setReturnMsg(model, Message.OK);
 		return JSON_VIEW;
 	}
 	

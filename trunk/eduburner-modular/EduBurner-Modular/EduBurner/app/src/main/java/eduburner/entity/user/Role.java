@@ -41,7 +41,7 @@ public class Role extends EntityObject implements GrantedAuthority {
 		return description;
 	}
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	public Set<User> getUsers() {
 		return users;
 	}

@@ -19,6 +19,8 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
+
 import eduburner.entity.Comment;
 import eduburner.entity.Entry;
 import eduburner.entity.user.Invitation;
@@ -170,15 +172,21 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	}
 
 	@Override
-	public void getHomePageEntriesForUser(User user) {
-		// TODO Auto-generated method stub
-		
+	public Page<Entry> getHomePageEntriesForUser(UserData user, int pageNo) {
+		List<String> usernames = Lists.newArrayList();
+		usernames.add(user.getUsername());
+		for(UserData ud : user.getFriends()){
+			usernames.add(ud.getUsername());
+		}
+		long totalCount = dao.findUnique("select count(*) from Entry as e where e.user.username in {?}", usernames);
+		Page<Entry> page = new Page<Entry>();
+		page.setTotalCount(totalCount);
+		return dao.findPage(page, "from Entry as e where e.user.username in {?}", usernames);
 	}
 	
 	@Override
 	public Page<Entry> getUserEntriesPage(UserData ud, int pageNo){
-		logger.debug("entering getUserEntriesPage method...");
-		long totalCount = dao.findUnique("select count(*) from Entry");
+		long totalCount = dao.findUnique("select count(*) from Entry as e where e.user.id = ? order by e.published desc", ud.getId());
 		Page<Entry> page = new Page<Entry>();
 		page.setPageNo(pageNo);
 		page.setTotalCount(totalCount);
@@ -229,5 +237,11 @@ public class UserManager extends BaseManager implements UserDetailsService,
 	@Override
 	public List<Entry> getAllEntries() {
 		return dao.getAllInstances(Entry.class);
+	}
+
+	@Override
+	public void addFriend(UserData requestor, UserData candidate) {
+		requestor.getFriends().add(candidate);
+		dao.update(requestor);
 	}
 }

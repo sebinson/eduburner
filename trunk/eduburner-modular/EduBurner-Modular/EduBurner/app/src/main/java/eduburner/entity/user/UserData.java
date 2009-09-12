@@ -10,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -197,6 +198,15 @@ public class UserData extends EntityObject {
 
 	public void setFriends(List<UserData> friends) {
 		this.friends = friends;
+	}
+	
+	public boolean hasFriend(final UserData user){
+		return Iterables.any(friends, new Predicate<UserData>() {
+			@Override
+			public boolean apply(UserData input) {
+				return user.username.equals(input.username);
+			}
+		});
 	}
 
 	@Override
