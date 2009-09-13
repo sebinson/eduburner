@@ -21,7 +21,7 @@ public class SearchServiceTest extends BaseServiceTestSupport{
 	@Qualifier("userManager")
 	private IUserManager userManager;
 
-	@Test
+	//@Test
 	public void testSearchService(){
 		
 		List<Entry> entries = userManager.getAllEntries();

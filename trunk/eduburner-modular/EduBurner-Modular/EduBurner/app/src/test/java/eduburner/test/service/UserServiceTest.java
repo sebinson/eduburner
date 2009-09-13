@@ -27,11 +27,9 @@ public class UserServiceTest extends BaseServiceTestSupport {
 	@Autowired
 	@Qualifier("userManager")
 	private IUserManager userManager;
-
 	@Autowired
 	@Qualifier("roleManager")
 	private IRoleManager roleManager;
-
 	@Autowired
 	@Qualifier("passwordEncoder")
 	private PasswordEncoder passwordEncoder;
@@ -142,9 +140,8 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		Assert.assertNotNull(role);
 	}
 	
-	@Test
+	//@Test
 	public void testSendInvitation(){
-		
 		
 		userManager.sendInvitation("rockmaple", "admin");
 		
@@ -153,6 +150,21 @@ public class UserServiceTest extends BaseServiceTestSupport {
 		
 		Assert.assertEquals(1, user1.getIncomingInvitations().size());
 		Assert.assertEquals(1, user2.getOutgoingInvitations().size());
+	}
+	
+	@Test
+	public void testAddFriend(){
+		UserData requestor = userManager.getUserDataByUsername("admin");
+		UserData candidate = userManager.getUserDataByUsername("rockmaple");
+		
+		userManager.addFriend(requestor, candidate);
+		
+		UserData u = userManager.getUserDataByUsername("admin");
+		UserData u1 = userManager.getUserDataByUsername("rockmaple");
+		Assert.assertEquals(1, u.getFriends().size());
+		Assert.assertEquals(0, u1.getFriends().size());
+		
+		userManager.getHomePageEntriesForUser(requestor, 1);
 	}
 
 	protected User createUser(String username, String password) {
