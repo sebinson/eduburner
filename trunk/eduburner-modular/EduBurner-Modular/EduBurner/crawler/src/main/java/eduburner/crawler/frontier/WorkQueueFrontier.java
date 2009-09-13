@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Multiset;
 
@@ -37,8 +37,10 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	
 	private BlockingQueue<String> readyClassKeyQueues;
 	private DelayQueue<DelayedWorkQueue> snoozeQueues;
-	protected Multiset<WorkQueue> inProcessQueues = HashMultiset.create();
+	protected Multiset<WorkQueue> inProcessQueues = ConcurrentHashMultiset.create();
 
+	transient protected WorkQueue longestActiveQueue = null;
+	
 	public WorkQueueFrontier() {
 		super();
 	}
@@ -51,11 +53,11 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected void initInternalQueues(boolean recycle) {
 		allQueues = new MapMaker().makeMap();
 
-		readyClassKeyQueues = new LinkedBlockingDeque<String>();
+		readyClassKeyQueues = new LinkedBlockingQueue<String>();
 		snoozeQueues = new DelayQueue<DelayedWorkQueue>();
 	}
 
-	protected WorkQueue getQueueForClassKey(String classKey) {
+	protected WorkQueue getQueueFor(String classKey) {
 		return allQueues.get(classKey);
 	}
 
@@ -70,19 +72,19 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		long delay = uri.getMinCrawlInterval();
 		WorkQueue wq = allQueues.get(uri.getClassKey());
 		if (wq != null) {
-			addToSnoozeQueue(wq, now, delay);
+			snoozeQueue(wq, now, delay);
 		} else {
 			logger.warn("failed to get workqueue for url: " + uri.getUrl());
 		}
 	}
 
-	private void addToSnoozeQueue(WorkQueue wq, long now, long delay) {
+	private void snoozeQueue(WorkQueue wq, long now, long delay) {
 		long nextTime = now + delay;
 		wq.setWakeTime(nextTime);
 		snoozeQueues.add(new DelayedWorkQueue(wq));
 	}
 
-	private void addToReadyQueue(WorkQueue queue) {
+	private void readyQueue(WorkQueue queue) {
 		queue.setActive(this, true);
 		try {
 			readyClassKeyQueues.put(queue.getClassKey());
@@ -147,32 +149,50 @@ public class WorkQueueFrontier extends AbstractFrontier {
             WorkQueue queue = waked.getWorkQueue();
             queue.setWakeTime(0);
             queue.setActive(this, true);
-            addToReadyQueue(queue);
+            readyQueue(queue);
         }
     }
 
 	@Override
 	protected int getInProcessCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return inProcessQueues.size();
 	}
 
 	@Override
-	protected void processScheduleAlways(CrawlURI caUri) {
-		// TODO Auto-generated method stub
-
+	protected void processScheduleAlways(CrawlURI curi) {
+		assert Thread.currentThread() == managerThread;
+		sendToQueue(curi);
+	}
+	
+	protected void sendToQueue(CrawlURI curi) {
+		assert Thread.currentThread() == managerThread;
+		
+		WorkQueue wq = getQueueFor(curi.getClassKey());
+		wq.enqueue(this, curi);
+		
+		if(!wq.isHeld()){
+			wq.setHeld();
+		}
+		
+		WorkQueue laq = longestActiveQueue;
+        if(((laq==null) || wq.getCount() > laq.getCount())) {
+            longestActiveQueue = wq; 
+        }
 	}
 
+	/**
+	 * Arrange for the given CrawlURI to be visited, if it is not
+     * already scheduled/completed.
+	 */
 	@Override
 	protected void processScheduleIfUnique(CrawlURI caUri) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected long getMaxInWait() {
-		// TODO Auto-generated method stub
-		return 0;
+		Delayed next = snoozeQueues.peek();
+        return next == null ? 60000 : next.getDelay(TimeUnit.MILLISECONDS);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -226,7 +246,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		public WorkQueue getWorkQueue() {
 			if (workQueue == null) {
 				// This is a recently deserialized DelayedWorkQueue instance
-				WorkQueue result = getQueueForClassKey(classKey);
+				WorkQueue result = getQueueFor(classKey);
 				setWorkQueue(result);
 				return result;
 			}
@@ -234,7 +254,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 				SoftReference<WorkQueue> ref = (SoftReference) workQueue;
 				WorkQueue result = ref.get();
 				if (result == null) {
-					result = getQueueForClassKey(classKey);
+					result = getQueueFor(classKey);
 				}
 				setWorkQueue(result);
 				return result;

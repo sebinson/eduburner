@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -262,6 +261,22 @@ public abstract class WorkQueue implements Serializable, Comparable<Delayed>,
     public void setHeld() {
 		isHeld = true;
 		logger.info("queue held: " + getClassKey());
+    }
+    
+    public final int compareTo(Delayed obj) {
+        if(this == obj) {
+            return 0; // for exact identity only
+        }
+        WorkQueue other = (WorkQueue) obj;
+        if(getWakeTime() > other.getWakeTime()) {
+            return 1;
+        }
+        if(getWakeTime() < other.getWakeTime()) {
+            return -1;
+        }
+        // at this point, the ordering is arbitrary, but still
+        // must be consistent/stable over time
+        return this.classKey.compareTo(other.getClassKey());
     }
 
 }
