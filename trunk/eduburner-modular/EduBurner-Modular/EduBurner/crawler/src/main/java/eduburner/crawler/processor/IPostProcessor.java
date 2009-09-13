@@ -1,13 +1,8 @@
 package eduburner.crawler.processor;
 
 import eduburner.crawler.ProcessResult;
+import eduburner.crawler.model.CrawlURI;
 
-/**
- * Tagging interface for post processors.  Needed so that ToeThreads can
- * properly handle {@link ProcessResult#FINISH}. 
- * 
- * @author pjack
- */
 public interface IPostProcessor {
-	
+	public ProcessResult process(CrawlURI curi);
 }
