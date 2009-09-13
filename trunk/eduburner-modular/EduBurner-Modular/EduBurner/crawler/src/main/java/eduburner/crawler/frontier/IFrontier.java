@@ -43,6 +43,8 @@ public interface IFrontier {
     public void terminate();
     
     public void pause();
+    
+    void requestState(State target);
 
 	public enum State {
 		RUN, // juggle/prioritize/emit; usual state

@@ -6,7 +6,10 @@ import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.listener.StepListenerMetaData;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -28,6 +31,9 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 
 	private ApplicationContext appCtx;
 	private List<IProcessor> processors = Lists.newArrayList();
+	
+	@Autowired
+	@Qualifier("frontier")
 	private IFrontier crawlFrontier;
 
 	/**
@@ -42,6 +48,7 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 	transient private State state = State.NASCENT;
 
 	public void init() {
+		logger.debug("init crawler");
 		maxToeThreadSize = DEFAULT_MAX_TOE_THREAD_SIZE;
 		toeThreadPool = Executors
 				.newFixedThreadPool(DEFAULT_MAX_TOE_THREAD_SIZE);
@@ -52,6 +59,7 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 		crawlFrontier.loadSeeds();
 		setUpToePool();
 		state = State.RUNNING;
+		crawlFrontier.requestState(IFrontier.State.RUN);
 		sendCrawlStateChangeEvent(this.state, CrawlStatus.RUNNING);
 	}
 

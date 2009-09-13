@@ -65,6 +65,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	protected void startManagerThread() {
 		managerThread = new Thread() {
 			public void run() {
+				logger.debug("start manager thread");
 				AbstractFrontier.this.managementTasks();
 			}
 		};
@@ -160,6 +161,8 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 		outboundLock.readLock().lockInterruptibly();
 		outboundLock.readLock().unlock();
 
+		logger.debug("retrieve next uri to crawl");
+		
 		CrawlURI retval = outbound.take();
 		return retval;
 	}
@@ -290,6 +293,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 		}
 	}
 
+	@Override
 	public void requestState(State target) {
 		enqueueOrDo(new SetTargetState(target));
 	}
@@ -439,6 +443,33 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	public long queuedUriCount() {
 		return queuedUriCount.get();
 	}
+	
+	/**
+     * Increment the running count of queued URIs. 
+     */
+    protected void incrementQueuedUriCount() {
+        queuedUriCount.incrementAndGet();
+    }
+
+    /**
+     * Increment the running count of queued URIs. Synchronized because
+     * operations on longs are not atomic.
+     * 
+     * @param increment
+     *            amount to increment the queued count
+     */
+    protected void incrementQueuedUriCount(long increment) {
+        queuedUriCount.addAndGet(increment);
+    }
+    
+    /**
+     * Note that a number of queued Uris have been deleted.
+     * 
+     * @param numberOfDeletes
+     */
+    protected void decrementQueuedCount(long numberOfDeletes) {
+        queuedUriCount.addAndGet(-numberOfDeletes);
+    }
 
 	@Override
 	public long failedFetchCount() {
