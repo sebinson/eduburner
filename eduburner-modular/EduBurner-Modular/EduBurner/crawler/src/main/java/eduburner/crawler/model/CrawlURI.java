@@ -1,5 +1,6 @@
 package eduburner.crawler.model;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -9,8 +10,9 @@ import org.apache.commons.lang.StringUtils;
 import eduburner.crawler.enumerations.FetchStatusCodes;
 import eduburner.crawler.util.UrlUtils;
 
-public class CrawlURI {
+public class CrawlURI implements Serializable{
 
+	private static final long serialVersionUID = 968032112154104528L;
 	private String url = StringUtils.EMPTY;
 	private URI uri;
 	private String classKey = StringUtils.EMPTY;
@@ -89,5 +91,17 @@ public class CrawlURI {
 
 	public void setFetchAttempts(int fetchAttempts) {
 		this.fetchAttempts = fetchAttempts;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		CrawlURI c = (CrawlURI)o;
+		if(this == c){
+			return true;
+		}
+		if(this.classKey.equals(c.classKey) && this.url.equals(c.url)){
+			return true;
+		}
+		return false;
 	}
 }
