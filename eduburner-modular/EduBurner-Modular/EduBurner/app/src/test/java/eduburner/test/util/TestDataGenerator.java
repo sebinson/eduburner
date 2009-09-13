@@ -3,6 +3,8 @@ package eduburner.test.util;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 import com.google.common.collect.Lists;
 
 import eduburner.entity.Entry;
@@ -26,6 +28,7 @@ public class TestDataGenerator {
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setFullname(fullname);
+		
 		return user;
 	}
 	
@@ -43,6 +46,7 @@ public class TestDataGenerator {
 		c.setStartDate(new Date());
 		c.setEndDate(new Date());
 		c.setTitle(coursename);
+		c.setPicture("/static/images/courses/default.jpg");
 		return c;
 	}
 	
