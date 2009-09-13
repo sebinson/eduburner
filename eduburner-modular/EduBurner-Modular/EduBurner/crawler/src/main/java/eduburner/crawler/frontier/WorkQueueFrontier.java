@@ -9,9 +9,9 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
@@ -25,7 +25,6 @@ import eduburner.crawler.model.CrawlURI;
  * Uses in-memory map of all known 'queues' inside a single database.
  * Round-robins between all queues.
  */
-@Component("frontier")
 public class WorkQueueFrontier extends AbstractFrontier {
 
 	private static final long serialVersionUID = 5723257498212526250L;
@@ -48,9 +47,21 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	@Override
 	public void initTasks() {
 		super.initTasks();
+		initInternalQueues();
+	}
+	
+	@Override
+	public void loadSeeds() {
+		logger.debug("begin to load uris");
+		//make fake data
+		for(int i=0; i<10; i++){
+			CrawlURI uri = new CrawlURI("http://" + RandomStringUtils.random(5, new char[]{'a', 'b', 'c', 'd'}) + ".com/");
+			uri.setClassKey(uri.getUrl());
+			receive(uri);
+		}
 	}
 
-	protected void initInternalQueues(boolean recycle) {
+	protected void initInternalQueues() {
 		allQueues = new MapMaker().makeMap();
 
 		readyClassKeyQueues = new LinkedBlockingQueue<String>();
@@ -58,7 +69,12 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	}
 
 	protected WorkQueue getQueueFor(String classKey) {
-		return allQueues.get(classKey);
+		WorkQueue wq = allQueues.get(classKey);
+		if(wq == null){
+			wq = new MemoryWorkQueue(classKey);
+			allQueues.put(classKey, wq);
+		}
+		return wq;
 	}
 
 	/**
@@ -107,6 +123,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	@Override
 	protected CrawlURI findEligibleURI() {
 		assert Thread.currentThread() == managerThread;
+		logger.debug("find eligible uri for workqueue.");
 		wakeQueues();
 		WorkQueue readyQ = null;
 		do{
@@ -123,6 +140,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 				readyQ = null;
 			}
 		}while(readyQ == null);
+		
 		if(readyQ == null){
 			return null;
 		}
@@ -144,10 +162,11 @@ public class WorkQueueFrontier extends AbstractFrontier {
      * Wake any queues sitting in the snoozed queue whose time has come.
      */
     protected void wakeQueues() {
+    	logger.debug("wake queues");
         DelayedWorkQueue waked; 
         while((waked = snoozeQueues.poll())!=null) {
             WorkQueue queue = waked.getWorkQueue();
-            queue.setWakeTime(0);
+            queue.setWakeTime(System.currentTimeMillis());
             queue.setActive(this, true);
             readyQueue(queue);
         }
@@ -160,6 +179,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 
 	@Override
 	protected void processScheduleAlways(CrawlURI curi) {
+		logger.debug("process schedule always for uri: " + curi);
 		assert Thread.currentThread() == managerThread;
 		sendToQueue(curi);
 	}
@@ -170,8 +190,11 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		WorkQueue wq = getQueueFor(curi.getClassKey());
 		wq.enqueue(this, curi);
 		
+		incrementQueuedUriCount();
+		
 		if(!wq.isHeld()){
 			wq.setHeld();
+			readyQueue(wq);
 		}
 		
 		WorkQueue laq = longestActiveQueue;
@@ -296,9 +319,4 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		}
 	}
 
-	@Override
-	public void loadSeeds() {
-		// TODO Auto-generated method stub
-		
-	}
 }

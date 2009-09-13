@@ -104,4 +104,8 @@ public class CrawlURI implements Serializable{
 		}
 		return false;
 	}
+	
+	public String toString(){
+		return this.url;
+	}
 }

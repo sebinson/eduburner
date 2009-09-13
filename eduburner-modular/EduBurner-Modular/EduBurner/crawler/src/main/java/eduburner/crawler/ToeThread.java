@@ -46,7 +46,6 @@ public class ToeThread extends Thread {
 
 	@Override
 	public void run() {
-		logger.debug("toe thread started.");
 
 		try {
 			while (true) {
@@ -81,7 +80,7 @@ public class ToeThread extends Thread {
 		} catch (InterruptedException e) {
 			logger.warn("toe thread ended with interrupted exception");
 		} catch (Exception e) {
-			logger.warn("Fatal exception in : " + getName());
+			logger.warn("Fatal exception in : " + getName(), e);
 		}
 
 		logger.debug("toe thread: " + getName() + " finished finished. ");
