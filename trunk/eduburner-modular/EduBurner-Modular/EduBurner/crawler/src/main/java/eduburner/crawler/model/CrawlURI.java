@@ -38,7 +38,7 @@ public class CrawlURI implements Serializable{
 	 * @return
 	 */
 	public long getMinCrawlInterval() {
-		return 0L;
+		return 1000*5L;
 	}
 	
 	public void clearUp(){
