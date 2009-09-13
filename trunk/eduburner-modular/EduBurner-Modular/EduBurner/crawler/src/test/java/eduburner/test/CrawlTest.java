@@ -14,7 +14,9 @@ public class CrawlTest {
 		
 		ICrawler crawler = (ICrawler)ctx.getBean("crawler");
 		
-		System.out.println("crawler class name: " + crawler.toString());
+		crawler.requestCrawlStart();
+		
+		Thread.currentThread().join();
 	}
 	
 	private static String[] getConfigLocations(){
