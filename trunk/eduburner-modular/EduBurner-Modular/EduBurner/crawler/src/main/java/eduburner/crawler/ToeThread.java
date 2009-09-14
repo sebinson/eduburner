@@ -54,6 +54,8 @@ public class ToeThread extends Thread {
 				setStep(STEP_ABOUT_TO_GET_URI);
 
 				CrawlURI cUri = crawlController.getFrontier().next();
+				
+				logger.debug("process uri: " + cUri);
 
 				synchronized (this) {
 					continueCheck();
