@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.listener.StepListenerMetaData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,6 +34,10 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 	@Autowired
 	@Qualifier("frontier")
 	private IFrontier crawlFrontier;
+	
+	@Autowired
+	@Qualifier("crawlURILoader")
+	private ICrawlURILoader crawlURILoader;
 
 	/**
      * Crawl exit status.
@@ -56,7 +59,7 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 
 	@Override
 	public void requestCrawlStart() {
-		crawlFrontier.loadSeeds();
+		crawlFrontier.loadCrawlURIs(crawlURILoader);
 		setUpToePool();
 		state = State.RUNNING;
 		crawlFrontier.requestState(IFrontier.State.RUN);

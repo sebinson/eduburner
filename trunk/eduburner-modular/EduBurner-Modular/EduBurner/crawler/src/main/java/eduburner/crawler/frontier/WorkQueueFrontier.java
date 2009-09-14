@@ -2,6 +2,7 @@ package eduburner.crawler.frontier;
 
 import java.io.Serializable;
 import java.lang.ref.SoftReference;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
@@ -17,6 +18,7 @@ import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Multiset;
 
+import eduburner.crawler.ICrawlURILoader;
 import eduburner.crawler.model.CrawlURI;
 
 /**
@@ -51,12 +53,10 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	}
 	
 	@Override
-	public void loadSeeds() {
+	public void loadCrawlURIs(ICrawlURILoader loader) {
 		logger.debug("begin to load uris");
-		//make fake data
-		for(int i=0; i<10; i++){
-			CrawlURI uri = new CrawlURI("http://" + RandomStringUtils.random(5, new char[]{'a', 'b', 'c', 'd'}) + ".com/");
-			uri.setClassKey(uri.getUrl());
+		List<CrawlURI> uris = loader.loadCrawlURIs();
+		for(CrawlURI uri : uris){
 			receive(uri);
 		}
 	}
