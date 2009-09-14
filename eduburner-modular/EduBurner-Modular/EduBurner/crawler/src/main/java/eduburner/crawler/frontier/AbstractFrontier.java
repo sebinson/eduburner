@@ -255,6 +255,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	 *            InEvent to be done
 	 */
 	protected void enqueueOrDo(InEvent ev) {
+		logger.debug("entering enQueueOrDo method...");
 		if (!inbound.offer(ev)) {
 			// if can't defer,
 			if (Thread.currentThread() == managerThread) {

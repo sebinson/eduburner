@@ -16,7 +16,9 @@ public class CrawlURILoader implements ICrawlURILoader {
 		List<CrawlURI> uris = Lists.newArrayList();
 		
 		for(int i=0; i<10; i++){
-			CrawlURI uri = new CrawlURI("http://" + RandomStringUtils.random(5, new char[]{'a', 'b', 'c', 'd'}) + ".com/");
+			CrawlURI uri = new CrawlURI("http://" 
+					+ RandomStringUtils.random(5, new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g'}) 
+					+ ".com/");
 			uris.add(uri);
 		}
 		
