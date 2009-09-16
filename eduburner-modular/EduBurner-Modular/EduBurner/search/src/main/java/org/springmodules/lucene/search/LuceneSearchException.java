@@ -34,6 +34,8 @@ import org.springmodules.lucene.LuceneException;
  */
 public class LuceneSearchException extends LuceneException {
 
+	private static final long serialVersionUID = -4365709687999963500L;
+
 	/**
 	 * Constructor for LuceneSearchException.
 	 * @param msg message

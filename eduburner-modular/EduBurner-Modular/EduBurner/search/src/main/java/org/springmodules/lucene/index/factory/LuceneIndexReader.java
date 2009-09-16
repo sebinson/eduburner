@@ -81,7 +81,7 @@ public interface LuceneIndexReader {
 	/**
 	 * @see org.apache.lucene.index.IndexReader#getFieldNames(org.apache.lucene.index.org.apache.lucene.index.IndexReader.FieldOption)
 	 */
-	Collection getFieldNames(IndexReader.FieldOption fldOption);
+	Collection<?> getFieldNames(IndexReader.FieldOption fldOption);
 
 	/**
 	 * @see org.apache.lucene.index.IndexReader#getTermFreqVector(int, String)

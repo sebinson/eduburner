@@ -90,7 +90,7 @@ public class FileDictionaries implements Dictionaries {
 
 	// -------------------------------------------------
 
-	protected Map/* <String, Set<String>> */allWords;
+	protected Map<String, Set<String>> allWords;
 
 	protected String dicHome;
 	protected String skipPrefix;
@@ -308,7 +308,7 @@ public class FileDictionaries implements Dictionaries {
 		String dicName = dicPath.substring(0, index);
 		if (allWords != null) {
 			try {
-				Map/* <String, Set<String>> */temp = FileWordsReader
+				Map<String, Set<String>> temp = FileWordsReader
 						.readWords(dicHome + dicPath, charsetName);
 				allWords.put(dicName, temp.values().iterator().next());
 			} catch (FileNotFoundException e) {

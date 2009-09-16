@@ -329,4 +329,6 @@ public interface LuceneIndexTemplate {
 	 * @param callback the callback object that exposes the IndexWriter
 	 */
 	Object write(WriterCallback callback);
+	
+	Object readWrite(ReadWriteCallback callback);
 }

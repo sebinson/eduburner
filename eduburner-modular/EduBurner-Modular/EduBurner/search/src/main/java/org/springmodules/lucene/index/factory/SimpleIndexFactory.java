@@ -21,6 +21,7 @@ import java.io.IOException;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriter.MaxFieldLength;
 import org.apache.lucene.store.Directory;
 import org.springmodules.lucene.index.LuceneIndexAccessException;
 
@@ -116,10 +117,10 @@ public class SimpleIndexFactory extends AbstractIndexFactory implements IndexFac
 	 * @throws IOException if thrown by Lucene methods
 	 */
 	private void checkIndexLocking() throws IOException {
-		boolean locked = IndexReader.isLocked(getDirectory());
+		boolean locked = IndexWriter.isLocked(getDirectory());
 		if( locked ) {
 			if( resolveLock ) {
-				IndexReader.unlock(getDirectory());
+				IndexWriter.unlock(getDirectory());
 			} else {
 				throw new LuceneIndexAccessException("The index is locked");
 			}
@@ -132,7 +133,7 @@ public class SimpleIndexFactory extends AbstractIndexFactory implements IndexFac
 	private void createIndex() {
 		IndexWriter indexWriter = null;
 		try {
-			indexWriter = new IndexWriter(getDirectory(), getAnalyzer(), true);
+			indexWriter = new IndexWriter(getDirectory(), getAnalyzer(), true, MaxFieldLength.UNLIMITED);
 		} catch(Exception ex) {
 			throw new LuceneIndexAccessException("Error during creating a non existent index", ex);
 		} finally {
@@ -197,7 +198,7 @@ public class SimpleIndexFactory extends AbstractIndexFactory implements IndexFac
 									"To allow the creation of the index, set the create property to true.");
 			}
 
-			IndexWriter writer = new IndexWriter(getDirectory(), getAnalyzer(), !exists);
+			IndexWriter writer = new IndexWriter(getDirectory(), getAnalyzer(), !exists, MaxFieldLength.UNLIMITED);
 			setIndexWriterParameters(writer);
 			return new SimpleLuceneIndexWriter(writer);
 		} catch(IOException ex) {

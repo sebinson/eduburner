@@ -15,9 +15,10 @@
  */
 package net.paoding.analysis.knife;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * KnifeBox负责决策当遇到字符串指定位置时应使用的Knife对象.
@@ -39,7 +40,7 @@ public class KnifeBox implements Knife {
 	public KnifeBox() {
 	}
 
-	public KnifeBox(List/* <Knife> */knives) {
+	public KnifeBox(List<Knife> knives) {
 		this.setKnives(knives);
 	}
 
@@ -57,18 +58,18 @@ public class KnifeBox implements Knife {
 		return knives;
 	}
 
-	public void setKnives(List/* <Knife> */knifeList) {
+	public void setKnives(List<Knife> knifeList) {
 		if (knifeList == null) {
-			knifeList = new ArrayList(0);
+			knifeList = Lists.newArrayList();
 		}
 		size = knifeList.size();
 		this.knives = new Knife[size];
-		Iterator iter = knifeList.iterator();
+		Iterator<Knife> iter = knifeList.iterator();
 		for (int i = 0; i < size; i++) {
 			this.knives[i] = (Knife) iter.next();
 		}
 	}
-	
+
 	public void setKnives(Knife[] knives) {
 		if (knives == null) {
 			knives = new Knife[0];

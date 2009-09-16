@@ -84,7 +84,7 @@ public class SimpleLuceneIndexReader implements LuceneIndexReader {
 	/**
 	 * @see LuceneIndexReader#getFieldNames(FieldOption)
 	 */
-	public Collection getFieldNames(FieldOption fldOption) {
+	public Collection<?> getFieldNames(FieldOption fldOption) {
 		return indexReader.getFieldNames(fldOption);
 	}
 

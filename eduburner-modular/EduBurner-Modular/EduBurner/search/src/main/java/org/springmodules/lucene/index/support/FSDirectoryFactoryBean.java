@@ -38,12 +38,11 @@ import org.springframework.core.io.Resource;
  */
 public class FSDirectoryFactoryBean extends AbstractDirectoryFactoryBean {
     private Resource location;
-    private boolean create = false;
 
     /**
      * Return that the type of the directory is FSDirectory
      */
-    public Class getObjectType() {
+    public Class<? extends Directory> getObjectType() {
         return FSDirectory.class;
     }
 
@@ -67,14 +66,15 @@ public class FSDirectoryFactoryBean extends AbstractDirectoryFactoryBean {
 	protected Directory initializeDirectory() throws IOException {
         File locationFile = location.getFile();
         boolean locationExists = locationFile.exists();
-        if (!locationExists && !create) {
+        if (!locationExists) {
             throw new BeanInitializationException("location does not exist");
         } else if (locationExists && !locationFile.isDirectory()) {
             throw new BeanInitializationException(
                     "location must be a directory");
         }
 
-        return FSDirectory.getDirectory(locationFile, !locationExists?create:false);
+        
+        return FSDirectory.open(locationFile);
     }
 
     /**
@@ -82,17 +82,6 @@ public class FSDirectoryFactoryBean extends AbstractDirectoryFactoryBean {
      */
     public void setLocation(Resource location) {
         this.location = location;
-    }
-
-    /**
-     * Same as FSDirectory.getDirectory(File, boolean) boolean argument.
-     * 
-     * <p>Defaults to false
-     *
-     * @param create if true, create, or erase any existing contents
-     */
-    public void setCreate(boolean create) {
-        this.create = create;
     }
 
 }

@@ -17,11 +17,13 @@
 package org.springmodules.lucene.index.resource;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springmodules.lucene.index.factory.IndexFactory;
+
+import com.google.common.collect.Maps;
 
 /**
  * @author Juergen Hoeller
@@ -31,7 +33,7 @@ public abstract class ResourceBindingManager {
 
 	private static final Log logger = LogFactory.getLog(ResourceBindingManager.class);
 
-	private static final ThreadLocal resources = new ThreadLocal();
+	private static final ThreadLocal<Map<IndexFactory, ResourceHolder>> resources = new ThreadLocal<Map<IndexFactory, ResourceHolder>>();
 
 	//-------------------------------------------------------------------------
 	// Management of resource-associated resource handles
@@ -45,10 +47,10 @@ public abstract class ResourceBindingManager {
 	 * or empty Map if currently none bound
 	 * @see #hasResource
 	 */
-	public static Map getResourceMap() {
-		Map map = (Map) resources.get();
+	public static Map<IndexFactory, ResourceHolder> getResourceMap() {
+		Map<IndexFactory, ResourceHolder> map = resources.get();
 		if (map == null) {
-			map = new HashMap();
+			map = Maps.newHashMap();
 		}
 		return Collections.unmodifiableMap(map);
 	}
@@ -58,8 +60,8 @@ public abstract class ResourceBindingManager {
 	 * @param key key to check
 	 * @return if there is a value bound to the current thread
 	 */
-	public static boolean hasResource(Object key) {
-		Map map = (Map) resources.get();
+	public static boolean hasResource(IndexFactory key) {
+		Map<IndexFactory, ResourceHolder> map = resources.get();
 		return (map != null && map.containsKey(key));
 	}
 
@@ -68,8 +70,8 @@ public abstract class ResourceBindingManager {
 	 * @param key key to check
 	 * @return a value bound to the current thread, or null if none
 	 */
-	public static Object getResource(Object key) {
-		Map map = (Map) resources.get();
+	public static Object getResource(IndexFactory key) {
+		Map<IndexFactory, ResourceHolder> map = resources.get();
 		if (map == null) {
 			return null;
 		}
@@ -87,11 +89,11 @@ public abstract class ResourceBindingManager {
 	 * @param value value to bind
 	 * @throws IllegalStateException if there is already a value bound to the thread
 	 */
-	public static void bindResource(Object key, Object value) throws IllegalStateException {
-		Map map = (Map) resources.get();
+	public static void bindResource(IndexFactory key, ResourceHolder value) throws IllegalStateException {
+		Map<IndexFactory, ResourceHolder> map = resources.get();
 		// set ThreadLocal Map if none found
 		if (map == null) {
-			map = new HashMap();
+			map = Maps.newHashMap();
 			resources.set(map);
 		}
 		if (map.containsKey(key)) {
@@ -111,8 +113,8 @@ public abstract class ResourceBindingManager {
 	 * @return the previously bound value
 	 * @throws IllegalStateException if there is no value bound to the thread
 	 */
-	public static Object unbindResource(Object key) throws IllegalStateException {
-		Map map = (Map) resources.get();
+	public static Object unbindResource(IndexFactory key) throws IllegalStateException {
+		Map<IndexFactory, ResourceHolder> map = resources.get();
 		if (map == null || !map.containsKey(key)) {
 			throw new IllegalStateException(
 					"No value for key [" + key + "] bound to thread [" + Thread.currentThread().getName() + "]");

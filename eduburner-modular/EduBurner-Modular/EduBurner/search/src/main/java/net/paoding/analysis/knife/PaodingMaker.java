@@ -43,6 +43,8 @@ import net.paoding.analysis.exception.PaodingAnalysisException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.collect.Maps;
+
 /**
  * 
  * @author Zhiliang Wang [qieqie.wang@gmail.com]
@@ -557,18 +559,18 @@ public class PaodingMaker {
 
 	// --------------------------------------------------------------------
 
-	private static class ObjectHolder/* <T> */{
+	private static class ObjectHolder<T> {
 
 		private ObjectHolder() {
 		}
 
-		private Map/* <Object, T> */objects = new HashMap/* <Object, T> */();
+		private Map<Object, T> objects = Maps.newHashMap();
 
-		public Object/* T */get(Object name) {
+		public T get(Object name) {
 			return objects.get(name);
 		}
 
-		public void set(Object name, Object/* T */object) {
+		public void set(Object name, T object) {
 			objects.put(name, object);
 		}
 

@@ -446,4 +446,18 @@ public class DefaultLuceneIndexTemplate implements LuceneIndexTemplate {
 		}
 	}
 
+	@Override
+	public Object readWrite(ReadWriteCallback callback) {
+		LuceneIndexReader reader = IndexReaderFactoryUtils.getIndexReader(indexFactory);
+		LuceneIndexWriter writer = IndexWriterFactoryUtils.getIndexWriter(indexFactory);
+		try{
+			return callback.doWithReaderWriter(reader, writer);
+		}catch(Exception ex) {
+			throw new LuceneIndexAccessException("Error during using the IndexReader and IndexWriter.", ex);
+		} finally {
+			IndexReaderFactoryUtils.releaseIndexReader(indexFactory, reader);
+			IndexWriterFactoryUtils.releaseIndexWriter(indexFactory, writer);
+		}
+	}
+
 }

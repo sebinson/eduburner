@@ -27,6 +27,8 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Thierry Templier
  */
 public class ResourceAspectSupport implements InitializingBean, Serializable {
+	private static final long serialVersionUID = 4261429749375937527L;
+
 	private ResourceAttributeSource resourceAttributeSource;
 
 	/**

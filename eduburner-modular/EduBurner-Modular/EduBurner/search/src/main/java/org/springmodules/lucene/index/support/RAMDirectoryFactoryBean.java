@@ -34,7 +34,7 @@ public class RAMDirectoryFactoryBean extends AbstractDirectoryFactoryBean {
     /**
      * Return that the type of the directory is RAMDirectory
      */
-    public Class getObjectType() {
+    public Class<? extends Directory> getObjectType() {
         return RAMDirectory.class;
     }
 
