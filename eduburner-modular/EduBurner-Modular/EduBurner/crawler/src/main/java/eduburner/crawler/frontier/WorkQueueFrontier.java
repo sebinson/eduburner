@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
@@ -20,7 +23,7 @@ import com.google.common.collect.Multiset;
 import eduburner.crawler.ICrawlURIsLoader;
 import eduburner.crawler.model.CrawlURI;
 
-public class WorkQueueFrontier extends AbstractFrontier {
+public class WorkQueueFrontier extends AbstractFrontier implements ApplicationContextAware{
 
 	private static final long serialVersionUID = 5723257498212526250L;
 
@@ -32,6 +35,8 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	private BlockingQueue<String> readyClassKeyQueues;
 	private DelayQueue<DelayedWorkQueue> snoozeQueues;
 	protected Multiset<WorkQueue> inProcessQueues = ConcurrentHashMultiset.create();
+	
+	protected ApplicationContext appCtx;
 
 	transient protected WorkQueue longestActiveQueue = null;
 	
@@ -57,7 +62,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		logger.debug("begin to load uris");
 		List<CrawlURI> uris = loader.loadCrawlURIs();
 		for(CrawlURI uri : uris){
-			receive(uri);
+			schedule(uri);
 		}
 	}
 
@@ -168,7 +173,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		assert (wq.peek(this) == uri) : "unexpected peek " + wq;
 		inProcessQueues.remove(wq);
 		if (wq != null) {
-			logger.debug("enqueue uri to snooze queue: " + uri);
+			//TODO: fire finished event
 			long delay = uri.getMinCrawlInterval();
 			//wq.enqueue(this, uri);
 			snoozeQueue(wq, now, delay);
@@ -208,6 +213,12 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected long getMaxInWait() {
 		Delayed next = snoozeQueues.peek();
         return next == null ? 60000 : next.getDelay(TimeUnit.MILLISECONDS);
+	}
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		appCtx = applicationContext;
 	}
 
 	class DelayedWorkQueue implements Delayed, Serializable {
