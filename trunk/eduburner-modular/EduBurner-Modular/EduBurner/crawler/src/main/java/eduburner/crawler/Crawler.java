@@ -141,6 +141,4 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 		appCtx = applicationContext;
 	}
 
-
-
 }
