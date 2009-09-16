@@ -63,7 +63,7 @@ public class SimpleLuceneIndexWriter implements LuceneIndexWriter {
 	 * @see LuceneIndexWriter#addIndexes(Directory[])
 	 */
 	public void addIndexes(Directory[] dirs) throws IOException {
-		indexWriter.addIndexes(dirs);
+		indexWriter.addIndexesNoOptimize(dirs);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class SimpleLuceneIndexWriter implements LuceneIndexWriter {
 	 * @see LuceneIndexWriter#docCount()
 	 */
 	public int docCount() {
-		return indexWriter.docCount();
+		return indexWriter.maxDoc();
 	}
 
 	/**

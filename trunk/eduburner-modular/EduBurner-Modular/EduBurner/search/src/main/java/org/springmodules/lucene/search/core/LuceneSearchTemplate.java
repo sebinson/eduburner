@@ -86,9 +86,9 @@ public interface LuceneSearchTemplate {
 	 * @return the search results
 	 * @see QueryCreator#createQuery(Analyzer)
 	 */
-	List search(QueryCreator queryCreator, HitExtractor extractor, Filter filter);
+	List<?> search(QueryCreator queryCreator, HitExtractor extractor, Filter filter);
 
-	List search(QueryCreator queryCreator, HitExtractor extractor,
+	List<?> search(QueryCreator queryCreator, HitExtractor extractor,
 						QueryResultCreator result, Filter filter);
 
 	/**
@@ -98,9 +98,9 @@ public interface LuceneSearchTemplate {
 	 * @param extractor the extractor of hit informations
 	 * @return the search results
 	 */
-	List search(Query query, HitExtractor extractor, Filter filter);
+	List<?> search(Query query, HitExtractor extractor, Filter filter);
 
-	List search(Query query, HitExtractor extractor,
+	List<?> search(Query query, HitExtractor extractor,
 					QueryResultCreator resultCreator, Filter filter);
 
 	/**

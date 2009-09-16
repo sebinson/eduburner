@@ -27,13 +27,13 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Thierry Templier
  * @see org.apache.lucene.store.Directory
  */
-public abstract class AbstractDirectoryFactoryBean implements FactoryBean, InitializingBean, DisposableBean {
+public abstract class AbstractDirectoryFactoryBean implements FactoryBean<Directory>, InitializingBean, DisposableBean {
     private Directory directory;
 
     /**
 	 * Return the directory created by the FactoryBean.
      */
-    public final Object getObject() throws Exception {
+    public final Directory getObject() throws Exception {
         return directory;
     }
 

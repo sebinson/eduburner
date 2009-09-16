@@ -31,7 +31,7 @@ import org.springmodules.lucene.index.factory.SimpleIndexFactory;
  * @author Thierry Templier
  * @see org.springmodules.lucene.index.factory.SimpleIndexFactory
  */
-public class SimpleIndexFactoryBean implements FactoryBean,InitializingBean {
+public class SimpleIndexFactoryBean implements FactoryBean<IndexFactory>,InitializingBean {
 
 	private SimpleIndexFactory factory;
 	private boolean resolveLock = false;
@@ -42,14 +42,14 @@ public class SimpleIndexFactoryBean implements FactoryBean,InitializingBean {
 	/**
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
-	public Object getObject() throws Exception {
+	public IndexFactory getObject() throws Exception {
 		return factory;
 	}
 
 	/**
 	 * @see org.springframework.beans.factory.FactoryBean#getObjectType()
 	 */
-	public Class getObjectType() {
+	public Class<? extends IndexFactory> getObjectType() {
 		return IndexFactory.class;
 	}
 

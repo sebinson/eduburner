@@ -24,6 +24,8 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class ResourceInterceptor extends ResourceAspectSupport implements MethodInterceptor {
 
+	private static final long serialVersionUID = -7645344901905520737L;
+
 	private void doInitializeResources(ResourceAttribute attr) {
 		if( logger.isDebugEnabled() ) {
 			logger.debug("The interceptor is calling the resource manager to open the resource");
@@ -52,7 +54,7 @@ public class ResourceInterceptor extends ResourceAspectSupport implements Method
 		// Work out the target class: may be null.
 		// The TransactionAttributeSource should be passed the target class
 		// as well as the method, which may be from an interface
-		Class targetClass = (invocation.getThis() != null) ? invocation.getThis().getClass() : null;
+		Class<?> targetClass = (invocation.getThis() != null) ? invocation.getThis().getClass() : null;
 		final ResourceAttribute attr =
 			getResourceAttributesSource().getResourceAttribute(invocation.getMethod(), targetClass);
 		

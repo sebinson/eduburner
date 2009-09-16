@@ -36,7 +36,7 @@ public abstract class CombinatoricsKnife implements Knife, DictionariesWare {
 
 	protected Dictionary combinatoricsDictionary;
 
-	protected HashSet/* <String> */noiseTable;
+	protected HashSet<String> noiseTable;
 
 	public CombinatoricsKnife() {
 	}
@@ -46,7 +46,7 @@ public abstract class CombinatoricsKnife implements Knife, DictionariesWare {
 	}
 
 	public void setNoiseWords(String[] noiseWords) {
-		noiseTable = new HashSet/* <String> */((int) (noiseWords.length * 1.5));
+		noiseTable = new HashSet<String>((int) (noiseWords.length * 1.5));
 		for (int i = 0; i < noiseWords.length; i++) {
 			noiseTable.add(noiseWords[i]);
 		}

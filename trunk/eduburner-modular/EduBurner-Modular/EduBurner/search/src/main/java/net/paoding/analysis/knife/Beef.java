@@ -31,8 +31,6 @@ package net.paoding.analysis.knife;
  */
 public class Beef implements CharSequence {
 
-	// -------------------------------------------------
-
 	/**
 	 * 文本字符数组
 	 */

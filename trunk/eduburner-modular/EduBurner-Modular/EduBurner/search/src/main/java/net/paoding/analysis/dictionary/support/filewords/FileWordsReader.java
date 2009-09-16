@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
+import net.paoding.analysis.dictionary.Word;
 import net.paoding.analysis.knife.CharSet;
 
 /**
@@ -38,7 +40,7 @@ import net.paoding.analysis.knife.CharSet;
  */
 public class FileWordsReader {
 
-	public static Map/*<String, Set<Word>>*/ readWords(
+	public static Map<String, Set<String>> readWords(
 			String fileOrDirectory, String charsetName) throws IOException {
 		SimpleReadListener l = new SimpleReadListener();
 		readWords(fileOrDirectory, l, charsetName);
