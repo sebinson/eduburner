@@ -5,7 +5,7 @@ import eduburner.crawler.model.CrawlURI;
 
 public interface IFrontier {
 
-	public void initTasks();
+	public void init();
 	
 	//加载需要抓取的url
 	public void loadCrawlURIs(ICrawlURILoader loader);

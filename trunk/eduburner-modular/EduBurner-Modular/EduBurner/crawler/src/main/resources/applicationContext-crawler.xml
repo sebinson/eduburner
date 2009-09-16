@@ -23,6 +23,6 @@
 	    <property name="maxToeThreadSize" value="10" />
 	</bean>
 	
-	<bean id="frontier" class="eduburner.crawler.frontier.WorkQueueFrontier" init-method="initTasks"/>
+	<bean id="frontier" class="eduburner.crawler.frontier.WorkQueueFrontier" init-method="init"/>
 	
 </beans>

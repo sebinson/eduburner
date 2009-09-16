@@ -8,6 +8,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 
 import eduburner.crawler.enumerations.FetchStatusCodes;
+import eduburner.crawler.frontier.WorkQueue;
 import eduburner.crawler.util.UrlUtils;
 
 public class CrawlURI implements Serializable{
@@ -22,6 +23,8 @@ public class CrawlURI implements Serializable{
 	// User agent to masquerade as when crawling this URI. If null, globals
 	// should be used
 	private String userAgent = null;
+	
+	private WorkQueue holder;
 
 	public CrawlURI(String url) {
 		this.url = url;
@@ -38,7 +41,7 @@ public class CrawlURI implements Serializable{
 	 * @return
 	 */
 	public long getMinCrawlInterval() {
-		return 1000*5L;
+		return 1000*10L;
 	}
 	
 	public void clearUp(){
@@ -93,6 +96,14 @@ public class CrawlURI implements Serializable{
 		this.fetchAttempts = fetchAttempts;
 	}
 	
+	public WorkQueue getHolder() {
+		return holder;
+	}
+
+	public void setHolder(WorkQueue holder) {
+		this.holder = holder;
+	}
+
 	@Override
 	public boolean equals(Object o){
 		CrawlURI c = (CrawlURI)o;
