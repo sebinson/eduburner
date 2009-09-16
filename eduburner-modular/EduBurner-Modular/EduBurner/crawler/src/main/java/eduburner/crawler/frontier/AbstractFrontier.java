@@ -54,7 +54,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 			true);
 
 	@Override
-	public void initTasks() {
+	public void init() {
 		outboundCapacity = DEFAULT_OUTBOUND_CAPACITY;
 		inboundCapacity = DEFAULT_INBOUND_CAPACITY;
 		outbound = new ArrayBlockingQueue<CrawlURI>(outboundCapacity, true);

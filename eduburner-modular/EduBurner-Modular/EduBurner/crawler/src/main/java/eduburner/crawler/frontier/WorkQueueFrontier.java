@@ -10,7 +10,6 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +46,16 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	}
 
 	@Override
-	public void initTasks() {
-		super.initTasks();
+	public void init() {
+		super.init();
 		initInternalQueues();
+	}
+
+	protected void initInternalQueues() {
+		allQueues = new MapMaker().makeMap();
+
+		readyClassKeyQueues = new LinkedBlockingQueue<String>();
+		snoozeQueues = new DelayQueue<DelayedWorkQueue>();
 	}
 	
 	@Override
@@ -61,13 +67,6 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		}
 	}
 
-	protected void initInternalQueues() {
-		allQueues = new MapMaker().makeMap();
-
-		readyClassKeyQueues = new LinkedBlockingQueue<String>();
-		snoozeQueues = new DelayQueue<DelayedWorkQueue>();
-	}
-
 	protected WorkQueue getQueueFor(String classKey) {
 		WorkQueue wq = allQueues.get(classKey);
 		if(wq == null){
@@ -77,23 +76,6 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		return wq;
 	}
 
-	/**
-	 * finisehd, add work queue current uri belongs to snooze queue
-	 * 
-	 * @param uri
-	 */
-	protected void processFinish(CrawlURI uri) {
-		long now = System.currentTimeMillis();
-		uri.clearUp();
-		long delay = uri.getMinCrawlInterval();
-		WorkQueue wq = allQueues.get(uri.getClassKey());
-		if (wq != null) {
-			snoozeQueue(wq, now, delay);
-		} else {
-			logger.warn("failed to get workqueue for url: " + uri.getUrl());
-		}
-	}
-
 	private void snoozeQueue(WorkQueue wq, long now, long delay) {
 		long nextTime = now + delay;
 		wq.setWakeTime(nextTime);
@@ -101,12 +83,14 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	}
 
 	private void readyQueue(WorkQueue queue) {
+		logger.debug("add to ready queue: " + queue.getClassKey());
 		queue.setActive(this, true);
 		try {
 			readyClassKeyQueues.put(queue.getClassKey());
 		} catch (InterruptedException e) {
 			logger.warn("failed to add queue " + queue.getClassKey() + " to ready queue");
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -152,7 +136,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 					+ readyQ.classKey + "\n");
 			return null;
 		}
-           
+        curi.setHolder(readyQ);   
         inProcessQueues.add(readyQ);
         readyQ.dequeue(this, curi);
         return curi;
@@ -165,8 +149,9 @@ public class WorkQueueFrontier extends AbstractFrontier {
     	logger.debug("wake queues");
         DelayedWorkQueue waked; 
         while((waked = snoozeQueues.poll())!=null) {
+        	logger.debug("find waked. ");
             WorkQueue queue = waked.getWorkQueue();
-            queue.setWakeTime(System.currentTimeMillis());
+            queue.setWakeTime(0L);
             queue.setActive(this, true);
             readyQueue(queue);
         }
@@ -176,6 +161,27 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	protected int getInProcessCount() {
 		return inProcessQueues.size();
 	}
+	
+	/**
+	 * finisehd, add work queue current uri belongs to snooze queue
+	 * 
+	 * @param uri
+	 */
+	protected void processFinish(CrawlURI uri) {
+		long now = System.currentTimeMillis();
+		uri.clearUp();
+		WorkQueue wq = uri.getHolder();
+		assert (wq.peek(this) == uri) : "unexpected peek " + wq;
+		inProcessQueues.remove(wq);
+		if (wq != null) {
+			logger.debug("enqueue uri to snooze queue: " + uri);
+			long delay = uri.getMinCrawlInterval();
+			wq.enqueue(this, uri);
+			snoozeQueue(wq, now, delay);
+		} else {
+			logger.warn("failed to get workqueue for url: " + uri.getUrl());
+		}
+	}
 
 	@Override
 	protected void processScheduleAlways(CrawlURI curi) {
@@ -184,6 +190,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		sendToQueue(curi);
 	}
 	
+	//send to ready queue
 	protected void sendToQueue(CrawlURI curi) {
 		assert Thread.currentThread() == managerThread;
 		
@@ -209,7 +216,8 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	 */
 	@Override
 	protected void processScheduleIfUnique(CrawlURI caUri) {
-		// TODO Auto-generated method stub
+		assert Thread.currentThread() == managerThread;
+		//TODO: to be implemented
 	}
 
 	@Override
