@@ -17,7 +17,7 @@ import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Multiset;
 
-import eduburner.crawler.ICrawlURILoader;
+import eduburner.crawler.ICrawlURIsLoader;
 import eduburner.crawler.model.CrawlURI;
 
 public class WorkQueueFrontier extends AbstractFrontier {
@@ -53,7 +53,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 	}
 	
 	@Override
-	public void loadCrawlURIs(ICrawlURILoader loader) {
+	public void loadCrawlURIs(ICrawlURIsLoader loader) {
 		logger.debug("begin to load uris");
 		List<CrawlURI> uris = loader.loadCrawlURIs();
 		for(CrawlURI uri : uris){
@@ -170,7 +170,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 		if (wq != null) {
 			logger.debug("enqueue uri to snooze queue: " + uri);
 			long delay = uri.getMinCrawlInterval();
-			wq.enqueue(this, uri);
+			//wq.enqueue(this, uri);
 			snoozeQueue(wq, now, delay);
 		} else {
 			logger.warn("failed to get workqueue for url: " + uri.getUrl());
@@ -202,16 +202,6 @@ public class WorkQueueFrontier extends AbstractFrontier {
         if(((laq==null) || wq.getCount() > laq.getCount())) {
             longestActiveQueue = wq; 
         }
-	}
-
-	/**
-	 * Arrange for the given CrawlURI to be visited, if it is not
-     * already scheduled/completed.
-	 */
-	@Override
-	protected void processScheduleIfUnique(CrawlURI caUri) {
-		assert Thread.currentThread() == managerThread;
-		//TODO: to be implemented
 	}
 
 	@Override
