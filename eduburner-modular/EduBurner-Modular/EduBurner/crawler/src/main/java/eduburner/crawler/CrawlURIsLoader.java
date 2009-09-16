@@ -9,7 +9,7 @@ import org.testng.v6.Lists;
 import eduburner.crawler.model.CrawlURI;
 
 @Component("crawlURILoader")
-public class CrawlURILoader implements ICrawlURILoader {
+public class CrawlURIsLoader implements ICrawlURIsLoader {
 
 	@Override
 	public List<CrawlURI> loadCrawlURIs() {

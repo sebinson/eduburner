@@ -17,6 +17,7 @@ import com.google.common.collect.Lists;
 import eduburner.crawler.enumerations.CrawlStatus;
 import eduburner.crawler.event.CrawlStateEvent;
 import eduburner.crawler.frontier.IFrontier;
+import eduburner.crawler.model.CrawlURI;
 import eduburner.crawler.processor.IProcessor;
 
 public class Crawler implements ICrawler, ApplicationContextAware {
@@ -37,7 +38,7 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 	
 	@Autowired
 	@Qualifier("crawlURILoader")
-	private ICrawlURILoader crawlURILoader;
+	private ICrawlURIsLoader crawlURILoader;
 
 	/**
      * Crawl exit status.
@@ -128,11 +129,18 @@ public class Crawler implements ICrawler, ApplicationContextAware {
 	public void setMaxToeThreadSize(int maxToeThreadSize) {
 		this.maxToeThreadSize = maxToeThreadSize;
 	}
+	
+	@Override
+	public void schedule(CrawlURI uri) {
+		crawlFrontier.schedule(uri);
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		appCtx = applicationContext;
 	}
+
+
 
 }

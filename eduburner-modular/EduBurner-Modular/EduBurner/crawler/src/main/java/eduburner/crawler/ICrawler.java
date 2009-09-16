@@ -4,6 +4,7 @@ import java.util.List;
 
 import eduburner.crawler.enumerations.CrawlStatus;
 import eduburner.crawler.frontier.IFrontier;
+import eduburner.crawler.model.CrawlURI;
 import eduburner.crawler.processor.IProcessor;
 
 public interface ICrawler {
@@ -23,5 +24,7 @@ public interface ICrawler {
 	public IFrontier getFrontier();
 
 	public void requestCrawlStop(CrawlStatus message);
+	
+	public void schedule(CrawlURI uri);
 
 }

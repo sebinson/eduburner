@@ -212,7 +212,7 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	 * @see org.archive.crawler.framework.Frontier#schedule(org.archive.crawler.datamodel.CrawlURI)
 	 */
 	public void schedule(CrawlURI caUri) {
-		enqueueOrDo(new ScheduleIfUnique(caUri));
+		enqueueOrDo(new ScheduleAlways(caUri));
 	}
 
 	/**
@@ -331,14 +331,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 	 */
 	abstract protected void processScheduleAlways(CrawlURI caUri);
 
-	/**
-	 * Schedule the given CrawlURI if not already-seen. Only to be called inside
-	 * the managerThread, as by an InEvent.
-	 * 
-	 * @param caUri
-	 *            CrawlURI to schedule
-	 */
-	abstract protected void processScheduleIfUnique(CrawlURI caUri);
 
 	/**
 	 * Handle the given CrawlURI as having finished a worker ToeThread
@@ -389,22 +381,6 @@ public abstract class AbstractFrontier implements IFrontier, Serializable {
 
 		public void process() {
 			processScheduleAlways(caUri);
-		}
-	}
-
-	/**
-	 * A CrawlURI to be scheduled by the managerThread if it has not been
-	 * already-seen. (That is, if it passes the UriUniqFilter.)
-	 */
-	public class ScheduleIfUnique extends InEvent {
-		CrawlURI caUri;
-
-		public ScheduleIfUnique(CrawlURI c) {
-			this.caUri = c;
-		}
-
-		public void process() {
-			processScheduleIfUnique(caUri);
 		}
 	}
 
