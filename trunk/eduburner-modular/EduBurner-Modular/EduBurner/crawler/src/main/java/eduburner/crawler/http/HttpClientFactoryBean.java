@@ -15,10 +15,8 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component("httpClient")
 public class HttpClientFactoryBean implements FactoryBean<HttpClient>,
 		InitializingBean {
 
