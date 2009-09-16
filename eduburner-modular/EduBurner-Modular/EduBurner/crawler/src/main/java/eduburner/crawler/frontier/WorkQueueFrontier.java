@@ -20,12 +20,6 @@ import com.google.common.collect.Multiset;
 import eduburner.crawler.ICrawlURILoader;
 import eduburner.crawler.model.CrawlURI;
 
-/**
- * A common Frontier base using several queues to hold pending URIs.
- * 
- * Uses in-memory map of all known 'queues' inside a single database.
- * Round-robins between all queues.
- */
 public class WorkQueueFrontier extends AbstractFrontier {
 
 	private static final long serialVersionUID = 5723257498212526250L;
@@ -226,8 +220,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
         return next == null ? 60000 : next.getDelay(TimeUnit.MILLISECONDS);
 	}
 
-	@SuppressWarnings("unchecked")
-	private class DelayedWorkQueue implements Delayed, Serializable {
+	class DelayedWorkQueue implements Delayed, Serializable {
 
 		private static final long serialVersionUID = -6415390806576526923L;
 		/**
@@ -274,6 +267,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		public WorkQueue getWorkQueue() {
 			if (workQueue == null) {
 				// This is a recently deserialized DelayedWorkQueue instance
@@ -282,7 +276,7 @@ public class WorkQueueFrontier extends AbstractFrontier {
 				return result;
 			}
 			if (workQueue instanceof SoftReference) {
-				SoftReference<WorkQueue> ref = (SoftReference) workQueue;
+				SoftReference<WorkQueue> ref = (SoftReference<WorkQueue>) workQueue;
 				WorkQueue result = ref.get();
 				if (result == null) {
 					result = getQueueFor(classKey);
