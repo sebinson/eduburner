@@ -2,7 +2,7 @@ package eduburner.crawler.event;
 
 import org.springframework.context.ApplicationEvent;
 
-import eduburner.crawler.Crawler.State;
+import eduburner.crawler.DefaultCrawler.State;
 
 public class CrawlStateEvent extends ApplicationEvent {
     private static final long serialVersionUID = 1L;
