@@ -22,7 +22,7 @@ public class CrawlURI implements Serializable{
 	private int fetchAttempts = 0; // the number of fetch attempts that have been made
 	// User agent to masquerade as when crawling this URI. If null, globals
 	// should be used
-	private String userAgent = null;
+	private String userAgent = StringUtils.EMPTY;
 	
 	private WorkQueue holder;
 
