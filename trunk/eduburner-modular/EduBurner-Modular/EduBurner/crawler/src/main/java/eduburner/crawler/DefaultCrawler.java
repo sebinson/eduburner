@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 
 import eduburner.crawler.enumerations.CrawlStatus;
 import eduburner.crawler.event.CrawlStateEvent;
-import eduburner.crawler.frontier.IFrontier;
+import eduburner.crawler.frontier.Frontier;
 import eduburner.crawler.model.CrawlURI;
 import eduburner.crawler.processor.IProcessor;
 
@@ -34,11 +34,11 @@ public class DefaultCrawler implements Crawler, ApplicationContextAware {
 	
 	@Autowired
 	@Qualifier("frontier")
-	private IFrontier crawlFrontier;
+	private Frontier crawlFrontier;
 	
 	@Autowired
 	@Qualifier("crawlURILoader")
-	private ICrawlURIsLoader crawlURILoader;
+	private InitialCrawlURIsLoader crawlURILoader;
 
 	/**
      * Crawl exit status.
@@ -63,7 +63,7 @@ public class DefaultCrawler implements Crawler, ApplicationContextAware {
 		crawlFrontier.loadCrawlURIs(crawlURILoader);
 		setUpToePool();
 		state = State.RUNNING;
-		crawlFrontier.requestState(IFrontier.State.RUN);
+		crawlFrontier.requestState(Frontier.State.RUN);
 		sendCrawlStateChangeEvent(this.state, CrawlStatus.RUNNING);
 	}
 
@@ -89,7 +89,7 @@ public class DefaultCrawler implements Crawler, ApplicationContextAware {
 	private void beginCrawlStop() {
         logger.debug("Started.");
         sendCrawlStateChangeEvent(State.STOPPING, this.sExit);
-        IFrontier frontier = getFrontier();
+        Frontier frontier = getFrontier();
         if (frontier != null) {
             frontier.terminate();
         }
@@ -109,12 +109,12 @@ public class DefaultCrawler implements Crawler, ApplicationContextAware {
 
 	private void setUpToePool() {
 		for (int i = 0; i < maxToeThreadSize; i++) {
-			toeThreadPool.execute(new ToeThread(this));
+			toeThreadPool.execute(new CrawlWorker(this));
 		}
 	}
 
 	@Override
-	public IFrontier getFrontier() {
+	public Frontier getFrontier() {
 		return crawlFrontier;
 	}
 
