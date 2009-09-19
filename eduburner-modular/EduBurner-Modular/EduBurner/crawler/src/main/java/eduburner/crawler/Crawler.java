@@ -3,7 +3,7 @@ package eduburner.crawler;
 import java.util.List;
 
 import eduburner.crawler.enumerations.CrawlStatus;
-import eduburner.crawler.frontier.IFrontier;
+import eduburner.crawler.frontier.Frontier;
 import eduburner.crawler.model.CrawlURI;
 import eduburner.crawler.processor.IProcessor;
 
@@ -21,7 +21,7 @@ public interface Crawler {
 
 	public List<IProcessor> getProcessors();
 
-	public IFrontier getFrontier();
+	public Frontier getFrontier();
 
 	public void requestCrawlStop(CrawlStatus message);
 	

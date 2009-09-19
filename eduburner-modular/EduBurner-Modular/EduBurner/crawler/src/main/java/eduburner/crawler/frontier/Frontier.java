@@ -1,14 +1,14 @@
 package eduburner.crawler.frontier;
 
-import eduburner.crawler.ICrawlURIsLoader;
+import eduburner.crawler.InitialCrawlURIsLoader;
 import eduburner.crawler.model.CrawlURI;
 
-public interface IFrontier {
+public interface Frontier {
 
 	public void init();
 	
 	//加载需要抓取的url
-	public void loadCrawlURIs(ICrawlURIsLoader loader);
+	public void loadCrawlURIs(InitialCrawlURIsLoader loader);
 	
 	public CrawlURI next() throws InterruptedException;
 	

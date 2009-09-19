@@ -20,7 +20,7 @@ import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Multiset;
 
-import eduburner.crawler.ICrawlURIsLoader;
+import eduburner.crawler.InitialCrawlURIsLoader;
 import eduburner.crawler.model.CrawlURI;
 
 public class WorkQueueFrontier extends AbstractFrontier implements ApplicationContextAware{
@@ -58,7 +58,7 @@ public class WorkQueueFrontier extends AbstractFrontier implements ApplicationCo
 	}
 	
 	@Override
-	public void loadCrawlURIs(ICrawlURIsLoader loader) {
+	public void loadCrawlURIs(InitialCrawlURIsLoader loader) {
 		logger.debug("begin to load uris");
 		List<CrawlURI> uris = loader.loadCrawlURIs();
 		for(CrawlURI uri : uris){

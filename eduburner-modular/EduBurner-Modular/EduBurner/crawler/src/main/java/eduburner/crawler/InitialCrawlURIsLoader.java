@@ -4,7 +4,7 @@ import java.util.List;
 
 import eduburner.crawler.model.CrawlURI;
 
-public interface ICrawlURIsLoader {
+public interface InitialCrawlURIsLoader {
 	
 	public List<CrawlURI> loadCrawlURIs();
 }

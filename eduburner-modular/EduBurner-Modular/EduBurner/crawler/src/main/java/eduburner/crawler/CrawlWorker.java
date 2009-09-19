@@ -12,10 +12,10 @@ import eduburner.crawler.model.CrawlURI;
 import eduburner.crawler.processor.IPostProcessor;
 import eduburner.crawler.processor.IProcessor;
 
-public class ToeThread extends Thread {
+public class CrawlWorker extends Thread {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(ToeThread.class);
+			.getLogger(CrawlWorker.class);
 
 	private static final String STEP_NASCENT = "NASCENT";
 	private static final String STEP_ABOUT_TO_GET_URI = "ABOUT_TO_GET_URI";
@@ -39,7 +39,7 @@ public class ToeThread extends Thread {
 	// count; it should wrap up cleanly
 	private volatile boolean shouldRetire = false;
 
-	public ToeThread(Crawler crawlController) {
+	public CrawlWorker(Crawler crawlController) {
 		this.crawlController = crawlController;
 		lastFinishTime = System.currentTimeMillis();
 	}

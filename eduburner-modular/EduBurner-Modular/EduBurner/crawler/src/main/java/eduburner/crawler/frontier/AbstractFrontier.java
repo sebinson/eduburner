@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import eduburner.crawler.model.CrawlURI;
 
-public abstract class AbstractFrontier implements IFrontier, Serializable {
+public abstract class AbstractFrontier implements Frontier, Serializable {
 
 	private static final long serialVersionUID = -8091508743170194678L;
 
