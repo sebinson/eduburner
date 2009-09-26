@@ -84,13 +84,6 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.0</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>1.6</version>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -377,7 +370,7 @@
 		<hibernate-validator.version>
 			3.1.0.GA
 		</hibernate-validator.version>
-		<lucene.version>2.9</lucene.version>
+		<lucene.version>2.9.0</lucene.version>
 		<spring.version>3.0.0.RC1</spring.version>
 		<spring.security.version>2.0.4</spring.security.version>
 
