@@ -68,6 +68,18 @@
 		</property>
 	</bean>
 	
+	<!-- Invokes Spring MVC @Controller methods -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	    <property name="webBindingInitializer">
+	        <!-- Configures Spring MVC DataBinder instances -->
+	        <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+	            <property name="validator" ref="validator" />
+	        </bean>
+	    </property>
+	</bean>
+	<!-- Creates the JSR-303 Validator -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
 	<import resource="classpath:applicationContext-hibernate.xml" />
 	<import resource="classpath:applicationContext-security.xml" />
 	<import resource="classpath:applicationContext-search.xml" />

@@ -12,8 +12,8 @@
         http://www.springframework.org/schema/context/spring-context-2.5.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
-
-    <bean id="fsDirectory" class="org.springmodules.lucene.index.support.FSDirectoryFactoryBean">
+	
+    <bean id="fsDirectory" class="eduburner.search.index.support.FSDirectoryFactoryBean">
     	<property name="location" value="file:///d:/lucene-index/entry"/>
     </bean>
     
@@ -23,7 +23,6 @@
             <bean class="org.apache.lucene.analysis.SimpleAnalyzer"/>
         </property>
 	</bean>
-
 	<!-- indexes 
 	<bean id="targetIndexFactory" class="org.springmodules.lucene.index.support.SimpleIndexFactoryBean">
         <property name="directory" ref="fsDirectory"/>
