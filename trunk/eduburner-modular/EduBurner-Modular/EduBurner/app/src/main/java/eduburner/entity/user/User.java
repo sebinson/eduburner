@@ -16,14 +16,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.NotNull;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
@@ -61,7 +61,7 @@ public class User extends EntityObject implements UserDetails {
 	private boolean credentialsExpired = false;
 
 	@NotNull(message = "用户名不能为空！")
-	@Length(min = 3, max = 16, message = "用户名最少 {min}, 最大 {max} 个字符")
+	@Size(min = 3, max = 16, message = "用户名最少 {min}, 最大 {max} 个字符")
 	@Column(name = "username", length = 50, unique = true, nullable = false)
 	public String getUsername() {
 		return username;

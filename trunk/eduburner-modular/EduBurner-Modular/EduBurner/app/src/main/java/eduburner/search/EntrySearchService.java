@@ -26,9 +26,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
-import org.springmodules.lucene.index.LuceneIndexAccessException;
 
 import eduburner.entity.Entry;
+import eduburner.search.index.LuceneIndexAccessException;
 
 public class EntrySearchService implements IEntrySearchService, InitializingBean{
 
@@ -93,7 +93,7 @@ public class EntrySearchService implements IEntrySearchService, InitializingBean
 			
 			checkIndexLocking();
 			IndexReader reader = IndexReader.open(directory, false);
-
+			
 			for (Entry entry : entries) {
 
 				reader.deleteDocuments(new Term(SearchConstants.FIELD_ENTRY_ID,

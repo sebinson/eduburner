@@ -17,7 +17,6 @@ import eduburner.entity.course.Course;
 import eduburner.entity.user.UserData;
 import eduburner.enumerations.Message;
 import eduburner.service.course.ICourseManager;
-import eduburner.validation.CourseValidator;
 import eduburner.web.controller.BaseController;
 
 @Controller
@@ -64,7 +63,7 @@ public class CourseController extends BaseController {
 			BindingResult br, Model model) {
 		logger.debug("entering create method...");
 		// TODO: check permission
-		new CourseValidator().validate(course, br);
+		
 		if (br.hasErrors()) {
 			setReturnMsg(model, Message.ERROR);
 			return JSON_VIEW;
