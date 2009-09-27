@@ -15,9 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.validator.Length;
-import org.hibernate.validator.NotNull;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -75,7 +74,7 @@ public class Course extends EntityObject {
 	private String tagsAsString;
 
 	@NotNull(message = "课程名不能为空！")
-	@Length(min = 3, message = "课程名最少 {min}个字符")
+	@Size(min = 3, message = "课程名最少 {min}个字符")
 	public String getTitle() {
 		return title;
 	}
