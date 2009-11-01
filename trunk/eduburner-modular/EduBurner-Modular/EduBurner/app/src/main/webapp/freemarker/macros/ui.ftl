@@ -353,3 +353,22 @@
 	</#if>
   </div>
 </#macro>
+
+<#macro courseMemberListView users=[]>
+	<div class="grid-view">
+  	<#if (users?size > 0)>
+	    <#list users as u>
+	       <div class="single-item">
+	       		<div class="picture">
+	       			<a href="/users/${u.username}"><img style="width:75px;height:75px;" src="${u.profilePicture}" /></a>
+	       		</div>
+	       		<div class="name">
+	       		    <a href="/users/${u.username}">${u.username}</a>
+	       		</div>
+	       </div>
+	    </#list>
+	<#else>
+		<div class="info" style="margin-top:30px;">当前没有成员</div>
+	</#if>
+  </div>
+</#macro>
