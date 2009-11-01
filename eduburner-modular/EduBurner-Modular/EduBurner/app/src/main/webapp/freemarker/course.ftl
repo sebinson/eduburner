@@ -21,7 +21,7 @@
 		        </div>
 		        
 		        <div id="course-member" style="margin-top:10px;">
-		        	<@ui.userListView course.members/>
+		        	<@ui.courseMemberListView course.members/>
 		        </div>
 		        
 		        <div id="course-resource" style="margin-top:10px;" >
