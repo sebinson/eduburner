@@ -67,29 +67,10 @@
 		};
 		
 		function initRemove(entryId, $entryEl){
-			var removeDlg = new YAHOO.widget.SimpleDialog("removeDlg",  
-	             { width: "300px", 
-	               fixedcenter: true, 
-	               visible: false, 
-	               draggable: false, 
-	               close: true, 
-	               text: "确定要删除吗?", 
-	               icon: YAHOO.widget.SimpleDialog.ICON_HELP, 
-	               constraintoviewport: true, 
-	               buttons: [ { text:"Yes", handler:handleYes, isDefault:true }, 
-	                          { text:"No",  handler:handleNo } ] 
-	             } );
-			removeDlg.render('remove-dlg-container');
-			removeDlg.setHeader('删除确认');
-			function handleYes(){
-				this.hide();
-			};
-			
-			function handleNo(){
-				this.hide();
-			};
 			$entryEl.find('.remove').bind('click', function(e){
-				removeDlg.show();
+				e.preventDefault();
+				var c = confirm('确定要删除吗？');
+				
 			});
 		};
 		
