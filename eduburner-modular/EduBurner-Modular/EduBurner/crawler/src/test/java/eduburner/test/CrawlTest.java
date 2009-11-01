@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.support.GenericXmlContextLoader;
 
-import eduburner.crawler.ICrawler;
+import eduburner.crawler.Crawler;
 
 public class CrawlTest {
 
@@ -12,7 +12,7 @@ public class CrawlTest {
 		ContextLoader loader = new GenericXmlContextLoader();
 		ApplicationContext ctx = loader.loadContext(getConfigLocations());
 		
-		ICrawler crawler = (ICrawler)ctx.getBean("crawler");
+		Crawler crawler = (Crawler)ctx.getBean("crawler");
 		
 		crawler.requestCrawlStart();
 		
