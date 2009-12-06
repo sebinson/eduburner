@@ -1,13 +1,16 @@
 package torch.analysis.algorithm;
 
+import com.google.common.collect.AbstractIterator;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import torch.analysis.model.Chunk;
 import torch.analysis.model.Dictionary;
 import torch.analysis.model.Word;
 import torch.analysis.rule.IRule;
+import torch.util.LanguageUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,28 +38,21 @@ public abstract class AbstractAlgorithm {
 
     protected int index = 0;
 
-    public Word next(char[] chars) {
+    public Iterable<Word> segment(final char[] chars) {
+        final Iterator<Word> iter = new WordIterator(AbstractAlgorithm.this, chars);
+        return new Iterable<Word>(){
+            @Override
+            public Iterator<Word> iterator() {
+                 return iter;
+            }
+        };
 
-        if (index >= chars.length) {
-            index = 0;
-            return null;
-        }
-        char current = chars[index];
-        if (isBasicLatin(current)) {
-            Word word = getBasicLatinWord(chars, index);
-            index += word.getLength();
-            return word;
-        } else {
-            Chunk[] chunks = createChunks(chars, index);
-            Word word = getCJKWord(chunks);
-            index += word.getLength();
-            return word;
-        }
+
     }
 
     protected Word getBasicLatinWord(char[] chars, int index) {
         StringBuffer basicLatinWord = new StringBuffer();
-        while ((index < chars.length) && isBasicLatin(chars[index])) {
+        while ((index < chars.length) && LanguageUtil.isBasicLatin(chars[index])) {
             if (Character.isWhitespace(chars[index])) {
                 if (basicLatinWord.length() == 0) {
                     basicLatinWord.append(chars[index]);
@@ -92,7 +88,7 @@ public abstract class AbstractAlgorithm {
         }
 
         for (int i = 1; i < maxWordLength && ((i + index) < chars.length); i++) {
-            if (isBasicLatin(chars[i + index]))
+            if (LanguageUtil.isBasicLatin(chars[i + index]))
                 break;
             sb.append(chars[i + index]);
             String temp = sb.toString();
@@ -130,7 +126,37 @@ public abstract class AbstractAlgorithm {
         return chunk.getWords()[0];
     }
 
-    private boolean isBasicLatin(char c) {
-        return Character.UnicodeBlock.of(c) == Character.UnicodeBlock.BASIC_LATIN;
+
+    private class WordIterator extends AbstractIterator<Word>{
+
+        private AbstractAlgorithm algorithm;
+        private char[] chars;
+
+        public WordIterator(AbstractAlgorithm algorithm, char[] chars){
+            this.algorithm = algorithm;
+            this.chars = chars;
+        }
+
+        @Override
+        protected Word computeNext() {
+            if (index >= chars.length) {
+                index = 0;
+                return endOfData();
+            }
+            char current = chars[index];
+            if (LanguageUtil.isBasicLatin(current)) {
+                Word word = getBasicLatinWord(chars, index);
+                index += word.getLength();
+                return word;
+            } else {
+                Chunk[] chunks = createChunks(chars, index);
+                Word word = getCJKWord(chunks);
+                index += word.getLength();
+                return word;
+            }
+
+        }
     }
+
+    
 }

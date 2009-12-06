@@ -1,5 +1,8 @@
 package torch.analysis.test;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import org.testng.annotations.Test;
 
 import torch.analysis.SegmentModule;
@@ -26,11 +29,11 @@ public class SimpleSegTest {
 
         String content = "研究生命起源";
 
-        Word word = sa.next(content.toCharArray());
-        System.out.println("word: " + word);
-        while(word != null){
-            word = sa.next(content.toCharArray());
-            System.out.println("word: " + word);
+        Iterable<Word> iter = sa.segment(content.toCharArray());
+
+        for(Word w : iter){
+            System.out.println("word: " + w);
         }
+
     }
 }
