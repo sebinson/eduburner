@@ -1,21 +1,32 @@
 package eduburner.test.misc;
 
-import org.hibernate.validator.InvalidValue;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.testng.annotations.Test;
 
 import eduburner.entity.user.User;
-import eduburner.validation.AnnotationValidator;
+import eduburner.test.service.BaseServiceTestSupport;
 
-public class TestValidator{
+public class TestValidator extends BaseServiceTestSupport{
 	
+	@Autowired
+	@Qualifier("validator")
+	private Validator validator;
+
+	
+	@Test
 	public void testValidator(){
 		User user = new User();
 		user.setUsername("a");
 		user.setPassword(null);
-		InvalidValue[] invalidValues = AnnotationValidator.UserValidator.getInvalidValues(user);
-		System.out.println("iv length: " + invalidValues.length);
-		for(InvalidValue iv : invalidValues){
-			System.out.println(iv.getMessage());
-		}
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		System.out.println("size: " + violations.size());
 	}
 
 }
