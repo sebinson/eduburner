@@ -16,12 +16,12 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.collect.ForwardingObject;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import com.google.common.collect.ForwardingObject;
 
 /**
  * A {@link java.util.concurrent.Future} which forwards all its method calls to another future.
