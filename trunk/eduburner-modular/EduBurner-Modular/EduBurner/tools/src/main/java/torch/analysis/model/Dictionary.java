@@ -1,8 +1,13 @@
 package torch.analysis.model;
 
-import analysis.Config;
-import analysis.SegmentModule;
-import analysis.model.Word;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Map;
+
+import torch.analysis.Config;
+import torch.analysis.SegmentModule;
+
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
@@ -11,11 +16,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Map;
 
 public class Dictionary {
     

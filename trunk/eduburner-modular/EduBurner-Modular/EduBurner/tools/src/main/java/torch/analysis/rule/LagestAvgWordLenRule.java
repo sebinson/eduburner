@@ -1,10 +1,10 @@
 package torch.analysis.rule;
 
-import analysis.model.Chunk;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import torch.analysis.model.Chunk;
 
 /**
  * Created by IntelliJ IDEA.

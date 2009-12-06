@@ -1,7 +1,7 @@
 package torch.analysis.algorithm;
 
-import analysis.model.Chunk;
-import analysis.model.Word;
+import torch.analysis.model.Chunk;
+import torch.analysis.model.Word;
 
 /**
  * Created by IntelliJ IDEA.

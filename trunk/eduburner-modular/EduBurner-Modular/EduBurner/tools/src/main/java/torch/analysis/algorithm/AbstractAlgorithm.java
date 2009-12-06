@@ -1,15 +1,16 @@
 package torch.analysis.algorithm;
 
-import analysis.*;
-import analysis.model.Chunk;
-import analysis.model.Dictionary;
-import analysis.model.Word;
-import analysis.rule.*;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import torch.analysis.Config;
+import torch.analysis.model.Chunk;
+import torch.analysis.model.Dictionary;
+import torch.analysis.model.Word;
+import torch.analysis.rule.IRule;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Created by IntelliJ IDEA.
