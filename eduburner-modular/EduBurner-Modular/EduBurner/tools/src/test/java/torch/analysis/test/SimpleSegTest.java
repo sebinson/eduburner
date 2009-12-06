@@ -1,7 +1,5 @@
 package torch.analysis.test;
 
-import org.testng.annotations.Test;
-
 import torch.analysis.SegmentModule;
 import torch.analysis.algorithm.ComplexAlgorithm;
 import torch.analysis.model.Word;
@@ -17,14 +15,14 @@ import com.google.inject.Injector;
  */
 public class SimpleSegTest {
 
-    @Test
+    @org.junit.Test
     public void testSimpleSeg(){
 
         Injector injector = Guice.createInjector(new SegmentModule());
 
         ComplexAlgorithm sa = injector.getInstance(ComplexAlgorithm.class);
 
-        String content = "研究生命起源";
+        String content = "很久以前，有一片江湖，有位黑老大，他负责专门制定江湖游戏规则，所有的手下都必须遵守。老大一般不亲自出面，所有打打杀杀、抢钱掠物的事情都是手下那些小弟们干。不过，所得利益绝大多数是要上缴到老大手里，小弟们只能分点残羹冷炙";
 
         Iterable<Word> iter = sa.segment(content.toCharArray());
 

@@ -22,6 +22,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -29,6 +30,7 @@ import org.springframework.util.Assert;
 
 import eduburner.entity.Entry;
 import eduburner.search.index.LuceneIndexAccessException;
+import torch.util.StringUtil;
 
 public class EntrySearchService implements IEntrySearchService, InitializingBean{
 
@@ -52,6 +54,7 @@ public class EntrySearchService implements IEntrySearchService, InitializingBean
 		if(!exist){
 			createIndex();
 		}
+
 		refreshSearcher();
 	}
 	
@@ -171,7 +174,7 @@ public class EntrySearchService implements IEntrySearchService, InitializingBean
 	}
 	
 	private QueryParser getQueryParser(){
-		QueryParser parser = new MultiFieldQueryParser(new String[]{
+		QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_CURRENT, new String[]{
 			SearchConstants.FIELD_ENTRY_ID, SearchConstants.FIELD_ENTRY_TITLE
 		}, analyzer);
 		
