@@ -2837,7 +2837,7 @@ public class StringUtil {
     }
 
     public static boolean isChineseText(String summary){
-        String txtSummary = HtmlToText.htmlToPlainText(summary);
+        String txtSummary = HtmlUtil.htmlToPlainText(summary);
         int length = txtSummary.length();
         int cnCount = 0;
         for(int i=0; i<length; i++){
