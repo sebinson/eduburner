@@ -16,7 +16,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.base.Function;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.lang.reflect.UndeclaredThrowableException;
@@ -28,7 +27,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.annotation.Nullable;
+import com.google.common.base.Function;
+import com.google.inject.internal.Nullable;
 
 /**
  * Static utility methods pertaining to the {@link java.util.concurrent.Future} interface.

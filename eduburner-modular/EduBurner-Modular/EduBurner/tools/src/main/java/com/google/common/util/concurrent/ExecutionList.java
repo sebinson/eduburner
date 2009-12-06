@@ -16,13 +16,13 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * <p>A list of ({@code Runnable}, {@code Executor}) pairs that guarantees

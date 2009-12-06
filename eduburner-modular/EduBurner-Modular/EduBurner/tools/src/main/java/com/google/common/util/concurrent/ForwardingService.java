@@ -16,13 +16,13 @@
 
 package com.google.common.util.concurrent;
 
+import java.util.concurrent.Future;
+
 import com.google.common.base.Service;
 import com.google.common.collect.ForwardingObject;
 
-import java.util.concurrent.Future;
-
 /**
- * A {@link com.google.common.base.Service} that forwards all method calls to another service.
+ * A {@link Service} that forwards all method calls to another service.
  *
  * @author Chris Nokleberg
  * @since 9.09.15 <b>tentative</b>

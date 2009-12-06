@@ -16,9 +16,9 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.base.Preconditions;
-
 import java.util.concurrent.ThreadFactory;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Wraps another {@link java.util.concurrent.ThreadFactory}, making all new threads daemon threads.
