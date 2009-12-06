@@ -9,14 +9,14 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpringBeanUtils implements ApplicationContextAware {
+public class SpringBeanUtil implements ApplicationContextAware {
 	private static ApplicationContext applicationContext; // Spring Context
 
-	private static Logger logger = LoggerFactory.getLogger(SpringBeanUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(SpringBeanUtil.class);
 
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
-		SpringBeanUtils.applicationContext = applicationContext;
+		SpringBeanUtil.applicationContext = applicationContext;
 	}
 
 	/**

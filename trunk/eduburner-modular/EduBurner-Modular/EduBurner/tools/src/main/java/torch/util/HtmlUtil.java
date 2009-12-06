@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  *
  *
  */
-public final class HtmlToText {
+public final class HtmlUtil {
 
   /**
    * Regular expression to match html line breaks or paragraph tags
@@ -28,9 +28,9 @@ public final class HtmlToText {
   public static final int EMAIL_LINE_WIDTH_MAX = 72;
 
   // This class should not be instantiated, hence the private constructor
-  private HtmlToText() {}
+  private HtmlUtil() {}
 
-  /**
+    /**
    * Convert provided html string to plain text preserving the formatting
    * as much as possible. Ensure line wrapping to 72 chars as default.
    * NOTE: add support for more HTML tags here.

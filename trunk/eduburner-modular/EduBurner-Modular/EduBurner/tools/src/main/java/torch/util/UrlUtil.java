@@ -1,6 +1,6 @@
 package torch.util;
 
-public class UrlUtils {
+public class UrlUtil {
 
 	public static String getHostFromUrl(String url) {
 		return url.replaceFirst("^https*\\://", "")
