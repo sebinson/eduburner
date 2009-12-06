@@ -50,14 +50,14 @@ public class Dictionary {
                 if (word.indexOf("#") == -1) {
 					if (word.indexOf(" ") == -1) {
 						if (word.length() <= maxWordLength) {
-                            map.put(word, new Word(word, Word.CJK_WORD));
+                            map.put(word, new Word(word, Word.Type.CJK_WORD));
 						}
 					} else {
 						String value = word.substring(0, word.indexOf(" "));
 						if (value.length() <= maxWordLength) {
 							int frequency = Integer.parseInt(word
 									.substring(word.indexOf(" ") + 1,word.lastIndexOf(" ")));
-                            map.put(word, new Word(word, frequency, Word.CJK_WORD));
+                            map.put(word, new Word(word, Word.Type.CJK_WORD, frequency));
 						}
 					}
 				}
@@ -74,12 +74,12 @@ public class Dictionary {
         return map.containsKey(value);
     }
 
-    public void addWord(String value, int type) {
+    public void addWord(String value, Word.Type type) {
         map.put(value, new Word(value, type));
     }
 
-    public void addWord(String value, int frequency, int type) {
-        map.put(value, new Word(value, frequency, type));
+    public void addWord(String value, int frequency, Word.Type type) {
+        map.put(value, new Word(value, type, frequency));
     }
 
     public Word getWord(String value) {
@@ -96,8 +96,6 @@ public class Dictionary {
     }
 
     public static void main(String... args) throws IOException {
-        File f = new File("E:\\mmseg-v0.3\\MMSeg\\wordlist\\words.lex");
-
         /*String s = "a b";
         Iterables.all(Splitter.on(" ").split(s),new Predicate<String>(){
             @Override
@@ -108,9 +106,7 @@ public class Dictionary {
         });*/
 
         Injector injector = Guice.createInjector(new SegmentModule());
-
         Dictionary dict = injector.getInstance(Dictionary.class);
-
         System.out.println("dict length: " + dict.getLength());
     }
 }

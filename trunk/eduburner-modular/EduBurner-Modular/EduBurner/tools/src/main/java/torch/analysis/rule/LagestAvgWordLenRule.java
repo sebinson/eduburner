@@ -1,10 +1,11 @@
 package torch.analysis.rule;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import torch.analysis.model.Chunk;
+
+import com.google.common.collect.Lists;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +30,7 @@ public class LagestAvgWordLenRule implements IRule {
 		double largestAverageLength = orderedChunks[index].getChunk()
 				.getAverageLength();
 
-		List list = new ArrayList(1);
+		List list = Lists.newArrayList();
 		list.add(orderedChunks[index].getChunk());
 
 		index++;

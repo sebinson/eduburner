@@ -1,8 +1,5 @@
 package torch.analysis.test;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import org.testng.annotations.Test;
 
 import torch.analysis.SegmentModule;

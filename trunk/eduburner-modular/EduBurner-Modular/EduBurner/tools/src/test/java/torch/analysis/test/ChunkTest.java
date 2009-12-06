@@ -16,11 +16,11 @@ public class ChunkTest {
 
     @Test
     public final void testGetAverageLength() {
-        Word word1 = new Word("国际化", Word.CJK_WORD);
-        Word word2 = new Word("国际", Word.CJK_WORD);
-        Word word3 = new Word("国", Word.CJK_WORD);
-        Word word4 = new Word("际", Word.CJK_WORD);
-        Word word5 = new Word("化", Word.CJK_WORD);
+        Word word1 = new Word("国际化", Word.Type.CJK_WORD);
+        Word word2 = new Word("国际", Word.Type.CJK_WORD);
+        Word word3 = new Word("国", Word.Type.CJK_WORD);
+        Word word4 = new Word("际", Word.Type.CJK_WORD);
+        Word word5 = new Word("化", Word.Type.CJK_WORD);
 
         Chunk chunk1 = new Chunk(new Word[]{word1});
         Chunk chunk2 = new Chunk(new Word[]{word2, word5});
@@ -33,11 +33,11 @@ public class ChunkTest {
 
     @Test
     public final void testGetVariance() {
-        Word word1 = new Word("研究", Word.CJK_WORD);
-        Word word2 = new Word("生命", Word.CJK_WORD);
-        Word word3 = new Word("起源", Word.CJK_WORD);
-        Word word4 = new Word("研究生", Word.CJK_WORD);
-        Word word5 = new Word("命", Word.CJK_WORD);
+        Word word1 = new Word("研究", Word.Type.CJK_WORD);
+        Word word2 = new Word("生命", Word.Type.CJK_WORD);
+        Word word3 = new Word("起源", Word.Type.CJK_WORD);
+        Word word4 = new Word("研究生", Word.Type.CJK_WORD);
+        Word word5 = new Word("命", Word.Type.CJK_WORD);
 
         Chunk chunk1 = new Chunk(new Word[]{word1, word2, word3});
         Chunk chunk2 = new Chunk(new Word[]{word4, word5, word3});
@@ -48,11 +48,11 @@ public class ChunkTest {
 
     @Test
     public final void testGetLength() {
-        Word word1 = new Word("国际化", Word.CJK_WORD);
-        Word word2 = new Word("国际", Word.CJK_WORD);
-        Word word3 = new Word("国", Word.CJK_WORD);
-        Word word4 = new Word("际", Word.CJK_WORD);
-        Word word5 = new Word("化", Word.CJK_WORD);
+        Word word1 = new Word("国际化", Word.Type.CJK_WORD);
+        Word word2 = new Word("国际", Word.Type.CJK_WORD);
+        Word word3 = new Word("国", Word.Type.CJK_WORD);
+        Word word4 = new Word("际", Word.Type.CJK_WORD);
+        Word word5 = new Word("化", Word.Type.CJK_WORD);
 
         Chunk chunk1 = new Chunk(new Word[]{word1});
         Chunk chunk2 = new Chunk(new Word[]{word2, word5});
@@ -65,11 +65,11 @@ public class ChunkTest {
 
     @Test
     public final void testGetDegreeOfMorphemicFreedom() {
-        Word word1 = new Word("主要", Word.CJK_WORD);
-        Word word2 = new Word("是", 3200626, Word.CJK_WORD);
-        Word word3 = new Word("因为", Word.CJK_WORD);
-        Word word4 = new Word("主", 224073, Word.CJK_WORD);
-        Word word5 = new Word("要是", Word.CJK_WORD);
+        Word word1 = new Word("主要", Word.Type.CJK_WORD);
+        Word word2 = new Word("是",  Word.Type.CJK_WORD, 3200626);
+        Word word3 = new Word("因为", Word.Type.CJK_WORD);
+        Word word4 = new Word("主", Word.Type.CJK_WORD, 224073);
+        Word word5 = new Word("要是", Word.Type.CJK_WORD);
 
         Chunk chunk1 = new Chunk(new Word[]{word1, word2, word3});
         Chunk chunk2 = new Chunk(new Word[]{word4, word5, word3});

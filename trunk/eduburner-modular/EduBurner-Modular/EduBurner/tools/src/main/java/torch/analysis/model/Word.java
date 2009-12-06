@@ -1,24 +1,26 @@
 package torch.analysis.model;
 
+import torch.util.StringUtil;
+
 public class Word {
-
-    public static int UNRECOGNIZED = 0;
-	public static int BASICLATIN_WORD = 1;
-	public static int CJK_WORD = 2;
-
-    private String value = "";
+	
+    private String value = StringUtil.EMPTY_STRING;
 
     private int frequency = 0;
     private int length = 0;
-    private int type;
+    private Type type;
+    
+    public enum Type{
+		UNRECOGNIZED, BASICLATIN_WORD, CJK_WORD  
+	}
 
-    public Word(String value, int type) {
+    public Word(String value, Type type) {
 		this.value = value;
 		this.type = type;
 		this.length = value.length();
 	}
 
-	public Word(String value, int frequency, int type) {
+	public Word(String value, Type type, int frequency) {
 		this(value, type);
 		this.frequency = frequency;
 	}
@@ -35,11 +37,11 @@ public class Word {
 		return frequency;
 	}
 
-	public int getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
@@ -63,7 +65,6 @@ public class Word {
         int result = value != null ? value.hashCode() : 0;
         result = 31 * result + frequency;
         result = 31 * result + length;
-        result = 31 * result + type;
         return result;
     }
 

@@ -754,7 +754,7 @@ public final class ByteStreams {
    * greater than the length of the array {@code b}, then an
    * {@code IndexOutOfBoundsException} is thrown. If {@code len} is zero, then
    * no bytes are read. Otherwise, the first byte read is stored into element
-   * {@code b[off]}, the next one into {@code b[off+1]}, and so on. The number
+   * {@code b[off]}, the segment one into {@code b[off+1]}, and so on. The number
    * of bytes read is, at most, equal to {@code len}.
    *
    * @param in the input stream to read from

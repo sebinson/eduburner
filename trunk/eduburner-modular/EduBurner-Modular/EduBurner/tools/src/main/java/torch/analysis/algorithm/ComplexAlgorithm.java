@@ -35,7 +35,7 @@ public class ComplexAlgorithm extends AbstractAlgorithm{
 							List wordList = new ArrayList(3);
 							wordList.add( words0[i]);
 							wordList.add(words1[j]);
-							if(words2[k].getType()!=Word.UNRECOGNIZED){
+							if(words2[k].getType()!=Word.Type.UNRECOGNIZED){
 								wordList.add(words2[k]);
 							}
 							Word[] words = new Word[wordList.size()];
