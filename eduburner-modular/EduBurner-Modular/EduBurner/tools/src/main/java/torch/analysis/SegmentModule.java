@@ -6,7 +6,12 @@
  */
 package torch.analysis;
 
-import analysis.rule.*;
+import torch.analysis.rule.IRule;
+import torch.analysis.rule.LagestAvgWordLenRule;
+import torch.analysis.rule.LargestSumMorphemicFreedomDegreeRule;
+import torch.analysis.rule.MaxMatchRule;
+import torch.analysis.rule.SmallestVarianceRule;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 

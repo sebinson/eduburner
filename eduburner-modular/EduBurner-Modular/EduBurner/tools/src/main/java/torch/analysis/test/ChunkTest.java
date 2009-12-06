@@ -1,9 +1,10 @@
 package torch.analysis.test;
 
-import analysis.model.Chunk;
-import analysis.model.Word;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import torch.analysis.model.Chunk;
+import torch.analysis.model.Word;
 
 /**
  * Created by IntelliJ IDEA.

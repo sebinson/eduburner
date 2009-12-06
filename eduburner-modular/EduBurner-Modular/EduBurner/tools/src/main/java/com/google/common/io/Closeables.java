@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.Nullable;
+import com.google.inject.internal.Nullable;
 
 /**
  * Utility methods for working with {@link java.io.Closeable} objects.

@@ -1,12 +1,13 @@
 package torch.analysis.test;
 
-import analysis.model.Chunk;
-import analysis.model.Word;
-import analysis.rule.IRule;
-import analysis.rule.LagestAvgWordLenRule;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import torch.analysis.model.Chunk;
+import torch.analysis.model.Word;
+import torch.analysis.rule.IRule;
+import torch.analysis.rule.LagestAvgWordLenRule;
 
 /**
  * Created by IntelliJ IDEA.

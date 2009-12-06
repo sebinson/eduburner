@@ -1,6 +1,6 @@
 package torch.analysis.rule;
 
-import analysis.model.Chunk;
+import torch.analysis.model.Chunk;
 
 /**
  * rule rule?

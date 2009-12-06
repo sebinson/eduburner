@@ -1,12 +1,13 @@
 package torch.analysis.test;
 
-import analysis.SegmentModule;
-import analysis.algorithm.ComplexAlgorithm;
-import analysis.algorithm.SimpleAlgorithm;
-import analysis.model.Word;
+import org.testng.annotations.Test;
+
+import torch.analysis.SegmentModule;
+import torch.analysis.algorithm.ComplexAlgorithm;
+import torch.analysis.model.Word;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA.

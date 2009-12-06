@@ -1,10 +1,10 @@
 package torch.analysis.algorithm;
 
-import analysis.model.Chunk;
-import analysis.model.Word;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import torch.analysis.model.Chunk;
+import torch.analysis.model.Word;
 
 /**
  * Created by IntelliJ IDEA.
