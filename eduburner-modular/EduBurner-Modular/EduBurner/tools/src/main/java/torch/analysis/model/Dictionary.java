@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
+
 import torch.analysis.SegmentModule;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
@@ -19,14 +23,13 @@ import com.google.inject.name.Named;
 public class Dictionary {
     
     private Map<String, Word> map;
-    private String dictDirPath;
+    private String dictFiles;
     private Charset charset = Charsets.UTF_8;
-    
     private int maxWordLength = 4;
 
     @Inject
-    public Dictionary(@Named("dictDirPath") String dictDirPath, @Named("maxWordLength") int maxWordLength){
-        this.dictDirPath = dictDirPath;
+    public Dictionary(@Named("dictFiles") String dictFiles, @Named("maxWordLength") int maxWordLength){
+        this.dictFiles = dictFiles;
         this.maxWordLength = maxWordLength;
         map = Maps.newHashMap();
         try {
@@ -37,10 +40,11 @@ public class Dictionary {
     }
 
     private void loadDictionary() throws IOException {
-        File chars = new File(dictDirPath + "/chars.lex");
-        File words = new File(dictDirPath + "/words.lex");
-        loadWords(chars);
-        loadWords(words);
+    	ResourceLoader resourceLoader = new DefaultResourceLoader();
+    	Iterable<String> filePaths = Splitter.on(",").trimResults().split(dictFiles);
+    	for(String filePath : filePaths){
+    		loadWords(resourceLoader.getResource(filePath).getFile());
+    	}
     }
 
     private void loadWords(File file) throws IOException {
