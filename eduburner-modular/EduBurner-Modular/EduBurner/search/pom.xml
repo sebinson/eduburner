@@ -11,9 +11,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <artifactId>EduBurner-Search</artifactId>
+    <artifactId>EduBurner-Tools</artifactId>
     <packaging>jar</packaging>
-    <name>Search model and Paoding Analysis</name>
+    <name>EduBurner Tools</name>
     
     <build>
         <testResources>
