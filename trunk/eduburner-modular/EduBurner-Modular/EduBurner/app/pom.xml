@@ -210,9 +210,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
+			<version>4.0.0.GA</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.CR5</version>
+		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
@@ -249,7 +253,7 @@
 		
 		<dependency>
 			<groupId>eduburner</groupId>
-			<artifactId>EduBurner-Search</artifactId>
+			<artifactId>EduBurner-Tools</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
     </dependencies>
