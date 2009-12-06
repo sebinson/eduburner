@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import torch.analysis.Config;
 import torch.analysis.SegmentModule;
 
 import com.google.common.base.Charsets;
@@ -22,10 +21,13 @@ public class Dictionary {
     private Map<String, Word> map;
     private String dictDirPath;
     private Charset charset = Charsets.UTF_8;
+    
+    private int maxWordLength = 4;
 
     @Inject
-    public Dictionary(@Named("dictDirPath") String dictDirPath){
+    public Dictionary(@Named("dictDirPath") String dictDirPath, @Named("maxWordLength") int maxWordLength){
         this.dictDirPath = dictDirPath;
+        this.maxWordLength = maxWordLength;
         map = Maps.newHashMap();
         try {
             loadDictionary();
@@ -47,12 +49,12 @@ public class Dictionary {
             public boolean processLine(String word) throws IOException {
                 if (word.indexOf("#") == -1) {
 					if (word.indexOf(" ") == -1) {
-						if (word.length() <= Config.WORD_MAX_LENGTH) {
+						if (word.length() <= maxWordLength) {
                             map.put(word, new Word(word, Word.CJK_WORD));
 						}
 					} else {
 						String value = word.substring(0, word.indexOf(" "));
-						if (value.length() <= Config.WORD_MAX_LENGTH) {
+						if (value.length() <= maxWordLength) {
 							int frequency = Integer.parseInt(word
 									.substring(word.indexOf(" ") + 1,word.lastIndexOf(" ")));
                             map.put(word, new Word(word, frequency, Word.CJK_WORD));
