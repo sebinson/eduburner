@@ -1,5 +1,7 @@
 package torch.analysis.model;
 
+import java.util.Arrays;
+
 public class Chunk {
 
     private Word[] words = null;
@@ -60,5 +62,47 @@ public class Chunk {
             }
         }
         return degreeMorphemicFreedom;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Chunk chunk = (Chunk) o;
+
+        if (Double.compare(chunk.averageLength, averageLength) != 0) return false;
+        if (Double.compare(chunk.degreeMorphemicFreedom, degreeMorphemicFreedom) != 0) return false;
+        if (length != chunk.length) return false;
+        if (Double.compare(chunk.variance, variance) != 0) return false;
+        if (!Arrays.equals(words, chunk.words)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = words != null ? Arrays.hashCode(words) : 0;
+        temp = averageLength != +0.0d ? Double.doubleToLongBits(averageLength) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = variance != +0.0d ? Double.doubleToLongBits(variance) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = degreeMorphemicFreedom != +0.0d ? Double.doubleToLongBits(degreeMorphemicFreedom) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + length;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Chunk{" +
+                "words=" + (words == null ? null : Arrays.asList(words)) +
+                ", averageLength=" + averageLength +
+                ", variance=" + variance +
+                ", degreeMorphemicFreedom=" + degreeMorphemicFreedom +
+                ", length=" + length +
+                '}';
     }
 }

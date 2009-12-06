@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
  *
  * 取平均词长最大的chunk (Rule 2: Largest average word length) 
  */
-public class LagestAvgWordLenRule implements IRule {
+public class LargestAvgWordLenRule implements IRule {
 
     public final Chunk[] applyRule(final Chunk[] chunks) {
 		LAWLRuleComparator[] orderedChunks = new LAWLRuleComparator[chunks.length];

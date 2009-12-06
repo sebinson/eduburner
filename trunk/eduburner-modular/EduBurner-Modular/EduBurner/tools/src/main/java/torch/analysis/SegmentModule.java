@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import torch.analysis.rule.IRule;
-import torch.analysis.rule.LagestAvgWordLenRule;
+import torch.analysis.rule.LargestAvgWordLenRule;
 import torch.analysis.rule.LargestSumMorphemicFreedomDegreeRule;
 import torch.analysis.rule.MaxMatchRule;
 import torch.analysis.rule.SmallestVarianceRule;
@@ -38,8 +38,8 @@ public class SegmentModule extends AbstractModule {
 		bind(IRule.class).annotatedWith(
 				Names.named("LargestSumMorphemicFreedomDegreeRule")).to(
 				LargestSumMorphemicFreedomDegreeRule.class);
-		bind(IRule.class).annotatedWith(Names.named("LagestAvgWordLenRule"))
-				.to(LagestAvgWordLenRule.class);
+		bind(IRule.class).annotatedWith(Names.named("LargestAvgWordLenRule"))
+				.to(LargestAvgWordLenRule.class);
 		bind(IRule.class).annotatedWith(Names.named("MaxMatchRule")).to(
 				MaxMatchRule.class);
 
