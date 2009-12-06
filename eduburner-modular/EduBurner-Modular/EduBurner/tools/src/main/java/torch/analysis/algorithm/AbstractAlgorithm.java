@@ -58,17 +58,17 @@ public abstract class AbstractAlgorithm {
                     basicLatinWord.append(chars[index]);
                     index++;
                     return new Word(basicLatinWord.toString(),
-                            Word.BASICLATIN_WORD);
+                            Word.Type.BASICLATIN_WORD);
                 } else {
                     return new Word(basicLatinWord.toString(),
-                            Word.BASICLATIN_WORD);
+                            Word.Type.BASICLATIN_WORD);
                 }
             }
             basicLatinWord.append(chars[index]);
             index++;
         }
 
-        return new Word(basicLatinWord.toString(), Word.BASICLATIN_WORD);
+        return new Word(basicLatinWord.toString(), Word.Type.BASICLATIN_WORD);
     }
 
     protected abstract Chunk[] createChunks(char[] chars, int index2);
@@ -98,7 +98,7 @@ public abstract class AbstractAlgorithm {
         }
 
         if (matchWords.isEmpty()) {
-            matchWords.add(new Word(wordValue, Word.UNRECOGNIZED));
+            matchWords.add(new Word(wordValue, Word.Type.UNRECOGNIZED));
         }
 
         Word[] words = new Word[matchWords.size()];

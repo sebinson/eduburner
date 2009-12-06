@@ -39,7 +39,7 @@ class MultiReader extends Reader {
   }
 
   /**
-   * Closes the current reader and opens the next one, if any.
+   * Closes the current reader and opens the segment one, if any.
    */
   private void advance() throws IOException {
     close();

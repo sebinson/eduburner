@@ -25,11 +25,11 @@ public class LAWLRuleTest {
 
     @BeforeTest
     public void setUp() {
-        Word word1 = new Word("国际化", Word.CJK_WORD);
-        Word word2 = new Word("国际", Word.CJK_WORD);
-        Word word3 = new Word("国", Word.CJK_WORD);
-        Word word4 = new Word("际", Word.CJK_WORD);
-        Word word5 = new Word("化", Word.CJK_WORD);
+        Word word1 = new Word("国际化", Word.Type.CJK_WORD);
+        Word word2 = new Word("国际", Word.Type.CJK_WORD);
+        Word word3 = new Word("国", Word.Type.CJK_WORD);
+        Word word4 = new Word("际", Word.Type.CJK_WORD);
+        Word word5 = new Word("化", Word.Type.CJK_WORD);
 
         chunk1 = new Chunk(new Word[]{word1});
         chunk2 = new Chunk(new Word[]{word2, word5});
