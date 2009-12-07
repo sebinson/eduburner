@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import torch.analysis.model.Chunk;
 import torch.analysis.model.Word;
 import torch.analysis.rule.IRule;
-import torch.analysis.rule.LagestAvgWordLenRule;
+import torch.analysis.rule.LargestAvgWordLenRule;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +38,7 @@ public class LAWLRuleTest {
 
     @Test
     public final void testInvoke() {
-		IRule lawlRule = new LagestAvgWordLenRule();
+		IRule lawlRule = new LargestAvgWordLenRule();
 		Chunk[] chunks = new Chunk[] { chunk1, chunk2, chunk3 };
 		Chunk[] lawlChunks = lawlRule.applyRule(chunks);
 		Assert.assertEquals(chunk1, lawlChunks[0]);
