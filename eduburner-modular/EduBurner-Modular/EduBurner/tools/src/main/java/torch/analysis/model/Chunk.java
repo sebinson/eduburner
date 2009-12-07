@@ -25,8 +25,8 @@ public class Chunk {
     public double getVariance() {
         if (variance == -1D) {
             double tempVariance = 0D;
-            for (int i = 0; i < words.length; i++) {
-                double temp = (double) words[i].getLength() - getAverageLength();
+            for (Word word : words) {
+                double temp = (double) word.getLength() - getAverageLength();
                 tempVariance += temp * temp;
             }
 
@@ -43,8 +43,8 @@ public class Chunk {
     public int getLength() {
         if (length == -1) {
             length = 0;
-            for (int i = 0; i < words.length; i++) {
-                length += words[i].getLength();
+            for (Word word : words) {
+                length += word.getLength();
             }
         }
 
@@ -54,9 +54,9 @@ public class Chunk {
     public double getDegreeOfMorphemicFreedom() {
         if (degreeMorphemicFreedom == -1D) {
             degreeMorphemicFreedom = 0D;
-            for (int i = 0; i < words.length; i++) {
-                if (words[i].getLength() == 1) {
-                    degreeMorphemicFreedom += Math.log((double) words[i]
+            for (Word word : words) {
+                if (word.getLength() == 1) {
+                    degreeMorphemicFreedom += Math.log((double) word
                             .getFrequency());
                 }
             }
@@ -75,9 +75,8 @@ public class Chunk {
         if (Double.compare(chunk.degreeMorphemicFreedom, degreeMorphemicFreedom) != 0) return false;
         if (length != chunk.length) return false;
         if (Double.compare(chunk.variance, variance) != 0) return false;
-        if (!Arrays.equals(words, chunk.words)) return false;
+        return Arrays.equals(words, chunk.words);
 
-        return true;
     }
 
     @Override
