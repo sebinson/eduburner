@@ -1,4 +1,4 @@
-package torch.analysis;
+package torch.analysis.lucene;
 
 import java.io.IOException;
 
