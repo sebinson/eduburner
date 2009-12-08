@@ -1,5 +1,6 @@
 package torch.analysis.algorithm;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.AbstractIterator;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -53,6 +54,15 @@ public abstract class AbstractAlgorithm {
 
     }
 
+    protected abstract Chunk[] createChunks(char[] chars, int index2);
+
+    //从词典里找出以index开始的所有匹配的词。
+    protected Word[] findMatchWords(final char[] chars, final int index) {
+        logger.debug("finding matching words for chars: " + new String(chars) + " index: " + index);
+        return dictionary.findMatchWords(new String(chars), index);
+
+    }
+
     protected Word getBasicLatinWord(char[] chars, int index) {
         StringBuffer basicLatinWord = new StringBuffer();
         while ((index < chars.length) && LanguageUtil.isBasicLatin(chars[index])) {
@@ -72,47 +82,6 @@ public abstract class AbstractAlgorithm {
         }
 
         return new Word(basicLatinWord.toString(), Word.Type.BASICLATIN_WORD);
-    }
-
-    protected abstract Chunk[] createChunks(char[] chars, int index2);
-
-    //从词典里找出以index开始的所有匹配的词。
-    protected Word[] findMatchWords(char[] chars, int index) {
-
-        logger.debug("finding matching words for chars: " + new String(chars) + " index: " + index);
-
-        char c = chars[index];
-
-        List matchWords = new ArrayList();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(c);
-
-        String wordValue = sb.toString();
-        if (dictionary.isMatched(wordValue)) {
-            matchWords.add(dictionary.getWord(wordValue));
-        }
-
-        for (int i = 1; i < maxWordLength && ((i + index) < chars.length); i++) {
-            if (LanguageUtil.isBasicLatin(chars[i + index]))
-                break;
-            sb.append(chars[i + index]);
-            String temp = sb.toString();
-            if (dictionary.isMatched(temp)) {
-                matchWords.add(dictionary.getWord(temp));
-            }
-        }
-
-        if (matchWords.isEmpty()) {
-            matchWords.add(new Word(wordValue, Word.Type.UNRECOGNIZED));
-        }
-
-        Word[] words = new Word[matchWords.size()];
-        matchWords.toArray(words);
-
-        matchWords.clear();
-
-        return words;
     }
 
     protected Word getCJKWord(Chunk[] chunks) {

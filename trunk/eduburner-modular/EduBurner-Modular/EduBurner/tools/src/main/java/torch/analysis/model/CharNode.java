@@ -1,8 +1,10 @@
 package torch.analysis.model;
 
+import com.google.common.collect.Lists;
 import com.google.inject.internal.Maps;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,27 +26,26 @@ public class CharNode {
         }
     }
 
-    /**
-     * @param sen     句子, 一串文本.
-     * @param offset  词在句子中的位置
-     * @param tailLen 词尾的长度, 实际是去掉词的长度.
-     */
-    public int indexOf(char[] sen, int offset, int tailLen) {
-        return wordTails.match(sen, offset + 1, tailLen) ? 1 : -1;
-    }
 
-    /**
-     * @param sen            句子, 一串文本.
-     * @param wordTailOffset 词在句子中的位置, 实际是 offset 后面的开始找.
-     * @return 返回词尾长, 没有就是 0
-     */
-    public int maxMatch(char[] sen, int wordTailOffset) {
-        return wordTails.maxMatch(sen, wordTailOffset);
-    }
+    public Word[] findMatchWords(String textFragment, int offset){
+        List<Integer> l = wordTails.findMatchWords(textFragment.toCharArray(), offset);
+        if(l == null || l.size() == 0){
+            Word[] words = new Word[1];
+            words[0] = new Word(textFragment.substring(offset, offset+1), Word.Type.UNRECOGNIZED);
+            return words;
+        }
 
-
-    public ArrayList<Integer> maxMatch(ArrayList<Integer> tailLens, char[] sen, int wordTailOffset) {
-        return wordTails.maxMatch(tailLens, sen, wordTailOffset);
+        Word[] words = new Word[l.size()];
+        for(int i=0; i<l.size(); i++){
+            int p = l.get(i);
+            String w = textFragment.substring(offset, p + 1);
+            if(p == offset){
+                 words[i] = new Word(w, Word.Type.CJK_WORD, frequency);
+            }else{
+                 words[i] = new Word(w, Word.Type.CJK_WORD);
+            }
+        }
+        return words;
     }
 
     public int getFrequency() {
@@ -75,11 +76,11 @@ public class CharNode {
             if (w.length < 1) {
                 return;
             }
-            torch.analysis.model.CharNode.TreeNode p = head;
+            TreeNode p = head;
             for (int i = 0; i < w.length; i++) {
                 TreeNode n = p.getSubNode(w[i]);
                 if (n == null) {
-                    n = new torch.analysis.model.CharNode.TreeNode(w[i]);
+                    n = new TreeNode(w[i]);
                     p.addSubNode(w[i], n);
                 }
                 p = n;
@@ -87,49 +88,24 @@ public class CharNode {
             p.leaf = true;
         }
 
-        /**
-         * @return 返回匹配最长词的长度, 没有找到返回 0.
-         */
-        public int maxMatch(char[] sen, int offset) {
-            int idx = offset - 1;
-            torch.analysis.model.CharNode.TreeNode node = head;
-            for (int i = offset; i < sen.length; i++) {
-                node = node.getSubNode(sen[i]);
+        public List<Integer> findMatchWords(final char[] chars, final int offset){
+            if(offset >= chars.length-1){
+                return null;
+            }
+            TreeNode node = head;
+            List<Integer> l = Lists.newArrayList();
+            for (int i = offset + 1; i < chars.length; i++) {
+                char aChar = chars[i];
+                node = node.getSubNode(aChar);
                 if (node != null) {
                     if (node.isLeaf()) {
-                        idx = i;
+                        l.add(i);
                     }
                 } else {
                     break;
                 }
             }
-            return idx - offset + 1;
-        }
-
-        public ArrayList<Integer> maxMatch(ArrayList<Integer> tailLens, char[] sen, int offset) {
-            torch.analysis.model.CharNode.TreeNode node = head;
-            for (int i = offset; i < sen.length; i++) {
-                node = node.getSubNode(sen[i]);
-                if (node != null) {
-                    if (node.isLeaf()) {
-                        tailLens.add(i - offset + 1);
-                    }
-                } else {
-                    break;
-                }
-            }
-            return tailLens;
-        }
-
-        public boolean match(char[] sen, int offset, int len) {
-            torch.analysis.model.CharNode.TreeNode node = head;
-            for (int i = 0; i < len; i++) {
-                node = node.getSubNode(sen[offset + i]);
-                if (node == null) {
-                    return false;
-                }
-            }
-            return node.isLeaf();
+            return l;
         }
     }
 
