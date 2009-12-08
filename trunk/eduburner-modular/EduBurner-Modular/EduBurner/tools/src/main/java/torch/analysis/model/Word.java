@@ -9,10 +9,6 @@ public class Word {
     private int frequency = 0;
     private int length = 0;
 
-    private char[] fragment;  //当前句子
-    private int position = 0; //在整个文本里的偏移量
-    private int offset = 0;   //在当前句子里的偏移量
-
     private Type type;
     
     public enum Type{
