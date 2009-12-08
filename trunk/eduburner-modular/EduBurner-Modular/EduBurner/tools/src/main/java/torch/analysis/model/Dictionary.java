@@ -30,7 +30,6 @@ public class Dictionary {
     private String wordFiles;
     private String charFiles;
     private Charset charset = Charsets.UTF_8;
-    private int maxWordLength = 4;
 
 
     private enum DictType {
@@ -39,11 +38,9 @@ public class Dictionary {
 
     @Inject
     public Dictionary(@Named("wordFiles") String dictFiles,
-                      @Named("charFiles") String charFiles,
-                      @Named("maxWordLength") int maxWordLength) {
+                      @Named("charFiles") String charFiles) {
         this.wordFiles = dictFiles;
         this.charFiles = charFiles;
-        this.maxWordLength = maxWordLength;
         dict = Maps.newHashMap();
         try {
             loadDictionary();
@@ -261,14 +258,6 @@ public class Dictionary {
 
 
     public static void main(String... args) throws IOException {
-        /*String s = "a b";
-        Iterables.all(Splitter.on(" ").split(s),new Predicate<String>(){
-            @Override
-            public boolean apply(@Nullable String o) {
-                 System.out.println("s: " + o);
-                return true;
-            }
-        });*/
 
         Injector injector = Guice.createInjector(new SegmentModule());
         Dictionary dict = injector.getInstance(Dictionary.class);
