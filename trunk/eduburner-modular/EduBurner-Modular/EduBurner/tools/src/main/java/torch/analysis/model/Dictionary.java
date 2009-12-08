@@ -2,6 +2,7 @@ package torch.analysis.model;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
@@ -18,6 +19,7 @@ import torch.analysis.SegmentModule;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 
 public class Dictionary {
@@ -31,7 +33,7 @@ public class Dictionary {
     private int maxWordLength = 4;
 
 
-    private enum DictType{
+    private enum DictType {
         CHARS, WORDS, UNIT
     }
 
@@ -68,13 +70,13 @@ public class Dictionary {
         Files.readLines(file, charset, new LineProcessor<Map<Character, CharNode>>() {
             @Override
             public boolean processLine(String line) throws IOException {
-                if(line == null){
+                if (line == null) {
                     return false;
                 }
                 if (line.indexOf("#") == -1) {
-                    if(type == DictType.WORDS){
+                    if (type == DictType.WORDS) {
                         loadWords(line);
-                    }else if(type == DictType.CHARS){
+                    } else if (type == DictType.CHARS) {
                         loadChars(line);
                     }
                 }
@@ -108,24 +110,155 @@ public class Dictionary {
 
     private void loadWords(String line) {
         CharNode cn = dict.get(line.charAt(0));
-        if(cn == null) {
+        if (cn == null) {
             cn = new CharNode();
             dict.put(line.charAt(0), cn);
         }
         cn.addWordTail(tail(line));
     }
 
-    private char[] tail(String str){
-        char[] cs = new char[str.length()-1];
-		str.getChars(1, str.length(), cs, 0);
-		return cs;
+    private char[] tail(String str) {
+        char[] cs = new char[str.length() - 1];
+        str.getChars(1, str.length(), cs, 0);
+        return cs;
     }
 
-    public Word[] findMatchWords(String textFragment, int offset){
-         char c = textFragment.charAt(offset);
-         CharNode cn = dict.get(c);
-         return cn.findMatchWords(textFragment, offset);
+    public Word[] findMatchWords(char[] chars, int offset) {
+        char c = chars[offset];
+        CharNode cn = dict.get(c);
+        if (cn != null) {
+            return cn.findMatchWords(chars, offset);
+        } else {
+            Word[] words = new Word[1];
+            words[0] = new Word(String.valueOf(chars[offset]), Word.Type.UNRECOGNIZED);
+            return words;
+        }
     }
+
+
+    /**
+     * char node. inspired by and most codes taken from mmseg4j
+     * http://code.google.com/p/mmseg4j/
+     */
+    public static class CharNode {
+        private int frequency = -1;    //Degree of Morphemic Freedom of One-Character, 单字才需要
+        private int maxLength = 0;    //wordTail的最长
+
+        private KeyTree wordTails = new KeyTree();
+        private int wordNum = 0;
+
+        public void addWordTail(char[] wordTail) {
+            wordTails.add(wordTail);
+            wordNum++;
+            if (wordTail.length > maxLength) {
+                maxLength = wordTail.length;
+            }
+        }
+
+
+        public Word[] findMatchWords(char[] chars, int offset) {
+            List<Integer> l = wordTails.findMatchWords(chars, offset);
+            if (l.size() == 0) {
+                Word[] words = new Word[1];
+                words[0] = new Word(String.valueOf(chars[offset]), Word.Type.CJK_WORD, frequency);
+                return words;
+            }
+
+            Word[] words = new Word[l.size()];
+            for (int i = 0; i < l.size(); i++) {
+                int p = l.get(i);
+                StringBuilder sb = new StringBuilder();
+                for (int j = offset; j <= p; j++) {
+                    sb.append(chars[j]);
+                }
+                words[i] = new Word(sb.toString(), Word.Type.CJK_WORD);
+            }
+            return words;
+        }
+
+        public int getFrequency() {
+            return frequency;
+        }
+
+        public void setFrequency(int frequency) {
+            this.frequency = frequency;
+        }
+
+        public int wordNum() {
+            return wordNum;
+        }
+
+        public int getMaxLength() {
+            return maxLength;
+        }
+
+        public void setMaxLength(int maxLength) {
+            this.maxLength = maxLength;
+        }
+
+    }
+
+    private static class KeyTree {
+        TreeNode head = new TreeNode(' ');
+
+        public void add(char[] w) {
+            if (w.length < 1) {
+                return;
+            }
+            TreeNode p = head;
+            for (char aW : w) {
+                TreeNode n = p.getSubNode(aW);
+                if (n == null) {
+                    n = new TreeNode(aW);
+                    p.addSubNode(aW, n);
+                }
+                p = n;
+            }
+            p.leaf = true;
+        }
+
+        public List<Integer> findMatchWords(final char[] chars, final int offset) {
+            TreeNode node = head;
+            List<Integer> l = Lists.newArrayList();
+            for (int i = offset + 1; i < chars.length; i++) {
+                char aChar = chars[i];
+                node = node.getSubNode(aChar);
+                if (node != null) {
+                    if (node.isLeaf()) {
+                        l.add(i);
+                    }
+                } else {
+                    break;
+                }
+            }
+            return l;
+        }
+    }
+
+
+    private static class TreeNode {
+        char key;
+        Map<Character, TreeNode> subNodes;
+        boolean leaf;
+
+        public TreeNode(char key) {
+            this.key = key;
+            subNodes = com.google.inject.internal.Maps.newHashMap();
+        }
+
+        public void addSubNode(char k, TreeNode sub) {
+            subNodes.put(k, sub);
+        }
+
+        public TreeNode getSubNode(char k) {
+            return subNodes.get(k);
+        }
+
+        public boolean isLeaf() {
+            return leaf;
+        }
+    }
+
 
     public static void main(String... args) throws IOException {
         /*String s = "a b";
@@ -140,7 +273,7 @@ public class Dictionary {
         Injector injector = Guice.createInjector(new SegmentModule());
         Dictionary dict = injector.getInstance(Dictionary.class);
 
-        Word[] word = dict.findMatchWords("研究生命科学", 0);
+        Word[] word = dict.findMatchWords("研究生命起源".toCharArray(), 0);
 
         System.out.println("word length: " + word.length);
     }
