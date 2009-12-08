@@ -58,8 +58,8 @@ public abstract class AbstractAlgorithm {
 
     //从词典里找出以index开始的所有匹配的词。
     protected Word[] findMatchWords(final char[] chars, final int index) {
-        logger.debug("finding matching words for chars: " + new String(chars) + " index: " + index);
-        return dictionary.findMatchWords(new String(chars), index);
+        //logger.debug("finding matching words for chars: " + new String(chars) + " index: " + index);
+        return dictionary.findMatchWords(chars, index);
 
     }
 
