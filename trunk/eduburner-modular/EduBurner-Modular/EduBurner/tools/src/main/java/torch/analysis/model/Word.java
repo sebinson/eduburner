@@ -1,82 +1,100 @@
 package torch.analysis.model;
 
-import torch.util.StringUtil;
-
 public class Word {
 	
-    private String value = StringUtil.EMPTY_STRING;
-
+	public static final String TYPE_WORD = "word";
+	public static final String TYPE_LETTER = "letter";
+	/** 字母开头的"字母或数字" */
+	public static final String TYPE_LETTER_OR_DIGIT = "letter_or_digit";
+	public static final String TYPE_DIGIT = "digit";
+	/** 数字开头的"字母或数字" */
+	public static final String TYPE_DIGIT_OR_LETTER = "digit_or_letter";
+	public static final String TYPE_LETTER_NUMBER = "letter_number";
+	public static final String TYPE_OTHER_NUMBER = "other_number";
+	
+    private char[] textData;          //整个文本片断
+    private int offset;               //偏移量
+    private int length = 0;           //长度
     private int frequency = 0;
-    private int length = 0;
 
-    private Type type;
-    
-    public enum Type{
-		UNRECOGNIZED, BASICLATIN_WORD, CJK_WORD  
+    private String type = TYPE_WORD;
+
+    /**
+	 * @param startOffset word 在整个文本中的偏移位置
+	 */
+	public Word(char[] textData) {
+		super();
+		this.textData = textData;
+		this.offset = 0;
+		this.length = textData.length;
+	}
+	
+	/**
+	 * @param startOffset word 在整个文本中的偏移位置
+	 */
+	public Word(char[] textData, String wordType) {
+		this(textData);
+		this.type = wordType;
+	}
+	
+	/**
+	 * sen[offset] 开始的 len 个字符才是此 word
+	 * @param senStartOffset sen 在整个文本中的偏移位置
+	 * @param offset 词在 sen 的偏移位置
+	 * @param len 词长
+	 */
+	public Word(char[] textData, int offset, int len) {
+		super();
+		this.textData = textData;
+		this.offset = offset;
+		this.length = len;
 	}
 
-    public Word(String value, Type type) {
-		this.value = value;
-		this.type = type;
-		this.length = value.length();
+	public String getString() {
+		return new String(getTextData(), getOffset(), getLength());
+	}
+	
+	
+	public char[] getTextData() {
+		return textData;
 	}
 
-	public Word(String value, Type type, int frequency) {
-		this(value, type);
-		this.frequency = frequency;
+	public void setTextData(char[] textData) {
+		this.textData = textData;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 	public int getLength() {
 		return length;
 	}
 
-	public String getValue() {
-		return value;
+	public void setLength(int length) {
+		this.length = length;
 	}
 
 	public int getFrequency() {
 		return frequency;
 	}
 
-	public Type getType() {
+	public void setFrequency(int frequency) {
+		this.frequency = frequency;
+	}
+
+	public String getType() {
 		return type;
 	}
-
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Word word = (Word) o;
-
-        if (frequency != word.frequency) return false;
-        if (length != word.length) return false;
-        if (type != word.type) return false;
-        if (value != null ? !value.equals(word.value) : word.value != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = value != null ? value.hashCode() : 0;
-        result = 31 * result + frequency;
-        result = 31 * result + length;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Word{" +
-                "value='" + value + '\'' +
-                ", frequency=" + frequency +
-                ", length=" + length +
-                ", type=" + type +
-                '}';
-    }
+	
+	public String toString() {
+		return getString();
+	}
 }

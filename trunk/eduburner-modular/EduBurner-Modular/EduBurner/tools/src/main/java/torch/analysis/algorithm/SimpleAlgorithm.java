@@ -12,7 +12,6 @@ import torch.analysis.model.Word;
 public class SimpleAlgorithm extends AbstractAlgorithm{
 
 	protected Chunk[] createChunks(char[] chars, int index) {
-
 		Word[] words = findMatchWords(chars, index);
 		Chunk[] chunks = new Chunk[words.length];
 		for (int i = 0; i < words.length; i++) {

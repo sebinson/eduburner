@@ -56,11 +56,11 @@ public class Dictionary {
             loadDict(resourceLoader.getResource(filePath).getFile(), DictType.WORDS);
         }
 
-        /*
+        
         Iterable<String> charFilePaths = Splitter.on(",").trimResults().split(charFiles);
         for (String charFile : charFilePaths) {
             loadDict(resourceLoader.getResource(charFile).getFile(), DictType.CHARS);
-        }*/
+        }
     }
 
     private void loadDict(File file, final DictType type) throws IOException {
@@ -96,7 +96,7 @@ public class Dictionary {
         switch (w.length) {
             case 2:
                 try {
-                    cn.setFrequency((int) (Math.log(Integer.parseInt(w[1])) * 100));//字频计算出自由度
+                    cn.setFrequency((int) (Math.log(Integer.parseInt(w[1])) * 100));
                 } catch (NumberFormatException e) {
                     logger.warn("failed to load chars at line: " + line, e);
                 }
@@ -127,7 +127,7 @@ public class Dictionary {
             return cn.findMatchWords(chars, offset);
         } else {
             Word[] words = new Word[1];
-            words[0] = new Word(String.valueOf(chars[offset]), Word.Type.UNRECOGNIZED);
+            words[0] = new Word(chars, offset, 1);
             return words;
         }
     }
@@ -151,24 +151,20 @@ public class Dictionary {
                 maxLength = wordTail.length;
             }
         }
-
-
+        
         public Word[] findMatchWords(char[] chars, int offset) {
             List<Integer> l = wordTails.findMatchWords(chars, offset);
             if (l.size() == 0) {
-                Word[] words = new Word[1];
-                words[0] = new Word(String.valueOf(chars[offset]), Word.Type.CJK_WORD, frequency);
+                Word word = new Word(chars, offset, 1);
+                word.setFrequency(frequency);
+                Word[] words = new Word[]{word};
                 return words;
             }
 
             Word[] words = new Word[l.size()];
             for (int i = 0; i < l.size(); i++) {
                 int p = l.get(i);
-                StringBuilder sb = new StringBuilder();
-                for (int j = offset; j <= p; j++) {
-                    sb.append(chars[j]);
-                }
-                words[i] = new Word(sb.toString(), Word.Type.CJK_WORD);
+                words[i] = new Word(chars, offset, p-offset+1);
             }
             return words;
         }
