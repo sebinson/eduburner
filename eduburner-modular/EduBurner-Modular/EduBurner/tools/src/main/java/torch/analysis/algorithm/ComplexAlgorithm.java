@@ -1,10 +1,11 @@
 package torch.analysis.algorithm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import torch.analysis.model.Chunk;
 import torch.analysis.model.Word;
+
+import com.google.common.collect.Lists;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +18,7 @@ public class ComplexAlgorithm extends AbstractAlgorithm{
 
 	protected Chunk[] createChunks(char[] chars, int index) {
 
-		List chunkList = new ArrayList(5);
+		List<Chunk> chunkList = Lists.newArrayList();
 
 		Word[] words0 = findMatchWords(chars, index);
 
@@ -30,14 +31,9 @@ public class ComplexAlgorithm extends AbstractAlgorithm{
 					if (index1 < chars.length) {
 						Word[] words2 = findMatchWords(chars, index1);
 						for (int k = 0; k < words2.length; k++) {
-							//chunkList.add(new Chunk(new IWord[] { words0[i],
-							//		words1[j], words2[k] }));
-							List wordList = new ArrayList(3);
+							List<Word> wordList = Lists.newArrayList();
 							wordList.add( words0[i]);
 							wordList.add(words1[j]);
-							if(words2[k].getType()!=Word.Type.UNRECOGNIZED){
-								wordList.add(words2[k]);
-							}
 							Word[] words = new Word[wordList.size()];
 							wordList.toArray(words);
 							wordList.clear();
