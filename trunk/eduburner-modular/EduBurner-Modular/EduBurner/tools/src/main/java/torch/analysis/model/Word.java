@@ -45,7 +45,7 @@ public class Word {
 		this.length = len;
 	}
 
-	public String getString() {
+	public String getValue() {
 		return new String(getTextData(), getOffset(), getLength());
 	}
 	
@@ -97,10 +97,11 @@ public class Word {
         this.startOffset = startOffset;
     }
 
+
     @Override
     public String toString() {
         return "Word{" +
-                "textData=" + textData +
+                "textData=" + new String(textData) +
                 ", offset=" + offset +
                 ", length=" + length +
                 ", frequency=" + frequency +

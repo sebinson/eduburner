@@ -1,11 +1,14 @@
 package torch.analysis;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PushbackReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.Queue;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.name.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import torch.analysis.algorithm.IAlgorithm;
 import torch.analysis.model.Chunk;
 import torch.analysis.model.TextFragment;
@@ -15,31 +18,37 @@ import torch.util.LanguageUtil;
 import com.google.common.collect.Lists;
 
 /**
- * Created by IntelliJ IDEA.
- * User: rockmaple
- * Date: 2009-12-8
- * Time: 23:21:25
+ * entry class for mmseg, inspired by mmseg4j
  */
 public class Segmentation {
 
+    private static final Logger logger = LoggerFactory.getLogger(Segmentation.class);
+
     private PushbackReader reader;
+
+    @Inject
+    @Named("complexAlgorithm")
     private IAlgorithm algorithm;
 
-    private StringBuilder textBuffer = new StringBuilder(256);  //存储一个一个的文本片断
-    private TextFragment textFragment;    //当前的文本片断
-    private Queue<Word> wordBuffer; // word 缓存, 因为有 chunk 分析三个以上.
-    private int index = 0;          //当前字符指针
+    private StringBuilder textBuffer;      //存储一个一个的文本片断
+    private TextFragment textFragment;     //当前的文本片断
+    private Queue<Word> wordBuffer;        // word 缓存, 因为有 chunk 分析三个以上.
+    private int index = 0;                 //当前字符指针
 
-    public Segmentation(Reader input){
-         init(input);
+    public Segmentation(){
+         init();
     }
 
-    public void init(Reader input) {
-        this.reader = new PushbackReader(new BufferedReader(input), 20);
+    public void init() {
         textFragment = null;
         wordBuffer = Lists.newLinkedList();
+        textBuffer = new StringBuilder(256);
         textBuffer.setLength(0);
         index = -1;
+    }
+
+    public void setReader(Reader reader){
+        this.reader = new PushbackReader(new BufferedReader(reader), 20);
     }
 
     //TODO: return Iterable<Word> instead of Word
@@ -84,10 +93,22 @@ public class Segmentation {
                 }//switch
             }
             // 中文分词
-            fillWordBuffer();
+            doSegment();
             word = wordBuffer.poll();
         }
         return word;
+    }
+
+    private void doSegment() {
+        if (textFragment != null) {
+            do {
+                Chunk chunk = algorithm.doSegment(textFragment);
+                for (Word word : chunk.getWords()) {
+                    wordBuffer.add(word);
+                }
+            } while (!textFragment.isFinish());
+            textFragment = null;
+        }
     }
 
     private void handleNationalLetter(int data, NationLetter nl) throws IOException {
@@ -185,19 +206,6 @@ public class Segmentation {
         reader.unread(data);
     }
 
-
-    private void fillWordBuffer() {
-        if (textFragment != null) {
-            do {
-                Chunk chunk = algorithm.doSegment(textFragment);
-                for (Word word : chunk.getWords()) {
-                    wordBuffer.add(word);
-                }
-            } while (!textFragment.isFinish());
-            textFragment = null;
-        }
-    }
-
     private int readChars(StringBuilder fragBuffer, ReadChar readChar)
             throws IOException {
         int num = 0;
@@ -215,28 +223,28 @@ public class Segmentation {
         return num;
     }
 
-    private Word createWord(StringBuilder bufSentence, String type) {
-        return new Word(toChars(bufSentence), type);
+    private Word createWord(StringBuilder textBuffer, String type) {
+        return new Word(toChars(textBuffer), type);
     }
 
-    private TextFragment creageTextFragment(StringBuilder bufSentence) {
-        return new TextFragment(toChars(bufSentence),
-                startIndex(bufSentence));
+    private TextFragment creageTextFragment(StringBuilder textBuffer) {
+        return new TextFragment(toChars(textBuffer),
+                startIndex(textBuffer));
     }
 
     /**
-     * 取得 bufSentence 的第一个字符在整个文本中的位置
+     * 取得 textBuffer 的第一个字符在整个文本中的位置
      */
-    private int startIndex(StringBuilder bufSentence) {
-        return index - bufSentence.length() + 1;
+    private int startIndex(StringBuilder textBuffer) {
+        return index - textBuffer.length() + 1;
     }
 
     /**
      * 从 StringBuilder 里复制出 char[]
      */
-    private static char[] toChars(StringBuilder bufSentence) {
-        char[] chs = new char[bufSentence.length()];
-        bufSentence.getChars(0, bufSentence.length(), chs, 0);
+    private static char[] toChars(StringBuilder textBuffer) {
+        char[] chs = new char[textBuffer.length()];
+        textBuffer.getChars(0, textBuffer.length(), chs, 0);
         return chs;
     }
 
@@ -361,5 +369,21 @@ public class Segmentation {
             return NationLetter.GE;
         }
         return NationLetter.UNKNOW;
+    }
+
+
+    public static void main(String... args) throws IOException {
+
+        Injector injector = Guice.createInjector(new SegmentModule());
+
+        Segmentation seg = injector.getInstance(Segmentation.class);
+        seg.setReader(new StringReader("京华时报２００８年1月23日报道 昨天，受一股来自中西伯利亚的强冷空气影响，本市出现大风降温天气，白天最高气温只有零下7摄氏度，同时伴有6到7级的偏北风。"));
+
+        Word w = seg.next();
+
+        while(w != null){
+            System.out.println("w: " + w.getValue());
+            w = seg.next();
+        }
     }
 }

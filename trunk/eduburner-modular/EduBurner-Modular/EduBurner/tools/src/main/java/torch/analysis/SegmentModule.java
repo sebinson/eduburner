@@ -12,6 +12,8 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import torch.analysis.algorithm.ComplexAlgorithm;
+import torch.analysis.algorithm.IAlgorithm;
 import torch.analysis.rule.IRule;
 import torch.analysis.rule.LargestAvgWordLenRule;
 import torch.analysis.rule.LargestSumMorphemicFreedomDegreeRule;
@@ -42,6 +44,8 @@ public class SegmentModule extends AbstractModule {
 				.to(LargestAvgWordLenRule.class);
 		bind(IRule.class).annotatedWith(Names.named("MaxMatchRule")).to(
 				MaxMatchRule.class);
+
+        bind(IAlgorithm.class).annotatedWith(Names.named("complexAlgorithm")).to(ComplexAlgorithm.class);
 
 	}
 
