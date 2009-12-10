@@ -22,7 +22,7 @@ public class SimpleSegTest {
         ComplexAlgorithm sa = injector.getInstance(ComplexAlgorithm.class);
         //SimpleAlgorithm sa = injector.getInstance(SimpleAlgorithm.class);
 
-        String content = "研究生命科学";
+        String content = "研究生命起源";
 
         Iterable<Word> iter = sa.segment(content.toCharArray());
 
