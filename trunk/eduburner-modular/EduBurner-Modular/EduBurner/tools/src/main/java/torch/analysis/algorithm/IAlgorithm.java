@@ -11,5 +11,5 @@ import torch.analysis.model.TextFragment;
  */
 public interface IAlgorithm {
 
-	public Chunk createChunk(TextFragment textFragment);
+	public Chunk doSegment(TextFragment textFragment);
 }

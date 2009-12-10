@@ -12,6 +12,18 @@ public class LanguageUtil {
         return Character.UnicodeBlock.of(c) == Character.UnicodeBlock.BASIC_LATIN;
     }
 
+    public static boolean isAsciiLetter(int codePoint) {
+		return (codePoint >= 'A' && codePoint <= 'Z') || (codePoint >= 'a' && codePoint <= 'z');
+	}
+
+	public static boolean isRussiaLetter(int codePoint) {
+		return (codePoint >= 'А' && codePoint <= 'я') || codePoint=='Ё' || codePoint=='ё';
+	}
+
+	public static boolean isGreeceLetter(int codePoint) {
+		return (codePoint >= 'Α' && codePoint <= 'Ω') || (codePoint >= 'α' && codePoint <= 'ω');
+	}
+
     public static boolean isCJKCharacter(char input) {
         return Character.UnicodeBlock.of(input)
                 == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS;

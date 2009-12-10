@@ -36,7 +36,7 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	@Inject
 	private Dictionary dictionary;
 
-	public Chunk createChunk(TextFragment textFragment) {
+	public Chunk doSegment(TextFragment textFragment) {
 		Chunk[] chunks = createChunks(textFragment.getText(), textFragment
 				.getOffset());
 		Chunk[] chunkList = mmRule.applyRule(chunks);
