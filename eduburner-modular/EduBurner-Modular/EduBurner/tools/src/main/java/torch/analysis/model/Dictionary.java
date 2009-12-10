@@ -57,10 +57,10 @@ public class Dictionary {
         }
 
         
-        Iterable<String> charFilePaths = Splitter.on(",").trimResults().split(charFiles);
+        /*Iterable<String> charFilePaths = Splitter.on(",").trimResults().split(charFiles);
         for (String charFile : charFilePaths) {
             loadDict(resourceLoader.getResource(charFile).getFile(), DictType.CHARS);
-        }
+        }*/
     }
 
     private void loadDict(File file, final DictType type) throws IOException {
