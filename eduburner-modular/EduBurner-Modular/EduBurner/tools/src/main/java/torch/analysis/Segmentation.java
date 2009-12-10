@@ -25,10 +25,10 @@ public class Segmentation {
     private PushbackReader reader;
     private IAlgorithm algorithm;
 
-    private StringBuilder fragBuffer = new StringBuilder(256);
-    private TextFragment textFragment;
+    private StringBuilder textBuffer = new StringBuilder(256);  //存储一个一个的文本片断
+    private TextFragment textFragment;    //当前的文本片断
     private Queue<Word> wordBuffer; // word 缓存, 因为有 chunk 分析三个以上.
-    private int index = 0;
+    private int index = 0;          //当前字符指针
 
     public Segmentation(Reader input){
          init(input);
@@ -38,21 +38,22 @@ public class Segmentation {
         this.reader = new PushbackReader(new BufferedReader(input), 20);
         textFragment = null;
         wordBuffer = Lists.newLinkedList();
-        fragBuffer.setLength(0);
+        textBuffer.setLength(0);
         index = -1;
     }
 
+    //TODO: return Iterable<Word> instead of Word
     public Word next() throws IOException {
         Word word = wordBuffer.poll();
         if (word == null) {
-            fragBuffer.setLength(0);
+            textBuffer.setLength(0);
             int data = -1;
             boolean read = true;
             while (read && (data = readNext()) != -1) {
                 read = false; // 默认一次可以读出同一类字符,就可以分词内容
                 int type = Character.getType(data);
-                String wordType = Word.TYPE_WORD;
                 switch (type) {
+                    //字母或字母后加数字，无需分词，直接创建Word
                     case Character.UPPERCASE_LETTER:
                     case Character.LOWERCASE_LETTER:
                     case Character.TITLECASE_LETTER:
@@ -63,61 +64,19 @@ public class Segmentation {
                             read = true;
                             break;
                         }
-                        wordType = Word.TYPE_LETTER;
-                        fragBuffer.appendCodePoint(data);
-                        switch (nl) {
-                            case EN:
-                                // 字母后面的数字,如: VH049PA
-                                ReadCharByAsciiOrDigit rcad = new ReadCharByAsciiOrDigit();
-                                readChars(fragBuffer, rcad);
-                                if (rcad.hasDigit()) {
-                                    wordType = Word.TYPE_LETTER_OR_DIGIT;
-                                }
-                                break;
-                            case RA:
-                                readChars(fragBuffer, new ReadCharByRussia());
-                                break;
-                            case GE:
-                                readChars(fragBuffer, new ReadCharByGreece());
-                                break;
-                        }
-                        wordBuffer.add(createWord(fragBuffer, wordType));
-                        fragBuffer.setLength(0);
+                        handleNationalLetter(data, nl);
+                        break;
                     case Character.OTHER_LETTER:
-                        fragBuffer.appendCodePoint(data);
-                        readChars(fragBuffer, new ReadCharByType(Character.OTHER_LETTER));
-                        textFragment = createSentence(fragBuffer);
-                        fragBuffer.setLength(0);
+                        handlOtherLetter(data);
                         break;
                     case Character.DECIMAL_DIGIT_NUMBER:
-                        fragBuffer.appendCodePoint(toAscii(data));
-                        readChars(fragBuffer, new ReadCharDigit());    //读后面的数字, AsciiLetterOr
-                        wordType = Word.TYPE_DIGIT;
-                        int d = readNext();
-                        if (d > -1) {
-                            pushBack(d);
-                            if (readChars(fragBuffer, new ReadCharByAsciiOrDigit()) > 0) {    //如果有字母或数字都会连在一起.
-                                wordType = Word.TYPE_DIGIT_OR_LETTER;
-                            }
-                        }
-                        wordBuffer.add(createWord(fragBuffer, wordType));
-                        fragBuffer.setLength(0);    //缓存的字符清除
+                        handleDecimalDigitNumber(data);
                         break;
                     case Character.LETTER_NUMBER:
-                        fragBuffer.appendCodePoint(data);
-                        readChars(fragBuffer, new ReadCharByType(Character.LETTER_NUMBER));
-
-                        int startIdx = calStartIndex(fragBuffer);
-                        for (int i = 0; i < fragBuffer.length(); i++) {
-                            wordBuffer.add(new Word(new char[]{fragBuffer.charAt(i)}, Word.TYPE_LETTER_NUMBER));
-                        }
-                        fragBuffer.setLength(0);    //缓存的字符清除
+                        hanleLetterNumber(data);
                         break;
                     case Character.OTHER_NUMBER:
-                        fragBuffer.appendCodePoint(data);
-                        readChars(fragBuffer, new ReadCharByType(Character.OTHER_NUMBER));
-                        wordBuffer.add(createWord(fragBuffer, Word.TYPE_OTHER_NUMBER));
-                        fragBuffer.setLength(0);
+                        handleOtherNumber(data);
                         break;
                     default:
                         //其它认为无效字符
@@ -129,6 +88,87 @@ public class Segmentation {
             word = wordBuffer.poll();
         }
         return word;
+    }
+
+    private void handleNationalLetter(int data, NationLetter nl) throws IOException {
+        String wordType = Word.TYPE_LETTER;
+        textBuffer.appendCodePoint(data);
+        switch (nl) {
+            case EN:
+                // 字母后面的数字,如: VH049PA
+                ReadCharByAsciiOrDigit rcad = new ReadCharByAsciiOrDigit();
+                readChars(textBuffer, rcad);
+                if (rcad.hasDigit()) {
+                    wordType = Word.TYPE_LETTER_OR_DIGIT;
+                }
+                break;
+            case RA:
+                readChars(textBuffer, new ReadCharByRussia());
+                break;
+            case GE:
+                readChars(textBuffer, new ReadCharByGreece());
+                break;
+        }
+        wordBuffer.add(createWord(textBuffer, wordType));
+        textBuffer.setLength(0);
+    }
+
+    private void handleOtherNumber(int data) throws IOException {
+        //①⑩㈠㈩⒈⒑⒒⒛⑴⑽⑾⒇ 连着用
+        textBuffer.appendCodePoint(data);
+        readChars(textBuffer, new ReadCharByType(Character.OTHER_NUMBER));
+        wordBuffer.add(createWord(textBuffer, Word.TYPE_OTHER_NUMBER));
+        textBuffer.setLength(0);
+    }
+
+    private void hanleLetterNumber(int data) throws IOException {
+        // ⅠⅡⅢ 单分
+        textBuffer.appendCodePoint(data);
+        readChars(textBuffer, new ReadCharByType(Character.LETTER_NUMBER));
+        for (int i = 0; i < textBuffer.length(); i++) {
+            wordBuffer.add(new Word(new char[]{textBuffer.charAt(i)}, Word.TYPE_LETTER_NUMBER));
+        }
+        textBuffer.setLength(0);    //缓存的字符清除
+    }
+
+    private void handleDecimalDigitNumber(int data) throws IOException {
+        String wordType;
+        textBuffer.appendCodePoint(toAscii(data));
+        readChars(textBuffer, new ReadCharDigit());    //读后面的数字, AsciiLetterOr
+        wordType = Word.TYPE_DIGIT;
+        int d = readNext();
+        if (d > -1) {
+            /*if(seg.isUnit(d)) {	//单位,如时间
+							bufWord.add(createWord(bufSentence, startIdx(bufSentence)-1, Word.TYPE_DIGIT));	//先把数字添加(独立)
+
+							bufSentence.setLength(0);
+
+							bufSentence.appendCodePoint(d);
+							wordType = Word.TYPE_WORD;	//单位是 word
+						} else {	//后面可能是字母和数字
+							pushBack(d);
+							if(readChars(bufSentence, new ReadCharByAsciiOrDigit()) > 0) {	//如果有字母或数字都会连在一起.
+								wordType = Word.TYPE_DIGIT_OR_LETTER;
+							}
+						}*/
+            pushBack(d);
+            if (readChars(textBuffer, new ReadCharByAsciiOrDigit()) > 0) {    //如果有字母或数字都会连在一起.
+                wordType = Word.TYPE_DIGIT_OR_LETTER;
+            }
+        }
+        wordBuffer.add(createWord(textBuffer, wordType));
+        textBuffer.setLength(0);    //缓存的字符清除
+    }
+
+    private void handlOtherLetter(int data) throws IOException {
+         /*
+          * 1. 0x3041-0x30f6 -> ぁ-ヶ	//日文(平|片)假名
+		  * 2. 0x3105-0x3129 -> ㄅ-ㄩ	//注意符号
+		  */
+        textBuffer.appendCodePoint(data);
+        readChars(textBuffer, new ReadCharByType(Character.OTHER_LETTER));
+        textFragment = creageTextFragment(textBuffer);
+        textBuffer.setLength(0);
     }
 
     private int readNext() throws IOException {
@@ -179,15 +219,15 @@ public class Segmentation {
         return new Word(toChars(bufSentence), type);
     }
 
-    private TextFragment createSentence(StringBuilder bufSentence) {
+    private TextFragment creageTextFragment(StringBuilder bufSentence) {
         return new TextFragment(toChars(bufSentence),
-                calStartIndex(bufSentence));
+                startIndex(bufSentence));
     }
 
     /**
      * 取得 bufSentence 的第一个字符在整个文本中的位置
      */
-    private int calStartIndex(StringBuilder bufSentence) {
+    private int startIndex(StringBuilder bufSentence) {
         return index - bufSentence.length() + 1;
     }
 

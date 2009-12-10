@@ -12,16 +12,15 @@ public class Word {
 	public static final String TYPE_LETTER_NUMBER = "letter_number";
 	public static final String TYPE_OTHER_NUMBER = "other_number";
 	
-    private char[] textData;          //整个文本片断
-    private int offset;               //偏移量
+    private char[] textData;          //text fragment
+    private int offset;               //在当前frag里的偏移量
     private int length = 0;           //长度
     private int frequency = 0;
 
+    private int startOffset = 0;      //word在整个文本中的偏移量
+
     private String type = TYPE_WORD;
 
-    /**
-	 * @param startOffset word 在整个文本中的偏移位置
-	 */
 	public Word(char[] textData) {
 		super();
 		this.textData = textData;
@@ -29,9 +28,6 @@ public class Word {
 		this.length = textData.length;
 	}
 	
-	/**
-	 * @param startOffset word 在整个文本中的偏移位置
-	 */
 	public Word(char[] textData, String wordType) {
 		this(textData);
 		this.type = wordType;
@@ -39,7 +35,6 @@ public class Word {
 	
 	/**
 	 * sen[offset] 开始的 len 个字符才是此 word
-	 * @param senStartOffset sen 在整个文本中的偏移位置
 	 * @param offset 词在 sen 的偏移位置
 	 * @param len 词长
 	 */
@@ -93,8 +88,24 @@ public class Word {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	public String toString() {
-		return getString();
-	}
+
+    public int getStartOffset() {
+        return startOffset;
+    }
+
+    public void setStartOffset(int startOffset) {
+        this.startOffset = startOffset;
+    }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "textData=" + textData +
+                ", offset=" + offset +
+                ", length=" + length +
+                ", frequency=" + frequency +
+                ", startOffset=" + startOffset +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
