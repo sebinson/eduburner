@@ -102,6 +102,7 @@ public class Word {
     public String toString() {
         return "Word{" +
                 "textData=" + new String(textData) +
+                ", value=" + getValue() +
                 ", offset=" + offset +
                 ", length=" + length +
                 ", frequency=" + frequency +
