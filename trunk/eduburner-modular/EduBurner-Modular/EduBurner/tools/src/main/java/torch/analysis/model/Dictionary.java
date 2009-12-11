@@ -180,19 +180,16 @@ public class Dictionary {
         
         public Word[] findMatchWords(char[] chars, int offset) {
             List<Integer> l = wordTails.findMatchWords(chars, offset);
-            if (l.size() == 0) {
-                Word word = new Word(chars, offset, 1);
-                word.setFrequency(frequency);
-                Word[] words = new Word[]{word};
-                return words;
-            }
 
-            Word[] words = new Word[l.size()];
+            List<Word> wordList = Lists.newArrayList();
+            Word word = new Word(chars, offset, 1);
+            word.setFrequency(frequency);
+            wordList.add(word);
             for (int i = 0; i < l.size(); i++) {
                 int p = l.get(i);
-                words[i] = new Word(chars, offset, p-offset+1);
+                wordList.add(new Word(chars, offset, p-offset+1));
             }
-            return words;
+            return wordList.toArray(new Word[0]);
         }
 
         public int getFrequency() {

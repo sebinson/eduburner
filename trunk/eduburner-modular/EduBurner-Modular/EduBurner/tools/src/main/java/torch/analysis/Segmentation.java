@@ -372,7 +372,7 @@ public class Segmentation {
         Injector injector = Guice.createInjector(new SegmentModule());
 
         Segmentation seg = injector.getInstance(Segmentation.class);
-        seg.setReader(new StringReader("京华时报２００８年1月23日报道 昨天，受一股来自中西伯利亚的强冷空气影响，本市出现大风降温天气，白天最高气温只有零下7摄氏度，同时伴有6到7级的偏北风。"));
+        seg.setReader(new StringReader("京华时报２００８年1月23日报道 昨天，受一股来自中西伯利亚的强冷空气影响，本市出现大风降温天气，白天最高气温只有零下7摄氏度，同时伴有6到7级的偏北风"));
 
         Word w = seg.next();
 
