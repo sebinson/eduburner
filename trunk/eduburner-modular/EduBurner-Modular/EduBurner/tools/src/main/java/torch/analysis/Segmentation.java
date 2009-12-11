@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 import com.google.inject.name.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import torch.analysis.algorithm.AbstractAlgorithm;
 import torch.analysis.algorithm.IAlgorithm;
 import torch.analysis.model.Chunk;
 import torch.analysis.model.TextFragment;
@@ -28,7 +29,7 @@ public class Segmentation {
 
     @Inject
     @Named("complexAlgorithm")
-    private IAlgorithm algorithm;
+    private AbstractAlgorithm algorithm;
 
     private StringBuilder textBuffer;      //存储一个一个的文本片断
     private TextFragment textFragment;     //当前的文本片断
@@ -159,22 +160,16 @@ public class Segmentation {
         wordType = Word.TYPE_DIGIT;
         int d = readNext();
         if (d > -1) {
-            /*if(seg.isUnit(d)) {	//单位,如时间
-							bufWord.add(createWord(bufSentence, startIdx(bufSentence)-1, Word.TYPE_DIGIT));	//先把数字添加(独立)
-
-							bufSentence.setLength(0);
-
-							bufSentence.appendCodePoint(d);
-							wordType = Word.TYPE_WORD;	//单位是 word
-						} else {	//后面可能是字母和数字
-							pushBack(d);
-							if(readChars(bufSentence, new ReadCharByAsciiOrDigit()) > 0) {	//如果有字母或数字都会连在一起.
-								wordType = Word.TYPE_DIGIT_OR_LETTER;
-							}
-						}*/
-            pushBack(d);
-            if (readChars(textBuffer, new ReadCharByAsciiOrDigit()) > 0) {    //如果有字母或数字都会连在一起.
-                wordType = Word.TYPE_DIGIT_OR_LETTER;
+            if (algorithm.isUnit(d)) {
+                wordBuffer.add(createWord(textBuffer, Word.TYPE_DIGIT));
+                textBuffer.setLength(0);
+                textBuffer.appendCodePoint(d);
+                wordType = Word.TYPE_WORD;
+            } else {
+                pushBack(d);
+                if (readChars(textBuffer, new ReadCharByAsciiOrDigit()) > 0) {    //如果有字母或数字都会连在一起.
+                    wordType = Word.TYPE_DIGIT_OR_LETTER;
+                }
             }
         }
         wordBuffer.add(createWord(textBuffer, wordType));
@@ -377,7 +372,7 @@ public class Segmentation {
         Injector injector = Guice.createInjector(new SegmentModule());
 
         Segmentation seg = injector.getInstance(Segmentation.class);
-        seg.setReader(new StringReader("中西伯利亚"));
+        seg.setReader(new StringReader("京华时报２００８年1月23日报道 昨天，受一股来自中西伯利亚的强冷空气影响，本市出现大风降温天气，白天最高气温只有零下7摄氏度，同时伴有6到7级的偏北风。"));
 
         Word w = seg.next();
 

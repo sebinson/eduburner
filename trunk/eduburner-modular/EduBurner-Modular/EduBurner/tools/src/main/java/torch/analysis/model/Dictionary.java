@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 import com.google.inject.Guice;
@@ -21,14 +22,17 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Dictionary {
 
     private static final Logger logger = LoggerFactory.getLogger(Dictionary.class);
 
     private Map<Character, CharNode> dict;
+    private Set<Character> units;
     private String wordFiles;
     private String charFiles;
+    private String unitFiles;
     private Charset charset = Charsets.UTF_8;
 
 
@@ -38,15 +42,22 @@ public class Dictionary {
 
     @Inject
     public Dictionary(@Named("wordFiles") String dictFiles,
-                      @Named("charFiles") String charFiles) {
+                      @Named("charFiles") String charFiles,
+                      @Named("unitFiles") String unitFiles) {
         this.wordFiles = dictFiles;
         this.charFiles = charFiles;
+        this.unitFiles = unitFiles;
         dict = Maps.newHashMap();
+        units = Sets.newHashSet();
         try {
             loadDictionary();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isUnit(Character ch){
+        return units.contains(ch);
     }
 
     private void loadDictionary() throws IOException {
@@ -60,6 +71,11 @@ public class Dictionary {
         Iterable<String> filePaths = Splitter.on(",").trimResults().split(wordFiles);
         for (String filePath : filePaths) {
             loadDict(resourceLoader.getResource(filePath).getFile(), DictType.WORDS);
+        }
+
+        Iterable<String> unitFilePaths = Splitter.on(",").trimResults().split(unitFiles);
+        for (String filePath : unitFilePaths) {
+            loadDict(resourceLoader.getResource(filePath).getFile(), DictType.UNIT);
         }
         
     }
@@ -76,6 +92,8 @@ public class Dictionary {
                         loadWords(line);
                     } else if (type == DictType.CHARS) {
                         loadChars(line);
+                    } else if (type == DictType.UNIT){
+                        loadUnits(line);
                     }
                 }
                 return true;
@@ -113,6 +131,13 @@ public class Dictionary {
             dict.put(line.charAt(0), cn);
         }
         cn.addWordTail(tail(line));
+    }
+
+    private void loadUnits(String line){
+        char ch = line.charAt(0);
+        if(!units.contains(ch)){
+            units.add(new Character(ch));
+        }
     }
 
     private char[] tail(String str) {
