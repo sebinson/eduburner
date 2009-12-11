@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Command line test" failures="0" tests="2" time="5.937" errors="0">
+  <properties/>
+  <testcase name="testSaveUser" time="0.11" classname="readerside.test.dao.GrUserDaoTest"/>
+  <testcase name="doTest" time="0.016" classname="readerside.test.model.TestGrEntry"/>
+</testsuite>

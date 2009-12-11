@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+       	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <bean id="crawler" class="readerside.crawler.DefaultCrawler" init-method="init">
+        <property name="maxWorkerThreadSize" value="1"/>
+        <property name="seedUserIds">
+            <list>
+                <value>09166964415516033892</value>
+                <value>06601636036055060713</value>
+                <value>05597061783814717014</value>
+                <value>14045732697008354981</value>
+                <value>07135184458640162285</value>
+                <value>12861038172262976459</value>
+                <value>06601636036055060713</value>
+                <value>14680051848918851651</value>
+                <!--<value>07159170822501425721</value>
+                <value>05422701936444684249</value>
+                <value>07135184458640162285</value>
+            --></list>
+        </property>
+        <property name="processors" >
+            <list>
+                <ref bean="httpProcessor"/>
+            </list>
+        </property>
+        <property name="notPermittedIds">
+            <list>
+                <value>03265520349226549544</value>
+                <value>12447035790010947950</value>
+                <value>15047520805688141920</value>
+                <value>14454426474880547072</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="httpProcessor" class="readerside.crawler.processor.HttpProcessor">
+        <property name="userAgent" value="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.5) Gecko/20091102"/>
+        <property name="timeout" value="60000" />
+        <property name="abdera" ref="abdera" />
+    </bean>
+
+    <bean id="frontier" class="readerside.crawler.frontier.WorkQueueFrontier" init-method="init">
+        <property name="minCrawlInterval" value="2000" />
+    </bean>
+
+    <bean id="abdera" class="org.apache.abdera.Abdera" />
+</beans>
