@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import torch.analysis.algorithm.AbstractAlgorithm;
 import torch.analysis.algorithm.ComplexAlgorithm;
 import torch.analysis.algorithm.IAlgorithm;
 import torch.analysis.rule.IRule;
@@ -45,7 +46,7 @@ public class SegmentModule extends AbstractModule {
 		bind(IRule.class).annotatedWith(Names.named("MaxMatchRule")).to(
 				MaxMatchRule.class);
 
-        bind(IAlgorithm.class).annotatedWith(Names.named("complexAlgorithm")).to(ComplexAlgorithm.class);
+        bind(AbstractAlgorithm.class).annotatedWith(Names.named("complexAlgorithm")).to(ComplexAlgorithm.class);
 
 	}
 

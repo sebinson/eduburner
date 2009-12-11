@@ -54,6 +54,10 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 		return chunk;
 	}
 
+    public boolean isUnit(int codePoint){
+        return dictionary.isUnit((char)codePoint);
+    }
+
 	protected abstract Chunk[] createChunks(char[] chars, int offset);
 
 	// 从词典里找出以index开始的所有匹配的词。
