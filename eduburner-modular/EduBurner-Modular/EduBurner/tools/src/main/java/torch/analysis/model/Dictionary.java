@@ -51,16 +51,17 @@ public class Dictionary {
 
     private void loadDictionary() throws IOException {
         ResourceLoader resourceLoader = new DefaultResourceLoader();
+
+        Iterable<String> charFilePaths = Splitter.on(",").trimResults().split(charFiles);
+        for (String charFile : charFilePaths) {
+            loadDict(resourceLoader.getResource(charFile).getFile(), DictType.CHARS);
+        }
+
         Iterable<String> filePaths = Splitter.on(",").trimResults().split(wordFiles);
         for (String filePath : filePaths) {
             loadDict(resourceLoader.getResource(filePath).getFile(), DictType.WORDS);
         }
-
         
-        /*Iterable<String> charFilePaths = Splitter.on(",").trimResults().split(charFiles);
-        for (String charFile : charFilePaths) {
-            loadDict(resourceLoader.getResource(charFile).getFile(), DictType.CHARS);
-        }*/
     }
 
     private void loadDict(File file, final DictType type) throws IOException {
@@ -260,6 +261,8 @@ public class Dictionary {
 
         Word[] word = dict.findMatchWords("研究生命起源".toCharArray(), 0);
 
-        System.out.println("word length: " + word.length);
+        for(Word w:word){
+            System.out.println("w: " + w.getValue());
+        }
     }
 }
