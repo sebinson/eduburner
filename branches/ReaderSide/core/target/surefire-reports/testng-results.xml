@@ -1,0 +1,42 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite">
+    <groups>
+    </groups>
+    <test name="Command line test">
+      <class name="readerside.test.dao.GrUserDaoTest">
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="5422" started-at="2009-12-05T11:19:21Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2009-12-05T11:19:26Z">
+        </test-method>
+        <test-method status="PASS" signature="testSaveUser()" name="testSaveUser" duration-ms="110" started-at="2009-12-05T11:19:26Z" finished-at="2009-12-05T11:19:26Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestClass()" name="springTestContextAfterTestClass" is-config="true" duration-ms="0" started-at="2009-12-05T11:19:27Z" finished-at="2009-12-05T11:19:27Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()" name="springTestContextBeforeTestClass" is-config="true" duration-ms="0" started-at="2009-12-05T11:19:21Z" finished-at="2009-12-05T11:19:21Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="218" started-at="2009-12-05T11:19:26Z" finished-at="2009-12-05T11:19:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void readerside.test.dao.GrUserDaoTest.testSaveUser()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)" name="springTestContextAfterTestMethod" is-config="true" duration-ms="94" started-at="2009-12-05T11:19:26Z" finished-at="2009-12-05T11:19:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void readerside.test.dao.GrUserDaoTest.testSaveUser()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+      </class>
+      <class name="readerside.test.model.TestGrEntry">
+        <test-method status="PASS" signature="doTest()" name="doTest" duration-ms="16" started-at="2009-12-05T11:19:27Z" finished-at="2009-12-05T11:19:27Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

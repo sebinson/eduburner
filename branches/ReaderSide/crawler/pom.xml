@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>readerside</groupId>
+        <artifactId>readerside</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>readerside-crawler</artifactId>
+    <packaging>jar</packaging>
+    <name>readerside crawler</name>
+    
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+    </build>
+
+    <dependencies>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.0</version>
+		</dependency>
+        <dependency>
+			<groupId>org.apache.abdera</groupId>
+			<artifactId>abdera-client</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+            <groupId>readerside</groupId>
+            <artifactId>readerside-core</artifactId>
+			<version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

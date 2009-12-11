@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<feed xmlns:idx="urn:atom-extension:indexing" xmlns:gr="http://www.google.com/schemas/reader/atom/"
+      xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom" idx:index="no">
+  <!--
+Content-type: Preventing XSRF in IE.
+-->
+    <generator uri="http://www.google.com/reader">Google Reader</generator>
+    <id>tag:google.com,2005:reader/user/08329833989985440204/state/com.google/broadcast</id>
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <title>aa's shared items in Google Reader</title>
+    <link rel="self"
+          href="http://www.google.com/reader/public/atom/user%2F08329833989985440204%2Fstate%2Fcom.google%2Fbroadcast"/>
+    <author>
+        <name>aa</name>
+    </author>
+    <updated>2009-10-12T05:49:09Z</updated>
+    <entry gr:crawl-timestamp-msec="1255326549567">
+        <id gr:original-id="http://hi.baidu.com/madesign/blog/item/5f37874493759045510ffeff.html">
+            tag:google.com,2005:reader/item/4927a05b75704361
+        </id>
+        <category term="体验"/>
+        <title type="html">定时灯 - 电子蜡烛</title>
+        <published>2009-08-01T06:57:00Z</published>
+        <updated>2009-08-01T06:57:00Z</updated>
+        <link rel="alternate" href="http://hi.baidu.com/madesign/blog/item/5f37874493759045510ffeff.html"
+              type="text/html"/>
+        <summary xml:base="http://hi.baidu.com/madesign" type="html">&lt;a
+            href="http://www.existingvisual.com/2009/07/31/time-your-light/"&gt;定时灯&lt;/a&gt;，旋转底部的定时器，到点时灯就会缓缓亮起。有点类似机械表的原理，不用电池或充电，上紧的发条就可以点亮这掌灯。灯光的效果和蜡烛很相似，你甚至可以把它看成经济安全的电子蜡烛，Jasper
+            Hou 设计：&lt;br&gt;
+            &lt;br&gt;
+            &lt;div&gt;&lt;img border="0" src="http://hiphotos.baidu.com/madesign/pic/item/d2cf39db272c534fd0164e9a.jpg"&gt;&lt;/div&gt;
+            &lt;br&gt;
+            &lt;div&gt;&lt;img border="0" src="http://hiphotos.baidu.com/madesign/pic/item/c017b07ed75264110cd7da9b.jpg"&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;img border="0" src="http://hiphotos.baidu.com/madesign/pic/item/7629d42a21e735b2023bf664.jpg"&gt;&lt;/div&gt;
+
+            &lt;br&gt;&lt;b&gt;类别：&lt;/b&gt;&lt;a href="http://hi.baidu.com/madesign/blog/category/%CC%E5%D1%E9"&gt;体验&lt;/a&gt; &lt;a
+            href="http://hi.baidu.com/madesign/blog/item/5f37874493759045510ffeff.html#comment"&gt;查看评论&lt;/a&gt;</summary>
+        <author>
+            <name>madesign</name>
+        </author>
+        <gr:likingUser>01689548691870894482</gr:likingUser>
+        <gr:likingUser>06107385998877995938</gr:likingUser>
+        <gr:likingUser>05244343351169542224</gr:likingUser>
+        <gr:likingUser>03635115558197735050</gr:likingUser>
+        <gr:likingUser>08329833989985440204</gr:likingUser>
+        <gr:likingUser>10827318460036708411</gr:likingUser>
+        <source gr:stream-id="feed/http://hi.baidu.com/madesign/rss">
+            <id>tag:google.com,2005:reader/feed/http://hi.baidu.com/madesign/rss</id>
+            <title type="html">疯狂的设计</title>
+            <link rel="alternate" href="http://hi.baidu.com/madesign" type="text/html"/>
+        </source>
+    </entry>
+</feed>

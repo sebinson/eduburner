@@ -1,0 +1,14 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Custom suite">
+    <groups>
+    </groups>
+    <test name="readerside">
+      <class name="readerside.crawler.test.HttpProcessorTest">
+        <test-method status="PASS" signature="testProcessHttp()" name="testProcessHttp" duration-ms="244531" started-at="2009-11-29T19:02:10Z" finished-at="2009-11-29T19:06:15Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

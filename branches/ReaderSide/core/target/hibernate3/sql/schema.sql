@@ -1,0 +1,15 @@
+drop table if exists entry_data;
+drop table if exists gr_entry;
+drop table if exists gr_shared_feed;
+drop table if exists gr_user;
+drop table if exists source_feed;
+create table entry_data (id bigint not null auto_increment, content_val longtext, grEntryId varchar(255), summary_val longtext, primary key (id)) ENGINE=InnoDB;
+create table gr_entry (id bigint not null auto_increment, category varchar(1000), cnEntry bit not null, grCrawlTime bigint, grEntryId longtext, grFeedId varchar(500), grSourceFeedId varchar(255), likingUserIdNum integer not null, likingUserIds varchar(10000), link varchar(500), originalId varchar(500), published datetime, sharingUserIdNum integer not null, sharingUserIds longtext, title varchar(2000), updated datetime, url varchar(255), primary key (id)) ENGINE=InnoDB;
+create table gr_shared_feed (id bigint not null auto_increment, author varchar(255), grFeedId varchar(500), grUserId varchar(255), selfLink varchar(255), title varchar(255), updatedTime datetime, primary key (id)) ENGINE=InnoDB;
+create table gr_user (id bigint not null auto_increment, cnUser bit not null, email varchar(255), grUserId varchar(255), lastFetchTime datetime, likingEntries longtext, sharingEntries longtext, primary key (id)) ENGINE=InnoDB;
+create table source_feed (id bigint not null auto_increment, feedUrl varchar(500), grSourceFeedId varchar(500), link varchar(500), title varchar(1000), primary key (id)) ENGINE=InnoDB;
+create index grentry_id_index on entry_data (grEntryId);
+create index grentry_id on gr_entry (grEntryId);
+create index grfeed_index on gr_shared_feed (grFeedId);
+create index gruserid_index on gr_user (grUserId);
+create index grsf_id on source_feed (grSourceFeedId);

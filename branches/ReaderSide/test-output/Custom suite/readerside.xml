@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="readerside" failures="0" tests="1" time="244.551" errors="0">
+  <properties/>
+  <testcase name="testProcessHttp" time="244.531" classname="readerside.crawler.test.HttpProcessorTest"/>
+</testsuite>
