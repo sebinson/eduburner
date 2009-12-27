@@ -23,35 +23,7 @@
         <context:exclude-filter type="aspectj" expression="eduburner.feed.fetcher..*"/>
         -->
     </context:component-scan>
-	
-	<!--
-	<aop:config proxy-target-class="true">
-		<aop:advisor pointcut="execution(* eduburner..*Manager*.*(..))" advice-ref="txAdvice" />
-	</aop:config>
-	
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="save*" />
-			<tx:method name="update*" />
-			<tx:method name="remove*" />
-			<tx:method name="create*" />
-			<tx:method name="getUserData" />
-			<tx:method name="*" read-only="true" />
-		</tx:attributes>
-	</tx:advice>
-	-->
-	
-	<!-- Invokes Spring MVC @Controller methods -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-	    <property name="webBindingInitializer">
-	        <!-- Configures Spring MVC DataBinder instances -->
-	        <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-	            <property name="validator" ref="validator" />
-	        </bean>
-	    </property>
-	</bean>
-	<!-- Creates the JSR-303 Validator -->
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
 
 	
 </beans>

@@ -41,11 +41,11 @@
 	 - examples:
 	 -     http://localhost:8080/static/images/pets.png
 	 -     http://localhost:8080/static/styles/petclinic.css
-	-->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
+    -->
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
