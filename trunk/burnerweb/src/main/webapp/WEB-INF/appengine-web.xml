@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application></application>
+    <application>burnerweb</application>
     <version>1</version>
 
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
+
+    <static-files>
+        <include path="/static/**"/>
+    </static-files>
+
+    <env-variables>
+        <env-var name="DEFAULT_ENCODING" value="UTF-8"/>
+    </env-variables>
 
     <sessions-enabled>true</sessions-enabled>
 </appengine-web-app>
