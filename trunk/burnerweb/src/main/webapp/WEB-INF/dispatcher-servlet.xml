@@ -8,7 +8,7 @@
 	<context:annotation-config />
 	
 	<context:component-scan base-package="burnerweb">
-    	<context:include-filter type="regex" expression="burnerweb\.controller\..*"/>
+    	<context:include-filter type="regex" expression="burnerweb\.scala\.controller\..*"/>
     </context:component-scan>
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">  
