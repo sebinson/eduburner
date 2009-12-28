@@ -17,12 +17,7 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="burnerweb">
-        <!--
-        <context:include-filter type="regex" expression="eduburner\.service\..*"/>
-        <context:exclude-filter type="aspectj" expression="eduburner.feed.fetcher..*"/>
-        -->
-    </context:component-scan>
+    <context:component-scan base-package="burnerweb" />
 
 
     <bean id="persistienceAnnotationBeanPostProcessor"
