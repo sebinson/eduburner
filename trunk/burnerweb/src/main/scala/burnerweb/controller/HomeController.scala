@@ -1,6 +1,5 @@
 package burnerweb.controller
 
-
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
@@ -15,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 class HomeController{
 
   @RequestMapping(Array("/"))
-  def home:String = { "index" }
+  def home:String = { "home" }
 
 }

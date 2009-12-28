@@ -2,6 +2,7 @@ package burnerweb.persistence
 
 import javax.persistence.{FlushModeType, LockModeType, PersistenceContext, EntityManager}
 import org.springframework.stereotype.Repository
+import reflect.BeanProperty
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,10 +12,14 @@ import org.springframework.stereotype.Repository
  */
 
 @Repository("dao")
-trait BaseDao {
+class BaseDao {
+
+  private var em: EntityManager = _
 
   @PersistenceContext
-  val em: EntityManager
+  def setEntityManager(entityMgr: EntityManager){
+      this.em = entityMgr
+  }
 
   /**
    * <p>
