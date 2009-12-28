@@ -19,7 +19,10 @@
       </facet>
     </facet>
     <facet type="Scala" name="Scala">
-      <configuration />
+      <configuration>
+        <option name="takeFromSettings" value="true" />
+        <option name="myScalaCompilerJarPath" value="E:\dev\java-tools\scala-2.7.7.final\lib\scala-compiler.jar" />
+      </configuration>
     </facet>
     <facet type="jpa" name="JPA">
       <configuration>
