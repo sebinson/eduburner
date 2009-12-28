@@ -17,9 +17,35 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="burnerweb" />
+    <context:component-scan base-package="burnerweb"/>
 
 
-    <bean id="persistienceAnnotationBeanPostProcessor"
-          class="burnerweb.spring.PersistenceAnnotationBeanPostProcessor"/>
+    <bean class="burnerweb.spring.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!--<bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceProvider">
+            <bean class="org.datanucleus.store.appengine.jpa.DatastorePersistenceProvider"></bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="datanucleus.NontransactionalRead">true</prop>
+                <prop key="datanucleus.NontransactionalWrite">true</prop>
+                <prop key="datanucleus.ConnectionURL">appengine</prop>
+            </props>
+        </property>
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
+        </property>
+    </bean>-->
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="transactions-optional"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
