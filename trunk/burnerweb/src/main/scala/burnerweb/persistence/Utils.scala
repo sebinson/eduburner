@@ -21,7 +21,7 @@ object Utils {
   /**
    * Used to handle find quirkiness
    */
-  private[jpa] def findToOption[A](f: => A): Option[A] = 
+  private[persistence] def findToOption[A](f: => A): Option[A] = 
     try {  
       f match {
         case null => None
