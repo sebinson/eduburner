@@ -1,10 +1,9 @@
 package burnerweb.persistence
 
 
-import javax.management.Query
-import javax.persistence.{FlushModeType, TemporalType}
 import java.util.{Calendar, Date}
-import scala.collection.jcl.Set.apply.Conversions
+import _root_.scala.collection.jcl.Conversions
+import javax.persistence.{Query, FlushModeType, TemporalType}
 
 
 /**
