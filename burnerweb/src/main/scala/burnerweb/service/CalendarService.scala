@@ -17,8 +17,12 @@ import scala.reflect.BeanProperty
 @Service("calendarService")
 class CalendarService  {
 
-  var dao: BaseDao = _
+  private var dao: BaseDao = null
 
   def saveCalendar(cal: Calendar) = dao.persist(cal)
+  def getAllCalendars() = dao.
+
+  @Autowired
+  def setDao(dao:BaseDao) = {this.dao = dao}
 
 }

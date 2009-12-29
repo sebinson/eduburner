@@ -14,7 +14,7 @@ import reflect.BeanProperty
 @Repository("dao")
 class BaseDao {
 
-  private var em: EntityManager = _
+  private var em: EntityManager = null
 
   @PersistenceContext
   def setEntityManager(entityMgr: EntityManager){
