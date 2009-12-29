@@ -2,6 +2,10 @@ package burnerweb.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
+import burnerweb.model.Calendar
+import org.springframework.ui.Model
+import burnerweb.service.CalendarService
+import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HomeController{
 
+  private var calendarService: CalendarService = null
+
   @RequestMapping(Array("/"))
-  def home:String = { "home" }
+  def home(model: Model):String = {
+    val calendar = new Calendar()
+    model.addAttribute("calendar", calendar)
+    "home"
+  }
+
+  @Autowired
+  def setCalendarService(calendarService: CalendarService) = {this.calendarService = calendarService}
 
 }
