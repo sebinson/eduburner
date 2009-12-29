@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import burnerweb.persistence.BaseDao
 import org.springframework.beans.factory.annotation.Autowired
 import burnerweb.model.Calendar
+import scala.reflect.BeanProperty
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +17,6 @@ import burnerweb.model.Calendar
 @Service("calendarService")
 class CalendarService  {
 
-  @Autowired
   var dao: BaseDao = _
 
   def saveCalendar(cal: Calendar) = dao.persist(cal)

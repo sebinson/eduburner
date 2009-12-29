@@ -7,6 +7,7 @@ import burnerweb.model.Calendar
 import org.springframework.web.bind.annotation.{ModelAttribute, RequestMethod, RequestMapping}
 import org.springframework.validation.BindingResult
 import org.springframework.ui.Model
+import reflect.BeanProperty
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,6 +20,7 @@ import org.springframework.ui.Model
 class CalendarController extends BaseController{
 
   @Autowired
+  @BeanProperty
   var calendarService: CalendarService = _
 
   @RequestMapping{val value = Array("/calendar.*"), val method = Array(RequestMethod.POST)}
