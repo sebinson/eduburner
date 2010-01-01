@@ -7,6 +7,7 @@ import burnerweb.model.Calendar
 import org.springframework.web.bind.annotation.{ModelAttribute, RequestMethod, RequestMapping}
 import org.springframework.validation.BindingResult
 import org.springframework.ui.Model
+
 /**
  * Created by IntelliJ IDEA.
  * User: rockmaple
@@ -15,15 +16,17 @@ import org.springframework.ui.Model
  */
 @Controller
 @RequestMapping(Array("/calendar"))
-class CalendarController extends BaseController{
-
+class CalendarController extends BaseController {
   private var calendarService: CalendarService = null
 
-  @RequestMapping{val method = Array(RequestMethod.POST)}
-  def create(@ModelAttribute("calendar") calendar:Calendar, br:BindingResult, model:Model): String = {
-     println("go to create method.")
-     calendarService.saveCalendar(calendar)
-     "home"
+  @RequestMapping {val method = Array(RequestMethod.POST)}
+  def create(@ModelAttribute("calendar") calendar: Calendar, br: BindingResult, model: Model): String = {
+    //println("go to create method. cal: " + calendar.lunarBirthday)
+    var cal = new Calendar
+    cal.startYear = 1999
+    cal.endYear = 1950
+    calendarService.saveCalendar(cal)
+    "home"
   }
 
   @Autowired

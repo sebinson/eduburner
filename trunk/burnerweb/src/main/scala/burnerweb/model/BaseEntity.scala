@@ -13,9 +13,6 @@ import javax.persistence._
 class BaseEntity {
   @Id
   @GeneratedValue {val strategy = GenerationType.IDENTITY}
-  var id: Int = _
-
-  @Version
-  var version: Int = _
+  var id: java.lang.Long = _
 
 }

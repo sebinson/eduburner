@@ -18,7 +18,7 @@
             <label for="birthday">农历生日:</label>
         </div>
         <div class="input-row">
-            <input id="birthday" name="calendar.birthday" class="text" type="text" readonly="readonly"/>
+            <input id="birthday" name="calendar.lunarBirthday" class="text" type="text" readonly="readonly"/>
             <div id="calContainer" style="display:none;position:absolute;z-index:10001"></div>
         </div>
 
