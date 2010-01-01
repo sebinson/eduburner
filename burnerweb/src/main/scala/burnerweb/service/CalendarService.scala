@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import burnerweb.persistence.BaseDao
 import org.springframework.beans.factory.annotation.Autowired
 import burnerweb.model.Calendar
-import scala.reflect.BeanProperty
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,8 +19,9 @@ class CalendarService  {
 
   private var dao: BaseDao = null
 
-  def saveCalendar(cal: Calendar) = dao.persist(cal)
-  def getAllCalendars() = dao.
+  def saveCalendar(cal: Calendar) = { dao.persist(cal) }
+  def findAllCalendars = { dao.find[Calendar]("SELECT FROM Calendar") }
+  def findCalendarById(id: Long) = { dao.find[Calendar](classOf[Calendar], id)}
 
   @Autowired
   def setDao(dao:BaseDao) = {this.dao = dao}

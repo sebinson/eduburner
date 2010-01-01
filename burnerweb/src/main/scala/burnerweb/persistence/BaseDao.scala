@@ -21,6 +21,11 @@ class BaseDao {
       this.em = entityMgr
   }
 
+  def find[A](query: String){
+    val q = createQuery[A](query)
+    q.getResultList
+  }
+
   /**
    * <p>
    * Returns a <code>List[A]</code> of the results of excuting the given query.
@@ -41,7 +46,7 @@ class BaseDao {
    * @return A List[A] representing the results of the query
    *
    */
-  def findAll[A](queryName: String, params: Pair[String, Any]*) = createAndParamify[A](queryName, params).findAll
+  def findAllByNamedQuery[A](queryName: String, params: Pair[String, Any]*) = createAndParamify[A](queryName, params).findAll
 
   /**
    * Creates a ScalaQuery representing the given named query with the given
@@ -171,7 +176,7 @@ class BaseDao {
    * of the query should be of type A. See
    * <a href="http://www.hibernate.org/hib_docs/entitymanager/reference/en/html/queryhql.html">http://www.hibernate.org/hib_docs/entitymanager/reference/en/html/queryhql.html</a> for an EJB-QL reference.
    *
-   * @param queryString The query string (EJBQL)
+   * @param ring The query string (EJBQL)
    * @return A new ScalaQuery[A] that uses the given query string
    */
   def createQuery[A](queryString: String) = new ScalaQuery[A](em.createQuery(queryString))

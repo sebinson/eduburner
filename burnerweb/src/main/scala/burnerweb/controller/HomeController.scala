@@ -23,6 +23,10 @@ class HomeController{
   def home(model: Model):String = {
     val calendar = new Calendar()
     model.addAttribute("calendar", calendar)
+    val allCalendars = calendarService.findAllCalendars
+    println("cal length: " + allCalendars.toString)
+    val c: Option[Calendar] = calendarService.findCalendarById(5L)
+    println("end year: " + c.get.endYear)
     "home"
   }
 
