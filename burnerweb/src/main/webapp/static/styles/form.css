@@ -1,0 +1,57 @@
+.eb-form-container { border: 1px solid #CFCFCF; width: 90%; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+	.eb-form-container .eb-form { padding:25px 30px; }
+.persistent { color: #333333; font-size:12px; font-weight:normal; line-height:16px; }
+.eb-form .seperator { border-top:1px solid #DDDDDD; clear:both; height:20px; margin-top:20px; overflow:hidden; }
+.eb-form .form-header { margin:0 0 10px; padding:0 0 10px; border-bottom:1px solid #CCCCCC; margin-bottom: 15px; }
+	.eb-form .form-header h2 { font-size: 15px; }
+.form-field { font: normal 1em tahoma, arial, helvetica, sans-serif; }
+.form-text, textarea.form-field { padding: 1px 3px; border: 1px solid #999999; width:13em}
+.form-text { height: 18px; line-height: 18px; vertical-align: middle; }
+.ie .form-text { margin:-1px 0; height:18px; line-height:18px; }
+.ie textarea.form-field { margin:-1px 0; }
+.mozilla .form-text { padding-top:2px; /* FF won't center the text vertically */ padding-bottom:0; }
+.form-item { font:normal 12px tahoma, arial, helvetica, sans-serif; display:block; margin-bottom:8px; }
+	.form-item label { display:block; float:left; width:100px; padding:3px; padding-left:0; clear:left; z-index:2; font-size: 13px; position:relative; }
+		.form-item label span { color: #D01E3B; }
+.form-element { padding-left:105px; position:relative; }
+.form-invalid-msg { color:#ee0000; padding:2px; padding-left:18px; font:normal 1em tahoma, arial, helvetica, sans-serif; background: transparent url(../images/silk/error.png) no-repeat 0 2px; line-height:16px; width:200px; }
+.form-field-desc { padding:2px; padding-left:18px; font:normal 1em tahoma, arial, helvetica, sans-serif; line-height:16px; width:200px; color: #7F7F7F; }
+.form-clear { clear:both; height:0; overflow:hidden; line-height:0; font-size:0; }
+.form-clear-left { clear:left; height:0; overflow:hidden; line-height:0; font-size:0; }
+.form-cb-label { width:'auto' !important; float:none !important; clear:none !important; display:inline !important; margin-left:4px; }
+.form-column { float:left; padding:0; margin:0; width:48%; overflow:hidden; zoom:1; }
+
+.simple-form{
+	background:#F0F0F0 none repeat scroll 0 0;
+	border:1px solid #DDDDDD;
+	margin:2em 0 0;
+	padding:1em;
+	position:relative;
+}
+
+.simple-form fieldset label{
+	float:left;
+	width:auto;
+}
+
+.simple-form fieldset span.legend{
+	font-size:1.1em;
+	font-weight:700;
+	left:0.5em;
+	position:absolute;
+	top:-1.3em;
+}
+
+.simple-form fieldset fieldset.submit{
+	float:left;
+	padding:0;
+	width:auto;
+}
+
+.simple-form .desc{
+	clear:both;
+	color:#666666;
+	font-size:12px;
+	margin:-0.2em 0 0;
+	padding:0 0 0.3em;
+}
