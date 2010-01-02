@@ -11,6 +11,7 @@ import javax.persistence._
  */
 @MappedSuperclass
 class BaseEntity {
+  
   @Id
   @GeneratedValue {val strategy = GenerationType.IDENTITY}
   var id: java.lang.Long = _
